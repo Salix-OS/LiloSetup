@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version= '0.1' - 20091122		Forked LiloFix '0.9.7' to Salix environment
+# version= '0.1' - 20091208		Forked LiloFix '0.9.7' to Salix environment
 #								Modified name, logo, gui & lilosetup.conf stub
 #								Migrated from libglade to gtkbuilder
 #								Added extra info columns to the boot partition list
@@ -65,7 +65,7 @@ gtk.glade.bindtextdomain("lilosetup", "../share/locale")
 gtk.glade.textdomain("lilosetup")
 
 # The following 4 functions were borrowed from ndisgtk 
-# The study of ndisgtk code tought me a lot when I first explored python/glade3 ;)
+# The study of ndisgtk code taught me a lot when I first explored python/glade3 ;)
 
 # Info window skeleton:
 def info_dialog(message, parent = None):
@@ -128,10 +128,7 @@ already_in = []
 # Build LiloSetup configuration file stub:
 def build_lilosetupconf_stub():
 	
-	BOOT_PARTITION = """ 
-	lshal | grep -B 35 -m1 "{'boot'}" | grep "block.device"
-	"""
-	boot_partition = runBash(BOOT_PARTITION).split("'")[1].strip('0123456789')
+	boot_partition = commands.getoutput('os-prober').splitlines()[0].split(':')[0].strip('0123456789')
 
 	global stub_location	
 	stub_location = work_dir + "lilosetup.conf"
@@ -240,7 +237,7 @@ def build_lilosetupconf_stub():
 		os.environ['setfb'] = runBash(USEDFB)
 		# We also need to make sure that the adequate framebuffer resolution is in the stub
 		FBLINE= """
-		cat $stubfile | grep $setfb -m 1 -n | cut -f1 -d :
+		cat $stubfile | grep "@ $setfb" -m 1 -n | cut -f1 -d :
 		"""
 		fbline = runBash(FBLINE)
 		if fbline != '' :
@@ -408,7 +405,7 @@ class lilosetup:
 		# Set the new partition row value on the fourth column (3)
 		self.BootLabelListStore.set_value(iter, 3, new_text)
 
-	# What to do when a combo line is edited in the Linux New system column
+	# What to do when a combo line is edited in the Linux Rank column
 	def on_rank_cellrenderercombo_edited(self, widget, row_number, new_text):
 		# Retrieve the selected label row iter
 		bootrankchoice = self.BootPartitionTreeview.get_selection()
@@ -512,8 +509,8 @@ class lilosetup:
 					stub.write("root = " + set[0] +"\n")
 					stub.write("label = " + set[3] + "\n")
 					try :
-						initrd_file_path = glob.glob(mount_inconf + "/boot/initrd*")[0]
-						stub.write("initrd = " + mount_inconf + initrd_file_path + "\n")
+						initrd_file_path = glob.glob(chroot_mnt + other_mnt + "/boot/initrd*")[0].split("boot")[1]
+						stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
 					except :
 						pass
 					stub.write("read-only\n")
@@ -540,16 +537,18 @@ class lilosetup:
 					os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')
 				shutil.copy(stub_location, chroot_mnt + "/etc/lilosetup.conf")	
 				# Copy /boot/salix.bmp to chroot_mnt
-				subprocess.call("cp /boot/salix.bmp " + chroot_mnt + "/boot" , shell=True)
+				if os.path.exists("/boot/salix.bmp") == True :
+					subprocess.call("cp /boot/salix.bmp " + chroot_mnt + "/boot" , shell=True)
 				# Execute Lilo
+				subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
 				lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"		
 				output = commands.getstatusoutput(lilo_command)
 				if 0 in output :
 					info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer."))
-					self.button_apply.set_sensitive(False)
+					self.ExecuteButton.set_sensitive(False)
 				else:
 					error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again."))
-					self.button_apply.set_sensitive(False)
+					self.ExecuteButton.set_sensitive(False)
 			if result_warning == gtk.RESPONSE_NO:
 				pass	
 

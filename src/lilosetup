@@ -365,7 +365,7 @@ class lilosetup:
 	# What to do when the exit X on the main window upper right is clicked
 	def gtk_main_quit(self, widget, data=None):
 		shutil.rmtree(work_dir, ignore_errors=True)
-		umnt_command = "umount /mnt/*/mnt/* 2>/dev/null"
+		umnt_command = "umount -f /mnt/*/mnt/* 2>/dev/null"
 		subprocess.call(umnt_command, shell=True)	
 		if temp_mount :
 			for i in temp_mount :
@@ -378,7 +378,7 @@ class lilosetup:
 		Closes LiloSetup window, cleanup temp files & unmount temp system.
 		"""
 		shutil.rmtree(work_dir, ignore_errors=True)
-		umnt_command = "umount /mnt/*/mnt/* 2>/dev/null"
+		umnt_command = "umount -f /mnt/*/mnt/* 2>/dev/null"
 		subprocess.call(umnt_command, shell=True)	
 		if temp_mount :
 			for i in temp_mount :
@@ -456,7 +456,7 @@ class lilosetup:
 					self.BootPartitionTreeview.set_sensitive(True)
 					break					
 				# determines Lilo's root directory, only happens once.
-				am_i_first = 'cat ' + stub_location + ''' | grep -v other | grep \/dev\/sd | grep -w 'sd.[1-9]' | cut -f3 -d " " '''
+				am_i_first = 'cat ' + stub_location + ''' | grep -v other | grep \/dev\/hd | grep -w 'hd.[1-9]' | cut -f3 -d " " '''
 				already_done = commands.getoutput(am_i_first).splitlines()
 				if already_done == []: # This is the first Linux partition, the 'chrooted' one!
 					chroot_dev = set[0]
@@ -466,6 +466,9 @@ class lilosetup:
 					chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
 					if chroot_mnt == '' : # we need to create a temporary mountpoint ourselves
 						temp_chroot_mnt = chroot_dev.replace('dev', 'mnt')
+						# just to be safe let's try to unmount it first
+						umnt_command = "umount -f " + temp_chroot_mnt + " 2>/dev/null"
+						subprocess.call(umnt_command, shell=True)
 						shutil.rmtree(temp_chroot_mnt, ignore_errors=True)
 						os.mkdir(temp_chroot_mnt)						
 						temp_mount.append(temp_chroot_mnt) # allows cleanup temporary mountpoints later
@@ -478,11 +481,14 @@ class lilosetup:
 					global other_mnt
 					other_mnt = '' # we need this blank for the first time
 				else :	# This applies to all subsequent partitions
-					# we check how this partition should be mounted on the chrooted partition 
+					# we check how this partition should be mounted on the chrooted partition
 					OTHER_MNT="cat " + chroot_mnt + "/etc/fstab | grep " + set[0] + " | awk -F' ' '{print $2 }'"
 					other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
 					if other_mnt == '':  # we need to create a temporary mountpoint ourselves
-						temp_other_mnt = sel_dev.replace('dev', 'mnt')
+						temp_other_mnt = set[0].replace('dev', 'mnt')
+						# just to be safe let's try to unmount it first
+						umnt_command = "umount -f " + temp_other_mnt + " 2>/dev/null"
+						subprocess.call(umnt_command, shell=True)						
 						shutil.rmtree(temp_other_mnt, ignore_errors=True)
 						os.mkdir(temp_other_mnt)						
 						temp_mount.append(temp_other_mnt) # allows cleanup temporary mountpoints later

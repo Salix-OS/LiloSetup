@@ -22,13 +22,13 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version= '0.1' - 20091227 build - Forked LiloFix '0.9.7' to Salix environment
-#                                   Modified name, logo, gui & lilosetup.conf stub
-#                                   Migrated from libglade to gtkbuilder
-#                                   Added extra info columns to the boot partition list
-#                                   Switched to os-prober & lshal for booting partitions details
-#                                   Added initrd autodetection
-#                                   Added support for multiple kernels within the same partition
+# version = '0.1' - 20091228 build -    Forked LiloFix '0.9.7' to Salix environment
+#                                       Modified name, logo, gui & lilosetup.conf stub
+#                                       Migrated from libglade to gtkbuilder
+#                                       Added extra info columns to the boot partition list
+#                                       Switched to os-prober & lshal for booting partitions details
+#                                       Added initrd autodetection
+#                                       Added support for multiple kernels within the same partition
 
 # To Do => Detect Buntu's & co
 # To Do => Verify LIBATA kernel setups whether chrooted or not

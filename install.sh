@@ -10,7 +10,7 @@ install -d -m 755 $DESTDIR/usr/share/icons/hicolor/128x128/apps
 install -d -m 755 $DESTDIR/usr/share/icons/hicolor/scalable/apps
 install -d -m 755 $DESTDIR/usr/share/lilosetup
 
-install -m 755 src/lilosetup $DESTDIR/usr/sbin/lilosetup
+install -m 755 src/lilosetup.py $DESTDIR/usr/sbin/lilosetup.py
 install -m 644 src/lilosetup.glade \
 $DESTDIR/usr/share/lilosetup
 install -m 644 src/lilosetup.desktop \

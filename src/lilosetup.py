@@ -504,14 +504,15 @@ class LiloSetup:
                     already_in.append(already_done)
                     mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
                 # If Windows partition:
-                if 'Windows' or 'Microsoft' in set[3] :
-                    stub = open(stub_location, "a")
-                    stub.write("#\n")
-                    stub.write(_("# Windows bootable partition config begins\n"))
-                    stub.write("other = " + set[1] + "\n")
-                    stub.write("label = " + set[4] + "\n")
-                    stub.write(_("# Windows bootable partition config ends\n"))
-                    stub.close()
+                windows_sys_labels = ['Windows', 'Microsoft']
+                if set[3] in windows_sys_labels :
+                        stub = open(stub_location, "a")
+                        stub.write("#\n")
+                        stub.write(_("# Windows bootable partition config begins\n"))
+                        stub.write("other = " + set[1] + "\n")
+                        stub.write("label = " + set[4] + "\n")
+                        stub.write(_("# Windows bootable partition config ends\n"))
+                        stub.close()
                 else:
                     # Applies to Linux partitions
                     stub = open(stub_location, "a")

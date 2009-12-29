@@ -316,7 +316,8 @@ class LiloSetup:
                 else:
                     pass
             # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
-            this_os_main_partition = commands.getoutput("cat /etc/fstab | grep ' / '").split()[0]
+            os.putenv("root_partition", "\'/\'")
+            this_os_main_partition = commands.getoutput("lshal | grep -B33  $root_partition | grep block.device").split("'")[1]
             if '/dev/' in this_os_main_partition:
                 # Get the partition device
                 partition_device = this_os_main_partition

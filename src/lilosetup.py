@@ -22,16 +22,15 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20091228 build -    Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 20091229 build -    Forked LiloFix '0.9.7' to Salix environment
 #                                       Modified name, logo, gui & lilosetup.conf stub
 #                                       Migrated from libglade to gtkbuilder
 #                                       Added extra info columns to the boot partition list
 #                                       Switched to os-prober & lshal for booting partitions details
 #                                       Added initrd autodetection
 #                                       Added support for multiple kernels within the same partition
+#                                       Adapt syntax if target kernel is using LIBATA
 
-# To Do => Detect Buntu's & co
-# To Do => Verify LIBATA kernel setups whether chrooted or not
 # To Do => Verify internationalization process with gtkbuilder
 # To Do => Verify Raid device support
 
@@ -133,7 +132,7 @@ def build_lilosetupconf_stub():
     stub.write("#\n")
     stub.write(_("# Start LILO global section\n"))
     stub.write(_("# Append any additional kernel parameters:\n"))
-    stub.write('append="quiet vt.default_utf8=1 "\n')
+    stub.write('append = "quiet vt.default_utf8=1 "\n')
     stub.write("boot = " + boot_partition + "\n")
     stub.write("\n")
     stub.write(_("# Boot BMP Image.\n"))
@@ -516,8 +515,16 @@ class LiloSetup:
                     # Applies to Linux partitions
                     stub = open(stub_location, "a")
                     # There maybe a few kernels in the same partition
-                    vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz-*"))
-                    initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd-*"))
+                    vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
+                    # Remove symbolic links
+                    for i in vmlist :
+                        if os.path.islink(i) :
+                            vmlist.remove(i)
+                    initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd*"))
+                    # Remove symbolic links
+                    for i in initlist :
+                        if os.path.islink(i) :
+                            initlist.remove(i)
                     it = 0
                     while it < len(vmlist) :
                         stub.write("#\n")
@@ -527,6 +534,24 @@ class LiloSetup:
                             stub.write("image = " + mount_inconf + "/boot" + vmlinuz_file_path + "\n")
                         except:
                              error_dialog(_("Error! One of your partitions does not seem to hold a valid kernel file, please verify & correct lilo.conf manually"))
+                        # Add addappend line if neededed
+                        # check if LIBATA is used
+                        if "/dev/hd" in set[1] :
+                            libata_try = set[1].replace("hd", "sd")
+                            libata_line = commands.getoutput("cat " + mount_inconf + "/etc/fstab | grep " + libata_try)
+                            if libata_line != '' :
+                                libata_device = libata_line.split()[0]
+                                if "/dev/sd" in libata_device :
+                                    stub.write("""addappend = "root=""" + libata_device + """ "\n""")
+                                else : # some fstab files may have weird layout & scheme, try mtab instead
+                                    libata_device = commands.getoutput("cat " + mount_inconf + "/etc/mtab | grep " + libata_try).split()[0]
+                                    if "/dev/sd" in libata_device :
+                                        stub.write("""addappend = "root=""" + libata_device + """ "\n""")
+                                    else :
+                                        pass
+                        else :
+                            pass
+
                         stub.write("root = " + set[1] +"\n")
                         stub.write("label = " + set[4] + "\n")
                         try :
@@ -556,9 +581,12 @@ class LiloSetup:
                 if os.path.isfile(chroot_mnt + "/etc/lilosetup.conf") == True :
                     os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')
                 shutil.copy(stub_location, chroot_mnt + "/etc/lilosetup.conf")
-                # Copy /boot/salix.bmp to chroot_mnt
-                if os.path.exists("/boot/salix.bmp") == True :
-                    subprocess.call("cp /boot/salix.bmp " + chroot_mnt + "/boot" , shell=True)
+                # Copy /boot/salix graphics to chroot_mnt if needed
+                if os.path.isfile(chroot_mnt + "/boot/salix.bmp") == False :
+                    if os.path.isfile("/boot/salix.bmp") == True :
+                        shutil.copy("/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
+                    elif os.path.isfile("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp") == True :
+                        shutil.copy("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
                 # Execute Lilo
                 subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
                 lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"

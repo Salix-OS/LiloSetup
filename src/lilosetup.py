@@ -48,10 +48,10 @@ import gtk.glade
 import locale
 import gettext
 locale.setlocale(locale.LC_ALL, "")
-gettext.bindtextdomain("lilosetup", "../share/locale")
+gettext.bindtextdomain("lilosetup", "/usr/share/locale")
 gettext.textdomain("lilosetup")
-gettext.install("lilosetup", "../share/locale", unicode=1)
-gtk.glade.bindtextdomain("lilosetup", "../share/locale")
+gettext.install("lilosetup", "/usr/share/locale", unicode=1)
+gtk.glade.bindtextdomain("lilosetup", "/usr/share/locale")
 gtk.glade.textdomain("lilosetup")
 
 # The following 4 functions were borrowed from ndisgtk 
@@ -338,24 +338,27 @@ class LiloSetup:
                     pass
             # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
             os.putenv("root_partition", "\'/\'")
-            this_os_main_partition = commands.getoutput("lshal | grep -B33  $root_partition | grep block.device").split("'")[1]
-            if '/dev/' in this_os_main_partition:
-                # Get the partition device
-                partition_device = this_os_main_partition
-                # Get the file system
-                lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
-                file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                # Get the operating system.
-                try :
-                    version_file_path = glob.glob("/etc/*version")[0]
-                    version_file = open(version_file_path)
-                    operating_system = version_file.read().split()[0]
-                except :
-                    operating_system = "Unknown"
-                # Put it all together
-                boot_partition_feedline = [partition_device, file_system, operating_system, boot_label, boot_rank]
-                boot_partition_feedline_list.append(boot_partition_feedline)
-            else:
+            this_os_main_partition = commands.getoutput("lshal | grep -B33  $root_partition | grep block.device")
+            try :
+                if '/dev/' in this_os_main_partition.split("'")[1]:
+                    # Get the partition device
+                    partition_device = this_os_main_partition.split("'")[1]
+                    # Get the file system
+                    lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
+                    file_system = commands.getoutput(lshal_string_output).split("'")[1]
+                    # Get the operating system.
+                    try :
+                        version_file_path = glob.glob("/etc/*version")[0]
+                        version_file = open(version_file_path)
+                        operating_system = version_file.read().split()[0]
+                    except :
+                        operating_system = "Unknown"
+                    # Put it all together
+                    boot_partition_feedline = [partition_device, file_system, operating_system, boot_label, boot_rank]
+                    boot_partition_feedline_list.append(boot_partition_feedline)
+                else:
+                    pass
+            except:
                 pass
             # Insert Menu Label editable combobox
             self.LabelCellRendererCombo.set_property("model", self.BootLabelListStore)
@@ -440,7 +443,7 @@ class LiloSetup:
         for set in BootPartitionsValues	:
             # We need to ensure that the labels are unique and do not contain empty space
             if ' ' in set[4] :
-                error_dialog("\nAn Operating System label should not contain any space. \n\nPlease verify and correct! \n")
+                error_dialog("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n")
                 self.EditButton.set_sensitive(False)
                 self.CreateButton.set_sensitive(True)
                 self.ExecuteButton.set_sensitive(False)
@@ -454,7 +457,7 @@ class LiloSetup:
                 am_i_there = 'cat ' + stub_location + ''' | grep -w label | cut -f3 -d " " '''
                 already_there = commands.getoutput(am_i_there).splitlines()
                 if set[4] in already_there :
-                    error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct."))
+                    error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct.\n"))
                     self.EditButton.set_sensitive(False)
                     self.CreateButton.set_sensitive(True)
                     self.ExecuteButton.set_sensitive(False)
@@ -529,18 +532,18 @@ class LiloSetup:
                             vmlinuz_file_path = vmlist[it].split("boot")[1]
                             stub.write("image = " + mount_inconf + "/boot" + vmlinuz_file_path + "\n")
                         except:
-                             error_dialog(_("Error! One of your partitions does not seem to hold a valid kernel file, please verify & correct lilo.conf manually"))
+                             error_dialog(_("One of your partitions does not seem to hold a valid kernel file. Please verify and correct lilo.conf manually.\n"))
                         # Add addappend line if neededed
                         # check if LIBATA is used
                         if "/dev/hd" in set[1] :
                             libata_try = set[1].replace("hd", "sd")
-                            libata_line = commands.getoutput("cat " + mount_inconf + "/etc/fstab | grep " + libata_try)
+                            libata_line = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/fstab | grep " + libata_try)
                             if libata_line != '' :
                                 libata_device = libata_line.split()[0]
                                 if "/dev/sd" in libata_device :
                                     stub.write("""addappend = "root=""" + libata_device + """ "\n""")
                                 else : # some fstab files may have weird layout & scheme, try mtab instead
-                                    libata_device = commands.getoutput("cat " + mount_inconf + "/etc/mtab | grep " + libata_try).split()[0]
+                                    libata_device = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/mtab | grep " + libata_try).split()[0]
                                     if "/dev/sd" in libata_device :
                                         stub.write("""addappend = "root=""" + libata_device + """ "\n""")
                                     else :
@@ -565,7 +568,7 @@ class LiloSetup:
                     stub.close()
         # Check if at least one Linux partition has been configured:
         if partition_set == [] :
-            error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label."))
+            error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"))
         else:
             self.EditButton.set_sensitive(True)
             self.DeleteButton.set_sensitive(True)
@@ -618,10 +621,10 @@ class LiloSetup:
             lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"
             output = commands.getstatusoutput(lilo_command)
             if 0 in output :
-                info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer."))
+                info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"))
                 self.ExecuteButton.set_sensitive(False)
             else:
-                error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again."))
+                error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again.\n"))
                 self.ExecuteButton.set_sensitive(False)
         if result_warning == gtk.RESPONSE_NO:
             pass

@@ -31,6 +31,7 @@
 #                                       Added support for multiple kernels within the same partition
 #                                       Adapt syntax if target kernel is using LIBATA
 
+# To Do => Refine OS name detection
 # To Do => Verify internationalization process with gtkbuilder
 # To Do => Verify Raid device support
 
@@ -116,8 +117,7 @@ os.mkdir(work_dir)
 
 # initialize some lists
 temp_mount = []
-already_in = []
-	
+
 # Build LiloSetup configuration file stub:
 def build_lilosetupconf_stub():
 
@@ -247,6 +247,20 @@ def build_lilosetupconf_stub():
     except :
         failsafe_fb()
 
+def lilosetup_quit():
+    """
+    Closes LiloSetup window, cleanup temp files & unmount temp system.
+    """
+    shutil.rmtree(work_dir, ignore_errors=True)
+    if temp_mount :
+        for i in temp_mount :
+            subprocess.call("umount -f " + i + " 2>/dev/null", shell=True)
+            try:
+                os.rmdir(i)
+            except:
+                pass
+    gtk.main_quit()
+
 class LiloSetup:
     """
     Main application class.
@@ -270,6 +284,7 @@ class LiloSetup:
         self.BootPartitionListStore = builder.get_object("boot_partition_list_store")
         self.EditButton = builder.get_object("edit_button")
         self.CreateButton = builder.get_object("create_button")
+        self.DeleteButton = builder.get_object("delete_button")
         self.ExecuteButton = builder.get_object("execute_button")
         self.LabelCellRendererCombo = builder.get_object("label_cellrenderercombo")
         self.BootLabelListStore = builder.get_object("boot_label_list_store")
@@ -308,6 +323,9 @@ class LiloSetup:
                 if partition_is_recovery == '' :
                     # Get the operating system
                     operating_system = line.split(':')[1].split()[0]
+                    # TODO Refine OS recognition
+                    if 'Slackware' in operating_system :
+                        pass # Simply parse /etc/*version* in that mounted partition
                     # Get the file system
                     lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
                     file_system = commands.getoutput(lshal_string_output).split("'")[1]
@@ -360,31 +378,11 @@ class LiloSetup:
 
     # What to do when the exit X on the main window upper right is clicked
     def gtk_main_quit(self, widget, data=None):
-        shutil.rmtree(work_dir, ignore_errors=True)
-        umnt_command = "umount -f /mnt/*/mnt/* 2>/dev/null"
-        subprocess.call(umnt_command, shell=True)
-        if temp_mount :
-            for i in temp_mount :
-                try:
-                    os.rmdir(chroot_mnt + i)
-                except:
-                    pass
-        gtk.main_quit()
+        lilosetup_quit()
 
 # What to do when the quit button is is clicked    
     def on_main_window_destroy(self, widget, data=None):
-        """
-        Closes LiloSetup window, cleanup temp files & unmount temp system.
-        """
-        shutil.rmtree(work_dir, ignore_errors=True)
-        umnt_command = "umount -f /mnt/*/mnt/* 2>/dev/null"
-        subprocess.call(umnt_command, shell=True)
-        if temp_mount :
-            for i in temp_mount :
-                try:
-                    os.rmdir(chroot_mnt + i)
-                except:
-                    pass
+        lilosetup_quit()
 
     def on_about_button_clicked(self, widget, data=None):
         """
@@ -422,10 +420,8 @@ class LiloSetup:
         Populate lilosetup.conf & mounts needed partition to lilo's chrooted partition.
         """
         build_lilosetupconf_stub()
-        self.EditButton.set_sensitive(True)
-        self.CreateButton.set_sensitive(False)
-        self.ExecuteButton.set_sensitive(True)
-        self.BootPartitionTreeview.set_sensitive(False)
+        # This will help us to ensure at least one partition has been configured
+        partition_set = []
         # Retrieve all the partition rows values
         BootPartitionsValues = []
         x = 0
@@ -478,7 +474,6 @@ class LiloSetup:
                     # let's mount the 'chrooted' partition, just in case
                     chroot_mnt_command = "mount " + chroot_dev + " " + chroot_mnt + " 2>/dev/null"
                     subprocess.call(chroot_mnt_command, shell=True)
-                    already_in.append(chroot_dev)
                     mount_inconf = ''	# defines how the partition 'appears' mounted in lilosetup.conf
                     global other_mnt
                     other_mnt = '' # we need this blank for the first time
@@ -501,11 +496,11 @@ class LiloSetup:
                     # let's also mount this partition, just in case
                     mnt_command = "mount " + set[1] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
                     subprocess.call(mnt_command, shell=True)
-                    already_in.append(already_done)
                     mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
                 # If Windows partition:
-                windows_sys_labels = ['Windows', 'Microsoft']
+                windows_sys_labels = ['Microsoft', 'Windows']
                 if set[3] in windows_sys_labels :
+                        # Append to lilosetup.conf
                         stub = open(stub_location, "a")
                         stub.write("#\n")
                         stub.write(_("# Windows bootable partition config begins\n"))
@@ -515,6 +510,9 @@ class LiloSetup:
                         stub.close()
                 else:
                     # Applies to Linux partitions
+                    # Confirm that a partition is configured
+                    partition_set.append("OK")
+                    # Append to lilosetup.conf
                     stub = open(stub_location, "a")
                     # There maybe a few kernels in the same partition
                     vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
@@ -555,7 +553,11 @@ class LiloSetup:
                             pass
 
                         stub.write("root = " + set[1] +"\n")
-                        stub.write("label = " + set[4] + "\n")
+                        if len(vmlist) == 1 :
+                            stub.write("label = " + set[4] + "\n")
+                        else:
+                            vmlinuz_suffix = vmlinuz_file_path.split('/')[-1].replace("vmlinuz", "")
+                            stub.write("label = " + set[4] + vmlinuz_suffix +"\n")
                         try :
                             initrd_file_path = initlist[it].split("boot")[1]
                             stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
@@ -565,42 +567,58 @@ class LiloSetup:
                         stub.write(_("# Linux bootable partition config ends\n"))
                         it += 1
                     stub.close()
+        # Check if at least one Linux partition has been configured:
+        if partition_set == [] :
+            error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label."))
+        else:
+            self.EditButton.set_sensitive(True)
+            self.DeleteButton.set_sensitive(True)
+            self.CreateButton.set_sensitive(False)
+            self.ExecuteButton.set_sensitive(True)
+            self.BootPartitionTreeview.set_sensitive(False)
+
+    def on_delete_button_clicked(self, widget, data=None):
+        """
+        Deletes lilosetup.conf.
+        """
+        os.remove(stub_location)
+        self.EditButton.set_sensitive(False)
+        self.DeleteButton.set_sensitive(False)
+        self.CreateButton.set_sensitive(True)
+        self.ExecuteButton.set_sensitive(False)
+        self.BootPartitionTreeview.set_sensitive(True)
 
     def on_edit_button_clicked(self, widget, data=None):
         """
-        Opens the edit_liloconf dialog.
+        Opens the edit lilosetup.conf dialog.
         """
         subprocess.call('xdg-open ' + stub_location, shell=True)
 
     def on_execute_button_clicked(self, widget, data=None):
-        if already_in == []:
-            error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and add it to the bootloader's menu."))
+        warning_dialog(_("You are about to install a new LILO bootloader. Are you sure you want to continue?"))
+        if result_warning == gtk.RESPONSE_YES:
+            # If previous lilosetup.conf file exist, save it as lilosetup.old
+            if os.path.isfile(chroot_mnt + "/etc/lilosetup.conf") == True :
+                os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')
+            shutil.copy(stub_location, chroot_mnt + "/etc/lilosetup.conf")
+            # Copy /boot/salix graphics to chroot_mnt if needed
+            if os.path.isfile(chroot_mnt + "/boot/salix.bmp") == False :
+                if os.path.isfile("/boot/salix.bmp") == True :
+                    shutil.copy("/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
+                elif os.path.isfile("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp") == True :
+                    shutil.copy("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
+            # Execute Lilo
+            subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
+            lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"
+            output = commands.getstatusoutput(lilo_command)
+            if 0 in output :
+                info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer."))
+                self.ExecuteButton.set_sensitive(False)
+            else:
+                error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again."))
+                self.ExecuteButton.set_sensitive(False)
+        if result_warning == gtk.RESPONSE_NO:
             pass
-        else :
-            warning_dialog(_("You are about to install a new LILO bootloader. Are you sure you want to continue?"))
-            if result_warning == gtk.RESPONSE_YES:
-                # If previous lilosetup.conf file exist, save it as lilosetup.old
-                if os.path.isfile(chroot_mnt + "/etc/lilosetup.conf") == True :
-                    os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')
-                shutil.copy(stub_location, chroot_mnt + "/etc/lilosetup.conf")
-                # Copy /boot/salix graphics to chroot_mnt if needed
-                if os.path.isfile(chroot_mnt + "/boot/salix.bmp") == False :
-                    if os.path.isfile("/boot/salix.bmp") == True :
-                        shutil.copy("/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
-                    elif os.path.isfile("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp") == True :
-                        shutil.copy("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
-                # Execute Lilo
-                subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
-                lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"
-                output = commands.getstatusoutput(lilo_command)
-                if 0 in output :
-                    info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer."))
-                    self.ExecuteButton.set_sensitive(False)
-                else:
-                    error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again."))
-                    self.ExecuteButton.set_sensitive(False)
-            if result_warning == gtk.RESPONSE_NO:
-                pass
 
 if __name__ == '__main__':
     # Checks for root privileges

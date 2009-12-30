@@ -21,10 +21,22 @@
         <col id="0" translatable="yes">Linux</col>
       </row>
       <row>
+        <col id="0" translatable="yes">Zenwalk</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Ubuntu</col>
+      </row>
+      <row>
         <col id="0" translatable="yes">Windows</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Edit...</col>
+        <col id="0" translatable="yes">Vista</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">XP</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Etc...</col>
       </row>
     </data>
   </object>
@@ -54,21 +66,6 @@
       </row>
       <row>
         <col id="0" translatable="yes">7</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">8</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">9</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">10</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">11</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">12</col>
       </row>
     </data>
   </object>
@@ -133,7 +130,7 @@
                 <child>
                   <object class="GtkImage" id="image_lilofix">
                     <property name="visible">True</property>
-                    <property name="tooltip_text" translatable="yes">About</property>
+                    <property name="tooltip_text" translatable="yes">About...</property>
                     <property name="xpad">15</property>
                     <property name="ypad">15</property>
                     <property name="pixbuf">lilosetup.png</property>
@@ -148,15 +145,17 @@
               <object class="GtkLabel" id="intro_label">
                 <property name="visible">True</property>
                 <property name="tooltip_text" translatable="yes">It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. 
-LiloSetup will also come in handy in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.
-Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive whith a boot flag..</property>
+
+LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.
+
+Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of the first hard drive with a boot flag.</property>
                 <property name="xpad">3</property>
                 <property name="ypad">3</property>
-                <property name="label" translatable="yes">&lt;b&gt;LiloSetup will install a new LILO bootloader on 
-your computer.&lt;/b&gt; 
+                <property name="label" translatable="yes">&lt;b&gt;LiloSetup will install a new LILO bootloader on your 
+computer.&lt;/b&gt; 
 
-A bootloader typically loads the main operating system of 
-a computer and will initially display a boot menu if several 
+A bootloader is required to load the main operating system 
+of a computer and will initially display a boot menu if several 
 operating systems are available on the same computer.</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
@@ -172,8 +171,8 @@ operating systems are available on the same computer.</property>
         </child>
         <child>
           <object class="GtkFrame" id="frame1">
-            <property name="width_request">600</property>
-            <property name="height_request">200</property>
+            <property name="width_request">660</property>
+            <property name="height_request">220</property>
             <property name="visible">True</property>
             <property name="label_xalign">0</property>
             <child>
@@ -189,11 +188,15 @@ operating systems are available on the same computer.</property>
                       <object class="GtkTreeView" id="boot_partition_treeview">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Here you must define a Boot menu label and rank for each of the partition you want displayed on your bootloader menu.
+                        <property name="tooltip_text" translatable="yes">Here you must define a Boot menu label and rank for each of the operating system that will be displayed on your bootloader menu.
 
-The partition with rank 1 will be displayed on the first line of the bootloader menu, while the partition with rank 2 will be on the second line, and so on...
+The partition with the lowest rank will be displayed on the first line of the bootloader menu, while the partition with the highest rank will be on the last line. If you do not set any rank, the boot menu order will follow the order of the device naming scheme.
 
-Any partition for which you do not set a  Boot menu label or rank will not be displayed on the bootloader menu. </property>
+Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu. 
+
+If a few kernels are available within one partition, the label you have chosen for that partition will be appended with the version of each kernel available to create multiple menu entries for each of these kernel.
+
+Any of these settings can later be edited manually in lilosetup configuration file.</property>
                         <property name="model">boot_partition_list_store</property>
                         <property name="rules_hint">True</property>
                         <child>
@@ -271,12 +274,52 @@ Any partition for which you do not set a  Boot menu label or rank will not be di
                   <object class="GtkHButtonBox" id="hbuttonbox1">
                     <property name="visible">True</property>
                     <child>
+                      <object class="GtkButton" id="delete_button">
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">You must first delete the current LiloSetup configuration file if you wish to recreate a new one.</property>
+                        <signal name="clicked" handler="on_delete_button_clicked"/>
+                        <child>
+                          <object class="GtkHBox" id="hbox4">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkImage" id="image4">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-clear</property>
+                              </object>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="delete_label">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Delete configuration file </property>
+                                <property name="use_markup">True</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkButton" id="edit_button">
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Once it is generated, experienced users have the possibility to manually edit lilosetup configuration file (settings are identical to lilo.conf). This option is to be used at your own risk... Please do not temper with this file unless you really know what you are doing.</property>
+                        <property name="tooltip_text" translatable="yes">Once it is generated, experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). 
+
+This option is to be used at your own risk... Please do not temper with this file unless you know what you are doing.</property>
                         <signal name="clicked" handler="on_edit_button_clicked"/>
                         <child>
                           <object class="GtkHBox" id="hbox1">
@@ -305,7 +348,7 @@ Any partition for which you do not set a  Boot menu label or rank will not be di
                         </child>
                       </object>
                       <packing>
-                        <property name="position">0</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -342,7 +385,7 @@ Any partition for which you do not set a  Boot menu label or rank will not be di
                         </child>
                       </object>
                       <packing>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -375,7 +418,7 @@ Any partition for which you do not set a  Boot menu label or rank will not be di
                 <property name="has_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Exit Lilo Setup program </property>
+                <property name="tooltip_text" translatable="yes">Exit Lilo Setup program.</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_main_window_destroy"/>
                 <signal name="clicked" handler="gtk_main_quit"/>
@@ -391,7 +434,8 @@ Any partition for which you do not set a  Boot menu label or rank will not be di
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Install LILO's bootloader.
-This button will only become available once the configuration file has been created</property>
+
+This button will only become available once the configuration file has been created.</property>
                 <signal name="clicked" handler="on_execute_button_clicked"/>
                 <child>
                   <object class="GtkHBox" id="hbox2">

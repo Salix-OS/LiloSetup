@@ -111,7 +111,7 @@ def run_bash(cmd):
     
 # Create LiloSetup temporary work directory
 global work_dir
-work_dir = "/tmp/lilosetup/"
+work_dir = "/tmp/lilosetup"
 shutil.rmtree(work_dir, ignore_errors=True)
 os.mkdir(work_dir)
 
@@ -124,7 +124,7 @@ def build_lilosetupconf_stub():
     boot_partition = commands.getoutput('os-prober').splitlines()[0].split(':')[0].strip('0123456789')
 
     global stub_location
-    stub_location = work_dir + "lilosetup.conf"
+    stub_location = work_dir + "/lilosetup.conf"
     try:
         os.remove(stub_location)
     except:
@@ -575,7 +575,7 @@ class LiloSetup:
 
     def on_delete_button_clicked(self, widget, data=None):
         """
-        Deletes lilosetup.conf.
+        Deletes lilosetup.conf & unmount temporary mountpoints
         """
         try:
             os.remove(stub_location)

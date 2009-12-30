@@ -471,7 +471,7 @@ class LiloSetup:
                     chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
                     if chroot_mnt == '' : # we need to create a temporary mountpoint ourselves
                         temp_chroot_mnt = work_dir + chroot_dev.replace('dev', 'mnt')
-                        os.mkdirs(temp_chroot_mnt)
+                        os.makedirs(temp_chroot_mnt)
                         temp_mount.append(temp_chroot_mnt) # allows cleanup temporary mountpoints later
                         chroot_mnt = temp_chroot_mnt
                     # let's mount the 'chrooted' partition, just in case
@@ -486,7 +486,7 @@ class LiloSetup:
                     other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
                     if other_mnt == '':  # we need to create a temporary mountpoint ourselves
                         temp_other_mnt = work_dir + set[1].replace('dev', 'mnt')
-                        os.mkdirs(chroot_mnt + temp_other_mnt)
+                        os.makedirs(chroot_mnt + temp_other_mnt)
                         temp_mount.append(chroot_mnt + temp_other_mnt) # allows cleanup temporary mountpoints later
                         other_mnt = temp_other_mnt
                     # let's also mount this partition

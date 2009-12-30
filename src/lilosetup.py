@@ -587,6 +587,13 @@ class LiloSetup:
         self.CreateButton.set_sensitive(True)
         self.ExecuteButton.set_sensitive(False)
         self.BootPartitionTreeview.set_sensitive(True)
+        if temp_mount :
+            for i in temp_mount :
+                subprocess.call("umount -f " + i + " 2>/dev/null", shell=True)
+                try:
+                    os.rmdir(i)
+                except:
+                    pass
 
     def on_edit_button_clicked(self, widget, data=None):
         """

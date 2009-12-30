@@ -470,7 +470,7 @@ class LiloSetup:
                     global chroot_mnt # we will need global access to this info
                     chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
                     if chroot_mnt == '' : # we need to create a temporary mountpoint ourselves
-                        temp_chroot_mnt = chroot_dev.replace('dev', 'mnt')
+                        temp_chroot_mnt = work_dir + chroot_dev.replace('dev', 'mnt')
                         os.mkdir(temp_chroot_mnt)
                         temp_mount.append(temp_chroot_mnt) # allows cleanup temporary mountpoints later
                         chroot_mnt = temp_chroot_mnt
@@ -485,18 +485,11 @@ class LiloSetup:
                     OTHER_MNT="cat " + chroot_mnt + "/etc/fstab | grep " + set[1] + " | awk -F' ' '{print $2 }'"
                     other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
                     if other_mnt == '':  # we need to create a temporary mountpoint ourselves
-                        temp_other_mnt = set[1].replace('dev', 'mnt')
-                        # just to be safe let's try to unmount it first
-                        umnt_command = "umount -f "  + chroot_mnt + temp_other_mnt + " 2>/dev/null"
-                        subprocess.call(umnt_command, shell=True)
-                        try:
-                            os.rmdir(chroot_mnt + temp_other_mnt)
-                        except:
-                            pass
+                        temp_other_mnt = work_dir + set[1].replace('dev', 'mnt')
                         os.mkdir(chroot_mnt + temp_other_mnt)
                         temp_mount.append(chroot_mnt + temp_other_mnt) # allows cleanup temporary mountpoints later
                         other_mnt = temp_other_mnt
-                    # let's also mount this partition, just in case
+                    # let's also mount this partition
                     mnt_command = "mount " + set[1] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
                     subprocess.call(mnt_command, shell=True)
                     mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf

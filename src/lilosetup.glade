@@ -145,12 +145,9 @@ LiloSetup can also be useful in the process of a disaster recovery in which case
 Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of the first hard drive with a boot flag.</property>
                 <property name="xpad">3</property>
                 <property name="ypad">3</property>
-                <property name="label" translatable="yes">&lt;b&gt;LiloSetup will install a new LILO bootloader on your 
-computer.&lt;/b&gt; 
+                <property name="label" translatable="yes">&lt;b&gt;LiloSetup will install a new LILO bootloader on your computer.&lt;/b&gt; 
 
-A bootloader is required to load the main operating system 
-of a computer and will initially display a boot menu if several 
-operating systems are available on the same computer.</property>
+A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer.</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
               </object>
@@ -484,7 +481,7 @@ This button will only become available once the configuration file has been crea
     <property name="version">0.1</property>
     <property name="copyright" translatable="yes">A simple GUI interface to set-up LILO.
 
-Copyright &#xA9; 2007-2009 Pierrick Le Brun</property>
+Copyright &#xA9; 2010 Pierrick Le Brun</property>
     <property name="website">http://salixos.org</property>
     <property name="website_label" translatable="yes">salixos.org</property>
     <property name="license" translatable="yes">This program is free software; you can redistribute it 

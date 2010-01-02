@@ -22,14 +22,16 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20091229 build -    Forked LiloFix '0.9.7' to Salix environment
-#                                       Modified name, logo, gui & lilosetup.conf stub
-#                                       Migrated from libglade to gtkbuilder
-#                                       Added extra info columns to the boot partition list
-#                                       Switched to os-prober & lshal for booting partitions details
-#                                       Added initrd autodetection
-#                                       Added support for multiple kernels within the same partition
-#                                       Adapt syntax if target kernel is using LIBATA
+# version = '0.1' - 201002 build -  Forked LiloFix '0.9.7' to Salix environment
+#                                   Modified name, logo, gui & lilosetup.conf stub
+#                                   Migrated from libglade to gtkbuilder
+#                                   Added extra info columns to the boot partition list
+#                                   Switched to os-prober & lshal for booting partitions details
+#                                   Added initrd autodetection
+#                                   Added support for multiple kernels within the same partition
+#                                   Adapt syntax if target kernel is using LIBATA
+#                                   Added fstab with'UUID for mountpoints detection
+#                                   French translation
 
 # To Do => Refine OS name detection
 # To Do => Verify Raid device support
@@ -43,7 +45,7 @@ import glob
 import gtk
 import gtk.glade
 
-# Internationalization (unchanged from libglade, to verify)
+# Internationalization
 import locale
 import gettext
 locale.setlocale(locale.LC_ALL, "")
@@ -255,9 +257,13 @@ def lilosetup_quit():
         for i in temp_mount :
             subprocess.call("umount -fl " + i + " 2>/dev/null", shell=True)
             try:
-                os.rmdir(i)
+                os.removedirs(i)
             except:
                 pass
+    try:
+        os.remove(stub_location)
+    except:
+        pass
     try :
         os.rmdir(work_dir)
     except:
@@ -473,12 +479,13 @@ class LiloSetup:
                     global chroot_mnt # we will need global access to this info
                     chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
                     if chroot_mnt == '' :
-                        # Check if device is used as the current root filesystem & linked to /dev/root
+                        # Either it is not mounted or else it is used as the current root filesystem (/) but linked to /dev/root
                         check_if_root = commands.getoutput("ls -l /dev/root | grep " + chroot_dev.replace("/dev/", ""))
                         if check_if_root != '' :
+                            # The link leads to the 'chrooted' device, it is the current file system.
                             chroot_mnt = "/"
                         else :
-                            # Create a temporary mountpoint ourselves
+                            # It is not mounted, let's create a temporary mountpoint ourselves
                             temp_chroot_mnt = work_dir + chroot_dev.replace('dev', 'mnt')
                             os.makedirs(temp_chroot_mnt)
                             temp_mount.append(temp_chroot_mnt) # allows cleanup temporary mountpoints later
@@ -489,16 +496,41 @@ class LiloSetup:
                     mount_inconf = ''	# defines how the partition 'appears' mounted in lilosetup.conf
                     global other_mnt
                     other_mnt = '' # we need this blank for the first time
+                    if chroot_mnt != "/" :
+                        # This is necessary only if we execute lilo from a 'real' chrooted partition
+                        subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
+                        temp_mount.append(chroot_mnt + "/dev") # allows cleanup temporary mountpoints later
+                        subprocess.call("mount -t proc proc " + chroot_mnt + "/proc 2>/dev/null", shell=True)
+                        temp_mount.append(chroot_mnt + "/proc") # allows cleanup temporary mountpoints later
                 else :	# This applies to all subsequent partitions
-                    # we check how this partition is mounted on the chrooted partition
-                    OTHER_MNT="cat " + chroot_mnt + "/etc/fstab | grep " + set[1] + " | awk -F' ' '{print $2 }'"
-                    other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
+                    # Let's check how this partition is mounted on the 'chrooted' partition
+                    # We create a fork, chroot in the child process & pipe the mount info to the parent process
+                    r, w = os.pipe() # these are file descriptors, not file objects
+                    pid = os.fork()
+                    if pid:
+                        # Parent process
+                        os.close(w) # use os.close() to close a file descriptor
+                        r = os.fdopen(r) # turn r into a file object
+                        other_mnt = r.read()
+                        os.waitpid(pid, 0) # make sure the child process gets cleaned up
+                    else:
+                        # Child process
+                        os.close(r)
+                        w = os.fdopen(w, 'w')
+                        os.chroot(chroot_mnt)
+                        subprocess.call("mount -a", shell=True)
+                        OTHER_MNT="mount | grep " + set[1] + " | awk -F' ' '{print $3 }'"
+                        other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
+                        w.write(other_mnt)
+                        w.close()
+                        # Exit child process
+                        sys.exit(0)
                     if other_mnt == '':  # we need to create a temporary mountpoint ourselves
                         temp_other_mnt = work_dir + set[1].replace('dev', 'mnt')
                         os.makedirs(chroot_mnt + temp_other_mnt)
                         temp_mount.append(chroot_mnt + temp_other_mnt) # allows cleanup temporary mountpoints later
                         other_mnt = temp_other_mnt
-                    # let's also mount this partition
+                    # In any case, let's mount this partition
                     mnt_command = "mount " + set[1] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
                     subprocess.call(mnt_command, shell=True)
                     mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
@@ -538,7 +570,7 @@ class LiloSetup:
                             vmlinuz_file_path = vmlist[it].split("boot")[1]
                             stub.write("image = " + mount_inconf + "/boot" + vmlinuz_file_path + "\n")
                         except:
-                             error_dialog(_("One of your partitions does not seem to hold a valid kernel file. Please verify and correct lilosetup configuration file manually.\n"))
+                             error_dialog(_("One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"))
                         # Add addappend line if neededed
                         # check if LIBATA is used
                         if "/dev/hd" in set[1] :
@@ -599,7 +631,7 @@ class LiloSetup:
             for i in temp_mount :
                 subprocess.call("umount -fl " + i + " 2>/dev/null", shell=True)
                 try:
-                    os.rmdir(i)
+                    os.removedirs(i)
                 except:
                     pass
 
@@ -623,9 +655,6 @@ class LiloSetup:
                 elif os.path.isfile("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp") == True :
                     shutil.copy("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
             # Execute Lilo
-            if chroot_mnt != "/" :
-                # This is necessary only if we execute lilo from a 'real' chrooted partition
-                subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
             lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"
             output = commands.getstatusoutput(lilo_command)
             if 0 in output :

@@ -30,12 +30,6 @@
         <col id="0" translatable="yes">Windows</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Vista</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">XP</col>
-      </row>
-      <row>
         <col id="0" translatable="yes">Etc...</col>
       </row>
     </data>

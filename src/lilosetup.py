@@ -453,9 +453,18 @@ class LiloSetup:
         # First we need to order the sets by ranks
         BootPartitionsValues.sort()
         for set in BootPartitionsValues	:
+
             # We need to ensure that the labels are unique and do not contain empty space
             if ' ' in set[4] :
                 error_dialog(_("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n"))
+                self.EditButton.set_sensitive(False)
+                self.CreateButton.set_sensitive(True)
+                self.ExecuteButton.set_sensitive(False)
+                self.BootPartitionTreeview.set_sensitive(True)
+                break
+            # We ensure that the label is less than 15 characters long
+            elif len(set[4]) >= 15 :
+                error_dialog(_("\nAn Operating System label should not hold more than 15 characters. \n\nPlease verify and correct.\n"))
                 self.EditButton.set_sensitive(False)
                 self.CreateButton.set_sensitive(True)
                 self.ExecuteButton.set_sensitive(False)
@@ -558,6 +567,7 @@ class LiloSetup:
                     # Append to lilosetup.conf
                     stub = open(stub_location, "a")
                     # There maybe a few kernels in the same partition
+                    # TODO this basic detection will be screwed if kernel with or without initrd are mixed...
                     vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
                     # Remove symbolic links
                     for i in vmlist :
@@ -569,6 +579,7 @@ class LiloSetup:
                         if os.path.islink(i) :
                             initlist.remove(i)
                     it = 0
+                    y = 1
                     while it < len(vmlist) :
                         stub.write("#\n")
                         stub.write(_("# Linux bootable partition config begins\n"))
@@ -600,7 +611,13 @@ class LiloSetup:
                             stub.write("label = " + set[4] + "\n")
                         else:
                             vmlinuz_suffix = vmlinuz_file_path.split('/')[-1].replace("vmlinuz", "")
-                            stub.write("label = " + set[4] + vmlinuz_suffix +"\n")
+                            # We need to ensure that the label is not too long
+                            new_label = set[4] + vmlinuz_suffix
+                            if len(new_label) >= 14 :
+                                corrected_label = set[4] + '-' + str(y)
+                                stub.write("label = " + corrected_label +"\n")
+                            else:
+                                stub.write("label = " + new_label +"\n")
                         try :
                             initrd_file_path = initlist[it].split("boot")[1]
                             stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
@@ -608,6 +625,7 @@ class LiloSetup:
                             pass
                         stub.write("read-only\n")
                         stub.write(_("# Linux bootable partition config ends\n"))
+                        y += 1
                         it += 1
                     stub.close()
         # Check if at least one Linux partition has been configured:

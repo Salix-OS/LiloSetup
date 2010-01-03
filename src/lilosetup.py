@@ -43,11 +43,11 @@ import sys
 import commands
 import glob
 import gtk
-import gtk.glade
 
 # Internationalization
 import locale
 import gettext
+import gtk.glade
 locale.setlocale(locale.LC_ALL, "")
 gettext.bindtextdomain("lilosetup", "/usr/share/locale")
 gettext.textdomain("lilosetup")
@@ -120,7 +120,13 @@ temp_mount = []
 # Build LiloSetup configuration file stub:
 def build_lilosetupconf_stub():
     # Get the booting device
-    boot_partition = commands.getoutput('os-prober').splitlines()[0].split(':')[0].strip('0123456789')
+    try :
+        boot_partition = commands.getoutput('os-prober').splitlines()[0].split(':')[0].strip('0123456789')
+    except:
+        BOOT_PARTITION = """
+        fdisk -l | grep dev | grep \* -m 1 | cut -f1 -d " "
+        """
+        boot_partition = run_bash(BOOT_PARTITION).strip('0123456789')
     # Create the configuration file stub
     global stub_location
     stub_location = work_dir + "/lilosetup.conf"
@@ -322,26 +328,26 @@ class LiloSetup:
             boot_label = 'Set...'
             boot_rank = int(0)
             boot_partition_feedline = []
-            boot_partition_output = commands.getoutput('os-prober').splitlines()
-            for line in boot_partition_output:
-                # Get the partition device
-                partition_device = line.split(':')[0]
-                # Check that it is not a Windows factory settings recovery partition...
-                lshal_recovery_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep -i recovery'
-                partition_is_recovery = commands.getoutput(lshal_recovery_output)
-                if partition_is_recovery == '' :
-                    # Get the operating system
-                    operating_system = line.split(':')[1].split()[0]
-                    # TODO Refine Slackware OS recognition
-                    if 'Slackware' in operating_system :
-                        pass # Simply parse /etc/*version* in that mounted partition
-                    # Get the file system
-                    lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
-                    file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                    boot_partition_feedline = [partition_device, file_system, operating_system, boot_label, boot_rank]
-                    boot_partition_feedline_list.append(boot_partition_feedline)
-                else:
-                    pass
+            try :
+                boot_partition_output = commands.getoutput('os-prober').splitlines()
+                for line in boot_partition_output:
+                    # Get the partition device
+                    partition_device = line.split(':')[0]
+                    # Check that it is not a Windows factory settings recovery partition...
+                    lshal_recovery_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep -i recovery'
+                    partition_is_recovery = commands.getoutput(lshal_recovery_output)
+                    if partition_is_recovery == '' :
+                        # Get the operating system
+                        operating_system = line.split(':')[1].split()[0]
+                        # Get the file system
+                        lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
+                        file_system = commands.getoutput(lshal_string_output).split("'")[1]
+                        boot_partition_feedline = [partition_device, file_system, operating_system, boot_label, boot_rank]
+                        boot_partition_feedline_list.append(boot_partition_feedline)
+                    else:
+                        pass
+            except :
+                pass
             # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
             os.putenv("root_partition", "\'/\'")
             this_os_main_partition = commands.getoutput("lshal | grep -B33  $root_partition | grep block.device")
@@ -449,7 +455,7 @@ class LiloSetup:
         for set in BootPartitionsValues	:
             # We need to ensure that the labels are unique and do not contain empty space
             if ' ' in set[4] :
-                error_dialog("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n")
+                error_dialog(_("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n"))
                 self.EditButton.set_sensitive(False)
                 self.CreateButton.set_sensitive(True)
                 self.ExecuteButton.set_sensitive(False)
@@ -669,7 +675,7 @@ class LiloSetup:
 if __name__ == '__main__':
     # Checks for root privileges
     if os.getuid() != 0:
-        error_dialog(_("Sorry, root privileges are required."))
+        error_dialog(_("<b>Sorry!</b> \n\nRoot privileges are required to run LiloSetup. "))
         sys.exit(1)
     # Executes the main program
     LiloSetup()

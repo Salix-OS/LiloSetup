@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 201007 build -  Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 201008 build -  Forked LiloFix '0.9.7' to Salix environment
 #                                   Modified name, logo, gui & lilosetup.conf stub
 #                                   Migrated from libglade to gtkbuilder
 #                                   Added extra info columns to the boot partition list
@@ -497,7 +497,10 @@ class LiloSetup:
                             sys.exit(0)
                         if other_mnt == '':  # we need to create a temporary mountpoint ourselves
                             temp_other_mnt = work_dir + set[0].replace('dev', 'mnt')
-                            os.makedirs(chroot_mnt + temp_other_mnt)
+                            try :
+                                os.makedirs(chroot_mnt + temp_other_mnt)
+                            except OSError :
+                                pass
                             temp_mount.append(chroot_mnt + temp_other_mnt) # allows cleanup temporary mountpoints later
                             other_mnt = temp_other_mnt
                             # Mount the 'other' partition(s)

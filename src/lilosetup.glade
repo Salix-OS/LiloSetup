@@ -34,35 +34,6 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="boot_rank_list_store">
-    <columns>
-      <!-- column-name rank -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">1</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">2</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">3</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">4</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">5</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">6</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">7</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="boot_partition_list_store">
     <columns>
       <!-- column-name partition -->
@@ -73,8 +44,6 @@
       <column type="gchararray"/>
       <!-- column-name label -->
       <column type="gchararray"/>
-      <!-- column-name rank -->
-      <column type="gchararray"/>
     </columns>
     <data>
       <row>
@@ -82,21 +51,18 @@
         <col id="1" translatable="yes">fat32</col>
         <col id="2" translatable="yes">Windows</col>
         <col id="3" translatable="yes">XP</col>
-        <col id="4" translatable="yes">0</col>
       </row>
       <row>
         <col id="0" translatable="yes">/dev/sda2</col>
         <col id="1" translatable="yes">ntfs</col>
         <col id="2" translatable="yes">Windows</col>
         <col id="3" translatable="yes">Vista</col>
-        <col id="4" translatable="yes">0</col>
       </row>
       <row>
         <col id="0" translatable="yes">/dev/sda3</col>
         <col id="1" translatable="yes">/dev/sdb1</col>
         <col id="2" translatable="yes">Slackware</col>
         <col id="3" translatable="yes">Salix</col>
-        <col id="4" translatable="yes">0</col>
       </row>
     </data>
   </object>
@@ -124,7 +90,7 @@
                 <child>
                   <object class="GtkImage" id="image_lilofix">
                     <property name="visible">True</property>
-                    <property name="tooltip_text" translatable="yes">About...</property>
+                    <property name="tooltip_text" translatable="yes">About Lilo Setup...</property>
                     <property name="xpad">15</property>
                     <property name="ypad">15</property>
                     <property name="pixbuf">lilosetup.png</property>
@@ -170,91 +136,138 @@ A bootloader is required to load the main operating system of a computer and wil
               <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkHBox" id="hbox3">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">automatic</property>
-                    <property name="vscrollbar_policy">automatic</property>
                     <child>
-                      <object class="GtkTreeView" id="boot_partition_treeview">
+                      <object class="GtkScrolledWindow" id="scrolledwindow1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Here you must define a Boot menu label and rank for each of the operating system that will be displayed on your bootloader menu.
-
-The partition with the lowest rank will be displayed on the first line of the bootloader menu, while the partition with the highest rank will be on the last line. If you do not set any rank, the boot menu order will follow the order of the device naming scheme.
-
-Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu. 
-
-If a few kernels are available within one partition, the label you have chosen for that partition will be appended with the version of each kernel available to create multiple menu entries for each of these kernel.
-
-Any of these settings can later be edited manually in lilosetup configuration file.</property>
-                        <property name="model">boot_partition_list_store</property>
-                        <property name="rules_hint">True</property>
+                        <property name="hscrollbar_policy">automatic</property>
+                        <property name="vscrollbar_policy">automatic</property>
                         <child>
-                          <object class="GtkTreeViewColumn" id="partition_treeviewcolumn">
-                            <property name="title">Partition</property>
-                            <property name="expand">True</property>
+                          <object class="GtkTreeView" id="boot_partition_treeview">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="tooltip_text" translatable="yes">Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.
+
+Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.
+
+If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.
+
+Any of these settings can be edited manually in lilosetup configuration file.</property>
+                            <property name="model">boot_partition_list_store</property>
+                            <property name="headers_clickable">False</property>
+                            <property name="rules_hint">True</property>
+                            <property name="search_column">0</property>
                             <child>
-                              <object class="GtkCellRendererText" id="partition_cellrenderertext"/>
-                              <attributes>
-                                <attribute name="text">0</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="filesystem_treeviewcolumn">
-                            <property name="title">File system</property>
-                            <property name="expand">True</property>
-                            <child>
-                              <object class="GtkCellRendererText" id="fs_cellrenderertext"/>
-                              <attributes>
-                                <attribute name="text">1</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="os_treeviewcolumn">
-                            <property name="title">Operating system</property>
-                            <property name="expand">True</property>
-                            <child>
-                              <object class="GtkCellRendererText" id="os_cellrenderertext"/>
-                              <attributes>
-                                <attribute name="text">2</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="label_treeviewcolumn">
-                            <property name="title">Boot menu label</property>
-                            <property name="expand">True</property>
-                            <child>
-                              <object class="GtkCellRendererCombo" id="label_cellrenderercombo">
-                                <signal name="edited" handler="on_label_cellrenderercombo_edited"/>
+                              <object class="GtkTreeViewColumn" id="partition_treeviewcolumn">
+                                <property name="title">Partition</property>
+                                <property name="expand">True</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="partition_cellrenderertext"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
                               </object>
-                              <attributes>
-                                <attribute name="text">3</attribute>
-                              </attributes>
                             </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="rank_treeviewcolumn">
-                            <property name="title">Boot menu rank</property>
-                            <property name="expand">True</property>
                             <child>
-                              <object class="GtkCellRendererCombo" id="rank_cellrenderercombo">
-                                <signal name="edited" handler="on_rank_cellrenderercombo_edited"/>
+                              <object class="GtkTreeViewColumn" id="filesystem_treeviewcolumn">
+                                <property name="title">File system</property>
+                                <property name="expand">True</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="fs_cellrenderertext"/>
+                                  <attributes>
+                                    <attribute name="text">1</attribute>
+                                  </attributes>
+                                </child>
                               </object>
-                              <attributes>
-                                <attribute name="text">4</attribute>
-                              </attributes>
+                            </child>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="os_treeviewcolumn">
+                                <property name="title">Operating system</property>
+                                <property name="expand">True</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="os_cellrenderertext"/>
+                                  <attributes>
+                                    <attribute name="text">2</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="label_treeviewcolumn">
+                                <property name="title">Boot menu label</property>
+                                <property name="expand">True</property>
+                                <child>
+                                  <object class="GtkCellRendererCombo" id="label_cellrenderercombo">
+                                    <signal name="edited" handler="on_label_cellrenderercombo_edited"/>
+                                  </object>
+                                  <attributes>
+                                    <attribute name="text">3</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
                             </child>
                           </object>
                         </child>
                       </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkVBox" id="vbox2">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkButton" id="up_button">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Use this arrow if you want to move the selected Operating System up to a higher rank.
+
+The partition with the highest rank will be displayed on the first line of the bootloader menu.
+
+Any of these settings can be edited manually in lilosetup configuration file.</property>
+                            <signal name="clicked" handler="on_up_button_clicked"/>
+                            <child>
+                              <object class="GtkImage" id="image5">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-go-up</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="down_button">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Use this arrow if you want to move the selected Operating System down to a lower rank.
+
+The partition with the lowest rank will be displayed on the last line of the bootloader menu.
+
+Any of these settings can be edited manually in lilosetup configuration file.</property>
+                            <signal name="clicked" handler="on_down_button_clicked"/>
+                            <child>
+                              <object class="GtkImage" id="image3">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-go-down</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">1</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>
@@ -265,13 +278,13 @@ Any of these settings can later be edited manually in lilosetup configuration fi
                   <object class="GtkHButtonBox" id="hbuttonbox1">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkButton" id="delete_button">
+                      <object class="GtkButton" id="undo_button">
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">You must first delete the current LiloSetup configuration file if you wish to recreate a new one.</property>
-                        <signal name="clicked" handler="on_delete_button_clicked"/>
+                        <property name="tooltip_text" translatable="yes">This will undo all settings (even manual modifications).</property>
+                        <signal name="clicked" handler="on_undo_button_clicked"/>
                         <child>
                           <object class="GtkHBox" id="hbox4">
                             <property name="visible">True</property>
@@ -285,9 +298,9 @@ Any of these settings can later be edited manually in lilosetup configuration fi
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="delete_label">
+                              <object class="GtkLabel" id="undo_label">
                                 <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Delete configuration file </property>
+                                <property name="label" translatable="yes">_Undo configuration </property>
                                 <property name="use_markup">True</property>
                                 <property name="use_underline">True</property>
                               </object>
@@ -308,9 +321,9 @@ Any of these settings can later be edited manually in lilosetup configuration fi
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Once it is generated, experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). 
+                        <property name="tooltip_text" translatable="yes">Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). 
 
-This option is to be used at your own risk... Please do not temper with this file unless you know what you are doing.</property>
+Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths.</property>
                         <signal name="clicked" handler="on_edit_button_clicked"/>
                         <child>
                           <object class="GtkHBox" id="hbox1">
@@ -327,7 +340,7 @@ This option is to be used at your own risk... Please do not temper with this fil
                             <child>
                               <object class="GtkLabel" id="edit_label">
                                 <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Edit configuration file </property>
+                                <property name="label" translatable="yes">_Edit configuration </property>
                                 <property name="use_markup">True</property>
                                 <property name="use_underline">True</property>
                               </object>
@@ -340,43 +353,6 @@ This option is to be used at your own risk... Please do not temper with this fil
                       </object>
                       <packing>
                         <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="create_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Create LiloSetup configuration file after you have defined your settings in the list above. This step is compulsory before you can install LILO's bootloader.</property>
-                        <signal name="clicked" handler="on_create_button_clicked"/>
-                        <child>
-                          <object class="GtkHBox" id="hbox3">
-                            <property name="visible">True</property>
-                            <child>
-                              <object class="GtkImage" id="image3">
-                                <property name="visible">True</property>
-                                <property name="stock">gtk-new</property>
-                              </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="create_label">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Create configuration file </property>
-                                <property name="use_markup">True</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -426,7 +402,7 @@ This option is to be used at your own risk... Please do not temper with this fil
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Install LILO's bootloader.
 
-This button will only become available once the configuration file has been created.</property>
+Once you have defined your settings, click on this button to create your new LILO's bootloader. </property>
                 <signal name="clicked" handler="on_execute_button_clicked"/>
                 <child>
                   <object class="GtkHBox" id="hbox2">

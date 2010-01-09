@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 201008 build -  Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 201009 build -  Forked LiloFix '0.9.7' to Salix environment
 #                                   Modified name, logo, gui & lilosetup.conf stub
 #                                   Migrated from libglade to gtkbuilder
 #                                   Added extra info columns to the boot partition list
@@ -34,6 +34,7 @@
 #                                   French translation
 
 # To Do => Refine Slackware based distro name detection
+# To Do => Rework translation around strings variables (makes it easier for translators to adapt words order & grammar)
 # To Do => Verify Raid device support
 # To Do => Add splash=quiet option to addapend line if needed for bootspash
 
@@ -487,7 +488,7 @@ class LiloSetup:
                             os.close(r)
                             w = os.fdopen(w, 'w')
                             os.chroot(chroot_mnt)
-                            # TODO 2>/dev/null ?
+                            # TODO silence mount with 2>/dev/null ?
                             subprocess.call("mount -a", shell=True)
                             OTHER_MNT="mount | grep " + set[0] + " | awk -F' ' '{print $3 }'"
                             other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
@@ -503,9 +504,9 @@ class LiloSetup:
                                 pass
                             temp_mount.append(chroot_mnt + temp_other_mnt) # allows cleanup temporary mountpoints later
                             other_mnt = temp_other_mnt
-                            # Mount the 'other' partition(s)
-                            mnt_command = "mount " + set[0] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
-                            subprocess.call(mnt_command, shell=True)
+                        # Mount the 'other' partition(s) in case it is not already done
+                        mnt_command = "mount " + set[0] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
+                        subprocess.call(mnt_command, shell=True)
                         mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
                     # If Windows partition:
                     windows_sys_labels = ['Microsoft', 'Windows']

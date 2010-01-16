@@ -22,21 +22,21 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 201009 build -  Forked LiloFix '0.9.7' to Salix environment
-#                                   Modified name, logo, gui & lilosetup.conf stub
-#                                   Migrated from libglade to gtkbuilder
-#                                   Added extra info columns to the boot partition list
-#                                   Switched to os-prober & lshal for booting partitions details
-#                                   Added initrd autodetection
-#                                   Added support for multiple kernels within the same partition
-#                                   Adapt syntax if target kernel is using LIBATA
-#                                   Added fstab with'UUID for mountpoints detection
-#                                   French translation
+# version = '0.1' - 20100116 build - Forked LiloFix '0.9.7' to Salix environment
+#                                    Modified name, logo, gui & lilosetup.conf stub
+#                                    Migrated from libglade to gtkbuilder
+#                                    Added extra info columns to the boot partition list
+#                                    Switched to os-prober & lshal for booting partitions details
+#                                    Added initrd autodetection
+#                                    Added support for multiple kernels within the same partition
+#                                    Adapt syntax if target kernel is using LIBATA
+#                                    Added fstab with'UUID for mountpoints detection
+#                                    French translation
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Rework translation around strings variables (makes it easier for translators to adapt words order & grammar)
 # To Do => Verify Raid device support
-# To Do => Add splash=quiet option to addapend line if needed for bootspash
+# To Do => Add splash=quiet option to addapend line if needed for bootspash (check if bootsplash png are availbale in /etc)
 
 import shutil
 import subprocess
@@ -63,7 +63,8 @@ gtk.glade.textdomain("lilosetup")
 # Info window skeleton:
 def info_dialog(message, parent = None):
     """
-    Displays an information message.
+    Display an information message.
+
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
     dialog.set_icon_from_file("/usr/share/icons/gnome/scalable/status/dialog-information.svg")
@@ -75,7 +76,8 @@ def info_dialog(message, parent = None):
 # Warning window skeleton:
 def warning_dialog(message, parent = None):
     """
-    Displays a warning message.
+    Display a warning message.
+
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_WARNING, buttons = gtk.BUTTONS_NONE, flags = gtk.DIALOG_MODAL)
     dialog.set_icon_from_file("/usr/share/icons/gnome/scalable/status/dialog-warning.svg")
@@ -90,7 +92,8 @@ def warning_dialog(message, parent = None):
 # Error window skeleton:
 def error_dialog(message, parent = None):
     """
-    Displays an error message.
+    Display an error message.
+
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
     dialog.set_icon_from_file("/usr/share/icons/gnome/scalable/status/dialog-error.svg")
@@ -102,19 +105,22 @@ def error_dialog(message, parent = None):
 # Output of bash commands :
 def run_bash(cmd):
     """
-    Takes bash commands and returns the output.
+    Take a bash command and return the output.
+
     """
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     out = p.stdout.read().strip()
     return out  #This is the stdout from the shell command
     
-# Create LiloSetup temporary work directory
+# Setup LiloSetup temporary work directory & configuration file
 global work_dir
 work_dir = "/tmp/lilosetup"
 try :
     os.mkdir(work_dir)
-except:
+except OSError:
     pass
+global config_location
+config_location = work_dir + "/lilosetup.conf"
 
 # initialize the temporary mountpoint list
 temp_mount = []
@@ -126,7 +132,7 @@ partition_set = []
 # Get the booting device
 try :
     boot_partition = commands.getoutput('os-prober').splitlines()[0].split(':')[0].strip('0123456789')
-except:
+except IndexError:
     BOOT_PARTITION = """
     fdisk -l | grep dev | grep \* -m 1 | cut -f1 -d " "
     """
@@ -137,7 +143,7 @@ stub_location = work_dir + "/lilosetup.stub"
 # Delete any old stub if present
 try:
     os.remove(stub_location)
-except:
+except OSError:
     pass
 # The following defaults reflect Salix' customisations for Lilo
 stub = open(stub_location, "w")
@@ -225,6 +231,7 @@ stub.close()
 # Let's now set the appropriate framebuffer...
 # Setting bash environment variable
 os.putenv("stubfile", stub_location)
+
 # This function gives a failsafe option in case of trouble with framebuffer:
 def failsafe_fb():
     FBLINE= """
@@ -236,10 +243,11 @@ def failsafe_fb():
     subprocess.call(set_framebuffer, shell=True)
 
 # We first check if framebuffer is available
-try :
-    USEDFB = """
-    fbset | grep -w mode | cut -f2 -d " " | cut -f1 -d "-" | sed 's/"//'
-    """
+
+USEDFB = """
+fbset | grep -w mode | cut -f2 -d " " | cut -f1 -d "-" | sed 's/"//'
+"""
+if run_bash(USEDFB):
     os.putenv("setfb", run_bash(USEDFB))
     # We also need to make sure that the adequate framebuffer resolution is in the stub
     FBLINE= """
@@ -254,9 +262,8 @@ try :
     # If no fitting resolution is available from the stub then failsafe to vga-normal
     else :
         failsafe_fb()
-
 # If framebuffer is not available, we can use failsafe option again
-except :
+else :
     failsafe_fb()
 
 def lilosetup_quit():
@@ -269,19 +276,19 @@ def lilosetup_quit():
             if "/proc" not in i :
                 try:
                     os.removedirs(i)
-                except:
+                except OSError:
                     pass
     try:
         os.remove(stub_location)
-    except:
+    except OSError:
         pass
     try:
         os.remove(config_location)
-    except:
+    except OSError:
         pass
     try :
         os.rmdir(work_dir)
-    except:
+    except OSError:
         pass
     gtk.main_quit()
 
@@ -309,6 +316,8 @@ class LiloSetup:
         self.EditButton = builder.get_object("edit_button")
         self.UndoButton = builder.get_object("undo_button")
         self.ExecuteButton = builder.get_object("execute_button")
+        self.UpButton = builder.get_object("up_button")
+        self.DownButton = builder.get_object("down_button")
         self.LabelCellRendererCombo = builder.get_object("label_cellrenderercombo")
         self.LabelTreeViewColumn = builder.get_object("label_treeviewcolumn")
 
@@ -396,8 +405,6 @@ class LiloSetup:
             """
             Populate lilosetup.conf & mounts needed partition to lilo's chrooted partition.
             """
-            global config_location
-            config_location = work_dir + "/lilosetup.conf"
             shutil.copy(stub_location,config_location)
 
             # Retrieve all the partition rows values
@@ -408,7 +415,7 @@ class LiloSetup:
                     treeiter = self.BootPartitionListStore.get_iter(x)
                     x += 1
                     BootPartitionsValues.append(self.BootPartitionListStore.get(treeiter, 0, 1, 2, 3))
-                except (ValueError) :
+                except ValueError :
                     break
             for set in BootPartitionsValues	:
 
@@ -417,6 +424,8 @@ class LiloSetup:
                     error_dialog(_("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n"))
                     self.EditButton.set_sensitive(False)
                     self.ExecuteButton.set_sensitive(False)
+                    self.UpButton.set_sensitive(True)
+                    self.DownButton.set_sensitive(True)
                     self.BootPartitionTreeview.set_sensitive(True)
                     break
                 # We ensure that the label is less than 15 characters long
@@ -424,6 +433,8 @@ class LiloSetup:
                     error_dialog(_("\nAn Operating System label should not hold more than 15 characters. \n\nPlease verify and correct.\n"))
                     self.EditButton.set_sensitive(False)
                     self.ExecuteButton.set_sensitive(False)
+                    self.UpButton.set_sensitive(True)
+                    self.DownButton.set_sensitive(True)
                     self.BootPartitionTreeview.set_sensitive(True)
                     break
                 # We skip the partitions that have not been configured by the user
@@ -437,6 +448,8 @@ class LiloSetup:
                         error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct.\n"))
                         self.EditButton.set_sensitive(False)
                         self.ExecuteButton.set_sensitive(False)
+                        self.UpButton.set_sensitive(True)
+                        self.DownButton.set_sensitive(True)
                         self.BootPartitionTreeview.set_sensitive(True)
                         break
                     # Let's determines Lilo's chrooted Linux partition directory, only happens once.
@@ -526,17 +539,16 @@ class LiloSetup:
                         # Append to lilosetup.conf
                         stub = open(config_location, "a")
                         # There maybe a few kernels in the same partition
-                        # TODO this basic detection will be screwed if kernel with or without initrd are mixed...
+                        # Some of them may have an initrd, which we assume have the exact same suffix.
                         vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
+                        # Remove directories
+                        for i in vmlist :
+                            if os.path.isdir(i) :
+                                vmlist.remove(i)
                         # Remove symbolic links
                         for i in vmlist :
                             if os.path.islink(i) :
                                 vmlist.remove(i)
-                        initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd*"))
-                        # Remove symbolic links
-                        for i in initlist :
-                            if os.path.islink(i) :
-                                initlist.remove(i)
                         it = 0
                         y = 1
                         while it < len(vmlist) :
@@ -577,11 +589,11 @@ class LiloSetup:
                                     stub.write("label = " + corrected_label +"\n")
                                 else:
                                     stub.write("label = " + new_label +"\n")
-                            try :
-                                initrd_file_path = initlist[it].split("boot")[1]
+                            # Add the initrd if appropriate
+                            initrd_match = vmlist[it].replace('vmlinuz', 'initrd')
+                            if os.path.isfile(initrd_match):
+                                initrd_file_path = initrd_match.split("boot")[1]
                                 stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
-                            except :
-                                pass
                             stub.write("read-only\n")
                             stub.write(_("# Linux bootable partition config ends\n"))
                             y += 1
@@ -675,12 +687,15 @@ class LiloSetup:
         """
         try:
             os.remove(config_location)
-        except:
+        except OSError:
             pass
         setup_partition_list()
         self.EditButton.set_sensitive(False)
         self.UndoButton.set_sensitive(False)
         self.ExecuteButton.set_sensitive(False)
+        self.UpButton.set_sensitive(True)
+        self.DownButton.set_sensitive(True)
+        self.BootPartitionTreeview.get_selection().unselect_all()
         self.BootPartitionTreeview.set_sensitive(True)
         if temp_mount :
             for i in temp_mount :
@@ -688,7 +703,7 @@ class LiloSetup:
                 if "/proc" not in i :
                     try:
                         os.removedirs(i)
-                    except:
+                    except OSError:
                         pass
 
     def on_edit_button_clicked(self, widget, data=None):
@@ -697,17 +712,21 @@ class LiloSetup:
         """
         create_configuration()
         subprocess.call('xdg-open ' + config_location, shell=True)
+        self.UpButton.set_sensitive(False)
+        self.DownButton.set_sensitive(False)
+        self.BootPartitionTreeview.get_selection().unselect_all()
         self.BootPartitionTreeview.set_sensitive(False)
 
     def on_execute_button_clicked(self, widget, data=None):
+        # Check if the configuration file has already beeen created
+        if os.path.isfile(config_location ) == False :
+            create_configuration()
         # Check if at least one Linux partition has been configured:
         if partition_set == [] :
             error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"))
         else:
             warning_dialog(_("You are about to install a new LILO bootloader. Are you sure you want to continue?"))
             if result_warning == gtk.RESPONSE_YES:
-                if os.path.isfile(config_location ) == False :
-                    create_configuration()
                 # If previous lilosetup.conf file exist, save it as lilosetup.old
                 if os.path.isfile(chroot_mnt + "/etc/lilosetup.conf") == True :
                     os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')

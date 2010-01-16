@@ -34,9 +34,8 @@
 #                                    French translation
 
 # To Do => Refine Slackware based distro name detection
-# To Do => Rework translation around strings variables (makes it easier for translators to adapt words order & grammar)
 # To Do => Verify Raid device support
-# To Do => Add splash=quiet option to addapend line if needed for bootspash (check if bootsplash png are availbale in /etc)
+# To Do => Add splash=quiet option to addapend line if needed for bootspash (check if bootsplash png are available in /etc)
 
 import shutil
 import subprocess
@@ -589,11 +588,25 @@ class LiloSetup:
                                     stub.write("label = " + corrected_label +"\n")
                                 else:
                                     stub.write("label = " + new_label +"\n")
-                            # Add the initrd if appropriate
+                            # Add the initrd if suffix is matching kernel
                             initrd_match = vmlist[it].replace('vmlinuz', 'initrd')
                             if os.path.isfile(initrd_match):
                                 initrd_file_path = initrd_match.split("boot")[1]
                                 stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
+                            # If only one kernel & one initrd, we assume they match even if their suffix do not.
+                            elif it == 0:
+                                initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd*"))
+                                # Remove directories
+                                for i in initlist :
+                                    if os.path.isdir(i) :
+                                        initlist.remove(i)
+                                # Remove symbolic links
+                                for i in initlist :
+                                    if os.path.islink(i) :
+                                        initlist.remove(i)
+                                if len(initlist) == 1 and len(vmlist) == 1:
+                                    initrd_file_path = initlist[0].split("boot")[1]
+                                    stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
                             stub.write("read-only\n")
                             stub.write(_("# Linux bootable partition config ends\n"))
                             y += 1
@@ -614,13 +627,15 @@ class LiloSetup:
 
     def on_about_button_clicked(self, widget, data=None):
         """
-        Opens the about dialog.
+        Open the about dialog.
+
         """
         self.AboutDialog.show()
 
     def on_about_dialog_close(self, widget, data=None):
         """
-        Closes the about dialog.
+        Close the about dialog.
+
         """
         self.AboutDialog.hide()
         return True;
@@ -638,7 +653,8 @@ class LiloSetup:
 
     def on_up_button_clicked(self, widget, data=None):
         """
-        move the row items upward
+        Move the row items upward.
+
         """
         # Obtain selection
         sel = self.BootPartitionTreeview.get_selection()
@@ -660,7 +676,8 @@ class LiloSetup:
 
     def on_down_button_clicked(self, widget, data=None):
         """
-        move the row items downward
+        Move the row items downward.
+
         """
         # Obtain selection
         sel = self.BootPartitionTreeview.get_selection()

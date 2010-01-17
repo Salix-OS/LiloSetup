@@ -379,7 +379,7 @@ Please do not temper with this file unless you know what you are doing and you h
             <property name="layout_style">edge</property>
             <child>
               <object class="GtkButton" id="button_quit">
-                <property name="label" translatable="yes">gtk-quit</property>
+                <property name="label">gtk-quit</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_focus">True</property>

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 09:58+0100\n"
+"POT-Creation-Date: 2010-01-17 11:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Raphael Groner  <raphgro(at)web.de>\n"
 "Language-Team: Raphael Groner <raphgro(at)web.de>\n"
@@ -444,10 +444,6 @@ msgstr ""
 
 #: lilosetup.glade:343
 msgid "_Edit configuration "
-msgstr ""
-
-#: lilosetup.glade:382
-msgid "gtk-quit"
 msgstr ""
 
 #: lilosetup.glade:388

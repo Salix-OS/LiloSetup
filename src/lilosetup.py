@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100116 build - Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 20100117 build - Forked LiloFix '0.9.7' to Salix environment
 #                                    Modified name, logo, gui & lilosetup.conf stub
 #                                    Migrated from libglade to gtkbuilder
 #                                    Added extra info columns to the boot partition list
@@ -31,7 +31,7 @@
 #                                    Added support for multiple kernels within the same partition
 #                                    Adapt syntax if target kernel is using LIBATA
 #                                    Added fstab with'UUID for mountpoints detection
-#                                    French translation
+#                                    French, German translation
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Verify Raid device support

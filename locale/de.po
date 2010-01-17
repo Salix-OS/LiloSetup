@@ -1,20 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: LiloSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-17 09:58+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Raphael Groner  <raphgro(at)web.de>\n"
+"Language-Team: Raphael Groner <raphgro(at)web.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
 
 #: lilosetup.py:149
 msgid "# LILO configuration file\n"
@@ -207,6 +203,10 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Ein Betriebssystem-Name sollte keine Leerzeichen enthalten. \n"
+"\n"
+"Bitte überprüfen und korrigieren.\n"
 
 #: lilosetup.py:432
 msgid ""
@@ -215,12 +215,18 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Ein Betriebssystem-Name sollte nicht aus mehr als 15 Zeichen bestehen. \n"
+"\n"
+"Bitte überprüfen und korrigieren.\n"
 
 #: lilosetup.py:447
 msgid ""
 "You have used the same label for different Operating Systems. Please verify "
 "and correct.\n"
 msgstr ""
+"Sie haben den gleichen Name für verschiedene Betriebssysteme verwendet. "
+"Bitte überprüfen und korrigieren.\n"
 
 #: lilosetup.py:529
 msgid "# Windows bootable partition config begins\n"
@@ -239,6 +245,9 @@ msgid ""
 "One of your partitions does not seem to hold a valid kernel file. Please "
 "verify and correct LiloSetup configuration file manually.\n"
 msgstr ""
+"Eine Ihrer Partitionen scheint nicht eine gültigen Kernel-Datei zu "
+"beinhalten. Bitte die LiloSetup Konfigurationsdatei manuell überprüfen und "
+"korrigieren. \n"
 
 #: lilosetup.py:611
 msgid "# Linux bootable partition config ends\n"
@@ -249,24 +258,33 @@ msgid ""
 "Your configuration is not complete. Please, select at least one Linux "
 "booting partition and define its Boot menu label.\n"
 msgstr ""
+"Ihre Konfiguration ist nicht vollständig. Bitte wählen Sie mindestens eine "
+"Linux Boot-Partition aus und legen Sie den Namen für das Boot-Menü fest.\n"
 
 #: lilosetup.py:745
 msgid ""
 "You are about to install a new LILO bootloader. Are you sure you want to "
 "continue?"
 msgstr ""
+"Sie sind dabei, einen neuen LILO Boot-Loader zu installieren. Sind Sie "
+"sicher, dass Sie fortfahren möchten?"
 
 #: lilosetup.py:761
 msgid ""
 "The installation of your new LILO bootloader was succesful. You can now exit "
 "LiloSetup and reboot your computer.\n"
 msgstr ""
+"Die Installation des neuen LILO-Bootloaders war erfolgreich. Sie können nun "
+"LiloSetup beenden und Ihren Computer neu starten. \n"
 
 #: lilosetup.py:764
 msgid ""
 "The installation of your new LILO bootloader failed. Please verify /var/log/"
 "lilosetup.log, modify your settings and try again.\n"
 msgstr ""
+"Die Installation des neues LILO-Bootloaders ist fehlgeschlagen. Bitte /var/"
+"log/lilosetup.log überprüfen, Ihre Einstellungen ändern und den Vorgang "
+"wiederholen. \n"
 
 #: lilosetup.py:772
 msgid ""
@@ -274,14 +292,16 @@ msgid ""
 "\n"
 "Root privileges are required to run LiloSetup. "
 msgstr ""
+"<b>Entschuldigung!</b> \n"
+"Sie benötigen Root-Rechte, um LiloSetup auszuführen."
 
 #: lilosetup.glade:72
 msgid "Lilo Setup"
-msgstr ""
+msgstr "Lilo Setup"
 
 #: lilosetup.glade:93
 msgid "About Lilo Setup..."
-msgstr ""
+msgstr "Über Lilo Setup..."
 
 #: lilosetup.glade:107
 msgid ""
@@ -296,6 +316,17 @@ msgid ""
 "from a regular installed Linux system.  In both cases, it will setup a new "
 "LILO bootloader on the MBR of the first hard drive with a boot flag."
 msgstr ""
+"Es ist notwendig, den Bootloader jedes Mal (erneut) zu installieren, wenn "
+"Sie ein neues Betriebssystem auf Ihrem Computer installieren. \n"
+"\n"
+"LiloSetup kann auch im Notfall zur Wiederherstellung des Bootloaders "
+"nützlich sein, indem Sie von einer LiveCD starten, wenn alle anderen "
+"Werkzeuge versagt haben, um Ihr System zu booten. \n"
+"\n"
+"Lilosetup kann gleichgültig von einer Linux-LiveCD-Umgebung oder von einem "
+"regulär installierten Linux-System ausgeführt werden. In beiden Fällen wird "
+"ein neuer LILO-Bootloader im MBR der ersten Festplatte mit einer Boot-"
+"Markierung eingerichtet."
 
 #: lilosetup.glade:114
 msgid ""
@@ -305,6 +336,12 @@ msgid ""
 "will initially display a boot menu if several operating systems are "
 "available on the same computer."
 msgstr ""
+"<b>LiloSetup wird einen neuen LILO-Bootloader auf Ihrem Computer "
+"installieren.</b> \n"
+"\n"
+"Ein Bootloader ist erforderlich, um das wichtigste Betriebssystem eines "
+"Computers zu laden und wird zunächst ein Boot-Menü anzeigen, wenn mehrere "
+"Betriebssysteme auf demselben Computer zur Verfügung stehen."
 
 #: lilosetup.glade:151
 msgid ""
@@ -320,6 +357,18 @@ msgid ""
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Hier müssen Sie einen Namen im Boot-Menü für jedes Betriebssystem angeben, "
+"der in Ihrem Bootloader-Menü angezeigt wird. \n"
+"\n"
+"Jede Partition, für die Sie keinen Namen im Boot-Menü setzen, wird auch "
+"nicht konfiguriert und nicht jm Bootloader-Menü angezeigt. \n"
+"\n"
+"Wenn ein paar Kernel in einer Partition vorhanden sind, wird der Name, den "
+"Sie für diese Partition ausgewählt haben, numerisch ergänzt, um mehrere Menü-"
+"Einträge für jeden dieser Kernel anzulegen. \n"
+" \n"
+"Alle diese Einstellungen können später manuell in der LiloSetup "
+"Konfigurationsdatei bearbeitet werden."
 
 #: lilosetup.glade:164
 msgid "Partition"
@@ -347,6 +396,14 @@ msgid ""
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Diesen Pfeil benutzen, wenn Sie das ausgewählte Betriebssystem auf eine "
+"höhere Position bewegen wollen.\n"
+"\n"
+"Die Partition mit der höchsten Position wird in der ersten Zeile des "
+"Bootloader-Menüs angezeigt.\n"
+"\n"
+"Jede dieser Einstellungen kann manuell in der lilosetup Konfigurationsdatei "
+"bearbeitet werden."
 
 #: lilosetup.glade:249
 msgid ""
@@ -358,10 +415,19 @@ msgid ""
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Diesen Pfeil benutzen, wenn Sie das ausgewählte Betriebssystem auf eine "
+"niedrigere Position bewegen wollen.\n"
+"\n"
+"Die Partition mit der niedrigsten Position wird in der letzten Zeile des "
+"Bootloader-Menüs angezeigt.\n"
+"\n"
+"Jede dieser Einstellungen kann manuell in der lilosetup Konfigurationsdatei "
+"bearbeitet werden."
 
 #: lilosetup.glade:286
 msgid "This will undo all settings (even manual modifications)."
 msgstr ""
+"Dies wird alle Einstellungen rückgängig machen (sogar manuelle Änderungen)."
 
 #: lilosetup.glade:303
 msgid "_Undo configuration "
@@ -386,7 +452,7 @@ msgstr ""
 
 #: lilosetup.glade:388
 msgid "Exit Lilo Setup program."
-msgstr ""
+msgstr "Programm Lilo Setup beenden."
 
 #: lilosetup.glade:403
 msgid ""
@@ -395,6 +461,10 @@ msgid ""
 "Once you have defined your settings, click on this button to create your new "
 "LILO's bootloader. "
 msgstr ""
+"LILO-Bootloader installieren.\n"
+"\n"
+"Wenn Sie einmal Ihre Einstellungen festgelegt haben, klicken Sie auf diesen "
+"Knopf, um Ihren neuen LILO-Bootloader zu erstellen."
 
 #: lilosetup.glade:422
 msgid " _Install LILO's bootloader "
@@ -402,7 +472,7 @@ msgstr ""
 
 #: lilosetup.glade:448
 msgid "About lilosetup"
-msgstr ""
+msgstr "Über lilosetup"
 
 #: lilosetup.glade:458
 msgid ""
@@ -410,10 +480,13 @@ msgid ""
 "\n"
 "Copyright © 2010 Pierrick Le Brun"
 msgstr ""
+"Eine einfache GUI Schnittstelle, um LILO einzurichten.\n"
+"\n"
+"Copyright © 2010 Pierrick Le Brun"
 
 #: lilosetup.glade:462
 msgid "salixos.org"
-msgstr ""
+msgstr "salixos.org"
 
 #: lilosetup.glade:463
 msgid ""
@@ -434,3 +507,6 @@ msgid ""
 "the Free Software Foundation, Inc., 51 Franklin Street, \n"
 "Fifth Floor, Boston, MA 02110-1301, USA."
 msgstr ""
+
+#~ msgid "About..."
+#~ msgstr "Über..."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 08:22+0100\n"
+"POT-Creation-Date: 2010-01-18 08:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,6 +347,22 @@ msgid ""
 "menu entries for each of these kernels.\n"
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
+msgstr ""
+
+#: lilosetup.glade:164
+msgid "Partition"
+msgstr ""
+
+#: lilosetup.glade:176
+msgid "File system"
+msgstr ""
+
+#: lilosetup.glade:188
+msgid "Operating system"
+msgstr ""
+
+#: lilosetup.glade:200
+msgid "Boot menu label"
 msgstr ""
 
 #: lilosetup.glade:227

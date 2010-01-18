@@ -161,7 +161,7 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                             <property name="search_column">0</property>
                             <child>
                               <object class="GtkTreeViewColumn" id="partition_treeviewcolumn">
-                                <property name="title">Partition</property>
+                                <property name="title" translatable="yes">Partition</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="partition_cellrenderertext"/>
@@ -173,7 +173,7 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="filesystem_treeviewcolumn">
-                                <property name="title">File system</property>
+                                <property name="title" translatable="yes">File system</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="fs_cellrenderertext"/>
@@ -185,7 +185,7 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="os_treeviewcolumn">
-                                <property name="title">Operating system</property>
+                                <property name="title" translatable="yes">Operating system</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="os_cellrenderertext"/>
@@ -197,7 +197,7 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="label_treeviewcolumn">
-                                <property name="title">Boot menu label</property>
+                                <property name="title" translatable="yes">Boot menu label</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererCombo" id="label_cellrenderercombo">

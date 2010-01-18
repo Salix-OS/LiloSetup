@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 08:22+0100\n"
+"POT-Creation-Date: 2010-01-18 08:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Raphael Groner  <raphgro(at)web.de>\n"
 "Language-Team: Raphael Groner <raphgro(at)web.de>\n"
@@ -397,6 +397,22 @@ msgstr ""
 " \n"
 "Alle diese Einstellungen können später manuell in der LiloSetup "
 "Konfigurationsdatei bearbeitet werden."
+
+#: lilosetup.glade:164
+msgid "Partition"
+msgstr ""
+
+#: lilosetup.glade:176
+msgid "File system"
+msgstr ""
+
+#: lilosetup.glade:188
+msgid "Operating system"
+msgstr ""
+
+#: lilosetup.glade:200
+msgid "Boot menu label"
+msgstr ""
 
 #: lilosetup.glade:227
 msgid ""

@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100117 build - Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 20100118 build - Forked LiloFix '0.9.7' to Salix environment
 #                                    Modified name, logo, gui & lilosetup.conf stub
 #                                    Migrated from libglade to gtkbuilder
 #                                    Added extra info columns to the boot partition list

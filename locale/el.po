@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxsetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 08:22+0100\n"
+"POT-Creation-Date: 2010-01-18 08:42+0100\n"
 "PO-Revision-Date: 2010-01-17 21:50+0200\n"
 "Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: salix team <djemos@slackel.gr>\n"
@@ -414,6 +414,22 @@ msgstr ""
 "Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
 "αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
+#: lilosetup.glade:164
+msgid "Partition"
+msgstr "Διαμέρισμα"
+
+#: lilosetup.glade:176
+msgid "File system"
+msgstr "Σύστημα αρχείων"
+
+#: lilosetup.glade:188
+msgid "Operating system"
+msgstr "Λειτουργικό σύστημα"
+
+#: lilosetup.glade:200
+msgid "Boot menu label"
+msgstr "Ετικέτα μενού εκκίνησης"
+
 #: lilosetup.glade:227
 msgid ""
 "Use this arrow if you want to move the selected Operating System up to a "
@@ -559,15 +575,3 @@ msgid ""
 "French: Pierrick Le Brun\n"
 "Greek: Dimitris Tzemos"
 msgstr ""
-
-#~ msgid "Partition"
-#~ msgstr "Διαμέρισμα"
-
-#~ msgid "File system"
-#~ msgstr "Σύστημα αρχείων"
-
-#~ msgid "Operating system"
-#~ msgstr "Λειτουργικό σύστημα"
-
-#~ msgid "Boot menu label"
-#~ msgstr "Ετικέτα μενού εκκίνησης"

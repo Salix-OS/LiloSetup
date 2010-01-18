@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 07:52+0100\n"
+"POT-Creation-Date: 2010-01-18 08:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
 "Language-Team: \n"
@@ -348,22 +348,6 @@ msgstr ""
 "\n"
 "Chacun de ces paramètres peut être modifié manuellement dans le fichier de configuration de LiloSetup."
 
-#: lilosetup.glade:164
-msgid "Partition"
-msgstr "Partition"
-
-#: lilosetup.glade:176
-msgid "File system"
-msgstr "Système de fichiers"
-
-#: lilosetup.glade:188
-msgid "Operating system"
-msgstr "Système d'exploitation"
-
-#: lilosetup.glade:200
-msgid "Boot menu label"
-msgstr "Intitulé de menu"
-
 #: lilosetup.glade:227
 msgid ""
 "Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
@@ -483,6 +467,22 @@ msgstr ""
 "ce programme ; si ce n’est pas le cas, écrivez à la Free Software \n"
 "Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, Etats-Unis."
 
+#: lilosetup.glade:480
+msgid ""
+"French: Pierrick Le Brun\n"
+"Greek: Dimitris Tzemos"
+msgstr ""
+"Français: Pierrick Le Brun\n"
+"Grec: Dimitris Tzemos"
+
+#~ msgid "Partition"
+#~ msgstr "Partition"
+#~ msgid "File system"
+#~ msgstr "Système de fichiers"
+#~ msgid "Operating system"
+#~ msgstr "Système d'exploitation"
+#~ msgid "Boot menu label"
+#~ msgstr "Intitulé de menu"
 #~ msgid "gtk-quit"
 #~ msgstr "_Quitter"
 #~ msgid "About..."

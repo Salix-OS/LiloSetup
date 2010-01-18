@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxsetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 11:52+0100\n"
+"POT-Creation-Date: 2010-01-18 08:22+0100\n"
 "PO-Revision-Date: 2010-01-17 21:50+0200\n"
 "Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: salix team <djemos@slackel.gr>\n"
@@ -51,15 +51,20 @@ msgstr "# Θέση του πίνακα επιλογών: Θέση x, Θέση y,
 
 #: lilosetup.py:164
 msgid "# columns, lines per column (max 15), \"spill\" this is how many\n"
-msgstr "# στήλες, γραμμές ανά στήλη (μέγιστο 15), \"spill\" αυτό σημαίνει πόσα είναι\n"
+msgstr ""
+"# στήλες, γραμμές ανά στήλη (μέγιστο 15), \"spill\" αυτό σημαίνει πόσα "
+"είναι\n"
 
 #: lilosetup.py:165
 msgid "# entries must be in the first column before the next begins to\n"
-msgstr "# οι εισαγωγές πρέπει να είναι στη πρώτη στήλη πριν η δεύτερη αρχίσει\n"
+msgstr ""
+"# οι εισαγωγές πρέπει να είναι στη πρώτη στήλη πριν η δεύτερη αρχίσει\n"
 
 #: lilosetup.py:166
 msgid "# be used.  We don't specify it here, as there's just one column.\n"
-msgstr "# να χρησιμοποιείται.  Δεν την καθορίζουμε εδώ, αφού υπάρχει μόνο μια στήλη.\n"
+msgstr ""
+"# να χρησιμοποιείται.  Δεν την καθορίζουμε εδώ, αφού υπάρχει μόνο μια "
+"στήλη.\n"
 
 #: lilosetup.py:168
 msgid "# Timer location x, timer location y, foreground color,\n"
@@ -95,11 +100,14 @@ msgstr "# Χρονοκαθυστέρηση εκκίνησης πρώτης ει�
 
 #: lilosetup.py:181
 msgid "# This is given in tenths of a second, so 600 for every minute:\n"
-msgstr "# Αυτό δίνεται σε δέκατα του δευτερολέπτου, έτσι είναι 600 για κάθε λεπτό:\n"
+msgstr ""
+"# Αυτό δίνεται σε δέκατα του δευτερολέπτου, έτσι είναι 600 για κάθε λεπτό:\n"
 
 #: lilosetup.py:183
 msgid "# Override dangerous defaults that rewrite the partition table:\n"
-msgstr "# Αγνοεί επικίνδυνες παραλείψεις που επανεγγράφουν το πίνακα διαμερισμάτων του δίσκου:\n"
+msgstr ""
+"# Αγνοεί επικίνδυνες παραλείψεις που επανεγγράφουν το πίνακα διαμερισμάτων "
+"του δίσκου:\n"
 
 #: lilosetup.py:187
 msgid "# Normal VGA console\n"
@@ -175,7 +183,8 @@ msgstr "# Το LiloSetup μπορεί να τρέξει από LiveCD. Αυτό 
 
 #: lilosetup.py:222
 msgid "# could be issued from a 'chrooted' Linux partition, which would\n"
-msgstr "# μπορεί να ρυθμιστεί από ένα 'chrooted' διαμέρισμα Linux , που θα μπορούσε\n"
+msgstr ""
+"# μπορεί να ρυθμιστεί από ένα 'chrooted' διαμέρισμα Linux , που θα μπορούσε\n"
 
 #: lilosetup.py:223
 msgid "# happen to be the first Linux partition listed below.\n"
@@ -183,11 +192,14 @@ msgstr "# να είναι το πρώτο Linux διαμέρισμα που φα
 
 #: lilosetup.py:224
 msgid "# Therefore the following paths are relevant only when viewed\n"
-msgstr "# Μολονότι οι ακόλουθες θέσεις είναι σχετικές μόνο όταν τις βλέπουμε από \n"
+msgstr ""
+"# Μολονότι οι ακόλουθες θέσεις είναι σχετικές μόνο όταν τις βλέπουμε από \n"
 
 #: lilosetup.py:225
 msgid "# from that 'chrooted' partition's perspective. Please take this\n"
-msgstr "# τη πλευρά αυτού του 'chrooted' διαμερίσματος. Παρακαλώ πάρτε υπόψη σας αυτό το \n"
+msgstr ""
+"# τη πλευρά αυτού του 'chrooted' διαμερίσματος. Παρακαλώ πάρτε υπόψη σας "
+"αυτό το \n"
 
 #: lilosetup.py:226
 msgid "# constraint into consideration if you must modify this file\n"
@@ -197,7 +209,35 @@ msgstr "# περιορισμό αν πρέπει να τροποποιήσετε
 msgid "# or else LiloSetup will fail.\n"
 msgstr "# διαφορετικά η ρύθμιση του LILO (LiloSetup) θα αποτύχει.\n"
 
-#: lilosetup.py:423
+#: lilosetup.py:229
+msgid "# If later on you want to use this configuration file directly\n"
+msgstr ""
+
+#: lilosetup.py:230
+msgid "# with lilo in a command line, use the following syntax:\n"
+msgstr ""
+
+#: lilosetup.py:231
+msgid "# \"lilo -v -C /etc/lilosetup/conf\" instead of the traditional\n"
+msgstr ""
+
+#: lilosetup.py:232
+msgid "# \"lilo -v\" command. You must of course issue that command from\n"
+msgstr ""
+
+#: lilosetup.py:233
+msgid "# the operating system holding /etc/lilosetup.conf & ensure that\n"
+msgstr ""
+
+#: lilosetup.py:234
+msgid "# all partitions referenced in it are mounted on the appropriate\n"
+msgstr ""
+
+#: lilosetup.py:235
+msgid "# mountpoints.\n"
+msgstr ""
+
+#: lilosetup.py:435
 msgid ""
 "\n"
 "An Operating System label should not contain any space. \n"
@@ -205,11 +245,12 @@ msgid ""
 "Please verify and correct.\n"
 msgstr ""
 "\n"
-"Η ετικέτα ενός λειτουργικού συστήματος δεν πρέπει να περιέχει κανένα κενό διάστημα. \n"
+"Η ετικέτα ενός λειτουργικού συστήματος δεν πρέπει να περιέχει κανένα κενό "
+"διάστημα. \n"
 "\n"
 "Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
 
-#: lilosetup.py:432
+#: lilosetup.py:444
 msgid ""
 "\n"
 "An Operating System label should not hold more than 15 characters. \n"
@@ -217,51 +258,77 @@ msgid ""
 "Please verify and correct.\n"
 msgstr ""
 "\n"
-"Η ετικέτα ενός λειτουργικού συστήματος πρέπει να έχει μήκος έως 15 χαρακτήρες.\n"
+"Η ετικέτα ενός λειτουργικού συστήματος πρέπει να έχει μήκος έως 15 "
+"χαρακτήρες.\n"
 "\n"
 "Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
 
-#: lilosetup.py:447
-msgid "You have used the same label for different Operating Systems. Please verify and correct.\n"
-msgstr "Έχετε χρησιμοποιήσει την ίδια ετικέτα για διαφορετικά λειτουργικά συστήματα. Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
+#: lilosetup.py:459
+msgid ""
+"You have used the same label for different Operating Systems. Please verify "
+"and correct.\n"
+msgstr ""
+"Έχετε χρησιμοποιήσει την ίδια ετικέτα για διαφορετικά λειτουργικά συστήματα. "
+"Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
 
-#: lilosetup.py:529
+#: lilosetup.py:541
 msgid "# Windows bootable partition config begins\n"
 msgstr "# Αρχή διαμόρφωσης εκκινήσιμου διαμερίσματος Windows\n"
 
-#: lilosetup.py:532
+#: lilosetup.py:544
 msgid "# Windows bootable partition config ends\n"
 msgstr "# Τέλος διαμόρφωσης εκκινήσιμου διαμερίσματος Windows\n"
 
-#: lilosetup.py:555
+#: lilosetup.py:567
 msgid "# Linux bootable partition config begins\n"
 msgstr "# Αρχή διαμόρφωσης εκκινήσιμου διαμερίσματος Linux\n"
 
-#: lilosetup.py:560
-msgid "One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"
-msgstr "Ένα από τα διαμερίσματα δεν φαίνεται να έχει έγκυρο αρχείο πυρήνα . Παρακαλώ επιβεβαιώστε και διορθώστε το αρχείο διαμόρφωσης της LILO με το χέρι.\n"
+#: lilosetup.py:572
+msgid ""
+"One of your partitions does not seem to hold a valid kernel file. Please "
+"verify and correct LiloSetup configuration file manually.\n"
+msgstr ""
+"Ένα από τα διαμερίσματα δεν φαίνεται να έχει έγκυρο αρχείο πυρήνα . Παρακαλώ "
+"επιβεβαιώστε και διορθώστε το αρχείο διαμόρφωσης της LILO με το χέρι.\n"
 
-#: lilosetup.py:611
+#: lilosetup.py:623
 msgid "# Linux bootable partition config ends\n"
 msgstr "# Τέλος διαμόρφωσης εκκινήσιμου διαμερίσματος Linux\n"
 
-#: lilosetup.py:743
-msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
-msgstr "Η διαμόρφωση σας δεν έχει ολοκληρωθεί. Παρακαλώ, επιλέξτε τουλάχιστον ένα εκκινήσιμο διαμέρισμα LINUX και καθορίστε την ετικέτα του Μενού εκκίνησής του.\n"
+#: lilosetup.py:756
+msgid ""
+"Your configuration is not complete. Please, select at least one Linux "
+"booting partition and define its Boot menu label.\n"
+msgstr ""
+"Η διαμόρφωση σας δεν έχει ολοκληρωθεί. Παρακαλώ, επιλέξτε τουλάχιστον ένα "
+"εκκινήσιμο διαμέρισμα LINUX και καθορίστε την ετικέτα του Μενού εκκίνησής "
+"του.\n"
 
-#: lilosetup.py:745
-msgid "You are about to install a new LILO bootloader. Are you sure you want to continue?"
-msgstr "Πρόκειται να εγκαταστήσετε ένα νέο LILO εκκινητή. Είστε σίγουρος ότι θέλετε να συνεχίσετε;"
+#: lilosetup.py:758
+msgid ""
+"You are about to install a new LILO bootloader. Are you sure you want to "
+"continue?"
+msgstr ""
+"Πρόκειται να εγκαταστήσετε ένα νέο LILO εκκινητή. Είστε σίγουρος ότι θέλετε "
+"να συνεχίσετε;"
 
-#: lilosetup.py:761
-msgid "The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"
-msgstr "Η εγκατάσταση του νέου LILO εκκινητή ήταν επιτυχής. Μπορείτε να κλείσετε το LiloSetup και να επανεκκινήσετε τον υπολογιστή σας.\n"
+#: lilosetup.py:774
+msgid ""
+"The installation of your new LILO bootloader was succesful. You can now exit "
+"LiloSetup and reboot your computer.\n"
+msgstr ""
+"Η εγκατάσταση του νέου LILO εκκινητή ήταν επιτυχής. Μπορείτε να κλείσετε το "
+"LiloSetup και να επανεκκινήσετε τον υπολογιστή σας.\n"
 
-#: lilosetup.py:764
-msgid "The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again.\n"
-msgstr "Η εγκατάσταση του νέου LILO εκκινητή απέτυχε. Παρακαλώ ελέγξτε το /var/log/lilosetup.log, τροποποιήστε τις ρυθμίσεις σας και προσπαθήστε ξανά.\n"
+#: lilosetup.py:777
+msgid ""
+"The installation of your new LILO bootloader failed. Please verify /var/log/"
+"lilosetup.log, modify your settings and try again.\n"
+msgstr ""
+"Η εγκατάσταση του νέου LILO εκκινητή απέτυχε. Παρακαλώ ελέγξτε το /var/log/"
+"lilosetup.log, τροποποιήστε τις ρυθμίσεις σας και προσπαθήστε ξανά.\n"
 
-#: lilosetup.py:772
+#: lilosetup.py:785
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -281,93 +348,114 @@ msgstr "Περί του ρυθμιστή Lilo "
 
 #: lilosetup.glade:107
 msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
+"It is necessary to (re)configure the bootloader each time you install a new "
+"operating system on your computer. \n"
 "\n"
-"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
+"LiloSetup can also be useful in the process of a disaster recovery in which "
+"case you may have to launch it from a LiveCD if you have lost all other "
+"means to boot into your system.\n"
 "\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of the first hard drive with a boot flag."
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
+"from a regular installed Linux system.  In both cases, it will setup a new "
+"LILO bootloader on the MBR of the first hard drive with a boot flag."
 msgstr ""
-"Είναι απαραίτητο να (επανα)ρυθμίσετε τον εκκινητή κάθε φορά που εγκαθιστάτε ένα νέο λειτουργικό σύστημα στον υπολογιστή σας. \n"
+"Είναι απαραίτητο να (επανα)ρυθμίσετε τον εκκινητή κάθε φορά που εγκαθιστάτε "
+"ένα νέο λειτουργικό σύστημα στον υπολογιστή σας. \n"
 "\n"
-"Το LiloSetup μπορεί επίσης να είναι χρήσιμο για να μπουτάρετε τον υπολογιστή σας μετά από καταστροφή του MBR και σε αυτή τη περίπτωση θα πρέπει να το τρέξετε από ένα LiveCD εάν έχετε εξαντλήσει όλους τους τρόπους για να εκκινήσετε το σύστημά σας.\n"
+"Το LiloSetup μπορεί επίσης να είναι χρήσιμο για να μπουτάρετε τον υπολογιστή "
+"σας μετά από καταστροφή του MBR και σε αυτή τη περίπτωση θα πρέπει να το "
+"τρέξετε από ένα LiveCD εάν έχετε εξαντλήσει όλους τους τρόπους για να "
+"εκκινήσετε το σύστημά σας.\n"
 "\n"
-"Το Lilosetup μπορεί να εκτελεστεί από ένα περιβάλλον Linux LiveCD ή από ένα κανονικά εγκατεστημένο σύστημα  Linux.  Και στις δυο περιπτώσεις, θα ρυθμίσει ένα νέο LILO εκκινητή στο MBR του πρώτου σκληρού δίσκου στον οποίο έχει τεθεί η σημαία εκκίνησης. (Boot Flag)"
+"Το Lilosetup μπορεί να εκτελεστεί από ένα περιβάλλον Linux LiveCD ή από ένα "
+"κανονικά εγκατεστημένο σύστημα  Linux.  Και στις δυο περιπτώσεις, θα "
+"ρυθμίσει ένα νέο LILO εκκινητή στο MBR του πρώτου σκληρού δίσκου στον οποίο "
+"έχει τεθεί η σημαία εκκίνησης. (Boot Flag)"
 
 #: lilosetup.glade:114
 msgid ""
 "<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
 "\n"
-"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
+"A bootloader is required to load the main operating system of a computer and "
+"will initially display a boot menu if several operating systems are "
+"available on the same computer."
 msgstr ""
-"<b>To LiloSetup θα εγκαταστήσει ένα νέο LILO εκκινητή στον υπολογιστή σας.</b> \n"
+"<b>To LiloSetup θα εγκαταστήσει ένα νέο LILO εκκινητή στον υπολογιστή σας.</"
+"b> \n"
 "\n"
-"Ένας εκκινητής απαιτείται για να φορτώσει το κύριο λειτουργικό σύστημα ενός υπολογιστή και θα εμφανίσει αρχικά ένα μενού εκκίνησης εάν μερικά λειτουργικά συστήματα είναι διαθέσιμα στον ίδιο υπολογιστή."
+"Ένας εκκινητής απαιτείται για να φορτώσει το κύριο λειτουργικό σύστημα ενός "
+"υπολογιστή και θα εμφανίσει αρχικά ένα μενού εκκίνησης εάν μερικά "
+"λειτουργικά συστήματα είναι διαθέσιμα στον ίδιο υπολογιστή."
 
 #: lilosetup.glade:151
 msgid ""
-"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
+"Here you must define a Boot menu label for each of the operating system that "
+"will be displayed on your bootloader menu.\n"
 "\n"
-"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be "
+"configured and will not be displayed on the bootloader menu.\n"
 "\n"
-"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
+"If a few kernels are available within one partition, the label you have "
+"chosen for that partition will be appended numerically to create multiple "
+"menu entries for each of these kernels.\n"
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Εδώ πρέπει να καθορίσετε μια ετικέτα μενού εκκίνησης για κάθε λειτουργικό σύστημα που θα εμφανίζεται στον μενού του εκκινητή σας.\n"
+"Εδώ πρέπει να καθορίσετε μια ετικέτα μενού εκκίνησης για κάθε λειτουργικό "
+"σύστημα που θα εμφανίζεται στον μενού του εκκινητή σας.\n"
 "\n"
-"Οποιοδήποτε διαμέρισμα για το οποίο δεν έχετε καθορίσει ένα μενού εκκίνησης δεν θα ρυθμιστεί και δεν θα εμφανιστεί στο μενού του εκκινητή.\n"
+"Οποιοδήποτε διαμέρισμα για το οποίο δεν έχετε καθορίσει ένα μενού εκκίνησης "
+"δεν θα ρυθμιστεί και δεν θα εμφανιστεί στο μενού του εκκινητή.\n"
 "\n"
-"εάν μερικοί πυρήνες είναι διαθέσιμοι διαμέσου ενός διαμερίσματος, η ετικέτα που διαλέξατε για αυτό το διαμέρισμα θα ενημερωθεί αριθμητικά για να δημιουργήσει πολλαπλές επιλογές μενού για κάθε ένα από αυτούς τους πυρήνες.\n"
+"εάν μερικοί πυρήνες είναι διαθέσιμοι διαμέσου ενός διαμερίσματος, η ετικέτα "
+"που διαλέξατε για αυτό το διαμέρισμα θα ενημερωθεί αριθμητικά για να "
+"δημιουργήσει πολλαπλές επιλογές μενού για κάθε ένα από αυτούς τους πυρήνες.\n"
 "\n"
-"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο αρχείο διαμόρφωσης του Lilo (Lilosetup)."
-
-#: lilosetup.glade:164
-msgid "Partition"
-msgstr "Διαμέρισμα"
-
-#: lilosetup.glade:176
-msgid "File system"
-msgstr "Σύστημα αρχείων"
-
-#: lilosetup.glade:188
-msgid "Operating system"
-msgstr "Λειτουργικό σύστημα"
-
-#: lilosetup.glade:200
-msgid "Boot menu label"
-msgstr "Ετικέτα μενού εκκίνησης"
+"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
+"αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
 #: lilosetup.glade:227
 msgid ""
-"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
+"Use this arrow if you want to move the selected Operating System up to a "
+"higher rank.\n"
 "\n"
-"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
+"The partition with the highest rank will be displayed on the first line of "
+"the bootloader menu.\n"
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο Λειτουργικό σύστημα σε ανώτερη θέση.\n"
+"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο "
+"Λειτουργικό σύστημα σε ανώτερη θέση.\n"
 "\n"
-"Το διαμέρισμα με την ανώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή του μενού του εκκινητή.\n"
+"Το διαμέρισμα με την ανώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή "
+"του μενού του εκκινητή.\n"
 "\n"
-"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο αρχείο διαμόρφωσης του Lilo (Lilosetup)."
+"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
+"αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
 #: lilosetup.glade:249
 msgid ""
-"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
+"Use this arrow if you want to move the selected Operating System down to a "
+"lower rank.\n"
 "\n"
-"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
+"The partition with the lowest rank will be displayed on the last line of the "
+"bootloader menu.\n"
 "\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο Λειτουργικό σύστημα σε κατώτερη θέση προτίμησης.\n"
+"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο "
+"Λειτουργικό σύστημα σε κατώτερη θέση προτίμησης.\n"
 "\n"
-"Το διαμέρισμα με την κατώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή του μενού του εκκινητή.\n"
+"Το διαμέρισμα με την κατώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή "
+"του μενού του εκκινητή.\n"
 "\n"
-"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο αρχείο διαμόρφωσης του Lilo (Lilosetup)."
+"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
+"αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
 #: lilosetup.glade:286
 msgid "This will undo all settings (even manual modifications)."
-msgstr "Αυτό θα ακυρώσει όλες τις ρυθμίσεις σας (ακόμη αυτές που έγιναν με το χέρι)."
+msgstr ""
+"Αυτό θα ακυρώσει όλες τις ρυθμίσεις σας (ακόμη αυτές που έγιναν με το χέρι)."
 
 #: lilosetup.glade:303
 msgid "_Undo configuration "
@@ -375,13 +463,18 @@ msgstr "_Ακύρωση διαμόρφωσης"
 
 #: lilosetup.glade:324
 msgid ""
-"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
+"Experienced users have the possibility to manually edit LiloSetup "
+"configuration file (settings are identical to lilo.conf). \n"
 "\n"
-"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
+"Please do not temper with this file unless you know what you are doing and "
+"you have read its commented instructions regarding chrooted paths."
 msgstr ""
-"Οι έμπειροι χρήστες έχουν την δυνατότητα να επεξεργαστούν με το χέρι το αρχείο διαμόρφωσης του LiloSetup (οι ρυθμίσεις είναι σχετικές με το lilo.conf). \n"
+"Οι έμπειροι χρήστες έχουν την δυνατότητα να επεξεργαστούν με το χέρι το "
+"αρχείο διαμόρφωσης του LiloSetup (οι ρυθμίσεις είναι σχετικές με το lilo."
+"conf). \n"
 "\n"
-"Παρακαλώ μην ασχολείστε με αυτό το αρχείο εκτός αν ξέρετε τι κάνετε και έχετε διαβάσει τις σχολιασμένες οδηγίες σχετικά με τις chrooted διαδρομές."
+"Παρακαλώ μην ασχολείστε με αυτό το αρχείο εκτός αν ξέρετε τι κάνετε και "
+"έχετε διαβάσει τις σχολιασμένες οδηγίες σχετικά με τις chrooted διαδρομές."
 
 #: lilosetup.glade:343
 msgid "_Edit configuration "
@@ -395,11 +488,13 @@ msgstr "Έξοδος από Lilo Setup"
 msgid ""
 "Install LILO's bootloader.\n"
 "\n"
-"Once you have defined your settings, click on this button to create your new LILO's bootloader. "
+"Once you have defined your settings, click on this button to create your new "
+"LILO's bootloader. "
 msgstr ""
 "Εγκατάσταση εκκινητή LILO.\n"
 "\n"
-"Όταν καθορίστε τις ρυθμίσεις σας, κάντε κλικ σε αυτό το κουμπί για να δημιουργήσετε τον νέο σας εκκινητή LILO. "
+"Όταν καθορίστε τις ρυθμίσεις σας, κάντε κλικ σε αυτό το κουμπί για να "
+"δημιουργήσετε τον νέο σας εκκινητή LILO. "
 
 #: lilosetup.glade:422
 msgid " _Install LILO's bootloader "
@@ -459,3 +554,20 @@ msgstr ""
 "the Free Software Foundation, Inc., 51 Franklin Street, \n"
 "Fifth Floor, Boston, MA 02110-1301, USA."
 
+#: lilosetup.glade:480
+msgid ""
+"French: Pierrick Le Brun\n"
+"Greek: Dimitris Tzemos"
+msgstr ""
+
+#~ msgid "Partition"
+#~ msgstr "Διαμέρισμα"
+
+#~ msgid "File system"
+#~ msgstr "Σύστημα αρχείων"
+
+#~ msgid "Operating system"
+#~ msgstr "Λειτουργικό σύστημα"
+
+#~ msgid "Boot menu label"
+#~ msgstr "Ετικέτα μενού εκκίνησης"

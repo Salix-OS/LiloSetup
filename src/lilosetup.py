@@ -225,6 +225,14 @@ stub.write(_("# Therefore the following paths are relevant only when viewed\n"))
 stub.write(_("# from that 'chrooted' partition's perspective. Please take this\n"))
 stub.write(_("# constraint into consideration if you must modify this file\n"))
 stub.write(_("# or else LiloSetup will fail.\n"))
+stub.write("#\n")
+stub.write(_("# If later on you want to use this configuration file directly\n"))
+stub.write(_("# with lilo in a command line, use the following syntax:\n"))
+stub.write(_('# "lilo -v -C /etc/lilosetup/conf" instead of the traditional\n'))
+stub.write(_('# "lilo -v" command. You must of course issue that command from\n'))
+stub.write(_("# the operating system holding /etc/lilosetup.conf & ensure that\n"))
+stub.write(_("# all partitions referenced in it are mounted on the appropriate\n"))
+stub.write(_("# mountpoints.\n"))
 stub.close()
 
 # Let's now set the appropriate framebuffer...
@@ -355,6 +363,8 @@ class LiloSetup:
                             # Get the file system
                             lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
                             file_system = commands.getoutput(lshal_string_output).split("'")[1]
+                            if "ext4" in file_system:
+                                file_system = "ext3/ext4"
                             boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
                             boot_partition_feedline_list.append(boot_partition_feedline)
                         else:
@@ -370,6 +380,8 @@ class LiloSetup:
                     # Get the file system
                     lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
                     file_system = commands.getoutput(lshal_string_output).split("'")[1]
+                    if "ext4" in file_system:
+                        file_system = "ext3/ext4"
                     # Get the operating system.
                     try :
                         version_file_path = glob.glob("/etc/*version")[0]
@@ -731,6 +743,7 @@ class LiloSetup:
         subprocess.call('xdg-open ' + config_location, shell=True)
         self.UpButton.set_sensitive(False)
         self.DownButton.set_sensitive(False)
+        self.ExecuteButton.set_sensitive(True)
         self.BootPartitionTreeview.get_selection().unselect_all()
         self.BootPartitionTreeview.set_sensitive(False)
 

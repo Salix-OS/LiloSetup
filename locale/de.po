@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 11:52+0100\n"
+"POT-Creation-Date: 2010-01-18 07:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Raphael Groner  <raphgro(at)web.de>\n"
 "Language-Team: Raphael Groner <raphgro(at)web.de>\n"
@@ -196,7 +196,35 @@ msgstr ""
 msgid "# or else LiloSetup will fail.\n"
 msgstr ""
 
-#: lilosetup.py:423
+#: lilosetup.py:229
+msgid "# If later on you want to use this configuration file directly\n"
+msgstr ""
+
+#: lilosetup.py:230
+msgid "# with lilo in a command line, use the following syntax:\n"
+msgstr ""
+
+#: lilosetup.py:231
+msgid "# \"lilo -v -C /etc/lilosetup/conf\" instead of the traditional\n"
+msgstr ""
+
+#: lilosetup.py:232
+msgid "# \"lilo -v\" command. You must of course issue that command from\n"
+msgstr ""
+
+#: lilosetup.py:233
+msgid "# the operating system holding /etc/lilosetup.conf & ensure that\n"
+msgstr ""
+
+#: lilosetup.py:234
+msgid "# all partitions referenced in it are mounted on the appropriate\n"
+msgstr ""
+
+#: lilosetup.py:235
+msgid "# mountpoints.\n"
+msgstr ""
+
+#: lilosetup.py:435
 msgid ""
 "\n"
 "An Operating System label should not contain any space. \n"
@@ -208,7 +236,7 @@ msgstr ""
 "\n"
 "Bitte überprüfen und korrigieren.\n"
 
-#: lilosetup.py:432
+#: lilosetup.py:444
 msgid ""
 "\n"
 "An Operating System label should not hold more than 15 characters. \n"
@@ -220,7 +248,7 @@ msgstr ""
 "\n"
 "Bitte überprüfen und korrigieren.\n"
 
-#: lilosetup.py:447
+#: lilosetup.py:459
 msgid ""
 "You have used the same label for different Operating Systems. Please verify "
 "and correct.\n"
@@ -228,19 +256,19 @@ msgstr ""
 "Sie haben den gleichen Name für verschiedene Betriebssysteme verwendet. "
 "Bitte überprüfen und korrigieren.\n"
 
-#: lilosetup.py:529
+#: lilosetup.py:541
 msgid "# Windows bootable partition config begins\n"
 msgstr ""
 
-#: lilosetup.py:532
+#: lilosetup.py:544
 msgid "# Windows bootable partition config ends\n"
 msgstr ""
 
-#: lilosetup.py:555
+#: lilosetup.py:567
 msgid "# Linux bootable partition config begins\n"
 msgstr ""
 
-#: lilosetup.py:560
+#: lilosetup.py:572
 msgid ""
 "One of your partitions does not seem to hold a valid kernel file. Please "
 "verify and correct LiloSetup configuration file manually.\n"
@@ -249,11 +277,11 @@ msgstr ""
 "beinhalten. Bitte die LiloSetup Konfigurationsdatei manuell überprüfen und "
 "korrigieren. \n"
 
-#: lilosetup.py:611
+#: lilosetup.py:623
 msgid "# Linux bootable partition config ends\n"
 msgstr ""
 
-#: lilosetup.py:743
+#: lilosetup.py:756
 msgid ""
 "Your configuration is not complete. Please, select at least one Linux "
 "booting partition and define its Boot menu label.\n"
@@ -261,7 +289,7 @@ msgstr ""
 "Ihre Konfiguration ist nicht vollständig. Bitte wählen Sie mindestens eine "
 "Linux Boot-Partition aus und legen Sie den Namen für das Boot-Menü fest.\n"
 
-#: lilosetup.py:745
+#: lilosetup.py:758
 msgid ""
 "You are about to install a new LILO bootloader. Are you sure you want to "
 "continue?"
@@ -269,7 +297,7 @@ msgstr ""
 "Sie sind dabei, einen neuen LILO Boot-Loader zu installieren. Sind Sie "
 "sicher, dass Sie fortfahren möchten?"
 
-#: lilosetup.py:761
+#: lilosetup.py:774
 msgid ""
 "The installation of your new LILO bootloader was succesful. You can now exit "
 "LiloSetup and reboot your computer.\n"
@@ -277,7 +305,7 @@ msgstr ""
 "Die Installation des neuen LILO-Bootloaders war erfolgreich. Sie können nun "
 "LiloSetup beenden und Ihren Computer neu starten. \n"
 
-#: lilosetup.py:764
+#: lilosetup.py:777
 msgid ""
 "The installation of your new LILO bootloader failed. Please verify /var/log/"
 "lilosetup.log, modify your settings and try again.\n"
@@ -286,7 +314,7 @@ msgstr ""
 "log/lilosetup.log überprüfen, Ihre Einstellungen ändern und den Vorgang "
 "wiederholen. \n"
 
-#: lilosetup.py:772
+#: lilosetup.py:785
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"

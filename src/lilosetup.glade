@@ -478,7 +478,8 @@ the Free Software Foundation, Inc., 51 Franklin Street,
 Fifth Floor, Boston, MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun &lt;akuna~at~free~dot~fr&gt;</property>
     <property name="translator_credits" translatable="yes">French: Pierrick Le Brun
-Greek: Dimitris Tzemos</property>
+Greek: Dimitris Tzemos
+German: Andreas Born</property>
     <property name="logo">lilosetup.png</property>
     <signal name="delete_event" handler="on_about_dialog_close"/>
     <signal name="response" handler="on_about_dialog_close"/>

@@ -2,6 +2,7 @@
 
 cd $(dirname $0)
 
+install -d -m 755 $DESTDIR/install
 install -d -m 755 $DESTDIR/usr/sbin
 install -d -m 755 $DESTDIR/usr/share/applications
 install -d -m 755 $DESTDIR/usr/share/icons/hicolor/24x24/apps

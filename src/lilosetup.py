@@ -29,9 +29,9 @@
 #                                    Switched to os-prober & lshal for booting partitions details
 #                                    Added initrd autodetection
 #                                    Added support for multiple kernels within the same partition
-#                                    Adapt syntax if target kernel is using LIBATA
+#                                    Adapted syntax if target kernel is using LIBATA
 #                                    Added fstab with'UUID for mountpoints detection
-#                                    French, German translation
+#                                    French, German, Greek translation
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Verify Raid device support
@@ -512,8 +512,6 @@ class LiloSetup:
                             os.close(r)
                             w = os.fdopen(w, 'w')
                             os.chroot(chroot_mnt)
-                            # TODO silence mount with 2>/dev/null ?
-                            subprocess.call("mount -a", shell=True)
                             OTHER_MNT="mount | grep " + set[0] + " | awk -F' ' '{print $3 }'"
                             other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
                             w.write(other_mnt)

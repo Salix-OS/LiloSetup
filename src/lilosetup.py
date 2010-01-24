@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100119 build - Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 20100121 build - Forked LiloFix '0.9.7' to Salix environment
 #                                    Modified name, logo, gui & lilosetup.conf stub
 #                                    Migrated from libglade to gtkbuilder
 #                                    Added extra info columns to the boot partition list
@@ -110,22 +110,24 @@ def run_bash(cmd):
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     out = p.stdout.read().strip()
     return out  #This is the stdout from the shell command
-    
+
+# This will help us monitor whether the configuration file is succesfully created or not
+config_creation = []
+# This will help us to ensure at least one  partition has been configured
+partition_set = []
+# Initialize the temporary mountpoint lists
+temp_mount = []
+temp_dir = []
+# Initialize key mountpoints value
+temp_chroot_mnt = ''
+chroot_mnt = ''
 # Setup LiloSetup temporary work directory & configuration file
-global work_dir
 work_dir = "/tmp/lilosetup"
 try :
     os.mkdir(work_dir)
 except OSError:
     pass
-global config_location
 config_location = work_dir + "/lilosetup.conf"
-
-# initialize the temporary mountpoint list
-temp_mount = []
-
-# This will help us to ensure at least one partition has been configured
-partition_set = []
 
 # Build LiloSetup configuration file stub:
 # Get the booting device
@@ -135,9 +137,8 @@ except IndexError:
     BOOT_PARTITION = """
     fdisk -l | grep dev | grep \* -m 1 | cut -f1 -d " "
     """
-    boot_partition = run_bash(BOOT_PARTITION).strip('0123456789')
+    boot_partition = commands.getoutput(BOOT_PARTITION).strip('0123456789')
 # Create the configuration file stub
-global stub_location
 stub_location = work_dir + "/lilosetup.stub"
 # Delete any old stub if present
 try:
@@ -273,30 +274,62 @@ if run_bash(USEDFB):
 else :
     failsafe_fb()
 
-def lilosetup_quit():
+def lilosetup_undo():
     """
-    Unmount temp mountpoints, cleanup temp files & close LiloSetup window.
+    Unmount temp mountpoints & cleanup some temp files
+
     """
-    if temp_mount :
-        for i in temp_mount :
-            subprocess.call("umount -fl " + i + " 2>/dev/null", shell=True)
-            if "/proc" not in i :
-                try:
-                    os.removedirs(i)
-                except OSError:
-                    pass
+    global temp_mount, temp_dir
+    # First we unmount the various temporary mountpoints
+    print 'Undo configuration...'
+    while temp_mount :
+        print 'unmounting:'
+        print temp_mount[0]
+        subprocess.call("umount " + temp_mount[0] + " 2>/dev/null", shell=True)
+        temp_mount.remove(temp_mount[0])
+    # Then we remove the temporary mountpoints created by LiloSetup
+    while temp_dir :
+        try:
+            os.removedirs(temp_dir[0])
+        except OSError:
+            pass
+        temp_dir.remove(temp_dir[0])
+    # Last we unmount & remove the temporary mountpoint for the temporary chrooted partition
+    if temp_chroot_mnt:
+        subprocess.call("umount " + temp_chroot_mnt + " 2>/dev/null", shell=True)
+        print 'unmounting:'
+        print temp_chroot_mnt
     try:
-        os.remove(stub_location)
+        os.removedirs(temp_chroot_mnt)
     except OSError:
         pass
+    # Removal of the temporary configuration file
     try:
         os.remove(config_location)
     except OSError:
         pass
+
+def lilosetup_quit():
+    """
+    Unmount temp mountpoints, cleanup all temp files & close LiloSetup window.
+
+    """
+    if partition_set == [] :
+        pass
+    else:
+        lilosetup_undo()
+
+    # Removal of the configuration stub file
+    try:
+        os.remove(stub_location)
+    except OSError:
+        pass
+    # Removal of the temporary work directory
     try :
         os.rmdir(work_dir)
     except OSError:
         pass
+    # Quit LiloSetup GUI
     gtk.main_quit()
 
 class LiloSetup:
@@ -417,7 +450,14 @@ class LiloSetup:
             Populate lilosetup.conf & mounts needed partition to lilo's chrooted partition.
             """
             shutil.copy(stub_location,config_location)
-
+            # Re-initialize key variables
+            # Temporary mountpoint list
+            global temp_mount, temp_chroot_mnt, temp_dir, partition_set, chroot_mnt
+            temp_mount = []
+            # Configuration file
+            config_creation = []
+            # At least one  partition has been configured
+            partition_set = []
             # Retrieve all the partition rows values
             BootPartitionsValues = []
             x = 0
@@ -428,16 +468,29 @@ class LiloSetup:
                     BootPartitionsValues.append(self.BootPartitionListStore.get(treeiter, 0, 1, 2, 3))
                 except ValueError :
                     break
-            for set in BootPartitionsValues	:
-
+            for set in BootPartitionsValues:
+                am_i_there = 'cat ' + config_location + ''' | grep -w label | cut -f3 -d " " '''
+                already_there = commands.getoutput(am_i_there).splitlines()
+                windows_sys_labels = ['Microsoft', 'Windows']
+                # We ensure there are no identical labels
+                if set[3] in already_there :
+                    error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct.\n"))
+                    self.EditButton.set_sensitive(False)
+                    self.ExecuteButton.set_sensitive(False)
+                    self.UpButton.set_sensitive(True)
+                    self.DownButton.set_sensitive(True)
+                    self.BootPartitionTreeview.set_sensitive(True)
+                    config_creation.append('failure')
+                    break
                 # We need to ensure that the labels are unique and do not contain empty space
-                if ' ' in set[3] :
+                elif ' ' in set[3] :
                     error_dialog(_("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n"))
                     self.EditButton.set_sensitive(False)
                     self.ExecuteButton.set_sensitive(False)
                     self.UpButton.set_sensitive(True)
                     self.DownButton.set_sensitive(True)
                     self.BootPartitionTreeview.set_sensitive(True)
+                    config_creation.append('failure')
                     break
                 # We ensure that the label is less than 15 characters long
                 elif len(set[3]) >= 15 :
@@ -447,30 +500,32 @@ class LiloSetup:
                     self.UpButton.set_sensitive(True)
                     self.DownButton.set_sensitive(True)
                     self.BootPartitionTreeview.set_sensitive(True)
+                    config_creation.append('failure')
                     break
                 # We skip the partitions that have not been configured by the user
                 elif '...' in set[3] :
                     pass
-                # We ensure there are no identical labels
-                else :
-                    am_i_there = 'cat ' + config_location + ''' | grep -w label | cut -f3 -d " " '''
-                    already_there = commands.getoutput(am_i_there).splitlines()
-                    if set[3] in already_there :
-                        error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct.\n"))
-                        self.EditButton.set_sensitive(False)
-                        self.ExecuteButton.set_sensitive(False)
-                        self.UpButton.set_sensitive(True)
-                        self.DownButton.set_sensitive(True)
-                        self.BootPartitionTreeview.set_sensitive(True)
-                        break
-                    # Let's determines Lilo's chrooted Linux partition directory, only happens once.
+                # If Windows partition:
+                elif set[2] in windows_sys_labels :
+                    # Append to lilosetup.conf
+                    stub = open(config_location, "a")
+                    stub.write("#\n")
+                    stub.write(_("# Windows bootable partition config begins\n"))
+                    stub.write("other = " + set[0] + "\n")
+                    stub.write("label = " + set[3] + "\n")
+                    stub.write(_("# Windows bootable partition config ends\n"))
+                    stub.close()
+                else:
+                    # Applies to Linux partitions
+                    # Let's determines Lilo's chrooted Linux partition directory, only happens one.
                     am_i_first = 'cat ' + config_location + ''' | grep -v other | grep \/dev\/ | grep -w '.d.[1-9]' | cut -f3 -d " " '''
                     already_done = commands.getoutput(am_i_first).splitlines()
                     if already_done == []: # This is the first Linux partition, the one we will chroot in to launch lilo!
                         chroot_dev = set[0]
+                        mount_inconf = '' # Defines how the partitions 'appears' mounted in lilosetup.conf
+                        other_mnt = '' # we need this blank for the first time
                         # Check if lilo's chroot directory is mounted
                         CHROOT_MNT="mount | grep " + chroot_dev + " | awk -F' ' '{print $3 }'"
-                        global chroot_mnt # we will need global access to this info
                         chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
                         if chroot_mnt == '' :
                             # Either it is not mounted or else it is used as the current root filesystem (/) but linked to /dev/root
@@ -481,147 +536,170 @@ class LiloSetup:
                             else :
                                 # It is not mounted, let's create a temporary mountpoint ourselves
                                 temp_chroot_mnt = work_dir + chroot_dev.replace('dev', 'mnt')
-                                os.makedirs(temp_chroot_mnt)
-                                temp_mount.append(temp_chroot_mnt) # allows cleanup temporary mountpoints later
-                                chroot_mnt = temp_chroot_mnt
+                                try:
+                                    os.makedirs(temp_chroot_mnt)
+                                except OSError :
+                                    pass                               
                                 # Mount the 'chrooted' partition
-                                chroot_mnt_command = "mount " + chroot_dev + " " + chroot_mnt + " 2>/dev/null"
+                                chroot_mnt_command = "mount " + chroot_dev + " " + temp_chroot_mnt + " 2>/dev/null"
                                 subprocess.call(chroot_mnt_command, shell=True)
-                        mount_inconf = ''	# defines how the partition 'appears' mounted in lilosetup.conf
-                        global other_mnt
-                        other_mnt = '' # we need this blank for the first time
+                                print 'mounting:'
+                                print temp_chroot_mnt
+                                chroot_mnt = temp_chroot_mnt
                         if chroot_mnt != "/" :
                             # This is necessary only if we execute lilo from a 'real' chrooted partition
                             subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
                             temp_mount.append(chroot_mnt + "/dev") # allows unmounting temporary mountpoints later
+                            print 'mounting:'
+                            print chroot_mnt + "/dev"
                             subprocess.call("mount -t proc proc " + chroot_mnt + "/proc 2>/dev/null", shell=True)
                             temp_mount.append(chroot_mnt + "/proc") # allows unmounting temporary mountpoints later
+                            print 'mounting:'
+                            print chroot_mnt + "/proc"
                     else :	# This applies to all subsequent partitions
-                        # Let's check how this partition is mounted on the 'chrooted' partition
-                        # We create a fork, chroot in the child process & pipe the mount info to the parent process
-                        r, w = os.pipe() # these are file descriptors, not file objects
-                        pid = os.fork()
-                        if pid:
-                            # Parent process
-                            os.close(w) # use os.close() to close a file descriptor
-                            r = os.fdopen(r) # turn r into a file object
-                            other_mnt = r.read()
-                            os.waitpid(pid, 0) # make sure the child process gets cleaned up
-                        else:
-                            # Child process
-                            os.close(r)
-                            w = os.fdopen(w, 'w')
-                            os.chroot(chroot_mnt)
-                            OTHER_MNT="mount | grep " + set[0] + " | awk -F' ' '{print $3 }'"
-                            other_mnt = commands.getoutput(OTHER_MNT) # partition mountpoint
-                            w.write(other_mnt)
-                            w.close()
-                            # Exit child process
-                            sys.exit(0)
-                        if other_mnt == '':  # we need to create a temporary mountpoint ourselves
-                            temp_other_mnt = work_dir + set[0].replace('dev', 'mnt')
-                            try :
-                                os.makedirs(chroot_mnt + temp_other_mnt)
-                            except OSError :
-                                pass
-                            temp_mount.append(chroot_mnt + temp_other_mnt) # allows cleanup temporary mountpoints later
-                            other_mnt = temp_other_mnt
-                        # Mount the 'other' partition(s) in case it is not already done
-                        mnt_command = "mount " + set[0] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
-                        subprocess.call(mnt_command, shell=True)
+                        # How this partition is mounted on a the current partition
+                        if chroot_mnt == "/" :
+                            print 'chroot_mnt: ' + chroot_mnt + ', no need for a fork'
+                            mount_info=commands.getoutput("mount -f")
+                            if set[0] in mount_info:
+                                for i in mount_info.splitlines():
+                                    if set[0] in i:
+                                        other_mnt = i.split()[2]
+                                        break
+                        # How this partition should (and will) be mounted on a 'real' chrooted partition
+                        else :
+                            print 'chroot_mnt: ' + chroot_mnt
+                            print 'Fork is not done yet, other_mnt initial value is: ' + other_mnt
+                            # We create a fork, chroot in the child process & pipe the mount info to the parent process
+                            r, w = os.pipe() # these are file descriptors, not file objects
+                            pid = os.fork()
+                            if pid:
+                                # Parent process
+                                print "We are now in parent process waiting on childprocess"
+                                print 'chroot_mnt: ' + chroot_mnt
+                                os.close(w) # use os.close() to close a file descriptor
+                                r = os.fdopen(r) # turn r into a file object
+                                other_mnt = r.read()
+                                os.waitpid(pid, 0) # make sure the child process gets cleaned up
+                            else:
+                                # Child process
+                                print "We are now in child process"
+                                print 'chroot_mnt: ' + chroot_mnt
+                                os.close(r)
+                                w = os.fdopen(w, 'w')
+                                os.chroot(chroot_mnt)
+                                # Fake fstab mounting - we do it that way to not have to deal directly with eventual UUID schemes
+                                subprocess.call("mount -af 2>/dev/null", shell=True)
+                                # Retieve the mount info
+                                mount_info=commands.getoutput("mount")
+                                print 'mount_info value is: ' + mount_info
+                                if set[0] in mount_info:
+                                    for i in mount_info.splitlines():
+                                        if set[0] in i:
+                                            other_mnt = i.split()[2]
+                                            print 'other_mnt value in child is: ' + other_mnt
+                                            break
+                                w.write(other_mnt)
+                                w.close()
+                                # Exit child process
+                                sys.exit(0)
+                            print 'Fork is done, other_mnt value is now: ' + other_mnt
+                            if other_mnt == '':  # we need to create a temporary mountpoint ourselves
+                                temp_other_mnt = work_dir + set[0].replace('dev', 'mnt')
+                                try :
+                                    os.makedirs(chroot_mnt + temp_other_mnt)
+                                    temp_dir.append(chroot_mnt + temp_other_mnt)
+                                    print 'Created temporary mountpoint: ' + temp_other_mnt
+                                except OSError :
+                                    pass
+                                other_mnt = temp_other_mnt
+                            # all temporary mountpoints exist, we can now mount them
+                            mnt_command = "mount " + set[0] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
+                            subprocess.call(mnt_command, shell=True)
+                            temp_mount.append(chroot_mnt +other_mnt) # allows cleanup temporary mountpoints later
+                            print 'mounting:'
+                            print chroot_mnt + other_mnt
+
                         mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
-                    # If Windows partition:
-                    windows_sys_labels = ['Microsoft', 'Windows']
-                    if set[2] in windows_sys_labels :
-                            # Append to lilosetup.conf
-                            stub = open(config_location, "a")
-                            stub.write("#\n")
-                            stub.write(_("# Windows bootable partition config begins\n"))
-                            stub.write("other = " + set[0] + "\n")
-                            stub.write("label = " + set[3] + "\n")
-                            stub.write(_("# Windows bootable partition config ends\n"))
-                            stub.close()
-                    else:
-                        # Applies to Linux partitions
-                        # Confirm that a partition is configured
-                        partition_set.append("OK")
-                        # Append to lilosetup.conf
-                        stub = open(config_location, "a")
-                        # There maybe a few kernels in the same partition
-                        # Some of them may have an initrd, which we assume have the exact same suffix.
-                        vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
-                        # Remove directories
-                        for i in vmlist :
-                            if os.path.isdir(i) :
-                                vmlist.remove(i)
-                        # Remove symbolic links
-                        for i in vmlist :
-                            if os.path.islink(i) :
-                                vmlist.remove(i)
-                        it = 0
-                        y = 1
-                        while it < len(vmlist) :
-                            stub.write("#\n")
-                            stub.write(_("# Linux bootable partition config begins\n"))
-                            try :
-                                vmlinuz_file_path = vmlist[it].split("boot")[1]
-                                stub.write("image = " + mount_inconf + "/boot" + vmlinuz_file_path + "\n")
-                            except:
-                                 error_dialog(_("One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"))
-                            # Add addappend line if neededed
-                            # check if LIBATA is used
-                            if "/dev/hd" in set[0] :
-                                libata_try = set[0].replace("hd", "sd")
-                                libata_line = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/fstab | grep " + libata_try)
-                                if libata_line != '' :
-                                    libata_device = libata_line.split()[0]
+                    # Confirm that a partition is configured
+                    partition_set.append("OK")
+                    # Append to lilosetup.conf
+                    stub = open(config_location, "a")
+                    # There maybe a few kernels in the same partition
+                    # Some of them may have an initrd, which we assume have the exact same suffix.
+                    vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
+                    # Remove directories
+                    for i in vmlist :
+                        if os.path.isdir(i) :
+                            vmlist.remove(i)
+                    # Remove symbolic links
+                    for i in vmlist :
+                        if os.path.islink(i) :
+                            vmlist.remove(i)
+                    it = 0
+                    y = 1
+                    while it < len(vmlist) :
+                        stub.write("#\n")
+                        stub.write(_("# Linux bootable partition config begins\n"))
+                        try :
+                            vmlinuz_file_path = vmlist[it].split("boot")[1]
+                            stub.write("image = " + mount_inconf + "/boot" + vmlinuz_file_path + "\n")
+                        except:
+                             error_dialog(_("One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"))
+                        # Add addappend line if neededed
+                        # check if LIBATA is used
+                        if "/dev/hd" in set[0] :
+                            libata_try = set[0].replace("hd", "sd")
+                            libata_line = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/fstab | grep " + libata_try)
+                            if libata_line != '' :
+                                libata_device = libata_line.split()[0]
+                                if "/dev/sd" in libata_device :
+                                    stub.write("""addappend = "root=""" + libata_device + """ "\n""")
+                                else : # some fstab files may have weird layout & scheme, try mtab instead
+                                    libata_device = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/mtab | grep " + libata_try).split()[0]
                                     if "/dev/sd" in libata_device :
                                         stub.write("""addappend = "root=""" + libata_device + """ "\n""")
-                                    else : # some fstab files may have weird layout & scheme, try mtab instead
-                                        libata_device = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/mtab | grep " + libata_try).split()[0]
-                                        if "/dev/sd" in libata_device :
-                                            stub.write("""addappend = "root=""" + libata_device + """ "\n""")
-                                        else :
-                                            pass
-                            else :
-                                pass
+                                    else :
+                                        pass
+                        else :
+                            pass
 
-                            stub.write("root = " + set[0] +"\n")
-                            if len(vmlist) == 1 :
-                                stub.write("label = " + set[3] + "\n")
+                        stub.write("root = " + set[0] +"\n")
+                        if len(vmlist) == 1 :
+                            stub.write("label = " + set[3] + "\n")
+                        else:
+                            vmlinuz_suffix = vmlinuz_file_path.split('/')[-1].replace("vmlinuz", "")
+                            # We need to ensure that the label is not too long
+                            new_label = set[3] + vmlinuz_suffix
+                            if len(new_label) >= 14 :
+                                corrected_label = set[3] + '-' + str(y)
+                                stub.write("label = " + corrected_label +"\n")
                             else:
-                                vmlinuz_suffix = vmlinuz_file_path.split('/')[-1].replace("vmlinuz", "")
-                                # We need to ensure that the label is not too long
-                                new_label = set[3] + vmlinuz_suffix
-                                if len(new_label) >= 14 :
-                                    corrected_label = set[3] + '-' + str(y)
-                                    stub.write("label = " + corrected_label +"\n")
-                                else:
-                                    stub.write("label = " + new_label +"\n")
-                            # Add the initrd if suffix is matching kernel
-                            initrd_match = vmlist[it].replace('vmlinuz', 'initrd')
-                            if os.path.isfile(initrd_match):
-                                initrd_file_path = initrd_match.split("boot")[1]
+                                stub.write("label = " + new_label +"\n")
+                        # Add the initrd if suffix is matching kernel
+                        initrd_match = vmlist[it].replace('vmlinuz', 'initrd')
+                        if os.path.isfile(initrd_match):
+                            initrd_file_path = initrd_match.split("boot")[1]
+                            stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
+                        # If only one kernel & one initrd, we assume they match even if their suffix do not.
+                        elif it == 0:
+                            initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd*"))
+                            # Remove directories
+                            for i in initlist :
+                                if os.path.isdir(i) :
+                                    initlist.remove(i)
+                            # Remove symbolic links
+                            for i in initlist :
+                                if os.path.islink(i) :
+                                    initlist.remove(i)
+                            if len(initlist) == 1 and len(vmlist) == 1:
+                                initrd_file_path = initlist[0].split("boot")[1]
                                 stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
-                            # If only one kernel & one initrd, we assume they match even if their suffix do not.
-                            elif it == 0:
-                                initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd*"))
-                                # Remove directories
-                                for i in initlist :
-                                    if os.path.isdir(i) :
-                                        initlist.remove(i)
-                                # Remove symbolic links
-                                for i in initlist :
-                                    if os.path.islink(i) :
-                                        initlist.remove(i)
-                                if len(initlist) == 1 and len(vmlist) == 1:
-                                    initrd_file_path = initlist[0].split("boot")[1]
-                                    stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
-                            stub.write("read-only\n")
-                            stub.write(_("# Linux bootable partition config ends\n"))
-                            y += 1
-                            it += 1
-                        stub.close()
+                        stub.write("read-only\n")
+                        stub.write(_("# Linux bootable partition config ends\n"))
+                        y += 1
+                        it += 1
+                    stub.close()
 
 ### Callback signals waiting in a constant loop: ###
 
@@ -712,10 +790,6 @@ class LiloSetup:
         """
         Delete lilosetup.conf & unmount temporary mountpoints
         """
-        try:
-            os.remove(config_location)
-        except OSError:
-            pass
         setup_partition_list()
         self.EditButton.set_sensitive(False)
         self.UndoButton.set_sensitive(False)
@@ -724,58 +798,57 @@ class LiloSetup:
         self.DownButton.set_sensitive(True)
         self.BootPartitionTreeview.get_selection().unselect_all()
         self.BootPartitionTreeview.set_sensitive(True)
-        if temp_mount :
-            for i in temp_mount :
-                subprocess.call("umount -fl " + i + " 2>/dev/null", shell=True)
-                if "/proc" not in i :
-                    try:
-                        os.removedirs(i)
-                    except OSError:
-                        pass
-
+        if partition_set == [] :
+            pass
+        else:
+            lilosetup_undo()
+            
     def on_edit_button_clicked(self, widget, data=None):
         """
         Opens the edit lilosetup.conf dialog.
         """
         create_configuration()
-        subprocess.call('xdg-open ' + config_location, shell=True)
-        self.UpButton.set_sensitive(False)
-        self.DownButton.set_sensitive(False)
-        self.ExecuteButton.set_sensitive(True)
-        self.BootPartitionTreeview.get_selection().unselect_all()
-        self.BootPartitionTreeview.set_sensitive(False)
+        if 'failure'  not in config_creation:
+            subprocess.call('xdg-open ' + config_location + ' 2>/dev/null', shell=True)
+            self.UpButton.set_sensitive(False)
+            self.DownButton.set_sensitive(False)
+            self.ExecuteButton.set_sensitive(True)
+            self.BootPartitionTreeview.get_selection().unselect_all()
+            self.BootPartitionTreeview.set_sensitive(False)
 
     def on_execute_button_clicked(self, widget, data=None):
         # Check if the configuration file has already beeen created
         if os.path.isfile(config_location ) == False :
             create_configuration()
-        # Check if at least one Linux partition has been configured:
-        if partition_set == [] :
-            error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"))
-        else:
-            warning_dialog(_("You are about to install a new LILO bootloader. Are you sure you want to continue?"))
-            if result_warning == gtk.RESPONSE_YES:
-                # If previous lilosetup.conf file exist, save it as lilosetup.old
-                if os.path.isfile(chroot_mnt + "/etc/lilosetup.conf") == True :
-                    os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')
-                shutil.copy(config_location, chroot_mnt + "/etc/lilosetup.conf")
-                # Copy /boot/salix graphics to chroot_mnt if needed
-                if os.path.isfile(chroot_mnt + "/boot/salix.bmp") == False :
-                    if os.path.isfile("/boot/salix.bmp") == True :
-                        shutil.copy("/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
-                    elif os.path.isfile("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp") == True :
-                        shutil.copy("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
-                # Execute Lilo
-                lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"
-                output = commands.getstatusoutput(lilo_command)
-                if 0 in output :
-                    info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"))
-                    self.ExecuteButton.set_sensitive(False)
-                else:
-                    error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again.\n"))
-                    self.ExecuteButton.set_sensitive(False)
-            if result_warning == gtk.RESPONSE_NO:
-                pass
+        if 'failure' not in config_creation:
+            # Check if at least one Linux partition has been configured:
+            if partition_set == [] :
+                error_dialog(_("Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"))
+                self.UndoButton.clicked()
+            else:
+                warning_dialog(_("You are about to install a new LILO bootloader. Are you sure you want to continue?"))
+                if result_warning == gtk.RESPONSE_YES:
+                    # If previous lilosetup.conf file exist, save it as lilosetup.old
+                    if os.path.isfile(chroot_mnt + "/etc/lilosetup.conf") == True :
+                        os.rename(chroot_mnt + "/etc/lilosetup.conf", chroot_mnt +'/etc/lilosetup.old')
+                    shutil.copy(config_location, chroot_mnt + "/etc/lilosetup.conf")
+                    # Copy /boot/salix graphics to chroot_mnt if needed
+                    if os.path.isfile(chroot_mnt + "/boot/salix.bmp") == False :
+                        if os.path.isfile("/boot/salix.bmp") == True :
+                            shutil.copy("/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
+                        elif os.path.isfile("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp") == True :
+                            shutil.copy("/mnt/live/memory/images/01-core.lzm/boot/salix.bmp", chroot_mnt + "/boot/salix.bmp")
+                    # Execute Lilo
+                    lilo_command = "lilo -v -r " + chroot_mnt + " -C /etc/lilosetup.conf > /var/log/lilosetup.log"
+                    output = commands.getstatusoutput(lilo_command)
+                    if 0 in output :
+                        info_dialog(_("The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"))
+                        self.ExecuteButton.set_sensitive(False)
+                    else:
+                        error_dialog(_("The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again.\n"))
+                        self.ExecuteButton.set_sensitive(False)
+                if result_warning == gtk.RESPONSE_NO:
+                    pass
 
 if __name__ == '__main__':
     # Checks for root privileges

@@ -292,7 +292,7 @@ msgid ""
 msgstr ""
 "Il est impératif de (re)configurer votre gestionnaire de démarrage chaque fois que vous installez un nouveau système d'exploitation sur votre ordinateur. \n"
 "\n"
-"LiloSetup peut également être utilisé lors d'une procédures de restauration à la suite d'un désastre, auquel cas il vous sera sans doute nécessaire d'exécuter l'utilitaire à partir d'un LiveCD si toute autre option classique de démarrage de l'ordinateur est impossible.\n"
+"LiloSetup peut également être utilisé lors d'une procédure de restauration à la suite d'un désastre, auquel cas il vous sera sans doute nécessaire d'exécuter l'utilitaire à partir d'un LiveCD si toute autre option classique de démarrage de l'ordinateur est impossible.\n"
 "\n"
 "Lilosetup peut indifféremment être exécuté à partir d'un environnement LiveCD ou d'un système d'exploitation Linux installé sur votre ordinateur. Dans les deux cas, un nouveau gestionnaire de démarrage LILO sera installé sur le MBR de votre premier disque dur amorçable."
 

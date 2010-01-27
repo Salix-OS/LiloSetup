@@ -521,7 +521,7 @@ class LiloSetup:
                         mount_inconf = '' # Defines how the partitions 'appears' mounted from the 'chrooted' partition's viewpoint
                         other_mnt = '' # we need this blank for the first Linux partition
                         # Check if lilo's chroot directory is mounted
-                        CHROOT_MNT="mount | grep " + chroot_dev + " | awk -F' ' '{print $3 }'"
+                        CHROOT_MNT="mount | grep -v \/mnt\/live | grep " + chroot_dev + " | awk -F' ' '{print $3 }'"
                         chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
                         if chroot_mnt == '' :
                             # Either it is not mounted or else it is used as the current root filesystem (/) but linked to /dev/root
@@ -591,6 +591,10 @@ class LiloSetup:
                                     mount_info=commands.getoutput("mount").splitlines()
                                     while mount_info:
                                         if set[0] in mount_info[0]:
+                                            other_mnt = mount_info[0].split()[2]
+                                        elif set[0].replace('hd', 'sd') in mount_info[0]:
+                                            other_mnt = mount_info[0].split()[2]
+                                        elif set[0].replace('sd', 'hd') in mount_info[0]:
                                             other_mnt = mount_info[0].split()[2]
                                         mount_info.remove(mount_info[0])
                                     w.write(other_mnt)

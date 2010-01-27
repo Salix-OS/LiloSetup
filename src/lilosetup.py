@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100121 build - Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 20100127 build - Forked LiloFix '0.9.7' to Salix environment
 #                                    Modified name, logo, gui & lilosetup.conf stub
 #                                    Migrated from libglade to gtkbuilder
 #                                    Added extra info columns to the boot partition list
@@ -281,10 +281,7 @@ def lilosetup_undo():
     """
     global temp_mount, temp_dir
     # First we unmount the various temporary mountpoints
-    print 'Undo configuration...'
     while temp_mount :
-        print 'unmounting:'
-        print temp_mount[0]
         subprocess.call("umount " + temp_mount[0] + " 2>/dev/null", shell=True)
         temp_mount.remove(temp_mount[0])
     # Then we remove the temporary mountpoints created by LiloSetup
@@ -297,8 +294,6 @@ def lilosetup_undo():
     # Last we unmount & remove the temporary mountpoint for the temporary chrooted partition
     if temp_chroot_mnt:
         subprocess.call("umount " + temp_chroot_mnt + " 2>/dev/null", shell=True)
-        print 'unmounting:'
-        print temp_chroot_mnt
     try:
         os.removedirs(temp_chroot_mnt)
     except OSError:
@@ -520,10 +515,11 @@ class LiloSetup:
                     # Let's determines Lilo's chrooted Linux partition directory, only happens one.
                     am_i_first = 'cat ' + config_location + ''' | grep -v other | grep \/dev\/ | grep -w '.d.[1-9]' | cut -f3 -d " " '''
                     already_done = commands.getoutput(am_i_first).splitlines()
-                    if already_done == []: # This is the first Linux partition, the one we will chroot in to launch lilo!
+                    if already_done == []:
+                        # This is the first Linux partition, the one we will chroot in to launch lilo!
                         chroot_dev = set[0]
-                        mount_inconf = '' # Defines how the partitions 'appears' mounted in lilosetup.conf
-                        other_mnt = '' # we need this blank for the first time
+                        mount_inconf = '' # Defines how the partitions 'appears' mounted from the 'chrooted' partition's viewpoint
+                        other_mnt = '' # we need this blank for the first Linux partition
                         # Check if lilo's chroot directory is mounted
                         CHROOT_MNT="mount | grep " + chroot_dev + " | awk -F' ' '{print $3 }'"
                         chroot_mnt = commands.getoutput(CHROOT_MNT) # chrooted partition mountpoint
@@ -543,84 +539,77 @@ class LiloSetup:
                                 # Mount the 'chrooted' partition
                                 chroot_mnt_command = "mount " + chroot_dev + " " + temp_chroot_mnt + " 2>/dev/null"
                                 subprocess.call(chroot_mnt_command, shell=True)
-                                print 'mounting:'
-                                print temp_chroot_mnt
                                 chroot_mnt = temp_chroot_mnt
                         if chroot_mnt != "/" :
                             # This is necessary only if we execute lilo from a 'real' chrooted partition
                             subprocess.call("mount --bind /dev " + chroot_mnt + "/dev 2>/dev/null", shell=True)
                             temp_mount.append(chroot_mnt + "/dev") # allows unmounting temporary mountpoints later
-                            print 'mounting:'
-                            print chroot_mnt + "/dev"
                             subprocess.call("mount -t proc proc " + chroot_mnt + "/proc 2>/dev/null", shell=True)
                             temp_mount.append(chroot_mnt + "/proc") # allows unmounting temporary mountpoints later
-                            print 'mounting:'
-                            print chroot_mnt + "/proc"
-                    else :	# This applies to all subsequent partitions
-                        # How this partition is mounted on a the current partition
+                    else : # This applies to all subsequent partitions
+                        # How this partition is --or should be-- mounted on a the current partition
                         if chroot_mnt == "/" :
-                            print 'chroot_mnt: ' + chroot_mnt + ', no need for a fork'
-                            mount_info=commands.getoutput("mount -f")
-                            if set[0] in mount_info:
-                                for i in mount_info.splitlines():
-                                    if set[0] in i:
-                                        other_mnt = i.split()[2]
-                                        break
-                        # How this partition should (and will) be mounted on a 'real' chrooted partition
+                            mount_info=commands.getoutput("mount").splitlines()
+                            while mount_info:
+                                if set[0] in mount_info[0]:
+                                    other_mnt = mount_info[0].split()[2]
+                                mount_info.remove(mount_info[0])
+                            if other_mnt == '':
+                                # We need to create a temporary mountpoint ourself & mount it:
+                                temp_other_mnt = work_dir + set[0].replace('dev', 'mnt')
+                                try :
+                                    os.makedirs(temp_other_mnt)
+                                    temp_dir.append(temp_other_mnt)
+                                except OSError :
+                                    pass
+                                other_mnt = temp_other_mnt
+                                # all needed temporary mountpoints on chrooted partitions exist, we can now mount them
+                                mnt_command = "mount " + set[0] + " " + other_mnt + " 2>/dev/null"
+                                subprocess.call(mnt_command, shell=True)
+                                temp_mount.append(other_mnt) # allows cleanup temporary mountpoints later
+                        # Else, how this partition should (and will) be mounted on a 'real' chrooted partition
                         else :
-                            print 'chroot_mnt: ' + chroot_mnt
-                            print 'Fork is not done yet, other_mnt initial value is: ' + other_mnt
+                            other_mnt = '' # reinitialization
                             # We create a fork, chroot in the child process & pipe the mount info to the parent process
-                            r, w = os.pipe() # these are file descriptors, not file objects
-                            pid = os.fork()
-                            if pid:
-                                # Parent process
-                                print "We are now in parent process waiting on childprocess"
-                                print 'chroot_mnt: ' + chroot_mnt
-                                os.close(w) # use os.close() to close a file descriptor
-                                r = os.fdopen(r) # turn r into a file object
-                                other_mnt = r.read()
-                                os.waitpid(pid, 0) # make sure the child process gets cleaned up
-                            else:
-                                # Child process
-                                print "We are now in child process"
-                                print 'chroot_mnt: ' + chroot_mnt
-                                os.close(r)
-                                w = os.fdopen(w, 'w')
-                                os.chroot(chroot_mnt)
-                                # Fake fstab mounting - we do it that way to not have to deal directly with eventual UUID schemes
-                                subprocess.call("mount -af 2>/dev/null", shell=True)
-                                # Retieve the mount info
-                                mount_info=commands.getoutput("mount")
-                                print 'mount_info value is: ' + mount_info
-                                if set[0] in mount_info:
-                                    for i in mount_info.splitlines():
-                                        if set[0] in i:
-                                            other_mnt = i.split()[2]
-                                            print 'other_mnt value in child is: ' + other_mnt
-                                            break
-                                w.write(other_mnt)
-                                w.close()
-                                # Exit child process
-                                sys.exit(0)
-                            print 'Fork is done, other_mnt value is now: ' + other_mnt
+                            if os.path.isdir(chroot_mnt + '/lib64') is not True:
+                                r, w = os.pipe() # these are file descriptors, not file objects
+                                pid = os.fork()
+                                if pid:
+                                    # Parent process
+                                    os.close(w) # use os.close() to close a file descriptor
+                                    r = os.fdopen(r) # turn r into a file object
+                                    other_mnt = r.read()
+                                    os.waitpid(pid, 0) # make sure the child process gets cleaned up
+                                else:
+                                    # Child process
+                                    os.close(r)
+                                    w = os.fdopen(w, 'w')
+                                    os.chroot(chroot_mnt)
+                                    # We use fake mounting to avoid dealing with eventual fstab UUID schemes
+                                    subprocess.call("mount -af 2>/dev/null", shell=True)
+                                    # Retrieve the mount info
+                                    mount_info=commands.getoutput("mount").splitlines()
+                                    while mount_info:
+                                        if set[0] in mount_info[0]:
+                                            other_mnt = mount_info[0].split()[2]
+                                        mount_info.remove(mount_info[0])
+                                    w.write(other_mnt)
+                                    w.close()
+                                    # Exit child process
+                                    sys.exit(0)
                             if other_mnt == '':  # we need to create a temporary mountpoint ourselves
                                 temp_other_mnt = work_dir + set[0].replace('dev', 'mnt')
                                 try :
                                     os.makedirs(chroot_mnt + temp_other_mnt)
                                     temp_dir.append(chroot_mnt + temp_other_mnt)
-                                    print 'Created temporary mountpoint: ' + temp_other_mnt
                                 except OSError :
                                     pass
                                 other_mnt = temp_other_mnt
-                            # all temporary mountpoints exist, we can now mount them
+                            # all needed temporary mountpoints on chrooted partitions exist, we can now mount them
                             mnt_command = "mount " + set[0] + " " + chroot_mnt + other_mnt + " 2>/dev/null"
                             subprocess.call(mnt_command, shell=True)
                             temp_mount.append(chroot_mnt +other_mnt) # allows cleanup temporary mountpoints later
-                            print 'mounting:'
-                            print chroot_mnt + other_mnt
-
-                        mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
+                    mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
                     # Confirm that a partition is configured
                     partition_set.append("OK")
                     # Append to lilosetup.conf

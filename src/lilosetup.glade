@@ -86,11 +86,12 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="relief">none</property>
+                <signal name="leave_notify_event" handler="on_about_button_leave_notify_event"/>
                 <signal name="clicked" handler="on_about_button_clicked"/>
+                <signal name="enter_notify_event" handler="on_about_button_enter_notify_event"/>
                 <child>
                   <object class="GtkImage" id="image_lilofix">
                     <property name="visible">True</property>
-                    <property name="tooltip_text" translatable="yes">About Lilo Setup...</property>
                     <property name="xpad">15</property>
                     <property name="ypad">15</property>
                     <property name="pixbuf">lilosetup.png</property>
@@ -98,24 +99,27 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="intro_label">
+              <object class="GtkEventBox" id="context_eventbox">
                 <property name="visible">True</property>
-                <property name="tooltip_text" translatable="yes">It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. 
-
-LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.
-
-Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of the first hard drive with a boot flag.</property>
-                <property name="xpad">3</property>
-                <property name="ypad">3</property>
-                <property name="label" translatable="yes">&lt;b&gt;LiloSetup will install a new LILO bootloader on your computer.&lt;/b&gt; 
-
-A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer.</property>
-                <property name="use_markup">True</property>
-                <property name="wrap">True</property>
+                <signal name="leave_notify_event" handler="on_context_eventbox_leave_notify_event"/>
+                <signal name="enter_notify_event" handler="on_context_eventbox_enter_notify_event"/>
+                <child>
+                  <object class="GtkLabel" id="label_context_help">
+                    <property name="height_request">220</property>
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="xpad">7</property>
+                    <property name="use_markup">True</property>
+                    <property name="wrap">True</property>
+                    <property name="width_chars">60</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -148,17 +152,12 @@ A bootloader is required to load the main operating system of a computer and wil
                           <object class="GtkTreeView" id="boot_partition_treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="tooltip_text" translatable="yes">Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.
-
-Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.
-
-If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.
-
-Any of these settings can be edited manually in lilosetup configuration file.</property>
                             <property name="model">boot_partition_list_store</property>
                             <property name="headers_clickable">False</property>
                             <property name="rules_hint">True</property>
                             <property name="search_column">0</property>
+                            <signal name="leave_notify_event" handler="on_boot_partition_treeview_leave_notify_event"/>
+                            <signal name="enter_notify_event" handler="on_boot_partition_treeview_enter_notify_event"/>
                             <child>
                               <object class="GtkTreeViewColumn" id="partition_treeviewcolumn">
                                 <property name="title" translatable="yes">Partition</property>
@@ -224,12 +223,9 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Use this arrow if you want to move the selected Operating System up to a higher rank.
-
-The partition with the highest rank will be displayed on the first line of the bootloader menu.
-
-Any of these settings can be edited manually in lilosetup configuration file.</property>
+                            <signal name="leave_notify_event" handler="on_up_button_leave_notify_event"/>
                             <signal name="clicked" handler="on_up_button_clicked"/>
+                            <signal name="enter_notify_event" handler="on_up_button_enter_notify_event"/>
                             <child>
                               <object class="GtkImage" id="image5">
                                 <property name="visible">True</property>
@@ -246,12 +242,9 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Use this arrow if you want to move the selected Operating System down to a lower rank.
-
-The partition with the lowest rank will be displayed on the last line of the bootloader menu.
-
-Any of these settings can be edited manually in lilosetup configuration file.</property>
+                            <signal name="leave_notify_event" handler="on_down_button_leave_notify_event"/>
                             <signal name="clicked" handler="on_down_button_clicked"/>
+                            <signal name="enter_notify_event" handler="on_down_button_enter_notify_event"/>
                             <child>
                               <object class="GtkImage" id="image3">
                                 <property name="visible">True</property>
@@ -278,35 +271,41 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                   <object class="GtkHButtonBox" id="hbuttonbox1">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkButton" id="undo_button">
+                      <object class="GtkEventBox" id="undo_eventbox">
                         <property name="visible">True</property>
-                        <property name="sensitive">False</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">This will undo all settings (even manual modifications).</property>
-                        <signal name="clicked" handler="on_undo_button_clicked"/>
+                        <signal name="leave_notify_event" handler="on_undo_eventbox_leave_notify_event"/>
+                        <signal name="enter_notify_event" handler="on_undo_eventbox_enter_notify_event"/>
                         <child>
-                          <object class="GtkHBox" id="hbox4">
+                          <object class="GtkButton" id="undo_button">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="on_undo_button_clicked"/>
                             <child>
-                              <object class="GtkImage" id="image4">
+                              <object class="GtkHBox" id="hbox4">
                                 <property name="visible">True</property>
-                                <property name="stock">gtk-clear</property>
+                                <child>
+                                  <object class="GtkImage" id="image4">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-clear</property>
+                                  </object>
+                                  <packing>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="undo_label">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">_Undo configuration </property>
+                                    <property name="use_markup">True</property>
+                                    <property name="use_underline">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="undo_label">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Undo configuration </property>
-                                <property name="use_markup">True</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
                             </child>
                           </object>
                         </child>
@@ -316,37 +315,40 @@ Any of these settings can be edited manually in lilosetup configuration file.</p
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="edit_button">
+                      <object class="GtkEventBox" id="edit_eventbox">
                         <property name="visible">True</property>
-                        <property name="sensitive">False</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). 
-
-Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths.</property>
-                        <signal name="clicked" handler="on_edit_button_clicked"/>
+                        <signal name="leave_notify_event" handler="on_edit_eventbox_leave_notify_event"/>
+                        <signal name="enter_notify_event" handler="on_edit_eventbox_enter_notify_event"/>
                         <child>
-                          <object class="GtkHBox" id="hbox1">
+                          <object class="GtkButton" id="edit_button">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
                             <child>
-                              <object class="GtkImage" id="image1">
+                              <object class="GtkHBox" id="hbox1">
                                 <property name="visible">True</property>
-                                <property name="stock">gtk-edit</property>
+                                <child>
+                                  <object class="GtkImage" id="image1">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-edit</property>
+                                  </object>
+                                  <packing>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="edit_label">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">_Edit configuration </property>
+                                    <property name="use_markup">True</property>
+                                    <property name="use_underline">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="edit_label">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Edit configuration </property>
-                                <property name="use_markup">True</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
                             </child>
                           </object>
                         </child>
@@ -385,46 +387,51 @@ Please do not temper with this file unless you know what you are doing and you h
                 <property name="has_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Exit Lilo Setup program.</property>
                 <property name="use_stock">True</property>
+                <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                 <signal name="clicked" handler="on_main_window_destroy"/>
                 <signal name="clicked" handler="gtk_main_quit"/>
+                <signal name="enter_notify_event" handler="on_button_quit_enter_notify_event"/>
               </object>
               <packing>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="execute_button">
+              <object class="GtkEventBox" id="execute_eventbox">
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Install LILO's bootloader.
-
-Once you have defined your settings, click on this button to create your new LILO's bootloader. </property>
-                <signal name="clicked" handler="on_execute_button_clicked"/>
+                <signal name="leave_notify_event" handler="on_execute_eventbox_leave_notify_event"/>
+                <signal name="enter_notify_event" handler="on_execute_eventbox_enter_notify_event"/>
                 <child>
-                  <object class="GtkHBox" id="hbox2">
+                  <object class="GtkButton" id="execute_button">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_execute_button_clicked"/>
                     <child>
-                      <object class="GtkImage" id="image2">
+                      <object class="GtkHBox" id="hbox2">
                         <property name="visible">True</property>
-                        <property name="stock">gtk-execute</property>
+                        <child>
+                          <object class="GtkImage" id="image2">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-execute</property>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="execute_label">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes"> _Install LILO's bootloader </property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
-                      <packing>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="execute_label">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes"> _Install LILO's bootloader </property>
-                        <property name="use_underline">True</property>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>

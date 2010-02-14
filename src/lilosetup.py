@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100127 build - Forked LiloFix '0.9.7' to Salix environment
+# version = '0.1' - 20100214 build - Forked LiloFix '0.9.7' to Salix environment
 #                                    Modified name, logo, gui & lilosetup.conf stub
 #                                    Migrated from libglade to gtkbuilder
 #                                    Added extra info columns to the boot partition list
@@ -32,6 +32,7 @@
 #                                    Adapted syntax if target kernel is using LIBATA
 #                                    Added fstab with'UUID for mountpoints detection
 #                                    French, German, Greek translation
+#                                    Contextual Help
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Verify Raid device support
@@ -130,14 +131,8 @@ except OSError:
 config_location = work_dir + "/lilosetup.conf"
 
 # Build LiloSetup configuration file stub:
-# Get the booting device
-try :
-    boot_partition = commands.getoutput('os-prober').splitlines()[0].split(':')[0].strip('0123456789')
-except IndexError:
-    BOOT_PARTITION = """
-    fdisk -l | grep dev | grep \* -m 1 | cut -f1 -d " "
-    """
-    boot_partition = commands.getoutput(BOOT_PARTITION).strip('0123456789')
+# Get the booting device, should be the first hard drive
+boot_partition = commands.getoutput('fdisk -l | grep "dev" -m 1 | cut -f2 -d " "').strip(':')
 # Create the configuration file stub
 stub_location = work_dir + "/lilosetup.stub"
 # Delete any old stub if present
@@ -355,9 +350,18 @@ class LiloSetup:
         self.DownButton = builder.get_object("down_button")
         self.LabelCellRendererCombo = builder.get_object("label_cellrenderercombo")
         self.LabelTreeViewColumn = builder.get_object("label_treeviewcolumn")
+        self.LabelContextHelp = builder.get_object("label_context_help")
 
         # Connect signals
         builder.connect_signals(self)
+
+        # Initialize the contextual help box
+        global context_intro
+        context_intro = _("<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n\
+\n\
+A bootloader is required to load the main operating system of a computer and will initially display \
+a boot menu if several operating systems are available on the same computer.")
+        self.LabelContextHelp.set_markup(context_intro)
 
         # Initialize the partition list
         global setup_partition_list
@@ -696,16 +700,97 @@ class LiloSetup:
 
 ### Callback signals waiting in a constant loop: ###
 
-### WINDOWS MAIN SIGNALS ###	
+### WINDOWS MAIN SIGNALS ###
+
+    # Contextual help:
+    def on_about_button_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_text(_("About Lilo Setup."))
+    def on_about_button_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_context_eventbox_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_text(_("It is necessary to (re)configure the \
+bootloader each time you install a new operating system on your computer. \n\
+\n\
+LiloSetup can also be useful in the process of a disaster recovery in which case you \
+may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n\
+\n\
+Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular \
+installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of \
+your first hard drive."))
+    def on_context_eventbox_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_boot_partition_treeview_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(_("Here you must define a Boot menu label for each \
+of the operating system that will be displayed on your bootloader menu.\n\
+\n\
+Any partition for which you do not set a  Boot menu label will not be configured and will \
+not be displayed on the bootloader menu.\n\
+\n\
+If a few kernels are available within one partition, the label you have chosen for that \
+partition will be appended numerically to create multiple menu entries for each of these kernels.\n\
+\n\
+Any of these settings can be edited manually in lilosetup configuration file."))
+    def on_boot_partition_treeview_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_up_button_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(_("Use this arrow if you want to move the \
+selected Operating System up to a higher rank.\n\
+\n\
+The partition with the highest rank will be displayed on the first line of the bootloader menu.\n\
+\n\
+Any of these settings can be edited manually in lilosetup configuration file."))
+    def on_up_button_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_down_button_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(_("Use this arrow if you want to move the \
+selected Operating System down to a lower rank.\n\
+\n\
+The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n\
+\n\
+Any of these settings can be edited manually in lilosetup configuration file."))
+    def on_down_button_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_undo_eventbox_enter_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(_("This will undo all settings (even manual modifications)."))
+    def on_undo_eventbox_leave_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_edit_eventbox_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(_("Experienced users have the possibility to \
+manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n\
+\n\
+Please do not temper with this file unless you know what you are doing and you have \
+read its commented instructions regarding chrooted paths."))
+    def on_edit_eventbox_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_button_quit_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(_("Exit Lilo Setup program."))
+    def on_button_quit_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+    def on_execute_eventbox_enter_notify_event(self, widget, data=None):
+        self.LabelContextHelp.set_markup(_("Once you have defined your settings, \
+click on this button to create your new LILO's bootloader."))
+    def on_execute_eventbox_leave_notify_event(self, widget, data=None):
+        global context_intro
+        self.LabelContextHelp.set_markup(context_intro)
+
 
     # What to do when the exit X on the main window upper right is clicked
     def gtk_main_quit(self, widget, data=None):
         lilosetup_quit()
 
-# What to do when the quit button is is clicked    
+    # What to do when the quit button is is clicked
     def on_main_window_destroy(self, widget, data=None):
         lilosetup_quit()
 
+    # What to do when the about button is is clicked
     def on_about_button_clicked(self, widget, data=None):
         """
         Open the about dialog.

@@ -22,17 +22,17 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100214 build - Forked LiloFix '0.9.7' to Salix environment
-#                                    Modified name, logo, gui & lilosetup.conf stub
-#                                    Migrated from libglade to gtkbuilder
-#                                    Added extra info columns to the boot partition list
-#                                    Switched to os-prober & lshal for booting partitions details
-#                                    Added initrd autodetection
-#                                    Added support for multiple kernels within the same partition
-#                                    Adapted syntax if target kernel is using LIBATA
-#                                    Added fstab with'UUID for mountpoints detection
-#                                    French, German, Greek translation
-#                                    Contextual Help
+# version = '0.1' - Forked LiloFix '0.9.7' to Salix environment
+#                   Modified name, logo, gui & lilosetup.conf stub
+#                   Migrated from libglade to gtkbuilder
+#                   Added extra info columns to the boot partition list
+#                   Switched to os-prober & lshal for booting partitions details
+#                   Added initrd autodetection
+#                   Added support for multiple kernels within the same partition
+#                   Adapted syntax if target kernel is using LIBATA
+#                   Added fstab with'UUID for mountpoints detection
+#                   French, German, Greek, Spanish translation
+#                   Contextual Help
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Verify Raid device support
@@ -804,7 +804,7 @@ click on this button to create your new LILO's bootloader."))
 
         """
         self.AboutDialog.hide()
-        return True;
+        return True
 
     # What to do when a combo line is edited in the Linux New system column
     def on_label_cellrenderercombo_edited(self, widget, row_number, new_text):

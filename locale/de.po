@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 17:31+0100\n"
+"POT-Creation-Date: 2010-03-14 10:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andreas Born <futur.andy@googlemail.com>\n"
 "Language-Team: Raphael Groner <raphgro(at)web.de>\n"
@@ -448,22 +448,6 @@ msgstr ""
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
 
-#: lilosetup.glade:163
-msgid "Partition"
-msgstr "Partition"
-
-#: lilosetup.glade:175
-msgid "File system"
-msgstr "Dateisystem"
-
-#: lilosetup.glade:187
-msgid "Operating system"
-msgstr "Betriebssystem"
-
-#: lilosetup.glade:199
-msgid "Boot menu label"
-msgstr "Name im Bootmenü"
-
 #: lilosetup.glade:300
 msgid "_Undo configuration "
 msgstr "Konfig_uration rückgängig"
@@ -518,8 +502,21 @@ msgstr ""
 msgid ""
 "French: Pierrick Le Brun\n"
 "Greek: Dimitris Tzemos\n"
-"German: Andreas Born"
+"German: Andreas Born\n"
+"Spanish: Fernando Velo"
 msgstr ""
+
+#~ msgid "Partition"
+#~ msgstr "Partition"
+
+#~ msgid "File system"
+#~ msgstr "Dateisystem"
+
+#~ msgid "Operating system"
+#~ msgstr "Betriebssystem"
+
+#~ msgid "Boot menu label"
+#~ msgstr "Name im Bootmenü"
 
 #~ msgid "About..."
 #~ msgstr "Über..."

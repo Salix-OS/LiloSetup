@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 17:31+0100\n"
+"POT-Creation-Date: 2010-03-14 10:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
 "Language-Team: \n"
@@ -374,22 +374,6 @@ msgstr ""
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
 
-#: lilosetup.glade:163
-msgid "Partition"
-msgstr "Partition"
-
-#: lilosetup.glade:175
-msgid "File system"
-msgstr "Système de fichiers"
-
-#: lilosetup.glade:187
-msgid "Operating system"
-msgstr "Système d'exploitation"
-
-#: lilosetup.glade:199
-msgid "Boot menu label"
-msgstr "Intitulé de menu"
-
 #: lilosetup.glade:300
 msgid "_Undo configuration "
 msgstr "_Annuler la configuration"
@@ -457,9 +441,20 @@ msgstr ""
 msgid ""
 "French: Pierrick Le Brun\n"
 "Greek: Dimitris Tzemos\n"
-"German: Andreas Born"
+"German: Andreas Born\n"
+"Spanish: Fernando Velo"
 msgstr ""
+"Espagnol: Fernando Velo\n"
 "Français: Pierrick Le Brun\n"
 "Grec: Dimitris Tzemos\n"
 "Allemand: Andreas Born"
+
+#~ msgid "Partition"
+#~ msgstr "Partition"
+#~ msgid "File system"
+#~ msgstr "Système de fichiers"
+#~ msgid "Operating system"
+#~ msgstr "Système d'exploitation"
+#~ msgid "Boot menu label"
+#~ msgstr "Intitulé de menu"
 

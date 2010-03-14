@@ -117,7 +117,7 @@
                     <property name="xpad">7</property>
                     <property name="use_markup">True</property>
                     <property name="wrap">True</property>
-                    <property name="width_chars">60</property>
+                    <property name="width_chars">55</property>
                   </object>
                 </child>
               </object>
@@ -160,7 +160,7 @@
                             <signal name="enter_notify_event" handler="on_boot_partition_treeview_enter_notify_event"/>
                             <child>
                               <object class="GtkTreeViewColumn" id="partition_treeviewcolumn">
-                                <property name="title" translatable="yes">Partition</property>
+                                <property name="title">Partition</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="partition_cellrenderertext"/>
@@ -172,7 +172,7 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="filesystem_treeviewcolumn">
-                                <property name="title" translatable="yes">File system</property>
+                                <property name="title">File system</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="fs_cellrenderertext"/>
@@ -184,7 +184,7 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="os_treeviewcolumn">
-                                <property name="title" translatable="yes">Operating system</property>
+                                <property name="title">Operating system</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="os_cellrenderertext"/>
@@ -196,7 +196,7 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="label_treeviewcolumn">
-                                <property name="title" translatable="yes">Boot menu label</property>
+                                <property name="title">Boot menu label</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererCombo" id="label_cellrenderercombo">
@@ -486,7 +486,8 @@ Fifth Floor, Boston, MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun &lt;akuna~at~free~dot~fr&gt;</property>
     <property name="translator_credits" translatable="yes">French: Pierrick Le Brun
 Greek: Dimitris Tzemos
-German: Andreas Born</property>
+German: Andreas Born
+Spanish: Fernando Velo</property>
     <property name="logo">lilosetup.png</property>
     <signal name="delete_event" handler="on_about_dialog_close"/>
     <signal name="response" handler="on_about_dialog_close"/>

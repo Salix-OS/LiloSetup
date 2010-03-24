@@ -1,0 +1,10 @@
+[Desktop Entry]
+Exec=gksu /usr/sbin/lilosetup.py
+Icon=lilosetup
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Application;System;
+_Name=Lilo Setup
+_GenericName=Lilo set-up tool
+_Comment=Set up Lilo from a LiveCD or a standard system.

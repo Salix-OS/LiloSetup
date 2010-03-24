@@ -449,7 +449,7 @@ msgstr ""
 "Francés: Pierrick Le Brun\n"
 "Griego: Dimitris Tzemos\n"
 "Alemán: Andreas Born\n"
-"Spanish: Fernando Velo"
+"Español: Fernando Velo"
 
 #~ msgid "Partition"
 #~ msgstr "Partición"

@@ -816,6 +816,14 @@ click on this button to create your new LILO's bootloader."))
         self.UndoButton.set_sensitive(True)
         self.EditButton.set_sensitive(True)
         self.ExecuteButton.set_sensitive(True)
+    
+    def on_label_cellrenderercombo_editing_started(self, widget, path, data):
+        self.EditButton.set_sensitive(False)
+        self.ExecuteButton.set_sensitive(False)
+
+    def on_label_cellrenderercombo_editing_canceled(self, data):
+        self.EditButton.set_sensitive(True)
+        self.ExecuteButton.set_sensitive(True)
 
     def on_up_button_clicked(self, widget, data=None):
         """

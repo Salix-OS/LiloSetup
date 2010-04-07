@@ -86,8 +86,8 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="relief">none</property>
-                <signal name="leave_notify_event" handler="on_about_button_leave_notify_event"/>
                 <signal name="clicked" handler="on_about_button_clicked"/>
+                <signal name="leave_notify_event" handler="on_about_button_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_about_button_enter_notify_event"/>
                 <child>
                   <object class="GtkImage" id="image_lilofix">
@@ -201,6 +201,8 @@
                                 <child>
                                   <object class="GtkCellRendererCombo" id="label_cellrenderercombo">
                                     <signal name="edited" handler="on_label_cellrenderercombo_edited"/>
+                                    <signal name="editing_started" handler="on_label_cellrenderercombo_editing_started"/>
+                                    <signal name="editing_canceled" handler="on_label_cellrenderercombo_editing_canceled"/>
                                   </object>
                                   <attributes>
                                     <attribute name="text">3</attribute>
@@ -223,8 +225,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <signal name="leave_notify_event" handler="on_up_button_leave_notify_event"/>
                             <signal name="clicked" handler="on_up_button_clicked"/>
+                            <signal name="leave_notify_event" handler="on_up_button_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_up_button_enter_notify_event"/>
                             <child>
                               <object class="GtkImage" id="image5">
@@ -242,8 +244,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <signal name="leave_notify_event" handler="on_down_button_leave_notify_event"/>
                             <signal name="clicked" handler="on_down_button_clicked"/>
+                            <signal name="leave_notify_event" handler="on_down_button_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_down_button_enter_notify_event"/>
                             <child>
                               <object class="GtkImage" id="image3">
@@ -311,6 +313,8 @@
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -355,6 +359,8 @@
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -389,12 +395,14 @@
                 <property name="can_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                 <signal name="clicked" handler="on_main_window_destroy"/>
                 <signal name="clicked" handler="gtk_main_quit"/>
+                <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_button_quit_enter_notify_event"/>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -438,6 +446,8 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -490,8 +500,8 @@ Greek: Dimitris Tzemos
 German: Andreas Born
 Spanish: Fernando Velo</property>
     <property name="logo">lilosetup.png</property>
-    <signal name="delete_event" handler="on_about_dialog_close"/>
     <signal name="response" handler="on_about_dialog_close"/>
+    <signal name="delete_event" handler="on_about_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>

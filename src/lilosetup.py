@@ -810,20 +810,26 @@ click on this button to create your new LILO's bootloader."))
     def on_label_cellrenderercombo_edited(self, widget, row_number, new_text):
         # Retrieve the selected label row iter
         bootlabelchoice = self.BootPartitionTreeview.get_selection()
-        self.BootLabelListStore, iter = bootlabelchoice.get_selected()
+        self.BootPartitionListStore, iter = bootlabelchoice.get_selected()
         # Set the new partition row value on the fourth column (3)
-        self.BootLabelListStore.set_value(iter, 3, new_text)
+        self.BootPartitionListStore.set_value(iter, 3, new_text)
         self.UndoButton.set_sensitive(True)
         self.EditButton.set_sensitive(True)
         self.ExecuteButton.set_sensitive(True)
-    
+        self.UpButton.set_sensitive(True)
+        self.DownButton.set_sensitive(True)
+
     def on_label_cellrenderercombo_editing_started(self, widget, path, data):
         self.EditButton.set_sensitive(False)
         self.ExecuteButton.set_sensitive(False)
+        self.UpButton.set_sensitive(False)
+        self.DownButton.set_sensitive(False)
 
     def on_label_cellrenderercombo_editing_canceled(self, data):
         self.EditButton.set_sensitive(True)
         self.ExecuteButton.set_sensitive(True)
+        self.UpButton.set_sensitive(True)
+        self.DownButton.set_sensitive(True)
 
     def on_up_button_clicked(self, widget, data=None):
         """

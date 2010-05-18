@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - Forked LiloFix '0.9.7' to Salix environment
+# xxxxxxx = '0.1' - Forked LiloFix '0.9.7' to Salix environment
 #                   Modified name, logo, gui & lilosetup.conf stub
 #                   Migrated from libglade to gtkbuilder
 #                   Added extra info columns to the boot partition list
@@ -33,6 +33,11 @@
 #                   Added fstab with'UUID for mountpoints detection
 #                   French, German, Greek, Spanish translation
 #                   Contextual Help
+
+# version = '0.2' - Added visual enhancement to label editing section
+#                   Finetuned Fedora type distro auto-configuration
+#                   Finetuned libata/nonlibata auto-configuration
+#                   Finetuned contextual help appearance
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Verify Raid device support
@@ -67,7 +72,6 @@ def info_dialog(message, parent = None):
 
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
-    dialog.set_icon_from_file("/usr/share/icons/gnome/scalable/status/dialog-information.svg")
     dialog.set_markup(message)
     global result_info
     result_info = dialog.run()
@@ -80,7 +84,6 @@ def warning_dialog(message, parent = None):
 
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_WARNING, buttons = gtk.BUTTONS_NONE, flags = gtk.DIALOG_MODAL)
-    dialog.set_icon_from_file("/usr/share/icons/gnome/scalable/status/dialog-warning.svg")
     dialog.add_buttons(gtk.STOCK_YES, gtk.RESPONSE_YES)
     dialog.add_buttons(gtk.STOCK_NO, gtk.RESPONSE_NO)
     dialog.set_default_response(gtk.RESPONSE_NO)
@@ -96,7 +99,6 @@ def error_dialog(message, parent = None):
 
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
-    dialog.set_icon_from_file("/usr/share/icons/gnome/scalable/status/dialog-error.svg")
     dialog.set_markup(message)
     global result_error
     result_error = dialog.run()
@@ -379,44 +381,48 @@ a boot menu if several operating systems are available on the same computer.")
             operating_system = ''
             boot_label = 'Set...'
             boot_partition_feedline = []
-            try_prober = commands.getoutput('os-prober')
-            if try_prober :
+            try_prober = commands.getoutput('LANG=C os-prober')
+            if 'os-prober' not in try_prober :
                 boot_partition_output = try_prober.splitlines()
                 for line in boot_partition_output:
                     if 'leaked on lvs invocation' not in line: # an apparently harmless os-prober error message...
                         # Get the partition device
                         partition_device = line.split(':')[0]
                         # Check that it is not a Windows factory settings recovery partition...
-                        lshal_recovery_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep -i recovery'
+                        lshal_recovery_output = 'lshal | grep -B1 -A50 ' + partition_device + ' | grep -m 1 -i recovery'
                         partition_is_recovery = commands.getoutput(lshal_recovery_output)
                         if partition_is_recovery == '' :
                             # Get the operating system
                             operating_system = line.split(':')[1].split()[0]
                             # Get the file system
-                            lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
+                            lshal_string_output = 'lshal | grep -B1 -A50 ' + partition_device + ' | grep -m 1 volume.fstype'
                             file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                            if "ext4" in file_system:
-                                file_system = "ext3/ext4"
+                            # This shouldn't be needed anymore
+#                            if "ext4" in file_system:
+#                                file_system = "ext3/ext4"
                             boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
                             boot_partition_feedline_list.append(boot_partition_feedline)
                         else:
                             pass
-
+            else:
+                error_dialog(_("\nSorry! os-prober, a dependency of LiloSetup appears to be missing. Please verify and correct.\n"))
+                sys.exit(1)
             # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
             os.putenv("root_partition", "\'/\'")
-            this_os_main_partition = commands.getoutput("lshal | grep -B33  $root_partition | grep block.device")
+            this_os_main_partition = commands.getoutput("lshal | grep -B40  $root_partition | grep block.device")
             try :
                 if '/dev/' in this_os_main_partition.split("'")[1]:
                     # Get the partition device
                     partition_device = this_os_main_partition.split("'")[1]
                     # Get the file system
-                    lshal_string_output = 'lshal | grep -B1 -A30 ' + partition_device + ' | grep volume.fstype'
+                    lshal_string_output = 'lshal | grep -B1 -A50 ' + partition_device + ' | grep -m 1 volume.fstype'
                     file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                    if "ext4" in file_system:
-                        file_system = "ext3/ext4"
+                    # This should not be needed anymore
+#                    if "ext4" in file_system:
+#                        file_system = "ext3/ext4"
                     # Get the operating system.
                     try :
-                        version_file_path = glob.glob("/etc/*version")[0]
+                        version_file_path = glob.glob("/etc/*version*")[0]
                         version_file = open(version_file_path)
                         operating_system = version_file.read().split()[0]
                     except :
@@ -434,11 +440,13 @@ a boot menu if several operating systems are available on the same computer.")
             self.LabelCellRendererCombo.set_property("model", self.BootLabelListStore)
             self.LabelCellRendererCombo.set_property('text-column', 0)
             self.LabelCellRendererCombo.set_property('editable', True)
+            self.LabelCellRendererCombo.set_property('cell_background', '#CCCCCC')
             self.LabelTreeViewColumn.set_attributes(self.LabelCellRendererCombo, text = 3)
             # Sort the list for the partitions who do not follow the hard drive order
             boot_partition_feedline_list.sort()
             # Populate GUI partition list view rows
             for line in boot_partition_feedline_list:
+                line.append('gtk-edit')
                 self.BootPartitionListStore.append(line)
         # Show partition list
         setup_partition_list()
@@ -455,9 +463,9 @@ a boot menu if several operating systems are available on the same computer.")
             temp_mount = []
             # Configuration file
             config_creation = []
-            # At least one  partition has been configured
+            # This will help ensure that at least one  partition has been configured
             partition_set = []
-            # Retrieve all the partition rows values
+            # This is for retrieving all the partition rows values
             BootPartitionsValues = []
             x = 0
             while x <= 20 :
@@ -502,7 +510,7 @@ a boot menu if several operating systems are available on the same computer.")
                     config_creation.append('failure')
                     break
                 # We skip the partitions that have not been configured by the user
-                elif '...' in set[3] :
+                elif _('Set...') in set[3] :
                     pass
                 # If Windows partition:
                 elif set[2] in windows_sys_labels :
@@ -517,7 +525,7 @@ a boot menu if several operating systems are available on the same computer.")
                 else:
                     # Applies to Linux partitions
                     # Let's determines Lilo's chrooted Linux partition directory, only happens one.
-                    am_i_first = 'cat ' + config_location + ''' | grep -v other | grep \/dev\/ | grep -w '.d.[1-9]' | cut -f3 -d " " '''
+                    am_i_first = 'cat ' + config_location + ' | grep -i uuid'
                     already_done = commands.getoutput(am_i_first).splitlines()
                     if already_done == []:
                         # This is the first Linux partition, the one we will chroot in to launch lilo!
@@ -579,7 +587,7 @@ a boot menu if several operating systems are available on the same computer.")
                                 r, w = os.pipe() # these are file descriptors, not file objects
                                 pid = os.fork()
                                 if pid:
-                                    # Parent process
+                                    chroot_mnt     # Parent process
                                     os.close(w) # use os.close() to close a file descriptor
                                     r = os.fdopen(r) # turn r into a file object
                                     other_mnt = r.read()
@@ -623,16 +631,28 @@ a boot menu if several operating systems are available on the same computer.")
                     # Append to lilosetup.conf
                     stub = open(config_location, "a")
                     # There maybe a few kernels in the same partition
-                    # Some of them may have an initrd, which we assume have the exact same suffix.
-                    vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
+                    # Some of them may have an initrd, which we assume have exactly the same suffix.
+                    if chroot_mnt != "/":
+                        vmlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/vmlinuz*"))
+                        initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initr*"))
+                    if chroot_mnt == "/":
+                        vmlist = sorted(glob.glob(other_mnt + "/boot/vmlinuz*"))
+                        initlist = sorted(glob.glob(other_mnt + "/boot/initr*"))
                     # Remove directories
                     for i in vmlist :
                         if os.path.isdir(i) :
                             vmlist.remove(i)
+                    for i in initlist :
+                        if os.path.isdir(i) :
+                            initlist.remove(i)
                     # Remove symbolic links
                     for i in vmlist :
                         if os.path.islink(i) :
                             vmlist.remove(i)
+                    for i in initlist :
+                        if os.path.islink(i) :
+                            initlist.remove(i)
+                    # There could be a few kernels in the same partition:
                     it = 0
                     y = 1
                     while it < len(vmlist) :
@@ -641,31 +661,22 @@ a boot menu if several operating systems are available on the same computer.")
                         try :
                             vmlinuz_file_path = vmlist[it].split("boot")[1]
                             stub.write("image = " + mount_inconf + "/boot" + vmlinuz_file_path + "\n")
+                            vmlinuz_suffix = vmlinuz_file_path.split('/')[-1].replace("vmlinuz", "")
                         except:
                              error_dialog(_("One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"))
-                        # Add addappend line if neededed
-                        # check if LIBATA is used
-                        if "/dev/hd" in set[0] :
-                            libata_try = set[0].replace("hd", "sd")
-                            libata_line = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/fstab | grep " + libata_try)
-                            if libata_line != '' :
-                                libata_device = libata_line.split()[0]
-                                if "/dev/sd" in libata_device :
-                                    stub.write("""addappend = "root=""" + libata_device + """ "\n""")
-                                else : # some fstab files may have weird layout & scheme, try mtab instead
-                                    libata_device = commands.getoutput("cat " + chroot_mnt + mount_inconf + "/etc/mtab | grep " + libata_try).split()[0]
-                                    if "/dev/sd" in libata_device :
-                                        stub.write("""addappend = "root=""" + libata_device + """ "\n""")
-                                    else :
-                                        pass
-                        else :
-                            pass
-
-                        stub.write("root = " + set[0] +"\n")
+                        # We'll use uuid to avoid libata/non-libata confusion
+                        # Find the uuid linked to the partition
+                        linked_partition = set[0].split('/')[-1]
+                        uuid_line = commands.getoutput('ls -l /dev/disk/by-uuid | grep ' + linked_partition).split('->')[0].split()[-1]
+                        if 'Fedora' in set[2]:
+                             stub.write('append = "root=UUID=' + uuid_line +' "\n')
+                        else:
+                            stub.write("root = /dev/disk/by-uuid/" + uuid_line +"\n")
                         if len(vmlist) == 1 :
+                            # There is only one kernel so only one entry for this partition
                             stub.write("label = " + set[3] + "\n")
                         else:
-                            vmlinuz_suffix = vmlinuz_file_path.split('/')[-1].replace("vmlinuz", "")
+                            # There is more than one kernel in the same partition, we need to create multiple entries
                             # We need to ensure that the label is not too long
                             new_label = set[3] + vmlinuz_suffix
                             if len(new_label) >= 14 :
@@ -674,21 +685,13 @@ a boot menu if several operating systems are available on the same computer.")
                             else:
                                 stub.write("label = " + new_label +"\n")
                         # Add the initrd if suffix is matching kernel
-                        initrd_match = vmlist[it].replace('vmlinuz', 'initrd')
-                        if os.path.isfile(initrd_match):
-                            initrd_file_path = initrd_match.split("boot")[1]
-                            stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
-                        # If only one kernel & one initrd, we assume they match even if their suffix do not.
-                        elif it == 0:
-                            initlist = sorted(glob.glob(chroot_mnt + other_mnt + "/boot/initrd*"))
-                            # Remove directories
-                            for i in initlist :
-                                if os.path.isdir(i) :
-                                    initlist.remove(i)
-                            # Remove symbolic links
-                            for i in initlist :
-                                if os.path.islink(i) :
-                                    initlist.remove(i)
+                        for i in initlist:
+                            if vmlinuz_suffix in i:
+                                initrd_file_path = i.split("boot")[1]
+                                stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
+                                break
+                        # If only one kernel & one initrd, we can assume they match even if their suffix do not.
+                        if it == 0 and vmlinuz_suffix not in i:
                             if len(initlist) == 1 and len(vmlist) == 1:
                                 initrd_file_path = initlist[0].split("boot")[1]
                                 stub.write("initrd = " + mount_inconf + "/boot" + initrd_file_path + "\n")
@@ -711,10 +714,8 @@ a boot menu if several operating systems are available on the same computer.")
     def on_context_eventbox_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_text(_("It is necessary to (re)configure the \
 bootloader each time you install a new operating system on your computer. \n\
-\n\
 LiloSetup can also be useful in the process of a disaster recovery in which case you \
 may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n\
-\n\
 Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular \
 installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of \
 your first hard drive."))
@@ -724,13 +725,10 @@ your first hard drive."))
     def on_boot_partition_treeview_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_markup(_("Here you must define a Boot menu label for each \
 of the operating system that will be displayed on your bootloader menu.\n\
-\n\
 Any partition for which you do not set a  Boot menu label will not be configured and will \
 not be displayed on the bootloader menu.\n\
-\n\
 If a few kernels are available within one partition, the label you have chosen for that \
 partition will be appended numerically to create multiple menu entries for each of these kernels.\n\
-\n\
 Any of these settings can be edited manually in lilosetup configuration file."))
     def on_boot_partition_treeview_leave_notify_event(self, widget, data=None):
         global context_intro
@@ -738,9 +736,7 @@ Any of these settings can be edited manually in lilosetup configuration file."))
     def on_up_button_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_markup(_("Use this arrow if you want to move the \
 selected Operating System up to a higher rank.\n\
-\n\
 The partition with the highest rank will be displayed on the first line of the bootloader menu.\n\
-\n\
 Any of these settings can be edited manually in lilosetup configuration file."))
     def on_up_button_leave_notify_event(self, widget, data=None):
         global context_intro
@@ -748,9 +744,7 @@ Any of these settings can be edited manually in lilosetup configuration file."))
     def on_down_button_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_markup(_("Use this arrow if you want to move the \
 selected Operating System down to a lower rank.\n\
-\n\
 The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n\
-\n\
 Any of these settings can be edited manually in lilosetup configuration file."))
     def on_down_button_leave_notify_event(self, widget, data=None):
         global context_intro
@@ -763,7 +757,6 @@ Any of these settings can be edited manually in lilosetup configuration file."))
     def on_edit_eventbox_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_markup(_("Experienced users have the possibility to \
 manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n\
-\n\
 Please do not temper with this file unless you know what you are doing and you have \
 read its commented instructions regarding chrooted paths."))
     def on_edit_eventbox_leave_notify_event(self, widget, data=None):
@@ -806,13 +799,17 @@ click on this button to create your new LILO's bootloader."))
         self.AboutDialog.hide()
         return True
 
-    # What to do when a combo line is edited in the Linux New system column
+    # What to do when a combo line is edited in the Label column
     def on_label_cellrenderercombo_edited(self, widget, row_number, new_text):
         # Retrieve the selected label row iter
         bootlabelchoice = self.BootPartitionTreeview.get_selection()
         self.BootPartitionListStore, iter = bootlabelchoice.get_selected()
         # Set the new partition row value on the fourth column (3)
         self.BootPartitionListStore.set_value(iter, 3, new_text)
+        if new_text != _("Set..."):
+            self.BootPartitionListStore.set_value(iter, 4, 'gtk-yes')
+        else:
+            self.BootPartitionListStore.set_value(iter, 4, 'gtk-edit')
         self.UndoButton.set_sensitive(True)
         self.EditButton.set_sensitive(True)
         self.ExecuteButton.set_sensitive(True)

@@ -21,16 +21,13 @@
         <col id="0" translatable="yes">Linux</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Zenwalk</col>
+        <col id="0" translatable="yes">Fedora</col>
       </row>
       <row>
         <col id="0" translatable="yes">Ubuntu</col>
       </row>
       <row>
         <col id="0" translatable="yes">Windows</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Etc...</col>
       </row>
     </data>
   </object>
@@ -44,6 +41,8 @@
       <column type="gchararray"/>
       <!-- column-name label -->
       <column type="gchararray"/>
+      <!-- column-name visual -->
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>
@@ -51,18 +50,21 @@
         <col id="1" translatable="yes">fat32</col>
         <col id="2" translatable="yes">Windows</col>
         <col id="3" translatable="yes">XP</col>
+        <col id="4" translatable="yes">gtk-no</col>
       </row>
       <row>
         <col id="0" translatable="yes">/dev/sda2</col>
         <col id="1" translatable="yes">ntfs</col>
         <col id="2" translatable="yes">Windows</col>
         <col id="3" translatable="yes">Vista</col>
+        <col id="4" translatable="yes">gtk-no</col>
       </row>
       <row>
         <col id="0" translatable="yes">/dev/sda3</col>
         <col id="1" translatable="yes">/dev/sdb1</col>
         <col id="2" translatable="yes">Slackware</col>
         <col id="3" translatable="yes">Salix</col>
+        <col id="4" translatable="yes">gtk-yes</col>
       </row>
     </data>
   </object>
@@ -111,10 +113,11 @@
                 <signal name="enter_notify_event" handler="on_context_eventbox_enter_notify_event"/>
                 <child>
                   <object class="GtkLabel" id="label_context_help">
+                    <property name="width_request">570</property>
                     <property name="height_request">220</property>
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="xpad">7</property>
+                    <property name="xpad">6</property>
                     <property name="use_markup">True</property>
                     <property name="wrap">True</property>
                     <property name="width_chars">55</property>
@@ -196,8 +199,15 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="label_treeviewcolumn">
+                                <property name="spacing">3</property>
                                 <property name="title">Boot menu label</property>
                                 <property name="expand">True</property>
+                                <child>
+                                  <object class="GtkCellRendererPixbuf" id="label_cellrendererpixbuf"/>
+                                  <attributes>
+                                    <attribute name="stock-id">4</attribute>
+                                  </attributes>
+                                </child>
                                 <child>
                                   <object class="GtkCellRendererCombo" id="label_cellrenderercombo">
                                     <signal name="edited" handler="on_label_cellrenderercombo_edited"/>
@@ -472,7 +482,7 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="has_separator">False</property>
     <property name="program_name">LiloSetup</property>
-    <property name="version">0.1</property>
+    <property name="version">0.2</property>
     <property name="copyright" translatable="yes">A simple GUI interface to set-up LILO.
 
 Copyright &#xA9; 2010 Pierrick Le Brun</property>
@@ -495,10 +505,7 @@ Public License along with this program; if not, write to
 the Free Software Foundation, Inc., 51 Franklin Street, 
 Fifth Floor, Boston, MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun &lt;akuna~at~free~dot~fr&gt;</property>
-    <property name="translator_credits" translatable="yes">French: Pierrick Le Brun
-Greek: Dimitris Tzemos
-German: Andreas Born
-Spanish: Fernando Velo</property>
+    <property name="translator_credits" translatable="yes">Salix Transifex Team.</property>
     <property name="logo">lilosetup.png</property>
     <signal name="response" handler="on_about_dialog_close"/>
     <signal name="delete_event" handler="on_about_dialog_close"/>

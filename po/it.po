@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lilosetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 18:28+0000\n"
+"POT-Creation-Date: 2010-05-18 19:16+0200\n"
 "PO-Revision-Date: 2010-04-05 15:58+0100\n"
 "Last-Translator: Mattia Tristo <mattia.tristo@gmail.com>\n"
 "Language-Team: Mattia Tristo <mattia.tristo@gmail.com>\n"
@@ -293,6 +293,10 @@ msgstr ""
 "e mostrera' inizialmente un menu di avvio se piu' sistemi operativi sono "
 "disponibili sullo stesso computer."
 
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
+msgid "Set..."
+msgstr ""
+
 #: src/lilosetup.py:408
 msgid ""
 "\n"
@@ -331,10 +335,6 @@ msgstr ""
 "Un'etichetta di Sistema Operativo non dovrebbe avere piu' di 15 caratteri.\n"
 "\n"
 "Per favore verifica e correggi.\n"
-
-#: src/lilosetup.py:513 src/lilosetup.py:809
-msgid "Set..."
-msgstr ""
 
 #: src/lilosetup.py:520
 msgid "# Windows bootable partition config begins\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lilosetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 18:28+0000\n"
+"POT-Creation-Date: 2010-05-18 19:16+0200\n"
 "PO-Revision-Date: 2010-03-23 14:19+0100\n"
 "Last-Translator: Kris Thomsen <lakristho@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -288,6 +288,10 @@ msgstr ""
 "computeren og vil vise en opstartsmenu med adskillige operativsystemer som "
 "er tilgængelige på den samme computer."
 
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
+msgid "Set..."
+msgstr ""
+
 #: src/lilosetup.py:408
 msgid ""
 "\n"
@@ -326,10 +330,6 @@ msgstr ""
 "En operativsystemetiket må ikke indeholde mere end 15 tegn. \n"
 "\n"
 "Verificér venligst og ret til.\n"
-
-#: src/lilosetup.py:513 src/lilosetup.py:809
-msgid "Set..."
-msgstr ""
 
 #: src/lilosetup.py:520
 msgid "# Windows bootable partition config begins\n"

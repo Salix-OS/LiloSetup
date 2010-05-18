@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 18:28+0000\n"
+"POT-Creation-Date: 2010-05-18 19:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: seacat <seacat.lang@gmail.com>\n"
 "Language-Team:  <seacat.linux@gmail.com>\n"
@@ -291,6 +291,10 @@ msgstr ""
 "principal de una computadora, que inicialmente mostrará un menú de arranque "
 "si hay varios sistemas operativos disponibles en la misma computadora."
 
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
+msgid "Set..."
+msgstr ""
+
 #: src/lilosetup.py:408
 msgid ""
 "\n"
@@ -329,10 +333,6 @@ msgstr ""
 "El rótulo del Sistema Operativo no debería tener más de 15 caracteres. \n"
 "\n"
 "Por favor, verificar y corregir.\n"
-
-#: src/lilosetup.py:513 src/lilosetup.py:809
-msgid "Set..."
-msgstr ""
 
 #: src/lilosetup.py:520
 msgid "# Windows bootable partition config begins\n"

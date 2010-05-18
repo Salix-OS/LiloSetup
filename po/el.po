@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxsetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 18:28+0000\n"
+"POT-Creation-Date: 2010-05-18 19:16+0200\n"
 "PO-Revision-Date: 2010-03-24 23:15+0200\n"
 "Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: salix team <djemos@slackel.gr>\n"
@@ -292,6 +292,10 @@ msgstr ""
 "υπολογιστή και θα εμφανίσει αρχικά ένα μενού εκκίνησης εάν μερικά "
 "λειτουργικά συστήματα είναι διαθέσιμα στον ίδιο υπολογιστή."
 
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
+msgid "Set..."
+msgstr ""
+
 #: src/lilosetup.py:408
 msgid ""
 "\n"
@@ -332,10 +336,6 @@ msgstr ""
 "χαρακτήρες.\n"
 "\n"
 "Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
-
-#: src/lilosetup.py:513 src/lilosetup.py:809
-msgid "Set..."
-msgstr ""
 
 #: src/lilosetup.py:520
 msgid "# Windows bootable partition config begins\n"

@@ -379,7 +379,7 @@ a boot menu if several operating systems are available on the same computer.")
             partition_device = ''
             file_system = ''
             operating_system = ''
-            boot_label = 'Set...'
+            boot_label = _('Set...')
             boot_partition_feedline = []
             try_prober = commands.getoutput('LANG=C os-prober')
             if 'os-prober' not in try_prober :

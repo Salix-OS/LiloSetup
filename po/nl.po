@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 18:28+0000\n"
+"POT-Creation-Date: 2010-05-18 19:16+0200\n"
 "PO-Revision-Date: 2010-05-04 07:08+0100\n"
 "Last-Translator: Imar van Erven Dorens <gambit73@gmail.com>\n"
 "Language-Team: dutch <LL@li.org>\n"
@@ -293,6 +293,10 @@ msgstr ""
 "en zal in eerste instantie een boot menu tonen als verschillende "
 "besturingssystemen beschikbaar zijn op dezelfde computer."
 
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
+msgid "Set..."
+msgstr ""
+
 #: src/lilosetup.py:408
 msgid ""
 "\n"
@@ -331,10 +335,6 @@ msgstr ""
 "Een besturingssysteem label behoort niet meer dan 15 karakters te bevatten.\n"
 "\n"
 "Controleer dit en corrigeer alstublieft.\n"
-
-#: src/lilosetup.py:513 src/lilosetup.py:809
-msgid "Set..."
-msgstr ""
 
 #: src/lilosetup.py:520
 msgid "# Windows bootable partition config begins\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SalixOS PL lilosetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 18:28+0000\n"
+"POT-Creation-Date: 2010-05-18 19:16+0200\n"
 "PO-Revision-Date: 2010-04-24 19:59+0100\n"
 "Last-Translator: Adrian Marcinkowski <amfidiusz@gmail.com>\n"
 "Language-Team: \n"
@@ -232,6 +232,10 @@ msgid ""
 "available on the same computer."
 msgstr ""
 
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
+msgid "Set..."
+msgstr ""
+
 #: src/lilosetup.py:408
 msgid ""
 "\n"
@@ -259,10 +263,6 @@ msgid ""
 "An Operating System label should not hold more than 15 characters. \n"
 "\n"
 "Please verify and correct.\n"
-msgstr ""
-
-#: src/lilosetup.py:513 src/lilosetup.py:809
-msgid "Set..."
 msgstr ""
 
 #: src/lilosetup.py:520

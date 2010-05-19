@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 msgid "Lilo Setup"
@@ -367,6 +367,10 @@ msgid ""
 "If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Тут Ви повинні визначити мітку меню завантаження для кожної операційної системи, яку буде видно в меню завантажувача.\n"
+"Будь-яка партиція, для якої Ви не визначили мітку меню завантаження, не буде сконфігурована і не буде видна в меню завантаження.\n"
+"Якщо кілька ядер містяться на одній партиції, то мітка, яка визначена для цієї партиції, буде додана з номером, щоб створити пункт меню для кожного з цих ядер.\n"
+"Всі ці налаштування можна редагувати вручну в конфігураційному файлі lilosetup."
 
 #: src/lilosetup.py:737
 msgid ""
@@ -374,6 +378,9 @@ msgid ""
 "The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Використовуйте цю стрілку, якщо бажаєте перемістити операційну систему на вищий рівень.\n"
+"Партиція з вищим рівнем буде висвітлена в першій стрічці меню завантажувача.\n"
+"Всі ці налаштування можна редагувати вручну в конфігураційному файлі lilosetup."
 
 #: src/lilosetup.py:745
 msgid ""
@@ -381,6 +388,9 @@ msgid ""
 "The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Використовуйте цю стрілку, якщо бажаєте перемістити операційну систему на нижчий рівень.\n"
+"Партиція з нижчим рівнем буде висвітлена в останній стрічці меню завантажувача.\n"
+"Всі ці налаштування можна редагувати вручну в конфігураційному файлі lilosetup."
 
 #: src/lilosetup.py:754
 msgid "This will undo all settings (even manual modifications)."
@@ -391,6 +401,8 @@ msgid ""
 "Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
 "Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
+"Досвідчені користувачі мають можливість редагувати вручну конфігураційний файл lilosetup (налаштування є ідентичні до lilo.conf).\n"
+"Будь ласка не правте цей файл, якщо Ви не знаєте що Ви робите і не читали цієї інструкції щодо chrooted шляхів."
 
 #: src/lilosetup.py:766
 msgid "Exit Lilo Setup program."

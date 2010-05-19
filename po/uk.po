@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 msgid "Lilo Setup"
@@ -129,6 +129,10 @@ msgid ""
 "# entries must be in the first column before the next begins to\n"
 "# be used.  We do not specify it here, as there is just one column.\n"
 msgstr ""
+"# Положення таблиці опцій: положення x, положення y, кількість\n"
+"# колонок, стрічок на колонку (макс. 15), як багато\n"
+"# пунктів повинно бути в першій колонці перед початком іншої.\n"
+"# Ми не вказуємо це тут, рскільки є тільки одна колонка.\n"
 
 #: src/lilosetup.py:166
 msgid ""
@@ -144,22 +148,29 @@ msgid ""
 "# Or, you can comment out the bitmap menu above and \n"
 "# use a boot message with the standard menu:\n"
 msgstr ""
+"# Стандартне меню.\n"
+"# Ви можете також закоментувати меню bitmap вище і \n"
+"# використати повідомлення завантажувача з стандартного меню:\n"
 
 #: src/lilosetup.py:175
 msgid ""
 "# Wait until the timeout to boot (if commented out, boot the\n"
 "# first entry immediately):\n"
 msgstr ""
+"# Чекати певний час при завантаженні (якщо закоментовано, то буде відразу вантажитися\n"
+"# перший пункт меню):\n"
 
 #: src/lilosetup.py:178
 msgid ""
 "# Timeout before the first entry boots.\n"
 "# This is given in tenths of a second, so 600 for every minute:\n"
 msgstr ""
+"# Час перед завантаженням першого пункту меню.\n"
+"# Час подається в тисячах секунд, тому 600 є одна хвилина:\n"
 
 #: src/lilosetup.py:181
 msgid "# Override dangerous defaults that rewrite the partition table:\n"
-msgstr ""
+msgstr "# Заміна небезпечних типових налаштувань, що переписують таблицю партицій:\n"
 
 #: src/lilosetup.py:185
 msgid "# Normal VGA console\n"
@@ -270,7 +281,7 @@ msgstr ""
 
 #: src/lilosetup.py:484
 msgid "You have used the same label for different Operating Systems. Please verify and correct.\n"
-msgstr ""
+msgstr "Ви використали ту саму мітку для різних операційних систем. Перевірте це і виправте.\n"
 
 #: src/lilosetup.py:494
 msgid ""
@@ -279,6 +290,10 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Мітка операційної системи не повинна містити жодного пропуску. \n"
+"\n"
+"Перевірте це і виправте.\n"
 
 #: src/lilosetup.py:504
 msgid ""
@@ -287,26 +302,30 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Мітка операційної системи не повинна бути довша за 15 символів. \n"
+"\n"
+"Перевірте це і виправте.\n"
 
 #: src/lilosetup.py:520
 msgid "# Windows bootable partition config begins\n"
-msgstr ""
+msgstr "# Початок налаштування завантажувальної партиції для Windows\n"
 
 #: src/lilosetup.py:523
 msgid "# Windows bootable partition config ends\n"
-msgstr ""
+msgstr "# Закінчення налаштування завантажувальної партиції для Windows\n"
 
 #: src/lilosetup.py:660
 msgid "# Linux bootable partition config begins\n"
-msgstr ""
+msgstr "# Початок налаштування завантажувальної партиції для Linux\n"
 
 #: src/lilosetup.py:666
 msgid "One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"
-msgstr ""
+msgstr "Одна з Ваших партицій, здається, не містить правильного файлу ядра. Перевірте це і виправте файл конфігурації LiloSetup вручну.\n"
 
 #: src/lilosetup.py:699
 msgid "# Linux bootable partition config ends\n"
-msgstr ""
+msgstr "# Закінчення налаштування завантажувальної партиції для Linux\n"
 
 #: src/lilosetup.py:710
 msgid "About Lilo Setup."
@@ -357,15 +376,15 @@ msgstr "Вийти з програми встановлювача Lilo."
 
 #: src/lilosetup.py:771
 msgid "Once you have defined your settings, click on this button to create your new LILO's bootloader."
-msgstr ""
+msgstr "Після визначення Ваших налаштувань, натисніть цю кнопку для створення нового завантажувача LILO."
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
-msgstr ""
+msgstr "Ваша конфігурація не завершена. Виберіть хоча б одну завантажувальну партицію Linux і визначте її мітку в меню завантаження.\n"
 
 #: src/lilosetup.py:918
 msgid "You are about to install a new LILO bootloader. Are you sure you want to continue?"
-msgstr ""
+msgstr "Ви збираєтеся встановити новий завантажувач LILO. Ви дійсно бажаєте продовжити?"
 
 #: src/lilosetup.py:934
 msgid "The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"
@@ -381,6 +400,9 @@ msgid ""
 "\n"
 "Root privileges are required to run LiloSetup. "
 msgstr ""
+"<b>Вибачте!</b> \n"
+"\n"
+"Потрібно привілеї root'а для запуску LiloSetup. "
 
 #: src/lilosetup.desktop.in.h:2
 msgid "Lilo set-up tool"

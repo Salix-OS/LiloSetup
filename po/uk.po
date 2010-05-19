@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 msgid "Lilo Setup"
@@ -135,6 +135,8 @@ msgid ""
 "# Timer location x, timer location y, foreground color,\n"
 "# background color, shadow color.\n"
 msgstr ""
+"# Положення таймера x, положення таймера y, колір переднього плану,\n"
+"# колір тла, колір тіні.\n"
 
 #: src/lilosetup.py:170
 msgid ""
@@ -205,27 +207,27 @@ msgstr "# Консоль VESA фреймбуфера @ 800x600x64k\n"
 
 #: src/lilosetup.py:207
 msgid "# VESA framebuffer console @ 800x600x32k\n"
-msgstr ""
+msgstr "# Консоль VESA фреймбуфера @ 800x600x32k\n"
 
 #: src/lilosetup.py:209
 msgid "# VESA framebuffer console @ 800x600x256\n"
-msgstr ""
+msgstr "# Консоль VESA фреймбуфера @ 800x600x256\n"
 
 #: src/lilosetup.py:211
 msgid "# VESA framebuffer console @ 640x480x64k\n"
-msgstr ""
+msgstr "# Консоль VESA фреймбуфера @ 640x480x64k\n"
 
 #: src/lilosetup.py:213
 msgid "# VESA framebuffer console @ 640x480x32k\n"
-msgstr ""
+msgstr "# Консоль VESA фреймбуфера @ 640x480x32k\n"
 
 #: src/lilosetup.py:215
 msgid "# VESA framebuffer console @ 640x480x256\n"
-msgstr ""
+msgstr "# Консоль VESA фреймбуфера @ 640x480x256\n"
 
 #: src/lilosetup.py:217
 msgid "# End LILO global section\n"
-msgstr ""
+msgstr "# Кінець глобальної секції LILO\n"
 
 #: src/lilosetup.py:219
 msgid ""
@@ -258,7 +260,7 @@ msgstr ""
 
 #: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
 msgid "Set..."
-msgstr ""
+msgstr "Встановлення..."
 
 #: src/lilosetup.py:408
 msgid ""

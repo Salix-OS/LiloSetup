@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 msgid "Lilo Setup"
@@ -250,6 +250,13 @@ msgid ""
 "# constraint into consideration if you must modify this file\n"
 "# or else LiloSetup will fail.\n"
 msgstr ""
+"# LiloSetup може бути запущений з LiveCD. Це означає, що lilo\n"
+"# може бути викликаний з 'chrooted' партиції Linux, яка можк бути\n"
+"#першою партицією Linux зі списку нижче.\n"
+"# Тому наступні шляхи потрібні тільки коли переглядаються\n"
+"# з перспективи цієї 'chrooted' патриції. Врахуйте це, \n"
+"# якщо пізніше потрібно буде змінювати цей файл, \n"
+"# в противному випадку LiloSetup не вдасться.\n"
 
 #: src/lilosetup.py:227
 msgid ""
@@ -278,6 +285,8 @@ msgid ""
 "\n"
 "Sorry! os-prober, a dependency of LiloSetup appears to be missing. Please verify and correct.\n"
 msgstr ""
+"\n"
+"Вибачте! os-prober, залежність LiloSetup, не встановлений. Перевірте це і виправіть.\n"
 
 #: src/lilosetup.py:484
 msgid "You have used the same label for different Operating Systems. Please verify and correct.\n"
@@ -388,11 +397,11 @@ msgstr "Ви збираєтеся встановити новий заванта
 
 #: src/lilosetup.py:934
 msgid "The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"
-msgstr ""
+msgstr "Встановлення завантажувача LILO вдалося. Ви можете тепер вийти з LiloSetup і перезавантажити Ваш крмп’ютер.\n"
 
 #: src/lilosetup.py:937
 msgid "The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again.\n"
-msgstr ""
+msgstr "Встановлення завантажувача LILO не вдалося. Перевірте файл /var/log/lilosetup.log, змініть Вагі налаштування і спробуйте знову.\n"
 
 #: src/lilosetup.py:945
 msgid ""

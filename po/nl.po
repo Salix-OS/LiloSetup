@@ -86,7 +86,6 @@ msgstr ""
 "Fifth Floor, Boston, MA 02110-1301, USA."
 
 #: src/lilosetup.glade:508
-#, fuzzy
 msgid "Salix Transifex Team."
 msgstr "Salix Transifex Team."
 

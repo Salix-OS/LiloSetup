@@ -351,13 +351,12 @@ msgid "About Lilo Setup."
 msgstr "A proposito di Lilo Setup."
 
 #: src/lilosetup.py:715
-#, fuzzy
 msgid ""
 "It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
 "LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
 "Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
 msgstr ""
-"E' necessario riconfigurare il bootloader ogni volta che installi un nuovo sistema operativo sul tuo computer.\n"
+"E' necessario (ri)configurare il bootloader ogni volta che installi un nuovo sistema operativo sul tuo computer.\n"
 "\n"
 "LiloSetup puo' inoltre essere di aiuto nel caso di recupero dell'installazione nel qual caso dovresti eseguirlo da un LiveCD se hai perso tutte le altre maniere per avviare il tuo sistema.\n"
 "\n"

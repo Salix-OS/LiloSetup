@@ -408,12 +408,11 @@ msgid "This will undo all settings (even manual modifications)."
 msgstr "Questo annullera' tutte le modifiche (anche manuali)."
 
 #: src/lilosetup.py:758
-#, fuzzy
 msgid ""
 "Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
 "Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
-"Gli utenti esperti hanno la possibilita' di modificare manualmente gli archivi di configurazione di LiloSetup (Le impostazioni sono identiche a quelle di lilo.conf).\n"
+"Gli utenti esperti hanno la possibilita' di modificare manualmente i file di configurazione di LiloSetup (Le impostazioni sono identiche a quelle di lilo.conf).\n"
 "\n"
 "Per favore non modificare questo file a meno che tu non sappia esattamente cosa stai facendo e solo dopo aver letto le istruzioni commentate a riguardo dei percorsi chrooted."
 

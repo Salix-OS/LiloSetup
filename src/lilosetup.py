@@ -38,6 +38,7 @@
 #                   Finetuned Fedora type distro auto-configuration
 #                   Finetuned libata/nonlibata auto-configuration
 #                   Finetuned contextual help appearance
+#                   Finetuned 64bit management
 
 # To Do => Refine Slackware based distro name detection
 # To Do => Verify Raid device support
@@ -583,7 +584,10 @@ a boot menu if several operating systems are available on the same computer.")
                         else :
                             other_mnt = '' # reinitialization
                             # We create a fork, chroot in the child process & pipe the mount info to the parent process
-                            if os.path.isdir(chroot_mnt + '/lib64') is not True:
+                            # If lilosetup is executed from a 32bit environment it can't chroot to a 64bit environment.
+                            if os.path.isdir('/lib64') is not True and os.path.isdir(chroot_mnt + '/lib64') is True:
+                                pass
+                            else :
                                 r, w = os.pipe() # these are file descriptors, not file objects
                                 pid = os.fork()
                                 if pid:

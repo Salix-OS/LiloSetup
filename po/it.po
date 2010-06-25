@@ -363,7 +363,6 @@ msgstr ""
 "LiloSetup puo' essere eseguito indifferentemente da un LiveCD o da un sistema Linux regolarmente installato. In entrambi i casi, installera' un nuovo bootloader LILO sul MBR del tuo primo disco."
 
 #: src/lilosetup.py:726
-#, fuzzy
 msgid ""
 "Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
 "Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
@@ -371,37 +370,29 @@ msgid ""
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 "Qui devi definire le etichette del menu di avvio per ciascun sistema operativo che verrà visualizzato dal bootloader.\n"
-"\n"
 "Qualsiasi partizione per la quale non verra' impostata un'etichetta di menu non verra' configurata e non verra' visualizzata sul menu del bootloader.\n"
-"\n"
 "Se un kernel e' disponibile per una partizione, l'etichetta che hai scelto per quella partizione verra' aggiunta con un numero per creare etichette multiple sul menu per ciascuno di questi kernels.\n"
 "Qualsiasi di queste impostazioni possono venire editate manualmente nel file di configurazione di LiloSetup."
 
 #: src/lilosetup.py:737
-#, fuzzy
 msgid ""
 "Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
 "The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 "Usa queste frecce se vuoi muovere il Sistema Operativo selezionato ad un livello superiore.\n"
-"\n"
 "La partizione con il livello maggiore verra' visualizzato sulla prima linea del menu del bootloader.\n"
-"\n"
-"Qualsiasi di queste impostazioni puo' essere modificata manualmente nell'archivio di configurazione di LiloSetup."
+"Qualsiasi di queste impostazioni puo' essere modificata manualmente nel file di configurazione di LiloSetup."
 
 #: src/lilosetup.py:745
-#, fuzzy
 msgid ""
 "Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
 "The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 "Usa queste frecce se vuoi muovere il Sistema Operativo selezionato ad un livello inferiore.\n"
-"\n"
 "La partizione con il livello minore verra' visualizzato sull'ultima linea del menu del bootloader.\n"
-"\n"
-"Qualsiasi di queste impostazioni puo' essere modificata manualmente nell'archivio di configurazione di LiloSetup."
+"Qualsiasi di queste impostazioni puo' essere modificata manualmente nel file di configurazione di LiloSetup."
 
 #: src/lilosetup.py:754
 msgid "This will undo all settings (even manual modifications)."

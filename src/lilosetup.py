@@ -902,7 +902,18 @@ click on this button to create your new LILO's bootloader."))
         """
         create_configuration()
         if 'failure'  not in config_creation:
-            subprocess.call('xdg-open ' + config_location + ' 2>/dev/null', shell=True)
+            if os.path.isfile("/usr/bin/mousepad") :
+                subprocess.call('mousepad ' + config_location + ' 2>/dev/null', shell=True)
+            elif os.path.isfile("/usr/bin/leafpad") :
+                subprocess.call('leafpad ' + config_location + ' 2>/dev/null', shell=True)            
+            elif os.path.isfile("/usr/bin/gedit") :
+                subprocess.call('gedit ' + config_location + ' 2>/dev/null', shell=True)   
+            elif os.path.isfile("/usr/bin/kedit") :
+                subprocess.call('kedit ' + config_location + ' 2>/dev/null', shell=True)   
+            elif os.path.isfile("/usr/bin/geany") :
+                subprocess.call('geany ' + config_location + ' 2>/dev/null', shell=True) 
+            else :
+                subprocess.call('xdg-open ' + config_location + ' 2>/dev/null', shell=True)                
             self.UpButton.set_sensitive(False)
             self.DownButton.set_sensitive(False)
             self.ExecuteButton.set_sensitive(True)

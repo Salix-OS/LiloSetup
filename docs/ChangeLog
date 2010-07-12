@@ -1,5 +1,7 @@
+version 0.2.1
+ * Improved detection of available text editor for lilosetup configuration file
+
 version 0.2
- * LiloSetup enters Salix repository.
  * Added translations in Danish, Dutch, Italian, Ukrainian. 
  * Added visual enhancement to label editing section.
  * Added auto-configuration for Fedora-based distro.
@@ -7,6 +9,7 @@ version 0.2
  * Improved autoconfiguration for multiboot with libata & non-libata partitions.
  * Improved contextual help display. 
 
+
 version 0.1
- * First release of LiloSetup only in SalixLive 13.0
+ * First release of LiloSetup in SalixLive 13.0
  * Translations in Greek, French, German, Spanish.

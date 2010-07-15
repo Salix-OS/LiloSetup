@@ -22,27 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# xxxxxxx = '0.1' - Forked LiloFix '0.9.7' to Salix environment
-#                   Modified name, logo, gui & lilosetup.conf stub
-#                   Migrated from libglade to gtkbuilder
-#                   Added extra info columns to the boot partition list
-#                   Switched to os-prober & lshal for booting partitions details
-#                   Added initrd autodetection
-#                   Added support for multiple kernels within the same partition
-#                   Adapted syntax if target kernel is using LIBATA
-#                   Added fstab with'UUID for mountpoints detection
-#                   French, German, Greek, Spanish translation
-#                   Contextual Help
-
-# version = '0.2' - Added visual enhancement to label editing section
-#                   Finetuned Fedora type distro auto-configuration
-#                   Finetuned libata/nonlibata auto-configuration
-#                   Finetuned contextual help appearance
-#                   Finetuned 64bit management
-
-# To Do => Refine Slackware based distro name detection
-# To Do => Verify Raid device support
-# To Do => Add splash=quiet option to addapend line if needed for bootspash (check if bootsplash png are available in /etc)
+# version = '0.2.1'
 
 import shutil
 import subprocess

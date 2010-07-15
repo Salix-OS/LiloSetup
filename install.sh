@@ -1,7 +1,9 @@
 #!/bin/sh
 
-cd $(dirname $0)
+VER=$(grep 'version =' src/lilosetup.py | head -n 1 | sed "s/.*'\(.*\)'/\1/")
 
+cd $(dirname $0)
+install -d -m 755 $DESTDIR/usr/doc/lilosetup-$VER
 install -d -m 755 $DESTDIR/install
 install -d -m 755 $DESTDIR/usr/sbin
 install -d -m 755 $DESTDIR/usr/share/applications
@@ -31,5 +33,10 @@ for i in `ls po/*.mo|sed "s|po/\(.*\).mo|\1|"`; do
 	install -d -m 755 $DESTDIR/usr/share/locale/${i}/LC_MESSAGES
 	install -m 644 po/${i}.mo \
 	$DESTDIR/usr/share/locale/${i}/LC_MESSAGES/lilosetup.mo
+done
+
+for i in `ls docs`; do
+	install -m 644 docs/${i} \
+	$DESTDIR/usr/doc/lilosetup-$VER/
 done
 

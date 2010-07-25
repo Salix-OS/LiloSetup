@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: lilosetup\n"
@@ -17,8 +17,7 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Beállítás"
 
@@ -44,8 +43,7 @@ msgid ""
 "\n"
 "Copyright © 2010 Pierrick Le Brun"
 msgstr ""
-"Egyszerű GUI felület a LILO beállításához.\\n"
-"\n"
+"Egyszerű GUI felület a LILO beállításához.\\n\n"
 "Copyright © 2010 Pierrick Le Brun"
 
 #: src/lilosetup.glade:490
@@ -136,6 +134,8 @@ msgid ""
 "# Timer location x, timer location y, foreground color,\n"
 "# background color, shadow color.\n"
 msgstr ""
+"# Időzítő x pozíció, időzítő y pozíció, előtér színe,\n"
+"# háttér színe, árnyékolás színe.\n"
 
 #: src/lilosetup.py:170
 msgid ""
@@ -262,9 +262,7 @@ msgstr ""
 "\n"
 "A rendszerbetöltő azért szükséges hogy betöltse az elsődleges operációs rendszert a számítógépen és kezdetben megjelenik egy indító menüt, ha több operációs rendszer is elérhető ugyanazon a számítógépen."
 
-#: src/lilosetup.py:382
-#: src/lilosetup.py:513
-#: src/lilosetup.py:809
+#: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
 msgid "Set..."
 msgstr "Beállít..."
 
@@ -410,4 +408,3 @@ msgstr "Lilo beállító eszköz"
 #: src/lilosetup.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Lilo beállítása LiveCD-n vagy normál rendszeren."
-

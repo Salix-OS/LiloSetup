@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.2'
+# version = '0.2.3'
 
 import shutil
 import subprocess
@@ -366,25 +366,20 @@ a boot menu if several operating systems are available on the same computer.")
             if 'os-prober' not in try_prober :
                 boot_partition_output = try_prober.splitlines()
                 for line in boot_partition_output:
-                    if 'leaked on lvs invocation' not in line: # an apparently harmless os-prober error message...
+                    if line.startswith("/dev/") :
                         # Get the partition device
                         partition_device = line.split(':')[0]
                         # Check that it is not a Windows factory settings recovery partition...
-                        lshal_recovery_output = 'lshal | grep -B1 -A50 ' + partition_device + ' | grep -m 1 -i recovery'
+                        lshal_recovery_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 -i recovery'
                         partition_is_recovery = commands.getoutput(lshal_recovery_output)
                         if partition_is_recovery == '' :
                             # Get the operating system
                             operating_system = line.split(':')[1].split()[0]
                             # Get the file system
-                            lshal_string_output = 'lshal | grep -B1 -A50 ' + partition_device + ' | grep -m 1 volume.fstype'
+                            lshal_string_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 volume.fstype'
                             file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                            # This shouldn't be needed anymore
-#                            if "ext4" in file_system:
-#                                file_system = "ext3/ext4"
                             boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
                             boot_partition_feedline_list.append(boot_partition_feedline)
-                        else:
-                            pass
             else:
                 error_dialog(_("\nSorry! os-prober, a dependency of LiloSetup appears to be missing. Please verify and correct.\n"))
                 sys.exit(1)
@@ -396,7 +391,7 @@ a boot menu if several operating systems are available on the same computer.")
                     # Get the partition device
                     partition_device = this_os_main_partition.split("'")[1]
                     # Get the file system
-                    lshal_string_output = 'lshal | grep -B1 -A50 ' + partition_device + ' | grep -m 1 volume.fstype'
+                    lshal_string_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 volume.fstype'
                     file_system = commands.getoutput(lshal_string_output).split("'")[1]
                     # This should not be needed anymore
 #                    if "ext4" in file_system:

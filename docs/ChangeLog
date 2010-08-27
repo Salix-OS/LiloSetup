@@ -1,3 +1,10 @@
+version 0.2.3
+ * Improved bootable partition detection
+ * Fixed annulation sequence after error detection for labels with more than 15 characters
+
+version 0.2.2
+ * Translation updates
+
 version 0.2.1
  * Improved detection of available text editor for lilosetup configuration file
 

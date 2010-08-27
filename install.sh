@@ -39,4 +39,3 @@ for i in `ls docs`; do
 	install -m 644 docs/${i} \
 	$DESTDIR/usr/doc/lilosetup-$VER/
 done
-

@@ -287,7 +287,7 @@ msgstr ""
 
 #: src/lilosetup.py:382 src/lilosetup.py:513 src/lilosetup.py:809
 msgid "Set..."
-msgstr ""
+msgstr "Ändern..."
 
 #: src/lilosetup.py:408
 msgid ""

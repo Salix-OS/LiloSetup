@@ -54,6 +54,7 @@ def info_dialog(message, parent = None):
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
     dialog.set_markup(message)
+    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/gtk-info.svg")
     global result_info
     result_info = dialog.run()
     dialog.destroy()
@@ -69,6 +70,7 @@ def warning_dialog(message, parent = None):
     dialog.add_buttons(gtk.STOCK_NO, gtk.RESPONSE_NO)
     dialog.set_default_response(gtk.RESPONSE_NO)
     dialog.set_markup(message)
+    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/dialog-warning.svg")
     global result_warning
     result_warning = dialog.run()
     dialog.destroy()
@@ -81,6 +83,7 @@ def error_dialog(message, parent = None):
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
     dialog.set_markup(message)
+    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/dialog-error.svg")
     global result_error
     result_error = dialog.run()
     dialog.destroy()
@@ -605,7 +608,7 @@ a boot menu if several operating systems are available on the same computer.")
                             subprocess.call(mnt_command, shell=True)
                             temp_mount.append(chroot_mnt +other_mnt) # allows cleanup temporary mountpoints later
                     mount_inconf = other_mnt	# defines how the partition 'appears' mounted in lilosetup.conf
-                    # Confirm that a partition is configured
+                    # Confirm that the partition is configured
                     partition_set.append("OK")
                     # Append to lilosetup.conf
                     stub = open(config_location, "a")
@@ -897,7 +900,7 @@ click on this button to create your new LILO's bootloader."))
 
     def on_execute_button_clicked(self, widget, data=None):
         # Check if the configuration file has already beeen created
-        if os.path.isfile(config_location ) == False :
+        if os.path.isfile(config_location) == False :
             create_configuration()
         if 'failure' not in config_creation:
             # Check if at least one Linux partition has been configured:

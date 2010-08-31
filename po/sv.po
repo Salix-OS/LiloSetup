@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: SWEDEN\n"
 "X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 msgid "Lilo Setup"
@@ -235,6 +235,13 @@ msgid ""
 "# constraint into consideration if you must modify this file\n"
 "# or else LiloSetup will fail.\n"
 msgstr ""
+"# LiloSetup kan köras från en LiveCD. Detta innebär att lilo \n"
+" # kan utfärdas från en \"chrootade\" Linux partition, vilket skulle \n"
+" # råkar vara den första Linux-partition som anges nedan. \n"
+" # Därför måste följande sökvägar relevanta endast när det betraktas \n"
+" # från  \"chrootade Partition. Ta detta \n"
+" # i beaktande om du måste ändra denna fil \n"
+" # annars kommer LiloSetup att misslyckas. \n"
 
 #: src/lilosetup.py:227
 msgid ""

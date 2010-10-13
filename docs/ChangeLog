@@ -1,3 +1,7 @@
+version 0.2.4
+ * Added lilosetup-kde.desktop.in file
+ * Added translations in Japanese, Hungarian, Swedish.
+
 version 0.2.3
  * Improved bootable partition detection
  * Fixed annulation sequence after error detection for labels with more than 15 characters

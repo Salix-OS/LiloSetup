@@ -18,6 +18,8 @@ install -m 644 src/lilosetup.glade \
 $DESTDIR/usr/share/lilosetup
 install -m 644 src/lilosetup.desktop \
 $DESTDIR/usr/share/applications/
+install -m 644 src/lilosetup-kde.desktop \
+$DESTDIR/usr/share/applications/
 install -m 644 icons/lilosetup-24.png \
 $DESTDIR/usr/share/icons/hicolor/24x24/apps/lilosetup.png
 install -m 644 icons/lilosetup-64.png \

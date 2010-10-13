@@ -7,3 +7,4 @@ for i in `ls po/*.po`;do
 	msgfmt $i -o `echo $i |sed "s/.po//"`.mo
 done
 intltool-merge po/ -d -u src/lilosetup.desktop.in src/lilosetup.desktop
+intltool-merge po/ -d -u src/lilosetup-kde.desktop.in src/lilosetup-kde.desktop

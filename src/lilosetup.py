@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.3'
+# version = '0.2.4'
 
 import shutil
 import subprocess
@@ -54,7 +54,6 @@ def info_dialog(message, parent = None):
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
     dialog.set_markup(message)
-    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/gtk-info.svg")
     global result_info
     result_info = dialog.run()
     dialog.destroy()
@@ -70,7 +69,6 @@ def warning_dialog(message, parent = None):
     dialog.add_buttons(gtk.STOCK_NO, gtk.RESPONSE_NO)
     dialog.set_default_response(gtk.RESPONSE_NO)
     dialog.set_markup(message)
-    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/dialog-warning.svg")
     global result_warning
     result_warning = dialog.run()
     dialog.destroy()
@@ -83,7 +81,6 @@ def error_dialog(message, parent = None):
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
     dialog.set_markup(message)
-    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/dialog-error.svg")
     global result_error
     result_error = dialog.run()
     dialog.destroy()
@@ -886,8 +883,8 @@ click on this button to create your new LILO's bootloader."))
                 subprocess.call('leafpad ' + config_location + ' 2>/dev/null', shell=True)            
             elif os.path.isfile("/usr/bin/gedit") :
                 subprocess.call('gedit ' + config_location + ' 2>/dev/null', shell=True)   
-            elif os.path.isfile("/usr/bin/kedit") :
-                subprocess.call('kedit ' + config_location + ' 2>/dev/null', shell=True)   
+            elif os.path.isfile("/usr/bin/kwrite") :
+                subprocess.call('kwrite ' + config_location + ' 2>/dev/null', shell=True)
             elif os.path.isfile("/usr/bin/geany") :
                 subprocess.call('geany ' + config_location + ' 2>/dev/null', shell=True) 
             else :

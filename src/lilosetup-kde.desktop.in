@@ -1,5 +1,5 @@
 [Desktop Entry]
-Exec=gksu /usr/sbin/lilosetup.py
+Exec=kdesu /usr/sbin/lilosetup.py
 Icon=lilosetup
 StartupNotify=true
 Terminal=false
@@ -7,7 +7,7 @@ Type=Application
 Categories=Application;System;
 Encoding=UTF-8
 NoDisplay=false
-NotShowIn=KDE
+OnlyShowIn=KDE
 _Name=Lilo Setup
 _GenericName=Lilo set-up utility
 _Comment=Set up Lilo from a LiveCD or a standard system.

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.14"/>
+  <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="boot_label_list_store">
     <columns>
@@ -472,17 +472,22 @@
     </child>
   </object>
   <object class="GtkAboutDialog" id="about_dialog">
+    <property name="can_focus">True</property>
+    <property name="has_focus">True</property>
+    <property name="is_focus">True</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">About lilosetup</property>
     <property name="resizable">False</property>
+    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">help-about</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">lilosetup_main</property>
     <property name="has_separator">False</property>
     <property name="program_name">LiloSetup</property>
-    <property name="version">0.2.4</property>
+    <property name="version">0.2.5</property>
     <property name="copyright" translatable="yes">A simple GUI interface to set-up LILO.
 
 Copyright &#xA9; 2010 Pierrick Le Brun</property>

@@ -1,3 +1,6 @@
+version 0.2.5
+ * About dialog now grabs focus
+
 version 0.2.4
  * Added lilosetup-kde.desktop.in file
  * Added translations in Japanese, Hungarian, Swedish.

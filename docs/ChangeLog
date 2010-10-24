@@ -1,3 +1,6 @@
+version 0.2.6
+ * Enabled successive manual editing of lilosetup configuration file.
+
 version 0.2.5
  * About dialog now grabs focus
 

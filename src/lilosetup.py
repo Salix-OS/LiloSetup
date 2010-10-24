@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.5'
+# version = '0.2.6'
 
 import shutil
 import subprocess
@@ -64,7 +64,7 @@ def warning_dialog(message, parent = None):
     Display a warning message.
 
     """
-    dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_WARNING, buttons = gtk.BUTTONS_NONE, flags = gtk.DIALOG_MODAL)
+    dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_WARNING, flags = gtk.DIALOG_MODAL)
     dialog.add_buttons(gtk.STOCK_YES, gtk.RESPONSE_YES)
     dialog.add_buttons(gtk.STOCK_NO, gtk.RESPONSE_NO)
     dialog.set_default_response(gtk.RESPONSE_NO)
@@ -105,14 +105,21 @@ temp_dir = []
 # Initialize key mountpoints value
 temp_chroot_mnt = ''
 chroot_mnt = ''
-# Setup LiloSetup temporary work directory & configuration file
+# Cleanup/Setup LiloSetup temporary work directory & configuration file
 work_dir = "/tmp/lilosetup"
+try :
+    os.rmdir(work_dir)
+except OSError:
+    pass
 try :
     os.mkdir(work_dir)
 except OSError:
     pass
 config_location = work_dir + "/lilosetup.conf"
-
+try :
+    os.remove(config_location)
+except OSError:
+    pass
 # Build LiloSetup configuration file stub:
 # Get the booting device, should be the first hard drive
 boot_partition = commands.getoutput('fdisk -l | grep "dev" -m 1 | cut -f2 -d " "').strip(':')
@@ -393,9 +400,6 @@ a boot menu if several operating systems are available on the same computer.")
                     # Get the file system
                     lshal_string_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 volume.fstype'
                     file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                    # This should not be needed anymore
-#                    if "ext4" in file_system:
-#                        file_system = "ext3/ext4"
                     # Get the operating system.
                     try :
                         version_file_path = glob.glob("/etc/*version*")[0]
@@ -875,25 +879,31 @@ click on this button to create your new LILO's bootloader."))
         """
         Opens the edit lilosetup.conf dialog.
         """
-        create_configuration()
-        if 'failure'  not in config_creation:
-            if os.path.isfile("/usr/bin/mousepad") :
-                subprocess.call('mousepad ' + config_location + ' 2>/dev/null', shell=True)
-            elif os.path.isfile("/usr/bin/leafpad") :
-                subprocess.call('leafpad ' + config_location + ' 2>/dev/null', shell=True)            
-            elif os.path.isfile("/usr/bin/gedit") :
-                subprocess.call('gedit ' + config_location + ' 2>/dev/null', shell=True)   
-            elif os.path.isfile("/usr/bin/kwrite") :
-                subprocess.call('kwrite ' + config_location + ' 2>/dev/null', shell=True)
-            elif os.path.isfile("/usr/bin/geany") :
-                subprocess.call('geany ' + config_location + ' 2>/dev/null', shell=True) 
-            else :
-                subprocess.call('xdg-open ' + config_location + ' 2>/dev/null', shell=True)                
-            self.UpButton.set_sensitive(False)
-            self.DownButton.set_sensitive(False)
-            self.ExecuteButton.set_sensitive(True)
-            self.BootPartitionTreeview.get_selection().unselect_all()
-            self.BootPartitionTreeview.set_sensitive(False)
+        # Check if the configuration file has already beeen created
+        if os.path.isfile(config_location) == False :
+            create_configuration()
+        if 'failure' not in config_creation:
+            try :
+                if os.path.isfile("/usr/bin/mousepad") :
+                    subprocess.call('/usr/bin/mousepad ' + config_location + ' 2>/dev/null', shell=True)
+                elif os.path.isfile("/usr/bin/leafpad") :
+                    subprocess.call('/usr/bin/leafpad ' + config_location + ' 2>/dev/null', shell=True)
+                elif os.path.isfile("/usr/bin/gedit") :
+                    subprocess.call('/usr/bin/gedit ' + config_location + ' 2>/dev/null', shell=True)
+                elif os.path.isfile("/usr/bin/kwrite") :
+                    subprocess.call('/usr/bin/kwrite ' + config_location, shell=True)
+                elif os.path.isfile("/usr/bin/geany") :
+                    subprocess.call('/usr/bin/geany ' + config_location + ' 2>/dev/null', shell=True)
+                else :
+                    subprocess.call('xdg-open ' + config_location + ' 2>/dev/null', shell=True)
+                self.UpButton.set_sensitive(False)
+                self.DownButton.set_sensitive(False)
+                self.ExecuteButton.set_sensitive(True)
+                self.BootPartitionTreeview.get_selection().unselect_all()
+                self.BootPartitionTreeview.set_sensitive(False)
+            except :
+                self.EditButton.set_sensitive(False)
+                error_dialog(_("Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"))
 
     def on_execute_button_clicked(self, widget, data=None):
         # Check if the configuration file has already beeen created

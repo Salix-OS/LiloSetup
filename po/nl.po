@@ -2,7 +2,7 @@
 # Copyright (C) 2010
 # This file is distributed under the same license as the lilosetup package.
 # Imar van Erven Dorens <gambit73@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -15,8 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
@@ -288,9 +287,7 @@ msgstr ""
 "\n"
 "Een bootloader is vereist om het besturingssysteem van een computer te laden en zal in eerste instantie een boot menu tonen als verschillende besturingssystemen beschikbaar zijn op dezelfde computer."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Instellen..."
 
@@ -418,7 +415,7 @@ msgstr "Zodra u uw instellingen heeft gedefinieerd, klik op deze knop om uw nieu
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "Excuses, LiloSetup is niet in staat om een geschikte tekst-editor te vinden op uw systeem. U kunt geen handmatige wijzigingen uitvoeren in de LiloSetup configuratie.\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -446,14 +443,11 @@ msgstr ""
 "\n"
 "Root gebruikersrechten zijn vereist om LiloSetup uit te voeren."
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "LILO setup tool"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Configureer LILO van een LiveCD of een standaard systeem."
 

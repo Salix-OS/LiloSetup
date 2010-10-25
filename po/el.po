@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: linuxsetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
-"PO-Revision-Date: 2010-10-25 14:01+0200\n"
+"PO-Revision-Date: 2010-10-25 14:24+0200\n"
 "Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: salix team <djemos@slackel.gr>\n"
 "MIME-Version: 1.0\n"
@@ -417,7 +417,7 @@ msgstr "Όταν καθορίστε τις ρυθμίσεις σας, κάντε
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "Το LiloSetup δεν εντόπισε κάποιο επεξεργαστή αρχείων κειμένο στο σύστημα. Δεν θα μπορείτε να επεξεργαστείτε το αρχείο ρυθμίσεων που θα δημιουργηθεί."
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -447,7 +447,6 @@ msgstr ""
 
 #: src/lilosetup.desktop.in.h:2
 #: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
 msgid "Lilo set-up utility"
 msgstr "Εργαλείο ρύθμισης του LILO"
 

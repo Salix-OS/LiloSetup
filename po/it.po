@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: lilosetup\n"
@@ -18,8 +18,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Country: ITALY\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
@@ -288,9 +287,7 @@ msgstr ""
 "\n"
 "Un bootloader e' richiesto per caricare il sistema operativo su un computer e mostrera' inizialmente un menu di avvio se piu' sistemi operativi sono disponibili sullo stesso computer."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Impostare"
 
@@ -421,7 +418,7 @@ msgstr "Una volta che hai definito le tue impostazioni, clicca su questo bottone
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "Ci dispiace, LiloSetup non riesce a trovare un editor di testo adatto nel vostro sistema. Non sara in grado di modificare manualmente la configurazione di LiloSetup.\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -449,14 +446,11 @@ msgstr ""
 "\n"
 "I privilegi di root sono richiesti per eseguire LiloSetup."
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "Utilita' di impostazione di LILO"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Imposta LILO da un LiveCD o da un sistema standard."
 

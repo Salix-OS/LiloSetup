@@ -91,7 +91,7 @@ msgstr ""
 
 #: src/lilosetup.glade:513
 msgid "translator-credits"
-msgstr "Kerd http://www.transifex.net/accounts/profile/Kerd"
+msgstr "Vasile Coman <kerd~at~slackware~dot~eu>"
 
 #: src/lilosetup.py:135
 msgid ""

@@ -5,7 +5,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
+"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,7 +13,8 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
-#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74
+#: src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
@@ -83,7 +84,7 @@ msgstr ""
 
 #: src/lilosetup.glade:513
 msgid "translator-credits"
-msgstr "Pierrick Le Brun"
+msgstr "Pierrick Le Brun <akuna~at~free~dot~fr>"
 
 #: src/lilosetup.py:135
 msgid ""
@@ -283,7 +284,9 @@ msgstr ""
 "\n"
 "Un gestionnaire de démarrage est indispensable pour charger le système d'exploitation d'un ordinateur. Au démarrage, Il affichera un menu si plusieurs systèmes d'exploitation différents sont disponibles sur votre machine."
 
-#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
+#: src/lilosetup.py:370
+#: src/lilosetup.py:493
+#: src/lilosetup.py:792
 msgid "Set..."
 msgstr "Définir..."
 
@@ -440,11 +443,13 @@ msgstr ""
 "\n"
 "Les droits d'administrateur (Root) sont requis pour exécuter LiloSetup. "
 
-#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
+#: src/lilosetup.desktop.in.h:2
+#: src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "Utilitaire de configuration Lilo"
 
-#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3
+#: src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Installer Lilo à partir d'un LiveCD ou d'un système standard."
 

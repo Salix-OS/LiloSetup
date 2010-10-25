@@ -5,7 +5,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Thorsten Mühlfelder <thenktor@gmx.de>\n"
+"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: Raphael Groner <raphgro(at)web.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,7 +13,8 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74
+#: src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
@@ -87,6 +88,8 @@ msgstr ""
 #: src/lilosetup.glade:513
 msgid "translator-credits"
 msgstr ""
+"Andreas Born <andreas~at~gogglemail~dot~com>\n"
+"Thorsten Mühlfelder <thenktor~at~gmx~dot~de>"
 
 #: src/lilosetup.py:135
 msgid ""
@@ -280,38 +283,29 @@ msgstr ""
 msgid ""
 "<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
 "\n"
-"A bootloader is required to load the main operating system of a computer and "
-"will initially display a boot menu if several operating systems are "
-"available on the same computer."
+"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
 msgstr ""
-"<b>LiloSetup wird einen neuen LILO-Bootloader auf Ihrem Computer "
-"installieren.</b> \n"
+"<b>LiloSetup wird einen neuen LILO-Bootloader auf Ihrem Computer installieren.</b> \n"
 "\n"
-"Ein Bootloader ist erforderlich, um das Betriebssystem eines Computers zu "
-"laden und wird zunächst ein Boot-Menü anzeigen, wenn mehrere Betriebssysteme "
-"auf demselben Computer zur Verfügung stehen."
+"Ein Bootloader ist erforderlich, um das Betriebssystem eines Computers zu laden und wird zunächst ein Boot-Menü anzeigen, wenn mehrere Betriebssysteme auf demselben Computer zur Verfügung stehen."
 
-#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
+#: src/lilosetup.py:370
+#: src/lilosetup.py:493
+#: src/lilosetup.py:792
 msgid "Set..."
 msgstr "Ändern..."
 
 #: src/lilosetup.py:391
 msgid ""
 "\n"
-"Sorry! os-prober, a dependency of LiloSetup appears to be missing. Please "
-"verify and correct.\n"
+"Sorry! os-prober, a dependency of LiloSetup appears to be missing. Please verify and correct.\n"
 msgstr ""
 "\n"
-"Entschuldigung! os-prober, eine Abhängigkeit von LiloSetup scheint zu "
-"fehlen. Bitte überprüfen und korrigieren.\n"
+"Entschuldigung! os-prober, eine Abhängigkeit von LiloSetup scheint zu fehlen. Bitte überprüfen und korrigieren.\n"
 
 #: src/lilosetup.py:464
-msgid ""
-"You have used the same label for different Operating Systems. Please verify "
-"and correct.\n"
-msgstr ""
-"Sie haben den gleichen Name für verschiedene Betriebssysteme verwendet. "
-"Bitte überprüfen und korrigieren.\n"
+msgid "You have used the same label for different Operating Systems. Please verify and correct.\n"
+msgstr "Sie haben den gleichen Name für verschiedene Betriebssysteme verwendet. Bitte überprüfen und korrigieren.\n"
 
 #: src/lilosetup.py:474
 msgid ""
@@ -350,13 +344,8 @@ msgid "# Linux bootable partition config begins\n"
 msgstr "# Anfang der Konfiguration für bootfähge Linux-Partitionen\n"
 
 #: src/lilosetup.py:649
-msgid ""
-"One of your partitions does not seem to hold a valid kernel file. Please "
-"verify and correct LiloSetup configuration file manually.\n"
-msgstr ""
-"Eine Ihrer Partitionen scheint nicht eine gültigen Kernel-Datei zu "
-"beinhalten. Bitte die LiloSetup Konfigurationsdatei manuell überprüfen und "
-"korrigieren. \n"
+msgid "One of your partitions does not seem to hold a valid kernel file. Please verify and correct LiloSetup configuration file manually.\n"
+msgstr "Eine Ihrer Partitionen scheint nicht eine gültigen Kernel-Datei zu beinhalten. Bitte die LiloSetup Konfigurationsdatei manuell überprüfen und korrigieren. \n"
 
 #: src/lilosetup.py:682
 msgid "# Linux bootable partition config ends\n"
@@ -368,145 +357,88 @@ msgstr "Über Lilo Setup."
 
 #: src/lilosetup.py:698
 msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new "
-"operating system on your computer. \n"
-"LiloSetup can also be useful in the process of a disaster recovery in which "
-"case you may have to launch it from a LiveCD if you have lost all other "
-"means to boot into your system.\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
-"from a regular installed Linux system.  In both cases, it will setup a new "
-"LILO bootloader on the MBR of your first hard drive."
+"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
+"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
 msgstr ""
-"Es ist notwendig, den Bootloader jedes Mal (erneut) zu konfigurieren, wenn "
-"Sie ein neues Betriebssystem auf Ihrem Computer installieren. \n"
-"LiloSetup kann auch im Notfall zur Wiederherstellung des Bootloaders "
-"nützlich sein, wenn alle anderen Wege Ihr System zu Starten versagt haben. "
-"Sie müssen es dann ggf. von einer LiveCD starten.\n"
-"Lilosetup kann ohne Unterschiede in einer Linux-LiveCD-Umgebung oder in "
-"einem regulär installierten Linux-System ausgeführt werden. In beiden Fällen "
-"wird ein neuer LILO-Bootloader im MBR der ersten Festplatte eingerichtet."
+"Es ist notwendig, den Bootloader jedes Mal (erneut) zu konfigurieren, wenn Sie ein neues Betriebssystem auf Ihrem Computer installieren. \n"
+"LiloSetup kann auch im Notfall zur Wiederherstellung des Bootloaders nützlich sein, wenn alle anderen Wege Ihr System zu Starten versagt haben. Sie müssen es dann ggf. von einer LiveCD starten.\n"
+"Lilosetup kann ohne Unterschiede in einer Linux-LiveCD-Umgebung oder in einem regulär installierten Linux-System ausgeführt werden. In beiden Fällen wird ein neuer LILO-Bootloader im MBR der ersten Festplatte eingerichtet."
 
 #: src/lilosetup.py:709
 msgid ""
-"Here you must define a Boot menu label for each of the operating system that "
-"will be displayed on your bootloader menu.\n"
-"Any partition for which you do not set a  Boot menu label will not be "
-"configured and will not be displayed on the bootloader menu.\n"
-"If a few kernels are available within one partition, the label you have "
-"chosen for that partition will be appended numerically to create multiple "
-"menu entries for each of these kernels.\n"
+"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
+"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Hier müssen Sie einen Namen für jedes Betriebssystem angeben, das in Ihrem "
-"Bootloader-Menü angezeigt wird. \n"
-"Jede Partition, für die Sie keinen Namen im Boot-Menü setzen, wird auch "
-"nicht konfiguriert und nicht im Bootloader-Menü angezeigt.\n"
-"Wenn mehrere Kernel in einer Partition vorhanden sind, wird der Name, den "
-"Sie für diese Partition ausgewählt haben, numerisch ergänzt, um mehrere Menü-"
-"Einträge für jeden dieser Kernel anzulegen.\n"
-"Alle diese Einstellungen können später manuell in der LiloSetup "
-"Konfigurationsdatei bearbeitet werden."
+"Hier müssen Sie einen Namen für jedes Betriebssystem angeben, das in Ihrem Bootloader-Menü angezeigt wird. \n"
+"Jede Partition, für die Sie keinen Namen im Boot-Menü setzen, wird auch nicht konfiguriert und nicht im Bootloader-Menü angezeigt.\n"
+"Wenn mehrere Kernel in einer Partition vorhanden sind, wird der Name, den Sie für diese Partition ausgewählt haben, numerisch ergänzt, um mehrere Menü-Einträge für jeden dieser Kernel anzulegen.\n"
+"Alle diese Einstellungen können später manuell in der LiloSetup Konfigurationsdatei bearbeitet werden."
 
 #: src/lilosetup.py:720
 msgid ""
-"Use this arrow if you want to move the selected Operating System up to a "
-"higher rank.\n"
-"The partition with the highest rank will be displayed on the first line of "
-"the bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
+"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Benutzen Sie diesen Pfeil, um das ausgewählte Betriebssystem an eine höhere "
-"Position zu setzen.\n"
-"Die oberste Partition wird in der ersten Zeile des Bootloader-Menüs "
-"angezeigt.\n"
-"Jede dieser Einstellungen kann manuell in der LiloSetup-Konfigurationsdatei "
-"bearbeitet werden."
+"Benutzen Sie diesen Pfeil, um das ausgewählte Betriebssystem an eine höhere Position zu setzen.\n"
+"Die oberste Partition wird in der ersten Zeile des Bootloader-Menüs angezeigt.\n"
+"Jede dieser Einstellungen kann manuell in der LiloSetup-Konfigurationsdatei bearbeitet werden."
 
 #: src/lilosetup.py:728
 msgid ""
-"Use this arrow if you want to move the selected Operating System down to a "
-"lower rank.\n"
-"The partition with the lowest rank will be displayed on the last line of the "
-"bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
+"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Benutzen Sie diesen Pfeil, um das ausgewählte Betriebssystem auf eine "
-"niedrigere Position zu setzen.\n"
-"Die unterste Partition wird in der letzten Zeile des Bootloader-Menüs "
-"angezeigt.\n"
-"Jede dieser Einstellungen kann manuell in der LiloSetup-Konfigurationsdatei "
-"bearbeitet werden."
+"Benutzen Sie diesen Pfeil, um das ausgewählte Betriebssystem auf eine niedrigere Position zu setzen.\n"
+"Die unterste Partition wird in der letzten Zeile des Bootloader-Menüs angezeigt.\n"
+"Jede dieser Einstellungen kann manuell in der LiloSetup-Konfigurationsdatei bearbeitet werden."
 
 #: src/lilosetup.py:737
 msgid "This will undo all settings (even manual modifications)."
-msgstr ""
-"Dies wird alle Einstellungen rückgängig machen (auch manuelle Änderungen)."
+msgstr "Dies wird alle Einstellungen rückgängig machen (auch manuelle Änderungen)."
 
 #: src/lilosetup.py:741
 msgid ""
-"Experienced users have the possibility to manually edit LiloSetup "
-"configuration file (settings are identical to lilo.conf). \n"
-"Please do not temper with this file unless you know what you are doing and "
-"you have read its commented instructions regarding chrooted paths."
+"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
+"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
-"Erfahrene Nutzer können die Konfigurationsdatei von LiloSetup manuell "
-"editieren (Einstellungen sind identisch zu lilo.conf). \n"
-"Bitte bearbeiten Sie diese Datei nicht, falls Sie sich damit nicht auskennen "
-"und die Instruktionen in den Kommentaren hinsichtlich der chroot-Pfade nicht "
-"gelesen heben."
+"Erfahrene Nutzer können die Konfigurationsdatei von LiloSetup manuell editieren (Einstellungen sind identisch zu lilo.conf). \n"
+"Bitte bearbeiten Sie diese Datei nicht, falls Sie sich damit nicht auskennen und die Instruktionen in den Kommentaren hinsichtlich der chroot-Pfade nicht gelesen heben."
 
 #: src/lilosetup.py:749
 msgid "Exit Lilo Setup program."
 msgstr "Lilo Setup beenden."
 
 #: src/lilosetup.py:754
-msgid ""
-"Once you have defined your settings, click on this button to create your new "
-"LILO's bootloader."
+msgid "Once you have defined your settings, click on this button to create your new LILO's bootloader."
 msgstr ""
 "LILO-Bootloader installieren.\n"
 "\n"
-"Sobald Sie die Einstellungen festgelegt haben, klicken Sie auf diesen Knopf, "
-"um Ihren neuen LILO-Bootloader zu installieren."
+"Sobald Sie die Einstellungen festgelegt haben, klicken Sie auf diesen Knopf, um Ihren neuen LILO-Bootloader zu installieren."
 
 #: src/lilosetup.py:906
-msgid ""
-"Sorry, LiloSetup is unable to find a suitable text editor in your system. "
-"You will not be able to manually modify LiloSetup configuration.\n"
+msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
 msgstr ""
 
 #: src/lilosetup.py:915
-msgid ""
-"Your configuration is not complete. Please, select at least one Linux "
-"booting partition and define its Boot menu label.\n"
-msgstr ""
-"Ihre Konfiguration ist nicht vollständig. Bitte wählen Sie mindestens eine "
-"Linux Boot-Partition aus und legen Sie den Namen für das Boot-Menü fest.\n"
+msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
+msgstr "Ihre Konfiguration ist nicht vollständig. Bitte wählen Sie mindestens eine Linux Boot-Partition aus und legen Sie den Namen für das Boot-Menü fest.\n"
 
 #: src/lilosetup.py:918
-msgid ""
-"You are about to install a new LILO bootloader. Are you sure you want to "
-"continue?"
-msgstr ""
-"Sie sind dabei, einen neuen LILO Boot-Loader zu installieren. Sind Sie "
-"sicher, dass Sie fortfahren möchten?"
+msgid "You are about to install a new LILO bootloader. Are you sure you want to continue?"
+msgstr "Sie sind dabei, einen neuen LILO Boot-Loader zu installieren. Sind Sie sicher, dass Sie fortfahren möchten?"
 
 #: src/lilosetup.py:934
-msgid ""
-"The installation of your new LILO bootloader was succesful. You can now exit "
-"LiloSetup and reboot your computer.\n"
-msgstr ""
-"Die Installation des neuen LILO-Bootloaders war erfolgreich. Sie können nun "
-"LiloSetup beenden und Ihren Computer neu starten. \n"
+msgid "The installation of your new LILO bootloader was succesful. You can now exit LiloSetup and reboot your computer.\n"
+msgstr "Die Installation des neuen LILO-Bootloaders war erfolgreich. Sie können nun LiloSetup beenden und Ihren Computer neu starten. \n"
 
 #: src/lilosetup.py:937
-msgid ""
-"The installation of your new LILO bootloader failed. Please verify /var/log/"
-"lilosetup.log, modify your settings and try again.\n"
-msgstr ""
-"Die Installation des neues LILO-Bootloaders ist fehlgeschlagen. Bitte /var/"
-"log/lilosetup.log überprüfen, Ihre Einstellungen ändern und den Vorgang "
-"wiederholen. \n"
+msgid "The installation of your new LILO bootloader failed. Please verify /var/log/lilosetup.log, modify your settings and try again.\n"
+msgstr "Die Installation des neues LILO-Bootloaders ist fehlgeschlagen. Bitte /var/log/lilosetup.log überprüfen, Ihre Einstellungen ändern und den Vorgang wiederholen. \n"
 
 #: src/lilosetup.py:945
 msgid ""
@@ -517,12 +449,14 @@ msgstr ""
 "<b>Entschuldigung!</b> \n"
 "Sie benötigen Root-Rechte, um LiloSetup auszuführen."
 
-#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
+#: src/lilosetup.desktop.in.h:2
+#: src/lilosetup-kde.desktop.in.h:2
 #, fuzzy
 msgid "Lilo set-up utility"
 msgstr "Lilo Konfiguration"
 
-#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3
+#: src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Lilo von einer LiveCD oder einem Standardsystem einrichten."
 

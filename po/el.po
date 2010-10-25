@@ -417,7 +417,7 @@ msgstr "Όταν καθορίστε τις ρυθμίσεις σας, κάντε
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr "Το LiloSetup δεν εντόπισε κάποιο επεξεργαστή αρχείων κειμένο στο σύστημα. Δεν θα μπορείτε να επεξεργαστείτε το αρχείο ρυθμίσεων που θα δημιουργηθεί."
+msgstr "Το LiloSetup δεν εντόπισε κάποιο επεξεργαστή αρχείων κειμένο στο σύστημα. Δεν θα μπορείτε να επεξεργαστείτε το αρχείο ρυθμίσεων που θα δημιουργηθεί.\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"

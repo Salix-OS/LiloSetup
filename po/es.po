@@ -5,14 +5,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
+"Last-Translator: seacat <seacat.linux@gmail.com>\n"
 "Language-Team:  <seacat.linux@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: ARGENTINA\n"
+"X-Poedit-Country: SPAIN\n"
 
 #: src/lilosetup.glade:74
 #: src/lilosetup.desktop.in.h:1
@@ -416,7 +416,7 @@ msgstr "Una vez que haya definido sus ajustes, haga clic en este botón para cre
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "Lo siento, LiloSetup es incapaz de encontrar un editor de texto adecuado en su sistema. No será capaz de modificar manualmente la configuración de LiloSetup.\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -446,9 +446,8 @@ msgstr ""
 
 #: src/lilosetup.desktop.in.h:2
 #: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
 msgid "Lilo set-up utility"
-msgstr "Configuración de Lilo"
+msgstr "Herramienta de configuración de Lilo"
 
 #: src/lilosetup.desktop.in.h:3
 #: src/lilosetup-kde.desktop.in.h:3

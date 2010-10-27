@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Yarema aka Knedlyk <yupadmin@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: lilosetup\n"
@@ -14,10 +14,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Встановлення Lilo"
@@ -288,9 +287,7 @@ msgstr ""
 "\n"
 "Завантажувач потрібен для завантаження основної системи на Вашому комп’ютері і спочатку показує меню завантаження, якщо на Вашому комп’ютері є кілька операційних систем."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Встановлення..."
 
@@ -418,7 +415,7 @@ msgstr "Після визначення Ваших налаштувань, на�
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "Вибачте, LiloSetup не може знайти відповідний редактор тексту у Вашій системі. Ви не зможете правити вручну конфігурацію LiloSetup.\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -446,14 +443,11 @@ msgstr ""
 "\n"
 "Потрібно привілеї root'а для запуску LiloSetup. "
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
-msgstr "Інструмент для встановлення Lilo"
+msgstr "Утиліта для встановлення Lilo"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Встановити Lilo з LiveCD або стандартної системи."
 

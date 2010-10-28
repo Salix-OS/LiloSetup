@@ -1,3 +1,4 @@
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -12,8 +13,7 @@ msgstr ""
 "X-Poedit-Language: Japanese\n"
 "X-Poedit-Country: JAPAN\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Liloセットアップ"
@@ -281,9 +281,7 @@ msgstr ""
 "\n"
 "ブート・ローダーは、オペレーティングシステムをコンピュータにロードするために必要です。とくに一つ以上のオペレーティングシステムを一つのコンピュータで使う場合、コンピュータをスタートした時点で、どのシステムを使うかどうかを選ぶことができます。"
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "セットする"
 
@@ -440,14 +438,11 @@ msgstr ""
 "\n"
 "Liloセットアップを使うには、ルートである必要があります。"
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
-msgstr "Liloセットアップ・ツール"
+msgstr "Liloのセットアップ・ツール"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Liloを、LiveCDから、または、スタンダードのLinuxシステムからセットアップします。"
 

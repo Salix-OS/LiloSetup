@@ -410,7 +410,7 @@ msgstr "設定をした後、このボタンをクリックし新しいLILOの�
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "申し訳ありませんが、LiloSetupは、システム内の適切なテキストエディタを見つけられません。マニュアルでLiloSetupの設定を変更することはできません。\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -440,7 +440,7 @@ msgstr ""
 
 #: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
-msgstr "Liloのセットアップ・ツール"
+msgstr "Liloのセットアップ用ツール"
 
 #: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."

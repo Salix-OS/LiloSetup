@@ -1,4 +1,4 @@
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: LiloSetup\n"
@@ -13,8 +13,7 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
@@ -289,9 +288,7 @@ msgstr ""
 "\n"
 "Ein Bootloader ist erforderlich, um das Betriebssystem eines Computers zu laden und wird zunächst ein Boot-Menü anzeigen, wenn mehrere Betriebssysteme auf demselben Computer zur Verfügung stehen."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Ändern..."
 
@@ -422,7 +419,7 @@ msgstr ""
 
 #: src/lilosetup.py:906
 msgid "Sorry, LiloSetup is unable to find a suitable text editor in your system. You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
+msgstr "LiloSetup kann keinen geeigneten Texteditor auf Ihrem System finden. Daher können Sie die LiloSetup Konfiguration nicht manuell bearbeiten.\n"
 
 #: src/lilosetup.py:915
 msgid "Your configuration is not complete. Please, select at least one Linux booting partition and define its Boot menu label.\n"
@@ -449,14 +446,11 @@ msgstr ""
 "<b>Entschuldigung!</b> \n"
 "Sie benötigen Root-Rechte, um LiloSetup auszuführen."
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
-#, fuzzy
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
-msgstr "Lilo Konfiguration"
+msgstr "Lilo Konfigurationswerkzeug"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Lilo von einer LiveCD oder einem Standardsystem einrichten."
 

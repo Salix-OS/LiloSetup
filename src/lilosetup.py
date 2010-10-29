@@ -4,7 +4,7 @@
 #                                                                             #
 # LiloSetup - GTK frontend to setup lilo, from a LiveCD or a standard system. #
 #                                                                             #
-# Copyright Pierrick Le Brun <akuna~at~free~dot~fr>.                          #
+# Copyright Pierrick Le Brun <akuna~at~salixos~dot~org>.                      #
 #                                                                             #
 # This program is free software; you can redistribute it and/or               #
 # modify it under the terms of the GNU General Public License                 #
@@ -108,6 +108,7 @@ chroot_mnt = ''
 # Cleanup/Setup LiloSetup temporary work directory & configuration file
 work_dir = "/tmp/lilosetup"
 try :
+     # We are using os.rmdir instead of os.rmtree in case some partitions would still be mounted on the workdirectory
     os.rmdir(work_dir)
 except OSError:
     pass
@@ -306,6 +307,7 @@ def lilosetup_quit():
         pass
     # Removal of the temporary work directory
     try :
+        # We are using os.rmdir instead of os.rmtree in case some partitions would still be mounted on the workdirectory
         os.rmdir(work_dir)
     except OSError:
         pass
@@ -891,11 +893,14 @@ click on this button to create your new LILO's bootloader."))
                 elif os.path.isfile("/usr/bin/gedit") :
                     subprocess.call('/usr/bin/gedit ' + config_location + ' 2>/dev/null', shell=True)
                 elif os.path.isfile("/usr/bin/kwrite") :
-                    subprocess.call('/usr/bin/kwrite ' + config_location, shell=True)
+                    subprocess.call('/usr/bin/kwrite ' + config_location + ' 2>/dev/null', shell=True)
                 elif os.path.isfile("/usr/bin/geany") :
                     subprocess.call('/usr/bin/geany ' + config_location + ' 2>/dev/null', shell=True)
                 else :
                     subprocess.call('xdg-open ' + config_location + ' 2>/dev/null', shell=True)
+                # Ensure changes are taken into account
+                subprocess.call('sync', shell=True)
+                subprocess.call('rm -f ' + config_location + '~ 2>/dev/null', shell=True)
                 self.UpButton.set_sensitive(False)
                 self.DownButton.set_sensitive(False)
                 self.ExecuteButton.set_sensitive(True)

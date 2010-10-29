@@ -23,4 +23,3 @@ for i in `ls *.po`; do
 	msgmerge -U $i lilosetup.pot
 done
 rm -f ./*~
-

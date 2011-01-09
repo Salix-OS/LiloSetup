@@ -1,24 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Ingemar Karlsson <po@ingk.se>, 2010.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: lilosetup\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
-"PO-Revision-Date: 2010-10-25 14:03+0200\n"
-"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2011-01-09 13:25+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Swedish\n"
-"X-Poedit-Country: SWEDEN\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo setup"
@@ -289,9 +288,7 @@ msgstr ""
 "\n"
 "En bootloader krävs för att ladda operativ systemet på en dator och visa en boot meny om flera operativ system finns på datorn."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Sätt..."
 
@@ -446,72 +443,10 @@ msgstr ""
 "\n"
 "Root rättigheter krävs för att köra LiloSetup."
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "Lilo set-upp verktyg"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Ställ in Lilo från en LiveCD eller standard system."
-
-#~ msgid ""
-#~ "LiloSetup localization was provided by:\n"
-#~ "\n"
-#~ "Danish: Kris Thomsen <lakristho~at~gmail~dot~com>\n"
-#~ "            mjjzf http://www.transifex.net/accounts/profile/mjjzf/\n"
-#~ "\n"
-#~ "Dutch: Imar van Erven Dorens <gambit73~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "French: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
-#~ "        \n"
-#~ "German: Andreas Born <andreas~at~gogglemail~dot~com>\n"
-#~ "              Thorsten Mühlfelder <thenktor~at~gmx~dot~de>\n"
-#~ "\n"
-#~ "Greek: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "Hungarian: Peter Polonkai <polesz~at~nedudu~dot~hu>\n"
-#~ "\n"
-#~ "Italian: Kerd http://www.transifex.net/accounts/profile/Kerd/\n"
-#~ "\n"
-#~ "Japanese: tsuren <hydrangea_and_snail~at~hotmail~dot~com>\n"
-#~ "\n"
-#~ "Spanish(Argentinian): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Spanish(Castilian): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Swedish: Ingemar Karlsson <ingemar~at~ingk~dot~se>\n"
-#~ "\n"
-#~ "Ukrainian: Yarema aka Knedly <yupadmin~at~gmail~dot~com>"
-#~ msgstr ""
-#~ "LiloSetup har översatts av:\n"
-#~ "\n"
-#~ "Danish: Kris Thomsen <lakristho~at~gmail~dot~com>\n"
-#~ "            mjjzf http://www.transifex.net/accounts/profile/mjjzf/\n"
-#~ "\n"
-#~ "Dutch: Imar van Erven Dorens <gambit73~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "French: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
-#~ "        \n"
-#~ "German: Andreas Born <andreas~at~gogglemail~dot~com>\n"
-#~ "              Thorsten Mühlfelder <thenktor~at~gmx~dot~de>\n"
-#~ "\n"
-#~ "Greek: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "Hungarian: Peter Polonkai <polesz~at~nedudu~dot~hu>\n"
-#~ "\n"
-#~ "Italian: Kerd http://www.transifex.net/accounts/profile/Kerd/\n"
-#~ "\n"
-#~ "Japanese: tsuren <hydrangea_and_snail~at~hotmail~dot~com>\n"
-#~ "\n"
-#~ "Spanish(Argentinian): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Spanish(Castilian): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Swedish: Ingemar Karlsson <ingemar~at~ingk~dot~se>\n"
-#~ "\n"
-#~ "Ukrainian: Yarema aka Knedly <yupadmin~at~gmail~dot~com>"
-
-#~ msgid "Salix Transifex Team."
-#~ msgstr "Salix Transifex Team."

@@ -1,17 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: LiloSetup\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
-"PO-Revision-Date: \n"
-"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-"Language-Team: Raphael Groner <raphgro(at)web.de>\n"
+"PO-Revision-Date: 2011-01-09 13:25+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: German <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
@@ -453,32 +457,3 @@ msgstr "Lilo Konfigurationswerkzeug"
 #: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Lilo von einer LiveCD oder einem Standardsystem einrichten."
-
-#~ msgid "Salix Transifex Team."
-#~ msgstr "Salix Transifex Team."
-
-#~ msgid ""
-#~ "French: Pierrick Le Brun\n"
-#~ "Greek: Dimitris Tzemos\n"
-#~ "German: Andreas Born\n"
-#~ "Spanish: Fernando Velo"
-#~ msgstr ""
-#~ "Französisch: Pierrick Le Brun\n"
-#~ "Griechisch: Dimitris Tzemos\n"
-#~ "Deutsch: Andreas Born\n"
-#~ "Spanisch: Fernando Velo"
-
-#~ msgid "Partition"
-#~ msgstr "Partition"
-
-#~ msgid "File system"
-#~ msgstr "Dateisystem"
-
-#~ msgid "Operating system"
-#~ msgstr "Betriebssystem"
-
-#~ msgid "Boot menu label"
-#~ msgstr "Name im Bootmenü"
-
-#~ msgid "About..."
-#~ msgstr "Über..."

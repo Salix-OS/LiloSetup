@@ -2,23 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: lilosetup\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
-"PO-Revision-Date: 2010-11-04 12:01+0100\n"
-"Last-Translator: Peter Polonkai <polesz@nedudu.hu>\n"
-"Language-Team: Nedudu Team <nedudu@nedudu.hu>\n"
+"PO-Revision-Date: 2011-01-09 13:25+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Hungarian\n"
-"X-Poedit-Country: HUNGARY\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Beállítás"
@@ -44,10 +43,7 @@ msgid ""
 "A simple GUI interface to set-up LILO.\n"
 "\n"
 "Copyright © 2010 Pierrick Le Brun"
-msgstr ""
-"Egyszerű GUI felület a LILO beállításához.\\n"
-"\\n"
-"Copyright © 2010 Pierrick Le Brun"
+msgstr "Egyszerű GUI felület a LILO beállításához.\\n\\nCopyright © 2010 Pierrick Le Brun"
 
 #: src/lilosetup.glade:495
 msgid "salixos.org"
@@ -267,9 +263,7 @@ msgstr ""
 "\n"
 "A rendszerbetöltő azért szükséges hogy betöltse az elsődleges operációs rendszert a számítógépen és kezdetben megjelenik egy indító menüt, ha több operációs rendszer is elérhető ugyanazon a számítógépen."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Beállít..."
 
@@ -412,15 +406,10 @@ msgstr ""
 "\n"
 "Rendszergazda jogosultság szükséges a LiloSetup futtatásához."
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "Lilo beállító segédprogram"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Lilo beállítása LiveCD-n vagy normál rendszeren."
-
-#~ msgid "Salix Transifex Team."
-#~ msgstr "Salix Transifex Csapat."

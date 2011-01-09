@@ -1,20 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: LiloSetup 0.1\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 13:57+0300\n"
-"PO-Revision-Date: \n"
-"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2011-01-09 13:25+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: French <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: src/lilosetup.glade:74
-#: src/lilosetup.desktop.in.h:1
+#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
 msgstr "Lilo Setup"
@@ -284,9 +287,7 @@ msgstr ""
 "\n"
 "Un gestionnaire de démarrage est indispensable pour charger le système d'exploitation d'un ordinateur. Au démarrage, Il affichera un menu si plusieurs systèmes d'exploitation différents sont disponibles sur votre machine."
 
-#: src/lilosetup.py:370
-#: src/lilosetup.py:493
-#: src/lilosetup.py:792
+#: src/lilosetup.py:370 src/lilosetup.py:493 src/lilosetup.py:792
 msgid "Set..."
 msgstr "Définir..."
 
@@ -443,95 +444,10 @@ msgstr ""
 "\n"
 "Les droits d'administrateur (Root) sont requis pour exécuter LiloSetup. "
 
-#: src/lilosetup.desktop.in.h:2
-#: src/lilosetup-kde.desktop.in.h:2
+#: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "Utilitaire de configuration Lilo"
 
-#: src/lilosetup.desktop.in.h:3
-#: src/lilosetup-kde.desktop.in.h:3
+#: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Installer Lilo à partir d'un LiveCD ou d'un système standard."
-
-#~ msgid ""
-#~ "LiloSetup localization was provided by:\n"
-#~ "\n"
-#~ "Danish: Kris Thomsen <lakristho~at~gmail~dot~com>\n"
-#~ "            mjjzf http://www.transifex.net/accounts/profile/mjjzf/\n"
-#~ "\n"
-#~ "Dutch: Imar van Erven Dorens <gambit73~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "French: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
-#~ "        \n"
-#~ "German: Andreas Born <andreas~at~gogglemail~dot~com>\n"
-#~ "              Thorsten Mühlfelder <thenktor~at~gmx~dot~de>\n"
-#~ "\n"
-#~ "Greek: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "Hungarian: Peter Polonkai <polesz~at~nedudu~dot~hu>\n"
-#~ "\n"
-#~ "Italian: Kerd http://www.transifex.net/accounts/profile/Kerd/\n"
-#~ "\n"
-#~ "Japanese: tsuren <hydrangea_and_snail~at~hotmail~dot~com>\n"
-#~ "\n"
-#~ "Spanish(Argentinian): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Spanish(Castilian): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Swedish: Ingemar Karlsson <ingemar~at~ingk~dot~se>\n"
-#~ "\n"
-#~ "Ukrainian: Yarema aka Knedly <yupadmin~at~gmail~dot~com>"
-#~ msgstr ""
-#~ "La traduction de LiloSetup a été effectuée par :\n"
-#~ "\n"
-#~ "Danois: Kris Thomsen <lakristho~at~gmail~dot~com>\n"
-#~ " mjjzf http://www.transifex.net/accounts/profile/mjjzf/\n"
-#~ "\n"
-#~ "Néerlandais: Imar van Erven Dorens <gambit73~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "Français: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
-#~ "\n"
-#~ "Allemand: Andreas Born <andreas~at~gogglemail~dot~com>\n"
-#~ " Thorsten Mühlfelder <thenktor~at~gmx~dot~de>\n"
-#~ "\n"
-#~ "Grec: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
-#~ "\n"
-#~ "Hongrois: Peter Polonkai <polesz~at~nedudu~dot~hu>\n"
-#~ "\n"
-#~ "Italien: Kerd http://www.transifex.net/accounts/profile/Kerd/\n"
-#~ "\n"
-#~ "Japonais: tsuren <hydrangea_and_snail~at~hotmail~dot~com>\n"
-#~ "\n"
-#~ "Espagnol(Argentine): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Espagnol(Castille): Fernando Velo <seacat~at~prog@gmail~dot~com>\n"
-#~ "\n"
-#~ "Suédois: Ingemar Karlsson <ingemar~at~ingk~dot~se>\n"
-#~ "\n"
-#~ "Ukrainien: Yarema aka Knedly <yupadmin~at~gmail~dot~com>"
-
-#~ msgid "Salix Transifex Team."
-#~ msgstr "L'équipe Transifex de Salix."
-
-#~ msgid ""
-#~ "French: Pierrick Le Brun\n"
-#~ "Greek: Dimitris Tzemos\n"
-#~ "German: Andreas Born\n"
-#~ "Spanish: Fernando Velo"
-#~ msgstr ""
-#~ "Espagnol: Fernando Velo\n"
-#~ "Français: Pierrick Le Brun\n"
-#~ "Grec: Dimitris Tzemos\n"
-#~ "Allemand: Andreas Born"
-
-#~ msgid "Partition"
-#~ msgstr "Partition"
-
-#~ msgid "File system"
-#~ msgstr "Système de fichiers"
-
-#~ msgid "Operating system"
-#~ msgstr "Système d'exploitation"
-
-#~ msgid "Boot menu label"
-#~ msgstr "Intitulé de menu"

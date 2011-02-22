@@ -1,3 +1,6 @@
+version 0.2.7
+ * Fixed exception raised when os-prober does not find the OS of a partition
+
 version 0.2.6
  * Enabled successive manual editing of lilosetup configuration file.
 

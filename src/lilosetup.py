@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.6'
+# version = '0.2.7'
 
 import shutil
 import subprocess
@@ -383,7 +383,10 @@ a boot menu if several operating systems are available on the same computer.")
                         partition_is_recovery = commands.getoutput(lshal_recovery_output)
                         if partition_is_recovery == '' :
                             # Get the operating system
-                            operating_system = line.split(':')[1].split()[0]
+                            try :
+                                operating_system = line.split(':')[1].split()[0]
+                            except IndexError :
+                                operating_system = line.split(':')[2]
                             # Get the file system
                             lshal_string_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 volume.fstype'
                             file_system = commands.getoutput(lshal_string_output).split("'")[1]

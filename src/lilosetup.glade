@@ -492,7 +492,7 @@
 
 Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
     <property name="website">http://www.simplynux.fr</property>
-    <property name="website_label" translatable="yes">simplynux.fr</property>
+    <property name="website_label" translatable="no">simplynux.fr</property>
     <property name="license" translatable="yes">This program is free software; you can redistribute it 
 and/or modify it under the terms of the GNU General
 Public License as published by the Free Software 

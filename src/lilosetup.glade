@@ -88,9 +88,9 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="relief">none</property>
-                <signal name="clicked" handler="on_about_button_clicked"/>
                 <signal name="leave_notify_event" handler="on_about_button_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_about_button_enter_notify_event"/>
+                <signal name="clicked" handler="on_about_button_clicked"/>
                 <child>
                   <object class="GtkImage" id="image_lilofix">
                     <property name="visible">True</property>
@@ -210,9 +210,9 @@
                                 </child>
                                 <child>
                                   <object class="GtkCellRendererCombo" id="label_cellrenderercombo">
-                                    <signal name="edited" handler="on_label_cellrenderercombo_edited"/>
-                                    <signal name="editing_started" handler="on_label_cellrenderercombo_editing_started"/>
                                     <signal name="editing_canceled" handler="on_label_cellrenderercombo_editing_canceled"/>
+                                    <signal name="editing_started" handler="on_label_cellrenderercombo_editing_started"/>
+                                    <signal name="edited" handler="on_label_cellrenderercombo_edited"/>
                                   </object>
                                   <attributes>
                                     <attribute name="text">3</attribute>
@@ -231,17 +231,23 @@
                       <object class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
                         <child>
-                          <object class="GtkButton" id="up_button">
+                          <object class="GtkEventBox" id="up_eventbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <signal name="clicked" handler="on_up_button_clicked"/>
-                            <signal name="leave_notify_event" handler="on_up_button_leave_notify_event"/>
-                            <signal name="enter_notify_event" handler="on_up_button_enter_notify_event"/>
+                            <signal name="enter_notify_event" handler="on_up_eventbox_enter_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_up_eventbox_leave_notify_event"/>
                             <child>
-                              <object class="GtkImage" id="image5">
+                              <object class="GtkButton" id="up_button">
                                 <property name="visible">True</property>
-                                <property name="stock">gtk-go-up</property>
+                                <property name="sensitive">False</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <signal name="clicked" handler="on_up_button_clicked"/>
+                                <child>
+                                  <object class="GtkImage" id="image5">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-go-up</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -250,17 +256,23 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="down_button">
+                          <object class="GtkEventBox" id="down_eventbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <signal name="clicked" handler="on_down_button_clicked"/>
-                            <signal name="leave_notify_event" handler="on_down_button_leave_notify_event"/>
-                            <signal name="enter_notify_event" handler="on_down_button_enter_notify_event"/>
+                            <signal name="enter_notify_event" handler="on_down_eventbox_enter_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_down_eventbox_leave_notify_event"/>
                             <child>
-                              <object class="GtkImage" id="image3">
+                              <object class="GtkButton" id="down_button">
                                 <property name="visible">True</property>
-                                <property name="stock">gtk-go-down</property>
+                                <property name="sensitive">False</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <signal name="clicked" handler="on_down_button_clicked"/>
+                                <child>
+                                  <object class="GtkImage" id="image3">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-go-down</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -405,10 +417,10 @@
                 <property name="can_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_main_window_destroy"/>
-                <signal name="clicked" handler="gtk_main_quit"/>
                 <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_button_quit_enter_notify_event"/>
+                <signal name="clicked" handler="on_main_window_destroy"/>
+                <signal name="clicked" handler="gtk_main_quit"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -485,14 +497,13 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">lilosetup_main</property>
-    <property name="has_separator">False</property>
     <property name="program_name">LiloSetup</property>
-    <property name="version">0.2.7</property>
+    <property name="version">0.2.8</property>
     <property name="copyright" translatable="yes">A simple GUI interface to set-up LILO.
 
 Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
     <property name="website">http://www.simplynux.fr</property>
-    <property name="website_label" translatable="no">simplynux.fr</property>
+    <property name="website_label">simplynux.fr</property>
     <property name="license" translatable="yes">This program is free software; you can redistribute it 
 and/or modify it under the terms of the GNU General
 Public License as published by the Free Software 
@@ -512,8 +523,8 @@ Fifth Floor, Boston, MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun &lt;akuna~at~salixos~dot~org&gt;</property>
     <property name="translator_credits" translatable="yes">translator-credits</property>
     <property name="logo">lilosetup.png</property>
-    <signal name="response" handler="on_about_dialog_close"/>
     <signal name="delete_event" handler="on_about_dialog_close"/>
+    <signal name="response" handler="on_about_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>

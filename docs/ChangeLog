@@ -1,3 +1,9 @@
+version 0.2.8
+ * Fixed auto-mounting of primary target partition in LiveCDs not using /dev/root
+ * Fixed Label length error checking
+ * Improved overall labelling error proofing scheme
+ * Added translations in Polish
+
 version 0.2.7
  * Fixed exception raised when os-prober does not find the OS of a partition
 

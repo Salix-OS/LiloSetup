@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.7'
+# version = '0.2.8'
 
 import shutil
 import subprocess
@@ -95,6 +95,8 @@ def run_bash(cmd):
     out = p.stdout.read().strip()
     return out  #This is the stdout from the shell command
 
+# This will help us monitor if a label is already in use
+already_there = []
 # This will help us monitor whether the configuration file is succesfully created or not
 config_creation = []
 # This will help us to ensure at least one  partition has been configured
@@ -461,41 +463,9 @@ a boot menu if several operating systems are available on the same computer.")
                 except ValueError :
                     break
             for set in BootPartitionsValues:
-                am_i_there = 'cat ' + config_location + ''' | grep -w label | cut -f3 -d " " '''
-                already_there = commands.getoutput(am_i_there).splitlines()
                 windows_sys_labels = ['Microsoft', 'Windows']
-                # We ensure there are no identical labels
-                if set[3] in already_there :
-                    error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct.\n"))
-                    self.EditButton.set_sensitive(False)
-                    self.ExecuteButton.set_sensitive(False)
-                    self.UpButton.set_sensitive(True)
-                    self.DownButton.set_sensitive(True)
-                    self.BootPartitionTreeview.set_sensitive(True)
-                    config_creation.append('failure')
-                    break
-                # We need to ensure that the labels are unique and do not contain empty space
-                elif ' ' in set[3] :
-                    error_dialog(_("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n"))
-                    self.EditButton.set_sensitive(False)
-                    self.ExecuteButton.set_sensitive(False)
-                    self.UpButton.set_sensitive(True)
-                    self.DownButton.set_sensitive(True)
-                    self.BootPartitionTreeview.set_sensitive(True)
-                    config_creation.append('failure')
-                    break
-                # We ensure that the label is less than 15 characters long
-                elif len(set[3]) >= 15 :
-                    error_dialog(_("\nAn Operating System label should not hold more than 15 characters. \n\nPlease verify and correct.\n"))
-                    self.EditButton.set_sensitive(False)
-                    self.ExecuteButton.set_sensitive(False)
-                    self.UpButton.set_sensitive(True)
-                    self.DownButton.set_sensitive(True)
-                    self.BootPartitionTreeview.set_sensitive(True)
-                    config_creation.append('failure')
-                    break
                 # We skip the partitions that have not been configured by the user
-                elif _('Set...') in set[3] :
+                if _('Set...') in set[3] :
                     pass
                 # If Windows partition:
                 elif set[2] in windows_sys_labels :
@@ -523,7 +493,7 @@ a boot menu if several operating systems are available on the same computer.")
                         if chroot_mnt == '' :
                             # Either it is not mounted or else it is used as the current root filesystem (/) but linked to /dev/root
                             check_if_root = commands.getoutput("ls -l /dev/root | grep " + chroot_dev.replace("/dev/", ""))
-                            if check_if_root != '' :
+                            if check_if_root in chroot_dev :
                                 # The link leads to the 'chrooted' device, it is the current file system.
                                 chroot_mnt = "/"
                             else :
@@ -721,20 +691,20 @@ Any of these settings can be edited manually in lilosetup configuration file."))
     def on_boot_partition_treeview_leave_notify_event(self, widget, data=None):
         global context_intro
         self.LabelContextHelp.set_markup(context_intro)
-    def on_up_button_enter_notify_event(self, widget, data=None):
+    def on_up_eventbox_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_markup(_("Use this arrow if you want to move the \
 selected Operating System up to a higher rank.\n\
 The partition with the highest rank will be displayed on the first line of the bootloader menu.\n\
 Any of these settings can be edited manually in lilosetup configuration file."))
-    def on_up_button_leave_notify_event(self, widget, data=None):
+    def on_up_eventbox_leave_notify_event(self, widget, data=None):
         global context_intro
         self.LabelContextHelp.set_markup(context_intro)
-    def on_down_button_enter_notify_event(self, widget, data=None):
+    def on_down_eventbox_enter_notify_event(self, widget, data=None):
         self.LabelContextHelp.set_markup(_("Use this arrow if you want to move the \
 selected Operating System down to a lower rank.\n\
 The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n\
 Any of these settings can be edited manually in lilosetup configuration file."))
-    def on_down_button_leave_notify_event(self, widget, data=None):
+    def on_down_eventbox_leave_notify_event(self, widget, data=None):
         global context_intro
         self.LabelContextHelp.set_markup(context_intro)
     def on_undo_eventbox_enter_notify_event(self, widget, data=None):
@@ -792,25 +762,71 @@ click on this button to create your new LILO's bootloader."))
         # Retrieve the selected label row iter
         bootlabelchoice = self.BootPartitionTreeview.get_selection()
         self.BootPartitionListStore, iter = bootlabelchoice.get_selected()
-        # Set the new partition row value on the fourth column (3)
-        self.BootPartitionListStore.set_value(iter, 3, new_text)
-        if new_text != _("Set..."):
-            self.BootPartitionListStore.set_value(iter, 4, 'gtk-yes')
+
+        # We ensure there are no identical labels
+        if any(new_text in item for item in already_there) :
+            for item in already_there[:] :
+                # The user could change his mind and leave a label unchanged after starting edition, in which case we shouldn't warn him
+                if (row_number,new_text) in already_there :
+                    break
+                else :
+                    error_dialog(_("You have used the same label for different Operating Systems. Please verify and correct.\n"))
+                    # Remove the item from the list if it already set before setting back to default
+                    try :
+                        already_there.remove((row_number,new_text))
+                    except ValueError :
+                        pass
+                    # Reset the default value of the label
+                    self.BootPartitionListStore.set_value(iter, 3, _("Set..."))
+                    self.BootPartitionListStore.set_value(iter, 4, 'gtk-edit')
+                    # Re-enables buttons if there are other valid entries
+                    if already_there != [] :
+                        self.UndoButton.set_sensitive(True)
+                        self.EditButton.set_sensitive(True)
+                        self.ExecuteButton.set_sensitive(True)
+                        self.UpButton.set_sensitive(True)
+                        self.DownButton.set_sensitive(True)
+                    break
+
+        # We need to ensure that the labels do not contain empty space
+        elif ' ' in new_text :
+            error_dialog(_("\nAn Operating System label should not contain any space. \n\nPlease verify and correct.\n"))
+
+        # We ensure that the label is less than 15 characters long
+        elif len(new_text) > 15 :
+            error_dialog(_("\nAn Operating System label should not hold more than 15 characters. \n\nPlease verify and correct.\n"))
+
         else:
-            self.BootPartitionListStore.set_value(iter, 4, 'gtk-edit')
-        self.UndoButton.set_sensitive(True)
-        self.EditButton.set_sensitive(True)
-        self.ExecuteButton.set_sensitive(True)
-        self.UpButton.set_sensitive(True)
-        self.DownButton.set_sensitive(True)
+            # Allow for successive editing of the same partition
+            for item in already_there[:] :
+                if row_number in item :
+                    already_there.remove(item)
+            if new_text != _("Set..."):
+                already_there.append((row_number,new_text))
+
+            # Set the new partition row value on the fourth column (3)
+            self.BootPartitionListStore.set_value(iter, 3, new_text)
+            if new_text != _("Set..."):
+                self.BootPartitionListStore.set_value(iter, 4, 'gtk-yes')
+            else:
+                self.BootPartitionListStore.set_value(iter, 4, 'gtk-edit')
+            # Re-enables buttons if there are other valid entries
+            if already_there != [] :
+                self.UndoButton.set_sensitive(True)
+                self.EditButton.set_sensitive(True)
+                self.ExecuteButton.set_sensitive(True)
+                self.UpButton.set_sensitive(True)
+                self.DownButton.set_sensitive(True)
 
     def on_label_cellrenderercombo_editing_started(self, widget, path, data):
+        self.UndoButton.set_sensitive(False)
         self.EditButton.set_sensitive(False)
         self.ExecuteButton.set_sensitive(False)
         self.UpButton.set_sensitive(False)
         self.DownButton.set_sensitive(False)
 
     def on_label_cellrenderercombo_editing_canceled(self, data):
+        self.UndoButton.set_sensitive(False)
         self.EditButton.set_sensitive(True)
         self.ExecuteButton.set_sensitive(True)
         self.UpButton.set_sensitive(True)
@@ -871,10 +887,12 @@ click on this button to create your new LILO's bootloader."))
         self.EditButton.set_sensitive(False)
         self.UndoButton.set_sensitive(False)
         self.ExecuteButton.set_sensitive(False)
-        self.UpButton.set_sensitive(True)
-        self.DownButton.set_sensitive(True)
+        self.UpButton.set_sensitive(False)
+        self.DownButton.set_sensitive(False)
         self.BootPartitionTreeview.get_selection().unselect_all()
         self.BootPartitionTreeview.set_sensitive(True)
+        global already_there
+        already_there = []
         if partition_set == [] :
             pass
         else:

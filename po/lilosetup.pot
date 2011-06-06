@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 18:42+0100\n"
+"POT-Creation-Date: 2011-06-06 10:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,10 +43,6 @@ msgid ""
 "A simple GUI interface to set-up LILO.\n"
 "\n"
 "Copyright © 2010-2011 Pierrick Le Brun"
-msgstr ""
-
-#: src/lilosetup.glade:495
-msgid "simplynux.fr"
 msgstr ""
 
 #: src/lilosetup.glade:496

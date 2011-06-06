@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 18:42+0100\n"
+"POT-Creation-Date: 2011-06-06 10:15+0200\n"
 "PO-Revision-Date: 2011-01-09 13:25+0000\n"
 "Last-Translator: gapan <vlahavas@gmail.com>\n"
 "Language-Team: German <None>\n"
@@ -48,10 +48,6 @@ msgstr ""
 "Eine einfache graphische Benutzeroberfläche, um LILO einzurichten.\n"
 "\n"
 "Copyright © 2010 Pierrick Le Brun"
-
-#: src/lilosetup.glade:495
-msgid "simplynux.fr"
-msgstr ""
 
 #: src/lilosetup.glade:496
 msgid ""

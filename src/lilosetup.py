@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.9'
+# version = '20110611'
 
 import shutil
 import subprocess
@@ -43,8 +43,14 @@ gettext.install("lilosetup", "/usr/share/locale", unicode=1)
 gtk.glade.bindtextdomain("lilosetup", "/usr/share/locale")
 gtk.glade.textdomain("lilosetup")
 
-# The following 4 functions were borrowed from ndisgtk 
+# The following 4 functions were borrowed from ndisgtk (I think...)
 # The study of ndisgtk code taught me a lot when I first explored python/glade3 ;)
+
+# TODO Much needed code cleanup, there are a lot of repetitions that can be transformed into functions
+# TODO Add GUI option for choosing BMP file (or not)
+# TODO Add GUI option for Addappend and Append lines
+# TODO Add GUI option for selecting resolution (or leave on automatic)
+# TODO Improve basic bootable partition detection
 
 # Info window skeleton:
 def info_dialog(message, parent = None):
@@ -107,7 +113,10 @@ temp_dir = []
 # Initialize key mountpoints value
 temp_chroot_mnt = ''
 chroot_mnt = ''
-root_device_uuid = commands.getoutput('blkid | grep "/dev/root"').split()[1].split('"')[1]
+try :
+    root_device_uuid = commands.getoutput('blkid | grep "/dev/root"').split()[1].split('"')[1]
+except IndexError :
+    root_device_uuid = 'none'
 # Cleanup/Setup LiloSetup temporary work directory & configuration file
 work_dir = "/tmp/lilosetup"
 try :
@@ -492,8 +501,7 @@ a boot menu if several operating systems are available on the same computer.")
             boot_partition_feedline = []
             try_prober = commands.getoutput('LANG=C os-prober')
             if 'os-prober' not in try_prober :
-#                boot_partition_output = try_prober.splitlines()
-                boot_partition_output = ["No volume groups found"]
+                boot_partition_output = try_prober.splitlines()
                 if len( boot_partition_output) == 1 :
                     for line in boot_partition_output:
                         # Get a list of all partitions
@@ -530,29 +538,32 @@ a boot menu if several operating systems are available on the same computer.")
                 sys.exit(1)
             # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
             blkid_global_output = commands.getoutput('blkid')
-            for line in blkid_global_output.splitlines() :
-                if root_device_uuid in line :
-                    # Check if is a 'real' device and we are in a non-live environment
-                    root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split()[0]
-                    if root_device != "/dev/root" :
-                        # Yes, it is!
-                        break
-            if root_device != "/dev/root" :
-                # Get the file system
-                string_output = commands.getoutput('blkid | grep ' + root_device_uuid + ' | grep -m 1 TYPE')
-                file_system = string_output.split()[-1].split('"')[1]
-                # Get the operating system.
-                try :
-                    version_file_path = glob.glob("/etc/*version*")[0]
-                    version_file = open(version_file_path)
-                    operating_system = version_file.read().split()[0]
-                except :
-                    operating_system = "Unknown"
-                # Put it all together
-                boot_partition_feedline = [root_device[:-1], file_system, operating_system, boot_label]
-                boot_partition_feedline_list.append(boot_partition_feedline)
-            else: # We probably are in a LiveCD environment.
-                pass
+            if root_device_uuid != 'none' : # In which case we would most probably be in a LiveCD
+                root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split()[0]
+                for line in blkid_global_output.splitlines() :
+                    if root_device_uuid in line :
+                        # Check if is a 'non-loop' device and we are in a non-live environment
+                        if root_device != "/dev/root" :
+                            # Yes, we are in a non-live environment, we need to add that partititon to lilosetup view
+                            break # we break this process so that we can go on with adding it
+                        else : # we are in a LiveCD , no need to add root
+                            pass # so we do nothing & check the next partition
+                if root_device != "/dev/root" : # Keep that check
+                    # Get the file system
+                    string_output = commands.getoutput('blkid | grep ' + root_device_uuid + ' | grep -m 1 TYPE')
+                    file_system = string_output.split()[-1].split('"')[1]
+                    # Get the operating system.
+                    try :
+                        version_file_path = glob.glob("/etc/*version*")[0]
+                        version_file = open(version_file_path)
+                        operating_system = version_file.read().split()[0]
+                    except :
+                        operating_system = "Unknown"
+                    # Put it all together
+                    boot_partition_feedline = [root_device[:-1], file_system, operating_system, boot_label]
+                    boot_partition_feedline_list.append(boot_partition_feedline)
+                else: # We probably are in a LiveCD environment.
+                    pass
 
             # Insert Menu Label editable combobox
             # We get this gui handle here to ensure it is reset to its default in the event of a configuration undo

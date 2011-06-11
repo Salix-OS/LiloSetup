@@ -1,3 +1,7 @@
+version 0.2.9
+ * Replaced all lshal instances with blkid for some info detection
+ * Added basic detection for bootable partitions in rare case where os-prober would fail
+
 version 0.2.8
  * Fixed auto-mounting of primary target partition in LiveCDs not using /dev/root
  * Fixed Label length error checking
@@ -39,3 +43,4 @@ version 0.2
 version 0.1
  * First release of LiloSetup in SalixLive 13.0
  * Translations in Greek, French, German, Spanish.
+ * LiloSetup is an improved version of LiloConfig which I initially developped for ZenLive.

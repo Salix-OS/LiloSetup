@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.8'
+# version = '0.2.9'
 
 import shutil
 import subprocess
@@ -107,6 +107,7 @@ temp_dir = []
 # Initialize key mountpoints value
 temp_chroot_mnt = ''
 chroot_mnt = ''
+root_device_uuid = commands.getoutput('blkid | grep "/dev/root"').split()[1].split('"')[1]
 # Cleanup/Setup LiloSetup temporary work directory & configuration file
 work_dir = "/tmp/lilosetup"
 try :
@@ -357,6 +358,122 @@ A bootloader is required to load the main operating system of a computer and wil
 a boot menu if several operating systems are available on the same computer.")
         self.LabelContextHelp.set_markup(context_intro)
 
+        # We may need to mount a partition temporarily
+        global check_and_mount
+        def check_and_mount(partition):
+            """
+            Checks if a partition is mounted
+            and mounts if it is not.
+            """
+            mount_info=commands.getoutput("mount").splitlines()
+            global partition_mountpoint
+            while mount_info:
+                if partition in mount_info[0]:
+                    # The partition is mounted                    
+                    partition_mountpoint = mount_info[0].split()[2]
+                    break
+                mount_info.remove(mount_info[0])
+            if mount_info == [] :
+                # The partition is not mounted, we need to do it.
+                # Except if it is a swap or an extended partition
+
+                # Then we create the temporary mountpoint
+                temporary_montpoint = work_dir + partition.replace('dev', 'mnt')
+                partition_mountpoint = temporary_montpoint
+                try :
+                    os.makedirs(temporary_montpoint)
+                    temp_dir.append(temporary_montpoint)# allows clean deleting of temporary directories later
+                except OSError :
+                    pass
+                # Then we mount the partition on it
+                subprocess.call("mount " + partition + " " + temporary_montpoint + " 2>/dev/null", shell=True)
+                temp_mount.append(temporary_montpoint) # allows clean unmounting of temporary mounting later
+
+        # We may need to unmount a partition if necessary
+        global check_and_unmount
+        def check_and_unmount(partition):
+            """
+            Checks if a partition is unmounted and unmounts if it is not.
+            But only if it was mounted by Lilosetup.
+            """
+            mount_info=commands.getoutput("mount").splitlines()
+            while mount_info:
+                if partition in mount_info[0] :
+                    # The partition is mounted, we need to unmount it and remove the temporary mountpoint.
+                    # First we unmount the device but only if if was mounted by LiloSetup
+                    temporary_montpoint = work_dir + partition.replace('dev', 'mnt')
+                    subprocess.call("umount " + temporary_montpoint + " 2>/dev/null", shell=True)
+                    try :
+                        temp_mount.remove(temporary_montpoint)
+                    except ValueError :
+                        pass # Not there since it wasn't mounted by LiloSetup
+                    # Then we remove the temporary mountpoint
+                    try:
+                        os.removedirs(temporary_montpoint)
+                    except OSError:
+                        pass # The directory doesn't exist since it wasn't created by LiloSetup
+                    try :
+                        temp_dir.remove(temporary_montpoint)
+                    except ValueError :
+                        pass # Not there since it wasn't created by LiloSetup
+                mount_info.remove(mount_info[0])
+
+        # In some LiveCDs os-prober may not work properly so we have to do a 'boot' basic check ourselves
+        global check_if_bootable
+        def check_if_bootable(partition):
+            """
+            Basic substitute for os-prober, checks if a partition is bootable
+            and gets basic info from it.
+            """
+            partition_device = ''
+            file_system = ''
+            operating_system = ''
+            kernel_check = []
+            win_boot_flag = []
+            check_and_mount(partition)
+            # check for a Linux kernel
+            kernel_check = glob.glob(partition_mountpoint + "/boot/vmlinuz*")
+            win_boot_flag = commands.getoutput('fdisk -l | grep "\*" | grep ' + partition )
+            # Check for Linux partition
+            if kernel_check != [] :
+                # This is probably a Linux bootable partititon, let's check it out a bit more
+                if os.path.isdir(partition_mountpoint + '/proc') is True and os.path.isdir(partition_mountpoint + '/sys') is True:
+                    # Define the partition device
+                    partition_device = partition
+                    # Get the file system
+                    string_output = 'blkid ' + partition + ' | grep -m 1 TYPE'
+                    file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
+                    # Define the operating system.
+                    try :
+                        version_file_path = glob.glob(partition_mountpoint + "/etc/*version*")[0]
+                        version_file = open(version_file_path)
+                        operating_system = version_file.read().split()[0]
+                    except :
+                        operating_system = "Unknown"
+                    return partition_device, file_system, operating_system
+            # else check for Windows boot partitions
+            elif partition in win_boot_flag :
+                # This could be a Windows bootable system, let's check it out a bit more
+                win_path =["/Windows/System32", "/WINDOWS/system32", "/WINDOWS/SYSTEM32", "/windows/system32"]
+                win_file =["/IO.SYS", "/io.sys", "/MSDOS.SYS", "/msdos.sys", "/KERNEL.SYS", "/kernel.sys", "/COMMAND.COM", "/command.com", "/CONFIG.SYS", "/config.sys", "/autoexec.bat", "/AUTOEXEC.BAT", "bootmgr"]
+                for i in win_path :
+                    winboot_dir_path = os.path.isdir(partition_mountpoint + i)
+                    if winboot_dir_path is True :
+                        for i in win_file :
+                            winboot_file_path = os.path.isfile(partition_mountpoint + i)
+                            if winboot_file_path is True :
+                                # Define the partition device
+                                partition_device = partition
+                                # Get the file system
+                                string_output = 'blkid ' + partition + ' | grep -m 1 TYPE'
+                                file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
+                                # Define the operating system.
+                                operating_system = "Windows"
+                                return partition_device, file_system, operating_system
+                                break
+            check_and_unmount(partition)
+            
+
         # Initialize the partition list
         global setup_partition_list
         def setup_partition_list():
@@ -375,52 +492,68 @@ a boot menu if several operating systems are available on the same computer.")
             boot_partition_feedline = []
             try_prober = commands.getoutput('LANG=C os-prober')
             if 'os-prober' not in try_prober :
-                boot_partition_output = try_prober.splitlines()
-                for line in boot_partition_output:
-                    if line.startswith("/dev/") :
-                        # Get the partition device
-                        partition_device = line.split(':')[0]
-                        # Check that it is not a Windows factory settings recovery partition...
-                        lshal_recovery_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 -i recovery'
-                        partition_is_recovery = commands.getoutput(lshal_recovery_output)
-                        if partition_is_recovery == '' :
-                            # Get the operating system
+#                boot_partition_output = try_prober.splitlines()
+                boot_partition_output = ["No volume groups found"]
+                if len( boot_partition_output) == 1 :
+                    for line in boot_partition_output:
+                        # Get a list of all partitions
+                        blkid_list = commands.getoutput('blkid | grep -iv recovery | grep -v ' + root_device_uuid + ' | grep -v swap').splitlines()
+                        for i in blkid_list :
+                            partition = i.split()[0][:-1]
                             try :
-                                operating_system = line.split(':')[1].split()[0]
-                            except IndexError :
-                                operating_system = line.split(':')[2]
-                            # Get the file system
-                            lshal_string_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 volume.fstype'
-                            file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                            boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
-                            boot_partition_feedline_list.append(boot_partition_feedline)
+                                partition_device, file_system, operating_system = check_if_bootable(partition)
+                                boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
+                                boot_partition_feedline_list.append(boot_partition_feedline)
+                            except TypeError :
+                                pass # this is not a bootable partition
+                else:
+                    for line in boot_partition_output:
+                        if line.startswith("/dev/") :
+                            # Get the partition device
+                            partition_device = line.split(':')[0]
+                            # Check that it is not a Windows factory settings recovery partition...
+                            recovery_output = 'blkid ' + partition_device + ' | grep -m 1 -i recovery'
+                            partition_is_recovery = commands.getoutput(recovery_output)
+                            if partition_is_recovery == '' :
+                                # Get the operating system
+                                try :
+                                    operating_system = line.split(':')[1].split()[0]
+                                except IndexError :
+                                    operating_system = line.split(':')[2]
+                                # Get the file system
+                                string_output = 'blkid ' + partition_device + ' | grep -m 1 TYPE'
+                                file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
+                                boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
+                                boot_partition_feedline_list.append(boot_partition_feedline)
             else:
                 error_dialog(_("\nSorry! os-prober, a dependency of LiloSetup appears to be missing. Please verify and correct.\n"))
                 sys.exit(1)
             # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
-            os.putenv("root_partition", "\'/\'")
-            this_os_main_partition = commands.getoutput("lshal | grep -B40  $root_partition | grep block.device")
-            try :
-                if '/dev/' in this_os_main_partition.split("'")[1]:
-                    # Get the partition device
-                    partition_device = this_os_main_partition.split("'")[1]
-                    # Get the file system
-                    lshal_string_output = 'lshal | grep -B1 -A40 ' + partition_device + ' | grep -m 1 volume.fstype'
-                    file_system = commands.getoutput(lshal_string_output).split("'")[1]
-                    # Get the operating system.
-                    try :
-                        version_file_path = glob.glob("/etc/*version*")[0]
-                        version_file = open(version_file_path)
-                        operating_system = version_file.read().split()[0]
-                    except :
-                        operating_system = "Unknown"
-                    # Put it all together
-                    boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
-                    boot_partition_feedline_list.append(boot_partition_feedline)
-                else:
-                    pass
-            except:
+            blkid_global_output = commands.getoutput('blkid')
+            for line in blkid_global_output.splitlines() :
+                if root_device_uuid in line :
+                    # Check if is a 'real' device and we are in a non-live environment
+                    root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split()[0]
+                    if root_device != "/dev/root" :
+                        # Yes, it is!
+                        break
+            if root_device != "/dev/root" :
+                # Get the file system
+                string_output = commands.getoutput('blkid | grep ' + root_device_uuid + ' | grep -m 1 TYPE')
+                file_system = string_output.split()[-1].split('"')[1]
+                # Get the operating system.
+                try :
+                    version_file_path = glob.glob("/etc/*version*")[0]
+                    version_file = open(version_file_path)
+                    operating_system = version_file.read().split()[0]
+                except :
+                    operating_system = "Unknown"
+                # Put it all together
+                boot_partition_feedline = [root_device[:-1], file_system, operating_system, boot_label]
+                boot_partition_feedline_list.append(boot_partition_feedline)
+            else: # We probably are in a LiveCD environment.
                 pass
+
             # Insert Menu Label editable combobox
             # We get this gui handle here to ensure it is reset to its default in the event of a configuration undo
             self.BootLabelListStore = builder.get_object("boot_label_list_store")

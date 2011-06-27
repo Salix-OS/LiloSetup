@@ -1,6 +1,7 @@
 version 0.2.9
  * Replaced all lshal instances with blkid for some info detection
  * Added basic detection for bootable partitions in rare case where os-prober would fail
+ * Added translations in Arabic and Russian
 
 version 0.2.8
  * Fixed auto-mounting of primary target partition in LiveCDs not using /dev/root

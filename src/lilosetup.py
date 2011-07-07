@@ -22,7 +22,13 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '20110611'
+# version = '20110706'
+
+# TODO Much needed code cleanup and organization
+# TODO Add GUI option for choosing BMP file (or not)
+# TODO Add GUI option for Addappend and Append lines
+# TODO Add GUI option for selecting resolution (or leave on automatic)
+# TODO Improve basic bootable partition detection
 
 import shutil
 import subprocess
@@ -43,14 +49,31 @@ gettext.install("lilosetup", "/usr/share/locale", unicode=1)
 gtk.glade.bindtextdomain("lilosetup", "/usr/share/locale")
 gtk.glade.textdomain("lilosetup")
 
-# The following 4 functions were borrowed from ndisgtk (I think...)
-# The study of ndisgtk code taught me a lot when I first explored python/glade3 ;)
 
-# TODO Much needed code cleanup, there are a lot of repetitions that can be transformed into functions
-# TODO Add GUI option for choosing BMP file (or not)
-# TODO Add GUI option for Addappend and Append lines
-# TODO Add GUI option for selecting resolution (or leave on automatic)
-# TODO Improve basic bootable partition detection
+##### INITIALISATION #####
+
+
+### Set global variables ###
+
+# This will help us monitor if a label is already in use
+already_there = []
+# This will help us monitor whether the configuration file is succesfully created or not
+config_creation = []
+# This will help us to ensure at least one  partition has been configured
+partition_set = []
+# Initialize the temporary mountpoint lists
+temp_mount = []
+temp_dir = []
+# Initialize key mountpoints value
+temp_chroot_mnt = ''
+chroot_mnt = ''
+try :
+    root_device_uuid = commands.getoutput('blkid /dev/root').split()[1].split('"')[1]
+except IndexError :
+    root_device_uuid = 'none'
+
+
+### Set global functions ###
 
 # Info window skeleton:
 def info_dialog(message, parent = None):
@@ -101,26 +124,182 @@ def run_bash(cmd):
     out = p.stdout.read().strip()
     return out  #This is the stdout from the shell command
 
-# This will help us monitor if a label is already in use
-already_there = []
-# This will help us monitor whether the configuration file is succesfully created or not
-config_creation = []
-# This will help us to ensure at least one  partition has been configured
-partition_set = []
-# Initialize the temporary mountpoint lists
-temp_mount = []
-temp_dir = []
-# Initialize key mountpoints value
-temp_chroot_mnt = ''
-chroot_mnt = ''
-try :
-    root_device_uuid = commands.getoutput('blkid | grep "/dev/root"').split()[1].split('"')[1]
-except IndexError :
-    root_device_uuid = 'none'
-# Cleanup/Setup LiloSetup temporary work directory & configuration file
+# We may need to mount a partition temporarily
+global check_and_mount
+def check_and_mount(partition):
+    """
+    Checks if a partition is mounted
+    and mounts if necessary.
+    """
+    mount_info=commands.getoutput("mount").splitlines()
+    global partition_mountpoint
+    while mount_info:
+        if partition in mount_info[0]:
+            # The partition is mounted
+            partition_mountpoint = mount_info[0].split()[2]
+            break
+        mount_info.remove(mount_info[0])
+    if mount_info == [] :
+        # The partition is not mounted, we need to do it.
+        # Except if it is a swap or an extended partition
+
+        # Then we create the temporary mountpoint
+        temporary_montpoint = work_dir + partition.replace('dev', 'mnt')
+        partition_mountpoint = temporary_montpoint
+        try :
+            os.makedirs(temporary_montpoint)
+            temp_dir.append(temporary_montpoint)# allows clean deleting of temporary directories later
+        except OSError :
+            pass
+        # Then we mount the partition on it
+        subprocess.call("mount " + partition + " " + temporary_montpoint + " 2>/dev/null", shell=True)
+        temp_mount.append(temporary_montpoint) # allows clean unmounting of temporary mounting later
+
+# We may need to unmount a partition if necessary
+global check_and_unmount
+def check_and_unmount(partition):
+    """
+    Check if a partition is unmounted and unmounts if necessary
+    (only if it was mounted by LiloSetup).
+    """
+    mount_info=commands.getoutput("mount").splitlines()
+    while mount_info:
+        if partition in mount_info[0] :
+            # The partition is mounted, we need to unmount it and remove the temporary mountpoint.
+            # First we unmount the device but only if if was mounted by LiloSetup
+            temporary_montpoint = work_dir + partition.replace('dev', 'mnt')
+            subprocess.call("umount " + temporary_montpoint + " 2>/dev/null", shell=True)
+            try :
+                temp_mount.remove(temporary_montpoint)
+            except ValueError :
+                pass # Not there since it wasn't mounted by LiloSetup
+            # Then we remove the temporary mountpoint
+            try:
+                os.removedirs(temporary_montpoint)
+            except OSError:
+                pass # The directory doesn't exist since it wasn't created by LiloSetup
+            try :
+                temp_dir.remove(temporary_montpoint)
+            except ValueError :
+                pass # Not there since it wasn't created by LiloSetup
+        mount_info.remove(mount_info[0])
+
+# We need to know if a partition holds a boot system or not (basic substitute for os-prober)
+global check_if_bootable
+def check_if_bootable(partition):
+    """
+    Check if a partition is bootable and retrieve basic info.
+    """
+    partition_device = ''
+    file_system = ''
+    operating_system = ''
+    kernel_check = []
+    win_boot_flag = []
+    check_and_mount(partition)
+    # check for a Linux kernel
+    kernel_check = glob.glob(partition_mountpoint + "/boot/vmlinuz*")
+    win_boot_flag = commands.getoutput('fdisk -l | grep "\*" | grep ' + partition )
+    # Check for Linux partition
+    if kernel_check != [] :
+        # This is probably a Linux bootable partititon, let's check it out a bit more
+        if os.path.isdir(partition_mountpoint + '/proc') is True and os.path.isdir(partition_mountpoint + '/sys') is True:
+            # Define the partition device
+            partition_device = partition
+            # Get the file system
+            string_output = 'blkid ' + partition + ' | grep -m 1 TYPE'
+            file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
+            # Define the operating system.
+            try :
+                version_file_path = glob.glob(partition_mountpoint + "/etc/*version*")[0]
+                version_file = open(version_file_path)
+                operating_system = version_file.read().split()[0]
+            except :
+                operating_system = "Unknown"
+            return partition_device, file_system, operating_system
+    # else check for Windows boot partitions
+    elif partition in win_boot_flag :
+        # This could be a Windows bootable system, let's check it out a bit more
+        win_path =["/Windows/System32", "/WINDOWS/system32", "/WINDOWS/SYSTEM32", "/windows/system32"]
+        win_file =["/IO.SYS", "/io.sys", "/MSDOS.SYS", "/msdos.sys", "/KERNEL.SYS", "/kernel.sys", "/COMMAND.COM", "/command.com", "/CONFIG.SYS", "/config.sys", "/autoexec.bat", "/AUTOEXEC.BAT", "bootmgr"]
+        for i in win_path :
+            winboot_dir_path = os.path.isdir(partition_mountpoint + i)
+            if winboot_dir_path is True :
+                for i in win_file :
+                    winboot_file_path = os.path.isfile(partition_mountpoint + i)
+                    if winboot_file_path is True :
+                        # Define the partition device
+                        partition_device = partition
+                        # Get the file system
+                        string_output = 'blkid ' + partition + ' | grep -m 1 TYPE'
+                        file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
+                        # Define the operating system.
+                        operating_system = "Windows"
+                        return partition_device, file_system, operating_system
+                        break
+    check_and_unmount(partition)
+
+# Purge any LiloSeup customization & reverts to initial defaults
+def lilosetup_undo():
+    """
+    Unmount temp mountpoints & cleanup some temp files
+
+    """
+    global temp_mount, temp_dir
+    # First we unmount the various temporary mountpoints
+    while temp_mount :
+        subprocess.call("umount " + temp_mount[0] + " 2>/dev/null", shell=True)
+        temp_mount.remove(temp_mount[0])
+    # Then we remove the temporary mountpoints created by LiloSetup
+    while temp_dir :
+        try:
+            os.removedirs(temp_dir[0])
+        except OSError:
+            pass
+        temp_dir.remove(temp_dir[0])
+    # Last we unmount & remove the temporary mountpoint for the temporary chrooted partition
+    if temp_chroot_mnt:
+        subprocess.call("umount " + temp_chroot_mnt + " 2>/dev/null", shell=True)
+    try:
+        os.removedirs(temp_chroot_mnt)
+    except OSError:
+        pass
+    # Removal of the temporary configuration file
+    try:
+        os.remove(config_location)
+    except OSError:
+        pass
+
+# Clean up all temporary files and directories when exiting
+def lilosetup_quit():
+    """
+    Unmount temp mountpoints, cleanup all temp files & close LiloSetup window.
+
+    """
+    if partition_set == [] :
+        pass
+    else:
+        lilosetup_undo()
+    # Removal of the configuration stub file
+    try:
+        os.remove(stub_location)
+    except OSError:
+        pass
+    # Removal of the temporary work directory
+    try :
+        # We are using os.rmdir instead of os.rmtree in case some partitions would still be mounted on the workdirectory
+        os.rmdir(work_dir)
+    except OSError:
+        pass
+    # Quit LiloSetup GUI
+    gtk.main_quit()
+
+
+### Set work directory ###
+
 work_dir = "/tmp/lilosetup"
 try :
-     # We are using os.rmdir instead of os.rmtree in case some partitions would still be mounted on the workdirectory
+    # We are using os.rmdir instead of os.rmtree in case some partitions would still
+    # be mounted on a work directory created by a previous use of LiloSetup
     os.rmdir(work_dir)
 except OSError:
     pass
@@ -128,29 +307,37 @@ try :
     os.mkdir(work_dir)
 except OSError:
     pass
+
+### Set configuration file stub ###
+
 config_location = work_dir + "/lilosetup.conf"
 try :
     os.remove(config_location)
 except OSError:
     pass
-# Build LiloSetup configuration file stub:
-# Get the booting device, should be the first hard drive
-boot_partition = commands.getoutput('fdisk -l | grep "dev" -m 1 | cut -f2 -d " "').strip(':')
-# Create the configuration file stub
+
+# Retrieve the boot device with the MBR that will host LILO
+# Preferably the first hard drive having a partition with a boot flag,
+boot_partition = commands.getoutput('fdisk -l | grep "dev" | grep "*" -m 1 | cut -f1 -d " "').rstrip('0123456789')
+# Else, just the first hard drive
+if boot_partition == "" :
+    boot_partition = commands.getoutput('fdisk -l | grep "dev" -m 1 | cut -f2 -d " "').strip(':')
 stub_location = work_dir + "/lilosetup.stub"
-# Delete any old stub if present
+
+# Purge eventual stub remnant from previous use of LiloSetip
 try:
     os.remove(stub_location)
 except OSError:
     pass
-# The following defaults reflect Salix' customisations for Lilo
+
+# New stub with following defaults that reflect Salix' customisations for Lilo
 stub = open(stub_location, "w")
 stub.write(_("# LILO configuration file\n\
 # Generated by LiloSetup\n"))
 stub.write("#\n")
 stub.write(_("# Start LILO global section\n\
 # Append any additional kernel parameters:\n"))
-stub.write('append = "quiet vt.default_utf8=1 "\n')
+stub.write('append = "vt.default_utf8=1 "\n')
 stub.write("boot = " + boot_partition + "\n")
 stub.write("\n")
 stub.write(_("# Boot BMP Image.\n\
@@ -185,12 +372,16 @@ stub.write("reset\n")
 stub.write("\n")
 stub.write(_("# Normal VGA console\n"))
 stub.write("# vga = normal\n")
+stub.write(_("# VESA framebuffer console @ 1600x1200x16m\n"))
+stub.write("# vga=799\n")
 stub.write(_("# VESA framebuffer console @ 1600x1200x64k\n"))
 stub.write("# vga=798\n")
 stub.write(_("# VESA framebuffer console @ 1600x1200x32k\n"))
 stub.write("# vga=797\n")
 stub.write(_("# VESA framebuffer console @ 1600x1200x256\n"))
 stub.write("# vga=796\n")
+stub.write(_("# VESA framebuffer console @ 1280x1024x16m\n"))
+stub.write("# vga=795\n")
 stub.write(_("# VESA framebuffer console @ 1280x1024x64k\n"))
 stub.write("# vga=794\n")
 stub.write(_("# VESA framebuffer console @ 1280x1024x32k\n"))
@@ -203,6 +394,8 @@ stub.write(_("# VESA framebuffer console @ 1024x768x32k\n"))
 stub.write("# vga=790\n")
 stub.write(_("# VESA framebuffer console @ 1024x768x256\n"))
 stub.write("# vga=773\n")
+stub.write(_("# VESA framebuffer console @ 800x600x16m\n"))
+stub.write("# vga=789\n")
 stub.write(_("# VESA framebuffer console @ 800x600x64k\n"))
 stub.write("# vga=788\n")
 stub.write(_("# VESA framebuffer console @ 800x600x32k\n"))
@@ -234,12 +427,14 @@ stub.write(_('# If later on you want to use this configuration file directly\n\
 # mountpoints.\n'))
 stub.close()
 
-# Let's now set the appropriate framebuffer...
-# Setting bash environment variable
-os.putenv("stubfile", stub_location)
+# Set the appropriate framebuffer
+os.putenv("stubfile", stub_location) # Sets the variable 'stubfile' in bash environment
 
-# This function gives a failsafe option in case of trouble with framebuffer:
 def failsafe_fb():
+    """
+    Fall back on a failsafe framebuffer option in lilosetup configuration file
+
+    """
     FBLINE= """
     cat $stubfile | grep "vga = normal" -m 1 -n | cut -f1 -d :
     """
@@ -248,14 +443,13 @@ def failsafe_fb():
     set_framebuffer = "sed $editline's/# //' -i $stubfile"
     subprocess.call(set_framebuffer, shell=True)
 
-# We first check if framebuffer is available
-
+# Check if framebuffer is available
 USEDFB = """
 fbset | grep -w mode | cut -f2 -d " " | cut -f1 -d "-" | sed 's/"//'
 """
 if run_bash(USEDFB):
     os.putenv("setfb", run_bash(USEDFB))
-    # We also need to make sure that the adequate framebuffer resolution is in the stub
+    # Ensure the adequate framebuffer resolution is in the stub
     FBLINE= """
     cat $stubfile | grep "@ $setfb" -m 1 -n | cut -f1 -d :
     """
@@ -265,66 +459,15 @@ if run_bash(USEDFB):
         os.putenv("editline", repr(fblineplus))
         set_framebuffer = "sed $editline's/# //' -i $stubfile"
         subprocess.call(set_framebuffer, shell=True)
-    # If no fitting resolution is available from the stub then failsafe to vga-normal
+    # If no fitting resolution is available from the stub, then failsafe to vga-normal
     else :
         failsafe_fb()
-# If framebuffer is not available, we can use failsafe option again
+# If framebuffer is not available, then failsafe to vga-normal
 else :
     failsafe_fb()
 
-def lilosetup_undo():
-    """
-    Unmount temp mountpoints & cleanup some temp files
 
-    """
-    global temp_mount, temp_dir
-    # First we unmount the various temporary mountpoints
-    while temp_mount :
-        subprocess.call("umount " + temp_mount[0] + " 2>/dev/null", shell=True)
-        temp_mount.remove(temp_mount[0])
-    # Then we remove the temporary mountpoints created by LiloSetup
-    while temp_dir :
-        try:
-            os.removedirs(temp_dir[0])
-        except OSError:
-            pass
-        temp_dir.remove(temp_dir[0])
-    # Last we unmount & remove the temporary mountpoint for the temporary chrooted partition
-    if temp_chroot_mnt:
-        subprocess.call("umount " + temp_chroot_mnt + " 2>/dev/null", shell=True)
-    try:
-        os.removedirs(temp_chroot_mnt)
-    except OSError:
-        pass
-    # Removal of the temporary configuration file
-    try:
-        os.remove(config_location)
-    except OSError:
-        pass
-
-def lilosetup_quit():
-    """
-    Unmount temp mountpoints, cleanup all temp files & close LiloSetup window.
-
-    """
-    if partition_set == [] :
-        pass
-    else:
-        lilosetup_undo()
-
-    # Removal of the configuration stub file
-    try:
-        os.remove(stub_location)
-    except OSError:
-        pass
-    # Removal of the temporary work directory
-    try :
-        # We are using os.rmdir instead of os.rmtree in case some partitions would still be mounted on the workdirectory
-        os.rmdir(work_dir)
-    except OSError:
-        pass
-    # Quit LiloSetup GUI
-    gtk.main_quit()
+##### GUI CONSTRUCTION #####
 
 class LiloSetup:
     """
@@ -367,123 +510,7 @@ A bootloader is required to load the main operating system of a computer and wil
 a boot menu if several operating systems are available on the same computer.")
         self.LabelContextHelp.set_markup(context_intro)
 
-        # We may need to mount a partition temporarily
-        global check_and_mount
-        def check_and_mount(partition):
-            """
-            Checks if a partition is mounted
-            and mounts if it is not.
-            """
-            mount_info=commands.getoutput("mount").splitlines()
-            global partition_mountpoint
-            while mount_info:
-                if partition in mount_info[0]:
-                    # The partition is mounted                    
-                    partition_mountpoint = mount_info[0].split()[2]
-                    break
-                mount_info.remove(mount_info[0])
-            if mount_info == [] :
-                # The partition is not mounted, we need to do it.
-                # Except if it is a swap or an extended partition
-
-                # Then we create the temporary mountpoint
-                temporary_montpoint = work_dir + partition.replace('dev', 'mnt')
-                partition_mountpoint = temporary_montpoint
-                try :
-                    os.makedirs(temporary_montpoint)
-                    temp_dir.append(temporary_montpoint)# allows clean deleting of temporary directories later
-                except OSError :
-                    pass
-                # Then we mount the partition on it
-                subprocess.call("mount " + partition + " " + temporary_montpoint + " 2>/dev/null", shell=True)
-                temp_mount.append(temporary_montpoint) # allows clean unmounting of temporary mounting later
-
-        # We may need to unmount a partition if necessary
-        global check_and_unmount
-        def check_and_unmount(partition):
-            """
-            Checks if a partition is unmounted and unmounts if it is not.
-            But only if it was mounted by Lilosetup.
-            """
-            mount_info=commands.getoutput("mount").splitlines()
-            while mount_info:
-                if partition in mount_info[0] :
-                    # The partition is mounted, we need to unmount it and remove the temporary mountpoint.
-                    # First we unmount the device but only if if was mounted by LiloSetup
-                    temporary_montpoint = work_dir + partition.replace('dev', 'mnt')
-                    subprocess.call("umount " + temporary_montpoint + " 2>/dev/null", shell=True)
-                    try :
-                        temp_mount.remove(temporary_montpoint)
-                    except ValueError :
-                        pass # Not there since it wasn't mounted by LiloSetup
-                    # Then we remove the temporary mountpoint
-                    try:
-                        os.removedirs(temporary_montpoint)
-                    except OSError:
-                        pass # The directory doesn't exist since it wasn't created by LiloSetup
-                    try :
-                        temp_dir.remove(temporary_montpoint)
-                    except ValueError :
-                        pass # Not there since it wasn't created by LiloSetup
-                mount_info.remove(mount_info[0])
-
-        # In some LiveCDs os-prober may not work properly so we have to do a 'boot' basic check ourselves
-        global check_if_bootable
-        def check_if_bootable(partition):
-            """
-            Basic substitute for os-prober, checks if a partition is bootable
-            and gets basic info from it.
-            """
-            partition_device = ''
-            file_system = ''
-            operating_system = ''
-            kernel_check = []
-            win_boot_flag = []
-            check_and_mount(partition)
-            # check for a Linux kernel
-            kernel_check = glob.glob(partition_mountpoint + "/boot/vmlinuz*")
-            win_boot_flag = commands.getoutput('fdisk -l | grep "\*" | grep ' + partition )
-            # Check for Linux partition
-            if kernel_check != [] :
-                # This is probably a Linux bootable partititon, let's check it out a bit more
-                if os.path.isdir(partition_mountpoint + '/proc') is True and os.path.isdir(partition_mountpoint + '/sys') is True:
-                    # Define the partition device
-                    partition_device = partition
-                    # Get the file system
-                    string_output = 'blkid ' + partition + ' | grep -m 1 TYPE'
-                    file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
-                    # Define the operating system.
-                    try :
-                        version_file_path = glob.glob(partition_mountpoint + "/etc/*version*")[0]
-                        version_file = open(version_file_path)
-                        operating_system = version_file.read().split()[0]
-                    except :
-                        operating_system = "Unknown"
-                    return partition_device, file_system, operating_system
-            # else check for Windows boot partitions
-            elif partition in win_boot_flag :
-                # This could be a Windows bootable system, let's check it out a bit more
-                win_path =["/Windows/System32", "/WINDOWS/system32", "/WINDOWS/SYSTEM32", "/windows/system32"]
-                win_file =["/IO.SYS", "/io.sys", "/MSDOS.SYS", "/msdos.sys", "/KERNEL.SYS", "/kernel.sys", "/COMMAND.COM", "/command.com", "/CONFIG.SYS", "/config.sys", "/autoexec.bat", "/AUTOEXEC.BAT", "bootmgr"]
-                for i in win_path :
-                    winboot_dir_path = os.path.isdir(partition_mountpoint + i)
-                    if winboot_dir_path is True :
-                        for i in win_file :
-                            winboot_file_path = os.path.isfile(partition_mountpoint + i)
-                            if winboot_file_path is True :
-                                # Define the partition device
-                                partition_device = partition
-                                # Get the file system
-                                string_output = 'blkid ' + partition + ' | grep -m 1 TYPE'
-                                file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
-                                # Define the operating system.
-                                operating_system = "Windows"
-                                return partition_device, file_system, operating_system
-                                break
-            check_and_unmount(partition)
-            
-
-        # Initialize the partition list
+        ### Initialize the partition list ###
         global setup_partition_list
         def setup_partition_list():
             """
@@ -499,56 +526,29 @@ a boot menu if several operating systems are available on the same computer.")
             operating_system = ''
             boot_label = _('Set...')
             boot_partition_feedline = []
-            try_prober = commands.getoutput('LANG=C os-prober')
-            if 'os-prober' not in try_prober :
-                boot_partition_output = try_prober.splitlines()
-                if len( boot_partition_output) == 1 :
-                    for line in boot_partition_output:
-                        # Get a list of all partitions
-                        blkid_list = commands.getoutput('blkid | grep -iv recovery | grep -v ' + root_device_uuid + ' | grep -v swap').splitlines()
-                        for i in blkid_list :
-                            partition = i.split()[0][:-1]
-                            try :
-                                partition_device, file_system, operating_system = check_if_bootable(partition)
-                                boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
-                                boot_partition_feedline_list.append(boot_partition_feedline)
-                            except TypeError :
-                                pass # this is not a bootable partition
-                else:
-                    for line in boot_partition_output:
-                        if line.startswith("/dev/") :
-                            # Get the partition device
-                            partition_device = line.split(':')[0]
-                            # Check that it is not a Windows factory settings recovery partition...
-                            recovery_output = 'blkid ' + partition_device + ' | grep -m 1 -i recovery'
-                            partition_is_recovery = commands.getoutput(recovery_output)
-                            if partition_is_recovery == '' :
-                                # Get the operating system
-                                try :
-                                    operating_system = line.split(':')[1].split()[0]
-                                except IndexError :
-                                    operating_system = line.split(':')[2]
-                                # Get the file system
-                                string_output = 'blkid ' + partition_device + ' | grep -m 1 TYPE'
-                                file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
-                                boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
-                                boot_partition_feedline_list.append(boot_partition_feedline)
-            else:
-                error_dialog(_("\nSorry! os-prober, a dependency of LiloSetup appears to be missing. Please verify and correct.\n"))
-                sys.exit(1)
-            # Add the main partition of the os we are in ( partition mounted on / is not taken care by os-prober)
+            # Get a list of all partitions
+            blkid_list = commands.getoutput('blkid -c /dev/null | grep -iv recovery | grep -v ' + root_device_uuid + ' | grep -v swap').splitlines()
+            for i in blkid_list :
+                partition = i.split()[0][:-1]
+                try :
+                    partition_device, file_system, operating_system = check_if_bootable(partition)
+                    boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
+                    boot_partition_feedline_list.append(boot_partition_feedline)
+                except TypeError :
+                    pass # this is not a bootable partition
+            # Add the main partition of the os we are in
             blkid_global_output = commands.getoutput('blkid')
-            if root_device_uuid != 'none' : # In which case we would most probably be in a LiveCD
-                root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split()[0]
+            if root_device_uuid != 'none' : # In which case we could otherwise be in a LiveCD
+                root_device = commands.getoutput('blkid -c /dev/null | grep ' + root_device_uuid).split()[0]
                 for line in blkid_global_output.splitlines() :
                     if root_device_uuid in line :
-                        # Check if is a 'non-loop' device and we are in a non-live environment
+                        # Check that it is a 'non-loop' device and that we are indeed in a non-live environment
                         if root_device != "/dev/root" :
                             # Yes, we are in a non-live environment, we need to add that partititon to lilosetup view
                             break # we break this process so that we can go on with adding it
                         else : # we are in a LiveCD , no need to add root
                             pass # so we do nothing & check the next partition
-                if root_device != "/dev/root" : # Keep that check
+                if root_device != "/dev/root" : # Keep that extra check to ensure there will be no double entries
                     # Get the file system
                     string_output = commands.getoutput('blkid | grep ' + root_device_uuid + ' | grep -m 1 TYPE')
                     file_system = string_output.split()[-1].split('"')[1]

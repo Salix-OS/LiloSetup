@@ -558,7 +558,7 @@ a boot menu if several operating systems are available on the same computer.")
             # Add the main partition of the os we are in
             blkid_global_output = commands.getoutput('blkid')
             if root_device_uuid != 'none' : # In which case we could otherwise be in a LiveCD
-                root_device = commands.getoutput('blkid -c /dev/null | grep ' + root_device_uuid).split()[0]
+                root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split()[0]
                 for line in blkid_global_output.splitlines() :
                     if root_device_uuid in line :
                         # Check that it is a 'non-loop' device and that we are indeed in a non-live environment

@@ -517,7 +517,7 @@ msgid ""
 "continue?"
 msgstr ""
 "Vous êtes sur le point d'installer un nouveau gestionnaire de démarrage "
-"LILO. Êtes vous certains de vouloir continuer ?"
+"LILO. Êtes vous certain de vouloir continuer ?"
 
 #: src/lilosetup.py:1124
 msgid ""

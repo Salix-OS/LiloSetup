@@ -163,7 +163,7 @@
                             <signal name="enter_notify_event" handler="on_boot_partition_treeview_enter_notify_event"/>
                             <child>
                               <object class="GtkTreeViewColumn" id="partition_treeviewcolumn">
-                                <property name="title">Partition</property>
+                                <property name="title" translatable="yes">Partition</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="partition_cellrenderertext"/>
@@ -175,7 +175,7 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="filesystem_treeviewcolumn">
-                                <property name="title">File system</property>
+                                <property name="title" translatable="yes">File system</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="fs_cellrenderertext"/>
@@ -187,7 +187,7 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="os_treeviewcolumn">
-                                <property name="title">Operating system</property>
+                                <property name="title" translatable="yes">Operating system</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="os_cellrenderertext"/>
@@ -200,7 +200,7 @@
                             <child>
                               <object class="GtkTreeViewColumn" id="label_treeviewcolumn">
                                 <property name="spacing">3</property>
-                                <property name="title">Boot menu label</property>
+                                <property name="title" translatable="yes">Boot menu label</property>
                                 <property name="expand">True</property>
                                 <child>
                                   <object class="GtkCellRendererPixbuf" id="label_cellrendererpixbuf"/>

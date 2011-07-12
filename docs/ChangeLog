@@ -3,6 +3,7 @@ version 0.2.9
  * Removed dependency on os-prober
  * Added basic detection for bootable partitions
  * Added translations in Arabic and Russian
+ * Made column headers translatable
  * Some code improvement
 
 version 0.2.8

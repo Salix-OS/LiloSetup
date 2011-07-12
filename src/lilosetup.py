@@ -22,13 +22,14 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '20110706'
+# version = '0.2.9'
 
-# TODO Much needed code cleanup and organization
-# TODO Add GUI option for choosing BMP file (or not)
+# TODO Code cleanup and re-organization (external function library?)
+# TODO Add GUI option for choosing graphic file (or not)
 # TODO Add GUI option for Addappend and Append lines
 # TODO Add GUI option for selecting resolution (or leave on automatic)
-# TODO Improve basic bootable partition detection
+# TODO Move lilosetup.conf stub to an external file
+# TODO Setting and translation of column headers in the py file
 
 import shutil
 import subprocess
@@ -188,7 +189,7 @@ def check_and_unmount(partition):
 global check_if_bootable
 def check_if_bootable(partition):
     """
-    Check if a partition is bootable and retrieve basic info.
+    Check if a partition is bootable and if so, retrieve basic info from it.
     """
     partition_device = ''
     file_system = ''
@@ -210,11 +211,29 @@ def check_if_bootable(partition):
             file_system = commands.getoutput(string_output).split()[-1].split('"')[1]
             # Define the operating system.
             try :
-                version_file_path = glob.glob(partition_mountpoint + "/etc/*version*")[0]
-                version_file = open(version_file_path)
-                operating_system = version_file.read().split()[0]
+                version_file_path = (partition_mountpoint + "/etc/lsb-release")
+                version_file = open(version_file_path, "r")
+                version_file_lines = version_file.read().splitlines()
+                for line in version_file_lines :
+                    if "DISTRIB_ID" in line :
+                        operating_system = line.split("=")[1]
+                        version_file.close()
+                        break
             except :
-                operating_system = "Unknown"
+                try :
+                    version_file_path = glob.glob(partition_mountpoint + "/etc/*release*")[0]
+                    version_file = open(version_file_path, "r")
+                    operating_system = version_file.read().split()[0]
+                    version_file.close()
+                except :
+                    try :
+                        version_file_path = glob.glob(partition_mountpoint + "/etc/*version*")[0]
+                        version_file = open(version_file_path, "r")
+                        operating_system = version_file.read().split()[0]
+                        version_file.close()
+                    except:
+                        version_file.close()
+                        operating_system = "Unknown"
             return partition_device, file_system, operating_system
     # else check for Windows boot partitions
     elif partition in win_boot_flag :
@@ -557,6 +576,7 @@ a boot menu if several operating systems are available on the same computer.")
                         version_file_path = glob.glob("/etc/*version*")[0]
                         version_file = open(version_file_path)
                         operating_system = version_file.read().split()[0]
+                        version_file.close()
                     except :
                         operating_system = "Unknown"
                     # Put it all together

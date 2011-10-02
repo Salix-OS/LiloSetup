@@ -498,7 +498,7 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">lilosetup_main</property>
     <property name="program_name">LiloSetup</property>
-    <property name="version">0.2.9.1/property>
+    <property name="version">0.2.9.1</property>
     <property name="copyright" translatable="yes">A simple GUI interface to set-up LILO.
 
 Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>

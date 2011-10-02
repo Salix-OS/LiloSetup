@@ -5,8 +5,8 @@ VER=$(grep 'version =' src/$PKGNAME.py | head -n 1 | sed "s/.*'\(.*\)'/\1/")
 
 cd $(dirname $0)
 
-install -d -m 755 $DESTDIR/usr/doc/$PKGNAME-$VER
 install -d -m 755 $DESTDIR/install
+install -d -m 755 $DESTDIR/usr/doc/$PKGNAME-$VER
 install -d -m 755 $DESTDIR/usr/sbin
 install -d -m 755 $DESTDIR/usr/share/applications
 install -d -m 755 $DESTDIR/usr/share/icons/hicolor/24x24/apps
@@ -15,7 +15,8 @@ install -d -m 755 $DESTDIR/usr/share/icons/hicolor/128x128/apps
 install -d -m 755 $DESTDIR/usr/share/icons/hicolor/scalable/apps
 install -d -m 755 $DESTDIR/usr/share/$PKGNAME
 
-install -m 755 src/$PKGNAME.py $DESTDIR/usr/sbin/$PKGNAME.py
+install -m 755 src/$PKGNAME.py \
+$DESTDIR/usr/sbin/$PKGNAME.py
 install -m 644 src/$PKGNAME.glade \
 $DESTDIR/usr/share/$PKGNAME
 install -m 644 src/$PKGNAME.desktop \

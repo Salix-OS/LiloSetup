@@ -1,3 +1,7 @@
+version 0.2.9.1
+ * Set column headers in the py file
+ * Fixed '/dev/root' partition showing in SaLT livecd
+
 version 0.2.9
  * Replaced all lshal instances with blkid to retrieve partition info
  * Removed dependency on os-prober

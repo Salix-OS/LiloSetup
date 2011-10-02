@@ -22,14 +22,13 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.9'
+# version = '0.2.9.1'
 
 # TODO Code cleanup and re-organization (external function library?)
 # TODO Add GUI option for choosing graphic file (or not)
 # TODO Add GUI option for Addappend and Append lines
 # TODO Add GUI option for selecting resolution (or leave on automatic)
 # TODO Move lilosetup.conf stub to an external file
-# TODO Setting and translation of column headers in the py file
 
 import shutil
 import subprocess
@@ -515,11 +514,20 @@ class LiloSetup:
         self.UpButton = builder.get_object("up_button")
         self.DownButton = builder.get_object("down_button")
         self.LabelCellRendererCombo = builder.get_object("label_cellrenderercombo")
+        self.PartitionTreeViewColumn = builder.get_object("partition_treeviewcolumn")
+        self.FileSystemTreeViewColumn = builder.get_object("filesystem_treeviewcolumn")
+        self.OsTreeViewColumn = builder.get_object("os_treeviewcolumn")
         self.LabelTreeViewColumn = builder.get_object("label_treeviewcolumn")
         self.LabelContextHelp = builder.get_object("label_context_help")
 
         # Connect signals
         builder.connect_signals(self)
+
+        # Set the column names
+        self.PartitionTreeViewColumn.set_title(_('Partition'))
+        self.FileSystemTreeViewColumn.set_title(_('File system'))
+        self.OsTreeViewColumn.set_title(_('Operating system'))
+        self.LabelTreeViewColumn.set_title(_('Boot menu label'))
 
         # Initialize the contextual help box
         global context_intro
@@ -548,7 +556,7 @@ a boot menu if several operating systems are available on the same computer.")
             # Get a list of all partitions
             blkid_list = commands.getoutput('blkid -c /dev/null | grep -iv recovery | grep -v ' + root_device_uuid + ' | grep -v swap').splitlines()
             for i in blkid_list :
-                partition = i.split()[0][:-1]
+                partition = i.split(':')[0]
                 try :
                     partition_device, file_system, operating_system = check_if_bootable(partition)
                     boot_partition_feedline = [partition_device, file_system, operating_system, boot_label]
@@ -558,7 +566,7 @@ a boot menu if several operating systems are available on the same computer.")
             # Add the main partition of the os we are in
             blkid_global_output = commands.getoutput('blkid')
             if root_device_uuid != 'none' : # In which case we could otherwise be in a LiveCD
-                root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split()[0]
+                root_device = commands.getoutput('blkid | grep ' + root_device_uuid).split(':')[0]
                 for line in blkid_global_output.splitlines() :
                     if root_device_uuid in line :
                         # Check that it is a 'non-loop' device and that we are indeed in a non-live environment
@@ -580,7 +588,7 @@ a boot menu if several operating systems are available on the same computer.")
                     except :
                         operating_system = "Unknown"
                     # Put it all together
-                    boot_partition_feedline = [root_device[:-1], file_system, operating_system, boot_label]
+                    boot_partition_feedline = [root_device, file_system, operating_system, boot_label]
                     boot_partition_feedline_list.append(boot_partition_feedline)
                 else: # We probably are in a LiveCD environment.
                     pass

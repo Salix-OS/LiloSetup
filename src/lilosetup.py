@@ -336,10 +336,10 @@ except OSError:
 
 # Retrieve the boot device with the MBR that will host LILO
 # Preferably the first hard drive having a partition with a boot flag,
-boot_partition = commands.getoutput('fdisk -l | grep "dev" | grep "*" -m 1 | cut -f1 -d " "').rstrip('0123456789')
+boot_partition = commands.getoutput('fdisk -l | grep "^/dev" | grep "*" -m 1 | cut -f1 -d " "').rstrip('0123456789')
 # Else, just the first hard drive
 if boot_partition == "" :
-    boot_partition = commands.getoutput('fdisk -l | grep "dev" -m 1 | cut -f2 -d " "').strip(':')
+    boot_partition = commands.getoutput('fdisk -l | grep "^/dev" -m 1 | cut -f1 -d " "').rstrip('0123456789')
 stub_location = work_dir + "/lilosetup.stub"
 
 # Purge eventual stub remnant from previous use of LiloSetip
@@ -357,6 +357,8 @@ stub.write(_("# Start LILO global section\n\
 # Append any additional kernel parameters:\n"))
 stub.write('append = "vt.default_utf8=1 "\n')
 stub.write("boot = " + boot_partition + "\n")
+stub.write("lba32\n")
+stub.write("compact\n")
 stub.write("\n")
 stub.write(_("# Boot BMP Image.\n\
 # Bitmap in BMP format: 640x480x8\n"))

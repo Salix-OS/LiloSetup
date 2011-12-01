@@ -22,7 +22,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.9.1'
+# version = '0.2.9.2'
 
 # TODO Code cleanup and re-organization (external function library?)
 # TODO Add GUI option for choosing graphic file (or not)

@@ -1,20 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+#   <djemos@slackel.gr>, 2011.
+# gapan <vlahavas@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 12:21+0200\n"
-"PO-Revision-Date: 2011-01-09 13:25+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"POT-Creation-Date: 2011-10-02 12:22+0200\n"
+"PO-Revision-Date: 2011-10-16 08:06+0000\n"
+"Last-Translator: djemos <djemos@slackel.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
@@ -39,15 +41,14 @@ msgid "About lilosetup"
 msgstr "Περί lilosetup"
 
 #: src/lilosetup.glade:502
-#, fuzzy
 msgid ""
 "A simple GUI interface to set-up LILO.\n"
 "\n"
 "Copyright © 2010-2011 Pierrick Le Brun"
 msgstr ""
-"Ένα απλό γραφικό περιβάλλον για τη ρύθμιση του LILO.\n"
+"Ένα απλό γραφικό περιβάλλον για την εγκατάσταση του LILO.\n"
 "\n"
-"Copyright © 2010 Pierrick Le Brun"
+"Copyright © 2010-2011 Pierrick Le Brun"
 
 #: src/lilosetup.glade:507
 msgid ""
@@ -87,7 +88,9 @@ msgstr ""
 
 #: src/lilosetup.glade:524
 msgid "translator-credits"
-msgstr "Γιώργος Βλαχάβας <vlahavas~at~gmail~dot~com>"
+msgstr ""
+"Γιώργος Βλαχάβας <vlahavas~at~gmail~dot~com>\n"
+"Δημήτρης Τζέμος <djemos~at~slackel~dor~gr>"
 
 #: src/lilosetup.py:353
 msgid ""
@@ -178,9 +181,8 @@ msgid "# Normal VGA console\n"
 msgstr "# Κανονική VGA οθόνη\n"
 
 #: src/lilosetup.py:393
-#, fuzzy
 msgid "# VESA framebuffer console @ 1600x1200x16m\n"
-msgstr "# Οθόνη VESA framebuffer @ 1600x1200x64k\n"
+msgstr "# Οθόνη VESA framebuffer @ 1600x1200x16m\n"
 
 #: src/lilosetup.py:395
 msgid "# VESA framebuffer console @ 1600x1200x64k\n"
@@ -195,9 +197,8 @@ msgid "# VESA framebuffer console @ 1600x1200x256\n"
 msgstr "# Οθόνη VESA framebuffer  @ 1600x1200x256\n"
 
 #: src/lilosetup.py:401
-#, fuzzy
 msgid "# VESA framebuffer console @ 1280x1024x16m\n"
-msgstr "# Οθόνη VESA framebuffer @ 1280x1024x64k\n"
+msgstr "# Οθόνη VESA framebuffer @ 1280x1024x16m\n"
 
 #: src/lilosetup.py:403
 msgid "# VESA framebuffer console @ 1280x1024x64k\n"
@@ -209,7 +210,7 @@ msgstr "# Οθόνη VESA framebuffer @ 1280x1024x32k\n"
 
 #: src/lilosetup.py:407
 msgid "# VESA framebuffer console @ 1280x1024x256\n"
-msgstr "# VESA framebuffer console @ 1280x1024x256\n"
+msgstr "# Οθόνη VESA framebuffer @ 1280x1024x256\n"
 
 #: src/lilosetup.py:409
 msgid "# VESA framebuffer console @ 1024x768x64k\n"
@@ -224,9 +225,8 @@ msgid "# VESA framebuffer console @ 1024x768x256\n"
 msgstr "# Οθόνη VESA framebuffer @ 1024x768x256\n"
 
 #: src/lilosetup.py:415
-#, fuzzy
 msgid "# VESA framebuffer console @ 800x600x16m\n"
-msgstr "# Οθόνη VESA framebuffer @ 800x600x64k\n"
+msgstr "# Οθόνη VESA framebuffer @ 800x600x16m\n"
 
 #: src/lilosetup.py:417
 msgid "# VESA framebuffer console @ 800x600x64k\n"
@@ -288,42 +288,35 @@ msgstr ""
 "# με το lilo στη γραμμή εντολών, χρησιμοποιήστε την ακόλουθη σύνταξη:\n"
 "# \"lilo -v -C /etc/lilosetup/conf\" αντί της παραδοσιακής\n"
 "# \"lilo -v\" εντολής. Πρέπει φυσικά να εκτελέσετε αυτή την εντολή από\n"
-"# το λειτουργικό σύστημα που περιέχει το αρχείο /etc/lilosetup.conf & να "
-"εξασφαλίσετε ότι\n"
-"# όλα τα διαμερίσματα που αναφέρονται μέσα σε αυτό είναι προσαρτημένα στα "
-"κατάλληλα\n"
+"# το λειτουργικό σύστημα που περιέχει το αρχείο /etc/lilosetup.conf & να εξασφαλίσετε ότι\n"
+"# όλα τα διαμερίσματα που αναφέρονται μέσα σε αυτό είναι προσαρτημένα στα κατάλληλα\n"
 "# σημεία προσάρτησης.\n"
 
 #: src/lilosetup.py:527
 msgid "Partition"
-msgstr ""
+msgstr "Κατάτμηση"
 
 #: src/lilosetup.py:528
 msgid "File system"
-msgstr ""
+msgstr "Το σύστημα αρχείων"
 
 #: src/lilosetup.py:529
 msgid "Operating system"
-msgstr ""
+msgstr "Λειτουργικό σύστημα"
 
 #: src/lilosetup.py:530
 msgid "Boot menu label"
-msgstr ""
+msgstr "Ετικέτα μενού εκκίνησης"
 
 #: src/lilosetup.py:534
 msgid ""
 "<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
 "\n"
-"A bootloader is required to load the main operating system of a computer and "
-"will initially display a boot menu if several operating systems are "
-"available on the same computer."
+"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
 msgstr ""
-"<b>To LiloSetup θα εγκαταστήσει ένα νέο LILO εκκινητή στον υπολογιστή σας.</"
-"b> \n"
+"<b>To LiloSetup θα εγκαταστήσει ένα νέο LILO εκκινητή στον υπολογιστή σας.</b> \n"
 "\n"
-"Ένας εκκινητής απαιτείται για να φορτώσει το κύριο λειτουργικό σύστημα ενός "
-"υπολογιστή και θα εμφανίσει αρχικά ένα μενού εκκίνησης εάν μερικά "
-"λειτουργικά συστήματα είναι διαθέσιμα στον ίδιο υπολογιστή."
+"Ένας εκκινητής απαιτείται για να φορτώσει το κύριο λειτουργικό σύστημα ενός υπολογιστή και θα εμφανίσει αρχικά ένα μενού εκκίνησης εάν μερικά λειτουργικά συστήματα είναι διαθέσιμα στον ίδιο υπολογιστή."
 
 #: src/lilosetup.py:554 src/lilosetup.py:640 src/lilosetup.py:952
 #: src/lilosetup.py:976 src/lilosetup.py:981
@@ -360,77 +353,46 @@ msgstr "Περί του Lilo Setup "
 
 #: src/lilosetup.py:845
 msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new "
-"operating system on your computer. \n"
-"LiloSetup can also be useful in the process of a disaster recovery in which "
-"case you may have to launch it from a LiveCD if you have lost all other "
-"means to boot into your system.\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
-"from a regular installed Linux system.  In both cases, it will setup a new "
-"LILO bootloader on the MBR of your first hard drive."
+"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
+"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
 msgstr ""
-"Είναι απαραίτητο να (επανα)ρυθμίσετε τον εκκινητή κάθε φορά που εγκαθιστάτε "
-"ένα νέο λειτουργικό σύστημα στον υπολογιστή σας. \n"
-"Το LiloSetup μπορεί επίσης να είναι χρήσιμο για να μπουτάρετε τον υπολογιστή "
-"σας μετά από καταστροφή του MBR και σε αυτή τη περίπτωση θα πρέπει να το "
-"τρέξετε από ένα LiveCD εάν έχετε εξαντλήσει όλους τους τρόπους για να "
-"εκκινήσετε το σύστημά σας.\n"
-"Το Lilosetup μπορεί να εκτελεστεί από ένα περιβάλλον Linux LiveCD ή από ένα "
-"κανονικά εγκατεστημένο σύστημα  Linux.  Και στις δυο περιπτώσεις, θα "
-"ρυθμίσει ένα νέο LILO εκκινητή στο MBR του πρώτου σκληρού δίσκου στον οποίο "
-"έχει τεθεί η σημαία εκκίνησης. (Boot Flag)"
+"Είναι απαραίτητο να (επανα)ρυθμίσετε τον εκκινητή κάθε φορά που εγκαθιστάτε ένα νέο λειτουργικό σύστημα στον υπολογιστή σας. \n"
+"Το LiloSetup μπορεί επίσης να είναι χρήσιμο για να μπουτάρετε τον υπολογιστή σας μετά από καταστροφή του MBR και σε αυτή τη περίπτωση θα πρέπει να το τρέξετε από ένα LiveCD εάν έχετε εξαντλήσει όλους τους τρόπους για να εκκινήσετε το σύστημά σας.\n"
+"Το Lilosetup μπορεί να εκτελεστεί από ένα περιβάλλον Linux LiveCD ή από ένα κανονικά εγκατεστημένο σύστημα  Linux.  Και στις δυο περιπτώσεις, θα ρυθμίσει ένα νέο LILO εκκινητή στο MBR του πρώτου σκληρού δίσκου στον οποίο έχει τεθεί η σημαία εκκίνησης. (Boot Flag)"
 
 #: src/lilosetup.py:856
 msgid ""
-"Here you must define a Boot menu label for each of the operating system that "
-"will be displayed on your bootloader menu.\n"
-"Any partition for which you do not set a  Boot menu label will not be "
-"configured and will not be displayed on the bootloader menu.\n"
-"If a few kernels are available within one partition, the label you have "
-"chosen for that partition will be appended numerically to create multiple "
-"menu entries for each of these kernels.\n"
+"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
+"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Εδώ πρέπει να καθορίσετε μια ετικέτα μενού εκκίνησης για κάθε λειτουργικό "
-"σύστημα που θα εμφανίζεται στον μενού του εκκινητή σας.\n"
-"Οποιοδήποτε διαμέρισμα για το οποίο δεν έχετε καθορίσει ένα μενού εκκίνησης "
-"δεν θα ρυθμιστεί και δεν θα εμφανιστεί στο μενού του εκκινητή.\n"
+"Εδώ πρέπει να καθορίσετε μια ετικέτα μενού εκκίνησης για κάθε λειτουργικό σύστημα που θα εμφανίζεται στον μενού του εκκινητή σας.\n"
+"Οποιοδήποτε διαμέρισμα για το οποίο δεν έχετε καθορίσει ένα μενού εκκίνησης δεν θα ρυθμιστεί και δεν θα εμφανιστεί στο μενού του εκκινητή.\n"
 "\n"
-"εάν μερικοί πυρήνες είναι διαθέσιμοι διαμέσου ενός διαμερίσματος, η ετικέτα "
-"που διαλέξατε για αυτό το διαμέρισμα θα ενημερωθεί αριθμητικά για να "
-"δημιουργήσει πολλαπλές επιλογές μενού για κάθε ένα από αυτούς τους πυρήνες.\n"
-"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
-"αρχείο διαμόρφωσης του Lilo (Lilosetup)."
+"εάν μερικοί πυρήνες είναι διαθέσιμοι διαμέσου ενός διαμερίσματος, η ετικέτα που διαλέξατε για αυτό το διαμέρισμα θα ενημερωθεί αριθμητικά για να δημιουργήσει πολλαπλές επιλογές μενού για κάθε ένα από αυτούς τους πυρήνες.\n"
+"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
 #: src/lilosetup.py:867
 msgid ""
-"Use this arrow if you want to move the selected Operating System up to a "
-"higher rank.\n"
-"The partition with the highest rank will be displayed on the first line of "
-"the bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
+"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο "
-"Λειτουργικό σύστημα σε ανώτερη θέση.\n"
-"Το διαμέρισμα με την ανώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή "
-"του μενού του εκκινητή.\n"
-"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
-"αρχείο διαμόρφωσης του Lilo (Lilosetup)."
+"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο Λειτουργικό σύστημα σε ανώτερη θέση.\n"
+"Το διαμέρισμα με την ανώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή του μενού του εκκινητή.\n"
+"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
 #: src/lilosetup.py:875
 msgid ""
-"Use this arrow if you want to move the selected Operating System down to a "
-"lower rank.\n"
-"The partition with the lowest rank will be displayed on the last line of the "
-"bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
+"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο "
-"Λειτουργικό σύστημα σε κατώτερη θέση προτίμησης.\n"
-"Το διαμέρισμα με την κατώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή "
-"του μενού του εκκινητή.\n"
-"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο "
-"αρχείο διαμόρφωσης του Lilo (Lilosetup)."
+"Χρησιμοποιήστε αυτό το βέλος αν θέλετε να μετακινήσετε το επιλεγμένο Λειτουργικό σύστημα σε κατώτερη θέση προτίμησης.\n"
+"Το διαμέρισμα με την κατώτερη θέση προτίμησης θα εμφανιστεί στη πρώτη γραμμή του μενού του εκκινητή.\n"
+"Οποιαδήποτε από αυτές τις ρυθμίσεις μπορεί να τροποποιηθεί με το χέρι στο αρχείο διαμόρφωσης του Lilo (Lilosetup)."
 
 #: src/lilosetup.py:884
 msgid "This will undo all settings (even manual modifications)."
@@ -439,16 +401,11 @@ msgstr ""
 
 #: src/lilosetup.py:888
 msgid ""
-"Experienced users have the possibility to manually edit LiloSetup "
-"configuration file (settings are identical to lilo.conf). \n"
-"Please do not temper with this file unless you know what you are doing and "
-"you have read its commented instructions regarding chrooted paths."
+"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
+"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
-"Οι έμπειροι χρήστες έχουν την δυνατότητα να επεξεργαστούν με το χέρι το "
-"αρχείο διαμόρφωσης του LiloSetup (οι ρυθμίσεις είναι σχετικές με το lilo."
-"conf). \n"
-"Παρακαλώ μην ασχολείστε με αυτό το αρχείο εκτός αν ξέρετε τι κάνετε και "
-"έχετε διαβάσει τις σχολιασμένες οδηγίες σχετικά με τις chrooted διαδρομές."
+"Οι έμπειροι χρήστες έχουν την δυνατότητα να επεξεργαστούν με το χέρι το αρχείο διαμόρφωσης του LiloSetup (οι ρυθμίσεις είναι σχετικές με το lilo.conf). \n"
+"Παρακαλώ μην ασχολείστε με αυτό το αρχείο εκτός αν ξέρετε τι κάνετε και έχετε διαβάσει τις σχολιασμένες οδηγίες σχετικά με τις chrooted διαδρομές."
 
 #: src/lilosetup.py:896
 msgid "Exit Lilo Setup program."
@@ -456,8 +413,8 @@ msgstr "Έξοδος από Lilo Setup"
 
 #: src/lilosetup.py:901
 msgid ""
-"Once you have defined your settings, click on this button to create your new "
-"LILO's bootloader."
+"Once you have defined your settings, click on this button to create your new"
+" LILO's bootloader."
 msgstr ""
 "Όταν καθορίστε τις ρυθμίσεις σας, κάντε κλικ σε αυτό το κουμπί για να "
 "δημιουργήσετε τον νέο σας εκκινητή LILO. "
@@ -467,8 +424,8 @@ msgid ""
 "You have used the same label for different Operating Systems. Please verify "
 "and correct.\n"
 msgstr ""
-"Έχετε χρησιμοποιήσει την ίδια ετικέτα για διαφορετικά λειτουργικά συστήματα. "
-"Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
+"Έχετε χρησιμοποιήσει την ίδια ετικέτα για διαφορετικά λειτουργικά συστήματα."
+" Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
 
 #: src/lilosetup.py:965
 msgid ""
@@ -478,8 +435,7 @@ msgid ""
 "Please verify and correct.\n"
 msgstr ""
 "\n"
-"Η ετικέτα ενός λειτουργικού συστήματος δεν πρέπει να περιέχει κανένα κενό "
-"διάστημα. \n"
+"Η ετικέτα ενός λειτουργικού συστήματος δεν πρέπει να περιέχει κανένα κενό διάστημα. \n"
 "\n"
 "Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
 
@@ -491,8 +447,7 @@ msgid ""
 "Please verify and correct.\n"
 msgstr ""
 "\n"
-"Η ετικέτα ενός λειτουργικού συστήματος πρέπει να έχει μήκος έως 15 "
-"χαρακτήρες.\n"
+"Η ετικέτα ενός λειτουργικού συστήματος πρέπει να έχει μήκος έως 15 χαρακτήρες.\n"
 "\n"
 "Παρακαλώ επιβεβαιώστε και διορθώστε.\n"
 
@@ -501,7 +456,7 @@ msgid ""
 "Sorry, LiloSetup is unable to find a suitable text editor in your system. "
 "You will not be able to manually modify LiloSetup configuration.\n"
 msgstr ""
-"Το LiloSetup δεν εντόπισε κάποιο επεξεργαστή αρχείων κειμένο στο σύστημα. "
+"Το LiloSetup δεν εντόπισε κάποιο επεξεργαστή αρχείων κειμένου στο σύστημα. "
 "Δεν θα μπορείτε να επεξεργαστείτε το αρχείο ρυθμίσεων που θα δημιουργηθεί.\n"
 
 #: src/lilosetup.py:1113
@@ -523,19 +478,20 @@ msgstr ""
 
 #: src/lilosetup.py:1132
 msgid ""
-"The installation of your new LILO bootloader was succesful. You can now exit "
-"LiloSetup and reboot your computer.\n"
+"The installation of your new LILO bootloader was succesful. You can now exit"
+" LiloSetup and reboot your computer.\n"
 msgstr ""
 "Η εγκατάσταση του νέου LILO εκκινητή ήταν επιτυχής. Μπορείτε να κλείσετε το "
 "LiloSetup και να επανεκκινήσετε τον υπολογιστή σας.\n"
 
 #: src/lilosetup.py:1135
 msgid ""
-"The installation of your new LILO bootloader failed. Please verify /var/log/"
-"lilosetup.log, modify your settings and try again.\n"
+"The installation of your new LILO bootloader failed. Please verify "
+"/var/log/lilosetup.log, modify your settings and try again.\n"
 msgstr ""
-"Η εγκατάσταση του νέου LILO εκκινητή απέτυχε. Παρακαλώ ελέγξτε το /var/log/"
-"lilosetup.log, τροποποιήστε τις ρυθμίσεις σας και προσπαθήστε ξανά.\n"
+"Η εγκατάσταση του νέου LILO εκκινητή απέτυχε. Παρακαλώ ελέγξτε το "
+"/var/log/lilosetup.log, τροποποιήστε τις ρυθμίσεις σας και προσπαθήστε "
+"ξανά.\n"
 
 #: src/lilosetup.py:1143
 msgid ""
@@ -555,14 +511,4 @@ msgstr "Εργαλείο ρύθμισης του LILO"
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Ρυθμίστε το Lilo σε περιβάλλον live ή τυπικής εγκατάστασης"
 
-#~ msgid ""
-#~ "\n"
-#~ "Sorry! os-prober, a dependency of LiloSetup appears to be missing. Please "
-#~ "verify and correct.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Συγγνώμη! Το os-prober, το οποίο απαιτείται από το LiloSetup δεν βρέθηκε. "
-#~ "Παρακαλώ επιβεβαιώστε και επιδιορθώστε το σφάλμα αυτό.\n"
 
-#~ msgid "salixos.org"
-#~ msgstr "salixos.org"

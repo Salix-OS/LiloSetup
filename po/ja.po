@@ -1,20 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# gapan <vlahavas@gmail.com>, 2011.
+#   <hydrangea_and_snail@hotmail.com>, 2011.
+# tsuren <hydrangea_and_snail@hotmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 12:21+0200\n"
-"PO-Revision-Date: 2011-01-09 13:25+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"POT-Creation-Date: 2011-10-02 12:22+0200\n"
+"PO-Revision-Date: 2011-10-19 17:22+0000\n"
+"Last-Translator: tsuren <hydrangea_and_snail@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
@@ -39,15 +42,13 @@ msgid "About lilosetup"
 msgstr "Liloセットアップについて"
 
 #: src/lilosetup.glade:502
-#, fuzzy
 msgid ""
 "A simple GUI interface to set-up LILO.\n"
 "\n"
 "Copyright © 2010-2011 Pierrick Le Brun"
 msgstr ""
-"簡単にLILOをセットアップできるグラフィック・ツール\n"
-"\n"
-"Copyright © 2010 Pierrick Le Brun"
+"シンプルなGUIインターフェイスでLILO設定ができるツール。\n"
+"著作権© 2010-2011 Pierrick Le Brun\n"
 
 #: src/lilosetup.glade:507
 msgid ""
@@ -126,11 +127,9 @@ msgid ""
 "# entries must be in the first column before the next begins to\n"
 "# be used.  We do not specify it here, as there is just one column.\n"
 msgstr ""
-"# オプション・テーブルのロケーション: ロケーション x, ロケーション y, カラム"
-"の数\n"
+"# オプション・テーブルのロケーション: ロケーション x, ロケーション y, カラムの数\n"
 "# カラムの行数 (最高 15行), \"spill\" これは、いくつの\n"
-"# エントリーが、次のカラムに移るまで、最初のカラムになければならないかで"
-"す。\n"
+"# エントリーが、次のカラムに移るまで、最初のカラムになければならないかです。\n"
 "# どうせ一つのカラムしかないので、とくに設定しません。\n"
 
 #: src/lilosetup.py:372
@@ -169,18 +168,15 @@ msgstr ""
 
 #: src/lilosetup.py:387
 msgid "# Override dangerous defaults that rewrite the partition table:\n"
-msgstr ""
-"# パーティション・テーブルを書き換えかもしれない危険なデフォをオーバーライド"
-"する。:\n"
+msgstr "# パーティション・テーブルを書き換えかもしれない危険なデフォをオーバーライドする。:\n"
 
 #: src/lilosetup.py:391
 msgid "# Normal VGA console\n"
 msgstr "# VGAコンソール\n"
 
 #: src/lilosetup.py:393
-#, fuzzy
 msgid "# VESA framebuffer console @ 1600x1200x16m\n"
-msgstr "# VESA　フレームバファー・コンソール @ 1600x1200x64k\n"
+msgstr "＃VESAフレームバッファ·コンソール@ 1600x1200x16m\n"
 
 #: src/lilosetup.py:395
 msgid "# VESA framebuffer console @ 1600x1200x64k\n"
@@ -195,9 +191,8 @@ msgid "# VESA framebuffer console @ 1600x1200x256\n"
 msgstr "# VESA　フレームバファー・コンソール @ 1600x1200x256\n"
 
 #: src/lilosetup.py:401
-#, fuzzy
 msgid "# VESA framebuffer console @ 1280x1024x16m\n"
-msgstr "# VESA フレームバファー・コンソール @ 1280x1024x64k\n"
+msgstr "＃VESAフレームバッファ·コンソール@ 1280x1024x16m\n"
 
 #: src/lilosetup.py:403
 msgid "# VESA framebuffer console @ 1280x1024x64k\n"
@@ -224,9 +219,8 @@ msgid "# VESA framebuffer console @ 1024x768x256\n"
 msgstr "# VESA 　フレームバファー・コンソール　@ 1024x768x256\n"
 
 #: src/lilosetup.py:415
-#, fuzzy
 msgid "# VESA framebuffer console @ 800x600x16m\n"
-msgstr "# VESA フレームバファー・コンソール @ 800x600x64k\n"
+msgstr "＃VESAフレームバッファ·コンソール@ 800x600x16m\n"
 
 #: src/lilosetup.py:417
 msgid "# VESA framebuffer console @ 800x600x64k\n"
@@ -269,8 +263,7 @@ msgstr ""
 "# LiloセットアップはライブCDから実行することができます。つまり、LILOは、\n"
 "# 下記のリストの最初である'chroot' されたLinuxのパーティションから、\n"
 "# スタートするわけです。\n"
-"# すなわち、次にあげるディレクトリ・パスは、'chroot'されたパーティションから"
-"の\n"
+"# すなわち、次にあげるディレクトリ・パスは、'chroot'されたパーティションからの\n"
 "# 関係図で考え構成しないといけません。\n"
 "# このファイルを変更する場合は、このことを考慮して行ってください。\n"
 "# でないとLiloセットアップは、ちゃんと作動しません。\n"
@@ -290,40 +283,33 @@ msgstr ""
 "# \"lilo -v\"の代わりに、\"lilo -v -C /etc/lilosetup/conf\" \n"
 "#  当然、このコマンドを使うには、 /etc/lilosetup.confファイルが、\n"
 "# 使用しているオペレーティング・システムになければいけません。\n"
-"# ファイルにのっているパーティションは、すべて割り当てられたマウント・ポイン"
-"トにn# マウントされていなければいけません。\n"
+"# ファイルにのっているパーティションは、すべて割り当てられたマウント・ポイントにn# マウントされていなければいけません。\n"
 
 #: src/lilosetup.py:527
 msgid "Partition"
-msgstr ""
+msgstr "パーティション"
 
 #: src/lilosetup.py:528
 msgid "File system"
-msgstr ""
+msgstr "ファイル·システム"
 
 #: src/lilosetup.py:529
 msgid "Operating system"
-msgstr ""
+msgstr "オペレーティング·システム"
 
 #: src/lilosetup.py:530
 msgid "Boot menu label"
-msgstr ""
+msgstr "ブート·メニューのラベル"
 
 #: src/lilosetup.py:534
 msgid ""
 "<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
 "\n"
-"A bootloader is required to load the main operating system of a computer and "
-"will initially display a boot menu if several operating systems are "
-"available on the same computer."
+"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
 msgstr ""
-"<b>Liloセットアップは、新しいLILOブート・ローダーをコンピュータにインストール"
-"します。</b> \n"
+"<b>Liloセットアップは、新しいLILOブート・ローダーをコンピュータにインストールします。</b> \n"
 "\n"
-"ブート・ローダーは、オペレーティングシステムをコンピュータにロードするために"
-"必要です。とくに一つ以上のオペレーティングシステムを一つのコンピュータで使う"
-"場合、コンピュータをスタートした時点で、どのシステムを使うかどうかを選ぶこと"
-"ができます。"
+"ブート・ローダーは、オペレーティングシステムをコンピュータにロードするために必要です。とくに一つ以上のオペレーティングシステムを一つのコンピュータで使う場合、コンピュータをスタートした時点で、どのシステムを使うかどうかを選ぶことができます。"
 
 #: src/lilosetup.py:554 src/lilosetup.py:640 src/lilosetup.py:952
 #: src/lilosetup.py:976 src/lilosetup.py:981
@@ -347,8 +333,7 @@ msgid ""
 "One of your partitions does not seem to hold a valid kernel file. Please "
 "verify and correct LiloSetup configuration file manually.\n"
 msgstr ""
-"パーティションのどれかが、使用できないカーネル・ファイルを使っています。"
-"チェックした後、Liloセットアップの構成ファイルを手入力で修理してください。\n"
+"パーティションのどれかが、使用できないカーネル・ファイルを使っています。チェックした後、Liloセットアップの構成ファイルを手入力で修理してください。\n"
 
 #: src/lilosetup.py:829
 msgid "# Linux bootable partition config ends\n"
@@ -360,74 +345,46 @@ msgstr "Liloセットアップについて"
 
 #: src/lilosetup.py:845
 msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new "
-"operating system on your computer. \n"
-"LiloSetup can also be useful in the process of a disaster recovery in which "
-"case you may have to launch it from a LiveCD if you have lost all other "
-"means to boot into your system.\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
-"from a regular installed Linux system.  In both cases, it will setup a new "
-"LILO bootloader on the MBR of your first hard drive."
+"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
+"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
 msgstr ""
-"新しいオペレーティングシステムをインストールする時は、いつもブート・ローダー"
-"を構成しなおす必要があります。\n"
-"Liloセットアップは、Liloのリカバリーとして、ライブCDから使うことができま"
-"す。\n"
+"新しいオペレーティングシステムをインストールする時は、いつもブート・ローダーを構成しなおす必要があります。\n"
+"Liloセットアップは、Liloのリカバリーとして、ライブCDから使うことができます。\n"
 "\n"
-"Liloセットアップは、ライブCDからの環境だけではなく、一般のLinuxシステムから実"
-"行することができます。どちらの場合も、新しいLILOのブート・ローダーを最初の"
-"ハードドライブのMBRに設定します。"
+"Liloセットアップは、ライブCDからの環境だけではなく、一般のLinuxシステムから実行することができます。どちらの場合も、新しいLILOのブート・ローダーを最初のハードドライブのMBRに設定します。"
 
 #: src/lilosetup.py:856
 msgid ""
-"Here you must define a Boot menu label for each of the operating system that "
-"will be displayed on your bootloader menu.\n"
-"Any partition for which you do not set a  Boot menu label will not be "
-"configured and will not be displayed on the bootloader menu.\n"
-"If a few kernels are available within one partition, the label you have "
-"chosen for that partition will be appended numerically to create multiple "
-"menu entries for each of these kernels.\n"
+"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
+"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"ひとつひとつのオペレーティングシステムのブート・メニューのラベルをここでつけ"
-"てください。これらのラベルは、ブート・メニューでつかわれます。\n"
-"ラベルをつけてないパーティションは、構成されず、ブート・メニューには、表示さ"
-"れません。\n"
-"もしもいくつかのカーネルが一つのパーティションにある場合は、選択したラベルに"
-"番号が加えられ、それぞれのカーネルがメニュー・エントリーとしてくわえられま"
-"す。\n"
-"これら全ての設定は、Liloセットアップ構成ファイルを手入力することによって可能"
-"です。"
+"ひとつひとつのオペレーティングシステムのブート・メニューのラベルをここでつけてください。これらのラベルは、ブート・メニューでつかわれます。\n"
+"ラベルをつけてないパーティションは、構成されず、ブート・メニューには、表示されません。\n"
+"もしもいくつかのカーネルが一つのパーティションにある場合は、選択したラベルに番号が加えられ、それぞれのカーネルがメニュー・エントリーとしてくわえられます。\n"
+"これら全ての設定は、Liloセットアップ構成ファイルを手入力することによって可能です。"
 
 #: src/lilosetup.py:867
 msgid ""
-"Use this arrow if you want to move the selected Operating System up to a "
-"higher rank.\n"
-"The partition with the highest rank will be displayed on the first line of "
-"the bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
+"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"選んだオペレーティング・システムをリストの上に上げる場合は、この矢印を使って"
-"ください。\n"
-"リストの一番上のパーティションは、ブート・メニューの一番上の行に表示されま"
-"す。\n"
-"これらの設定は、Liloセットアップの構成ファイルをつかってマニュアルで変更する"
-"こともできます。"
+"選んだオペレーティング・システムをリストの上に上げる場合は、この矢印を使ってください。\n"
+"リストの一番上のパーティションは、ブート・メニューの一番上の行に表示されます。\n"
+"これらの設定は、Liloセットアップの構成ファイルをつかってマニュアルで変更することもできます。"
 
 #: src/lilosetup.py:875
 msgid ""
-"Use this arrow if you want to move the selected Operating System down to a "
-"lower rank.\n"
-"The partition with the lowest rank will be displayed on the last line of the "
-"bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
+"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"選んだオペレーティング・システムをリストの下に下げる場合は、この矢印を使って"
-"ください。\n"
-"リストの一番下のパーティションは、ブート・メニューの一番下の行に表示されま"
-"す。\n"
-"これらの設定は、Liloセットアップの構成ファイルをつかってマニュアルで変更する"
-"こともできます。"
+"選んだオペレーティング・システムをリストの下に下げる場合は、この矢印を使ってください。\n"
+"リストの一番下のパーティションは、ブート・メニューの一番下の行に表示されます。\n"
+"これらの設定は、Liloセットアップの構成ファイルをつかってマニュアルで変更することもできます。"
 
 #: src/lilosetup.py:884
 msgid "This will undo all settings (even manual modifications)."
@@ -435,16 +392,11 @@ msgstr "これは、全ての（マニュアルで行った変更も含む）設
 
 #: src/lilosetup.py:888
 msgid ""
-"Experienced users have the possibility to manually edit LiloSetup "
-"configuration file (settings are identical to lilo.conf). \n"
-"Please do not temper with this file unless you know what you are doing and "
-"you have read its commented instructions regarding chrooted paths."
+"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
+"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
-"経験値の高いユーザは、マニュアルでLiloセットアップの構成ファイルを変更するこ"
-"ともできます。（設定の内容は、lilo.confと同じです。）\n"
-"よくわからない場合は、このファイルをいじくらないでください。また、インストラ"
-"クションのコメントと、chrootのディレクトリ・パスについてよく読んでから変更し"
-"てください。"
+"経験値の高いユーザは、マニュアルでLiloセットアップの構成ファイルを変更することもできます。（設定の内容は、lilo.confと同じです。）\n"
+"よくわからない場合は、このファイルをいじくらないでください。また、インストラクションのコメントと、chrootのディレクトリ・パスについてよく読んでから変更してください。"
 
 #: src/lilosetup.py:896
 msgid "Exit Lilo Setup program."
@@ -452,19 +404,15 @@ msgstr "Liloセットアップを閉じる"
 
 #: src/lilosetup.py:901
 msgid ""
-"Once you have defined your settings, click on this button to create your new "
-"LILO's bootloader."
-msgstr ""
-"設定をした後、このボタンをクリックし新しいLILOのブート・ローダーを作ってくだ"
-"さい。"
+"Once you have defined your settings, click on this button to create your new"
+" LILO's bootloader."
+msgstr "設定をした後、このボタンをクリックし新しいLILOのブート・ローダーを作ってください。"
 
 #: src/lilosetup.py:945
 msgid ""
 "You have used the same label for different Operating Systems. Please verify "
 "and correct.\n"
-msgstr ""
-"同じラベルをひとつ以上のオペレーティングシステムに使用しようとしています。再"
-"確認してください。\n"
+msgstr "同じラベルをひとつ以上のオペレーティングシステムに使用しようとしています。再確認してください。\n"
 
 #: src/lilosetup.py:965
 msgid ""
@@ -495,16 +443,13 @@ msgid ""
 "Sorry, LiloSetup is unable to find a suitable text editor in your system. "
 "You will not be able to manually modify LiloSetup configuration.\n"
 msgstr ""
-"申し訳ありませんが、LiloSetupは、システム内の適切なテキストエディタを見つけら"
-"れません。マニュアルでLiloSetupの設定を変更することはできません。\n"
+"申し訳ありませんが、LiloSetupは、システム内の適切なテキストエディタを見つけられません。マニュアルでLiloSetupの設定を変更することはできません。\n"
 
 #: src/lilosetup.py:1113
 msgid ""
 "Your configuration is not complete. Please, select at least one Linux "
 "booting partition and define its Boot menu label.\n"
-msgstr ""
-"構成が不完全です。少なくてもブートするLinuxのパーティションを選び、ブート・メ"
-"ニューのラベルを決めてください。\n"
+msgstr "構成が不完全です。少なくてもブートするLinuxのパーティションを選び、ブート・メニューのラベルを決めてください。\n"
 
 #: src/lilosetup.py:1116
 msgid ""
@@ -514,20 +459,17 @@ msgstr "新しいLILOブート・ローダーをインストールします。�
 
 #: src/lilosetup.py:1132
 msgid ""
-"The installation of your new LILO bootloader was succesful. You can now exit "
-"LiloSetup and reboot your computer.\n"
-msgstr ""
-"LILOブート・ローダーのインストレーションが、完了しました。Liloセットアップを"
-"閉じ、コンピュータを再起動してください。\n"
+"The installation of your new LILO bootloader was succesful. You can now exit"
+" LiloSetup and reboot your computer.\n"
+msgstr "LILOブート・ローダーのインストレーションが、完了しました。Liloセットアップを閉じ、コンピュータを再起動してください。\n"
 
 #: src/lilosetup.py:1135
 msgid ""
-"The installation of your new LILO bootloader failed. Please verify /var/log/"
-"lilosetup.log, modify your settings and try again.\n"
+"The installation of your new LILO bootloader failed. Please verify "
+"/var/log/lilosetup.log, modify your settings and try again.\n"
 msgstr ""
-"新しいLILOブート・ローダーをインストールするのに失敗しました。 /var/log/"
-"lilosetup.logをチェックした後、設定を再確認しLILOセットアップを再度試してくだ"
-"さい。\n"
+"新しいLILOブート・ローダーをインストールするのに失敗しました。 "
+"/var/log/lilosetup.logをチェックした後、設定を再確認しLILOセットアップを再度試してください。\n"
 
 #: src/lilosetup.py:1143
 msgid ""
@@ -545,18 +487,6 @@ msgstr "Liloのセットアップ用ツール"
 
 #: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
-msgstr ""
-"Liloを、LiveCDから、または、スタンダードのLinuxシステムからセットアップしま"
-"す。"
+msgstr "Liloを、LiveCDから、または、スタンダードのLinuxシステムからセットアップします。"
 
-#~ msgid ""
-#~ "\n"
-#~ "Sorry! os-prober, a dependency of LiloSetup appears to be missing. Please "
-#~ "verify and correct.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "注意 os-prober, Liloセットアップの依存ファイルがインストールされていませ"
-#~ "ん。 チェックしてください。\n"
 
-#~ msgid "salixos.org"
-#~ msgstr "salixos.org"

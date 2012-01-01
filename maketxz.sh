@@ -24,4 +24,5 @@ makepkg -l y -c n ../lilosetup-$VER-noarch-1plb.txz
 cd ..
 echo -e "lilo,python,os-prober" > lilosetup-$VER-noarch-1plb.dep
 md5sum lilosetup-$VER-noarch-1plb.txz > lilosetup-$VER-noarch-1plb.md5
+echo 'bin,coreutils,gawk,grep,lilo,,util-linux,python,pygtk,sed' > lilosetup-$VER-noarch-1plb.dep
 rm -rf pkg

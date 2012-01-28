@@ -1,22 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
+# Translators:
 # andyun <pokazsch@yandex.ru>, 2011.
+#   <pokazsch@yandex.ru>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 12:21+0200\n"
-"PO-Revision-Date: 2011-06-07 00:41+0000\n"
+"POT-Creation-Date: 2011-10-02 12:22+0200\n"
+"PO-Revision-Date: 2011-08-19 03:28+0000\n"
 "Last-Translator: andyun <pokazsch@yandex.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
@@ -153,8 +154,7 @@ msgid ""
 msgstr ""
 "# \n"
 "# СВОЙСТВА МЕНЮ ДЛЯ ФОНОВОГО ИЗОБРАЖЕНИЯ\n"
-"# Коорд. X (1..65), коорд. Y (1..29) (расположение, начиная от верхнего "
-"левого угла),\n"
+"# Коорд. X (1..65), коорд. Y (1..29) (расположение, начиная от верхнего левого угла),\n"
 "# число столбцов (1..5), число строк (2..30):\n"
 "# \n"
 
@@ -165,8 +165,7 @@ msgid ""
 msgstr ""
 "# \n"
 "# СВОЙСТВА ТАЙМЕРА ДЛЯ ФОНОВОГО ИЗОБРАЖЕНИЯ\n"
-"# Коорд. X (1..76), коорд. Y (1..30) (расположение, начиная от верхнего "
-"левого угла),\n"
+"# Коорд. X (1..76), коорд. Y (1..30) (расположение, начиная от верхнего левого угла),\n"
 "# цвет переднего плана, цвет фона, цвет тени:\n"
 "# \n"
 
@@ -191,7 +190,7 @@ msgid ""
 msgstr ""
 "# \n"
 "# ПОКАЗ ЗАГРУЗОЧНОГО МЕНЮ\n"
-"# Если параметр отключен, то будет загружаться\n"
+"# Если параметр отключен, то сразу же будет загружаться\n"
 "# первая указанная в списке операционная система.\n"
 "# \n"
 
@@ -201,11 +200,9 @@ msgid ""
 "# This is given in tenths of a second, so 600 for every minute:\n"
 msgstr ""
 "# \n"
-"# ПАУЗА ПЕРЕД ЗАГРУЗКОЙ\n"
-"# Если указать '0' или отключить параметр, то автоматическая загрузка не "
-"сработает\n"
-"# (необходимо будет нажать клавишу 'Enter').\n"
-"# Указывается в десятых долях секунды (в одной минуте — 600):\n"
+"# ПРОДОЛЖИТЕЛЬНОСТЬ ПОКАЗА ЗАГРУЗОЧНОГО МЕНЮ\n"
+"# Если отключить этот параметр, то пауза будет бесконечно долгой.\n"
+"# Указывается в десятых долях секунды (в одной минуте — 600).\n"
 "# \n"
 
 #: src/lilosetup.py:387
@@ -231,9 +228,8 @@ msgstr ""
 "# Normal VGA console\n"
 
 #: src/lilosetup.py:393
-#, fuzzy
 msgid "# VESA framebuffer console @ 1600x1200x16m\n"
-msgstr "# VESA framebuffer console @ 1600x1200x64k\n"
+msgstr "# VESA framebuffer console @ 1600x1200x16m\n"
 
 #: src/lilosetup.py:395
 msgid "# VESA framebuffer console @ 1600x1200x64k\n"
@@ -248,9 +244,8 @@ msgid "# VESA framebuffer console @ 1600x1200x256\n"
 msgstr "# VESA framebuffer console @ 1600x1200x256\n"
 
 #: src/lilosetup.py:401
-#, fuzzy
 msgid "# VESA framebuffer console @ 1280x1024x16m\n"
-msgstr "# VESA framebuffer console @ 1280x1024x64k\n"
+msgstr "# VESA framebuffer console @ 1280x1024x16m\n"
 
 #: src/lilosetup.py:403
 msgid "# VESA framebuffer console @ 1280x1024x64k\n"
@@ -277,9 +272,8 @@ msgid "# VESA framebuffer console @ 1024x768x256\n"
 msgstr "# VESA framebuffer console @ 1024x768x256\n"
 
 #: src/lilosetup.py:415
-#, fuzzy
 msgid "# VESA framebuffer console @ 800x600x16m\n"
-msgstr "# VESA framebuffer console @ 800x600x64k\n"
+msgstr "# VESA framebuffer console @ 800x600x16m\n"
 
 #: src/lilosetup.py:417
 msgid "# VESA framebuffer console @ 800x600x64k\n"
@@ -347,32 +341,30 @@ msgstr ""
 
 #: src/lilosetup.py:527
 msgid "Partition"
-msgstr ""
+msgstr "Раздел"
 
 #: src/lilosetup.py:528
 msgid "File system"
-msgstr ""
+msgstr "Файловая система"
 
 #: src/lilosetup.py:529
 msgid "Operating system"
-msgstr ""
+msgstr "Операционная система"
 
 #: src/lilosetup.py:530
 msgid "Boot menu label"
-msgstr ""
+msgstr "Название пункта меню"
 
 #: src/lilosetup.py:534
 msgid ""
 "<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
 "\n"
-"A bootloader is required to load the main operating system of a computer and "
-"will initially display a boot menu if several operating systems are "
-"available on the same computer."
+"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
 msgstr ""
 "Программа LiloSetup предназначена для настройки и установки LILO — "
 "загрузчика операционной системы. Загрузчик необходим для начала запуска "
-"операционной системы и возможности выбора системы при загрузке, если на один "
-"компьютер их установлено несколько. LiloSetup устанавливает загрузчик в "
+"операционной системы и возможности выбора системы при загрузке, если на один"
+" компьютер их установлено несколько. LiloSetup устанавливает загрузчик в "
 "главную загрузочную запись (Master Boot Record)."
 
 #: src/lilosetup.py:554 src/lilosetup.py:640 src/lilosetup.py:952
@@ -442,89 +434,65 @@ msgstr "О программе."
 
 #: src/lilosetup.py:845
 msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new "
-"operating system on your computer. \n"
-"LiloSetup can also be useful in the process of a disaster recovery in which "
-"case you may have to launch it from a LiveCD if you have lost all other "
-"means to boot into your system.\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
-"from a regular installed Linux system.  In both cases, it will setup a new "
-"LILO bootloader on the MBR of your first hard drive."
+"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
+"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
 msgstr ""
 "Программа LiloSetup предназначена для настройки и установки LILO — "
 "загрузчика операционной системы. Загрузчик необходим для начала запуска "
-"операционной системы и возможности выбора системы при загрузке, если на один "
-"компьютер их установлено несколько. LiloSetup устанавливает загрузчик в "
+"операционной системы и возможности выбора системы при загрузке, если на один"
+" компьютер их установлено несколько. LiloSetup устанавливает загрузчик в "
 "главную загрузочную запись (Master Boot Record)."
 
 #: src/lilosetup.py:856
 msgid ""
-"Here you must define a Boot menu label for each of the operating system that "
-"will be displayed on your bootloader menu.\n"
-"Any partition for which you do not set a  Boot menu label will not be "
-"configured and will not be displayed on the bootloader menu.\n"
-"If a few kernels are available within one partition, the label you have "
-"chosen for that partition will be appended numerically to create multiple "
-"menu entries for each of these kernels.\n"
+"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
+"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
-"В этом поле можно изменить названия и последовательность пунктов "
-"загрузочного меню, означающие разделы носителя с операционной системой.\n"
+"В этом поле можно изменить названия и последовательность пунктов загрузочного меню, означающие разделы носителя с операционной системой.\n"
 "\n"
-"Если будет обнаружено несколько файлов ядра на одном разделе, то в пункте "
-"меню появятся подпункты для каждого из них.\n"
+"Если будет обнаружено несколько файлов ядра на одном разделе, то в пункте меню появятся подпункты для каждого из них.\n"
 "\n"
 "Любые параметры могут быть отредактированы в файле настроек LiloSetup."
 
 #: src/lilosetup.py:867
 msgid ""
-"Use this arrow if you want to move the selected Operating System up to a "
-"higher rank.\n"
-"The partition with the highest rank will be displayed on the first line of "
-"the bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
+"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 "Изменение последовательности пунктов меню.\n"
 "\n"
-"Операционная система, находящаяся в самом верху списка, будет загружаться по "
-"умолчанию."
+"Операционная система, находящаяся в самом верху списка, будет загружаться по умолчанию."
 
 #: src/lilosetup.py:875
 msgid ""
-"Use this arrow if you want to move the selected Operating System down to a "
-"lower rank.\n"
-"The partition with the lowest rank will be displayed on the last line of the "
-"bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
+"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 "Изменение последовательности пунктов меню.\n"
 "\n"
-"Операционная система, находящаяся в самом верху списка, будет загружаться по "
-"умолчанию."
+"Операционная система, находящаяся в самом верху списка, будет загружаться по умолчанию."
 
 #: src/lilosetup.py:884
 msgid "This will undo all settings (even manual modifications)."
 msgstr ""
-"Отмена всех сделанных изменений, в том числе правки файла настроек LiloSetup."
+"Отмена всех сделанных изменений, в том числе правки файла настроек "
+"LiloSetup."
 
 #: src/lilosetup.py:888
 msgid ""
-"Experienced users have the possibility to manually edit LiloSetup "
-"configuration file (settings are identical to lilo.conf). \n"
-"Please do not temper with this file unless you know what you are doing and "
-"you have read its commented instructions regarding chrooted paths."
+"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
+"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
-"Правка в текстовом редакторе файла настроек LiloSetup (lilosetup.conf), "
-"идентичного оригинальному файлу настроек lilo.conf (оба файла находятся в "
-"папке /etc).\n"
+"Правка в текстовом редакторе файла настроек LiloSetup (lilosetup.conf), идентичного оригинальному файлу настроек lilo.conf (оба файла находятся в папке /etc).\n"
 "\n"
-"Данные из этих файлов считываются только во время установки LILO, а не "
-"каждый раз при загрузке операционной системы. Поэтому, после внесения каких-"
-"либо изменений в файл настроек, необходимо переустановить LILO с новыми "
-"параметрами.\n"
+"Данные из этих файлов считываются только во время установки LILO, а не каждый раз при загрузке операционной системы. Поэтому, после внесения каких-либо изменений в файл настроек, необходимо переустановить LILO с новыми параметрами.\n"
 "\n"
-"Если вы редактируете файл настроек lilo.conf, после внесения изменений "
-"выполните в терминале, от лица суперпользователя, команду lilo."
+"Если вы редактируете файл настроек lilo.conf, после внесения изменений выполните в терминале, от лица суперпользователя, команду lilo."
 
 #: src/lilosetup.py:896
 msgid "Exit Lilo Setup program."
@@ -532,8 +500,8 @@ msgstr "Выход из программы."
 
 #: src/lilosetup.py:901
 msgid ""
-"Once you have defined your settings, click on this button to create your new "
-"LILO's bootloader."
+"Once you have defined your settings, click on this button to create your new"
+" LILO's bootloader."
 msgstr "Установка LILO."
 
 #: src/lilosetup.py:945
@@ -584,14 +552,14 @@ msgstr "Выполнить задание?"
 
 #: src/lilosetup.py:1132
 msgid ""
-"The installation of your new LILO bootloader was succesful. You can now exit "
-"LiloSetup and reboot your computer.\n"
+"The installation of your new LILO bootloader was succesful. You can now exit"
+" LiloSetup and reboot your computer.\n"
 msgstr "Готово.\n"
 
 #: src/lilosetup.py:1135
 msgid ""
-"The installation of your new LILO bootloader failed. Please verify /var/log/"
-"lilosetup.log, modify your settings and try again.\n"
+"The installation of your new LILO bootloader failed. Please verify "
+"/var/log/lilosetup.log, modify your settings and try again.\n"
 msgstr ""
 "Произошла ошибка при установке LILO. Пожалуйста, проверьте отчёт хода "
 "установки в файле /var/log/lilosetup.log, измените настройки и попробуйте "
@@ -615,11 +583,4 @@ msgstr "Программа установки LILO"
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Установка LILO — загрузчика операционной системы."
 
-#~ msgid ""
-#~ "\n"
-#~ "Sorry! os-prober, a dependency of LiloSetup appears to be missing. Please "
-#~ "verify and correct.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Ошибка! Программа os-prober, необходимая для работы LiloSetup, не "
-#~ "найдена.\n"
+

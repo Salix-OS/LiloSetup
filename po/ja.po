@@ -48,7 +48,8 @@ msgid ""
 "Copyright © 2010-2011 Pierrick Le Brun"
 msgstr ""
 "シンプルなGUIインターフェイスでLILO設定ができるツール。\n"
-"著作権© 2010-2011 Pierrick Le Brun\n"
+"\n"
+"著作権© 2010-2011 Pierrick Le Brun"
 
 #: src/lilosetup.glade:507
 msgid ""

@@ -1,23 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-# cobraJoker <cobra.the.joker@gmail.com>, 2011.
+# 
+# Translators:
 #   <akuna@free.fr>, 2011.
+# cobraJoker <cobra.the.joker@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 12:21+0200\n"
-"PO-Revision-Date: 2011-07-12 10:57+0000\n"
+"POT-Creation-Date: 2011-10-02 12:22+0200\n"
+"PO-Revision-Date: 2011-07-27 00:59+0000\n"
 "Last-Translator: Akuna <akuna@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5\n"
 
 #: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
@@ -271,9 +271,7 @@ msgstr ""
 msgid ""
 "<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
 "\n"
-"A bootloader is required to load the main operating system of a computer and "
-"will initially display a boot menu if several operating systems are "
-"available on the same computer."
+"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
 msgstr ""
 
 #: src/lilosetup.py:554 src/lilosetup.py:640 src/lilosetup.py:952
@@ -309,43 +307,30 @@ msgstr ""
 
 #: src/lilosetup.py:845
 msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new "
-"operating system on your computer. \n"
-"LiloSetup can also be useful in the process of a disaster recovery in which "
-"case you may have to launch it from a LiveCD if you have lost all other "
-"means to boot into your system.\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
-"from a regular installed Linux system.  In both cases, it will setup a new "
-"LILO bootloader on the MBR of your first hard drive."
+"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
+"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
 msgstr ""
 
 #: src/lilosetup.py:856
 msgid ""
-"Here you must define a Boot menu label for each of the operating system that "
-"will be displayed on your bootloader menu.\n"
-"Any partition for which you do not set a  Boot menu label will not be "
-"configured and will not be displayed on the bootloader menu.\n"
-"If a few kernels are available within one partition, the label you have "
-"chosen for that partition will be appended numerically to create multiple "
-"menu entries for each of these kernels.\n"
+"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
+"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 
 #: src/lilosetup.py:867
 msgid ""
-"Use this arrow if you want to move the selected Operating System up to a "
-"higher rank.\n"
-"The partition with the highest rank will be displayed on the first line of "
-"the bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
+"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 
 #: src/lilosetup.py:875
 msgid ""
-"Use this arrow if you want to move the selected Operating System down to a "
-"lower rank.\n"
-"The partition with the lowest rank will be displayed on the last line of the "
-"bootloader menu.\n"
+"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
+"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
 
@@ -355,10 +340,8 @@ msgstr ""
 
 #: src/lilosetup.py:888
 msgid ""
-"Experienced users have the possibility to manually edit LiloSetup "
-"configuration file (settings are identical to lilo.conf). \n"
-"Please do not temper with this file unless you know what you are doing and "
-"you have read its commented instructions regarding chrooted paths."
+"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
+"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
 msgstr ""
 
 #: src/lilosetup.py:896
@@ -367,8 +350,8 @@ msgstr ""
 
 #: src/lilosetup.py:901
 msgid ""
-"Once you have defined your settings, click on this button to create your new "
-"LILO's bootloader."
+"Once you have defined your settings, click on this button to create your new"
+" LILO's bootloader."
 msgstr ""
 
 #: src/lilosetup.py:945
@@ -413,14 +396,14 @@ msgstr ""
 
 #: src/lilosetup.py:1132
 msgid ""
-"The installation of your new LILO bootloader was succesful. You can now exit "
-"LiloSetup and reboot your computer.\n"
+"The installation of your new LILO bootloader was succesful. You can now exit"
+" LiloSetup and reboot your computer.\n"
 msgstr ""
 
 #: src/lilosetup.py:1135
 msgid ""
-"The installation of your new LILO bootloader failed. Please verify /var/log/"
-"lilosetup.log, modify your settings and try again.\n"
+"The installation of your new LILO bootloader failed. Please verify "
+"/var/log/lilosetup.log, modify your settings and try again.\n"
 msgstr ""
 
 #: src/lilosetup.py:1143
@@ -437,3 +420,5 @@ msgstr ""
 #: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr ""
+
+

@@ -48,8 +48,9 @@ msgid ""
 "\n"
 "Copyright © 2010-2011 Pierrick Le Brun"
 msgstr ""
-"Una semplice interfaccia grafica per configurare LILO. Copyright © 2010-2011"
-" Pierrick Le Brun\n"
+"Una semplice interfaccia grafica per configurare LILO.\n"
+"\n"
+"Copyright © 2010-2011 Pierrick Le Brun"
 
 #: src/lilosetup.glade:507
 msgid ""

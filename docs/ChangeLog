@@ -1,5 +1,10 @@
+version 0.3
+ * Fixed a bug in partition and disk detection.
+ * Added lba32 and compact in default options
+ * Updated all translations
+
 version 0.2.9.1
- * Set column headers in the py file
+ * Set column headers in the py file for translation
  * Fixed '/dev/root' partition showing in SaLT livecd
 
 version 0.2.9
@@ -46,7 +51,6 @@ version 0.2
  * Added support for 64 bit systems
  * Improved autoconfiguration for multiboot with libata & non-libata partitions.
  * Improved contextual help display. 
-
 
 version 0.1
  * First release of LiloSetup in SalixLive 13.0

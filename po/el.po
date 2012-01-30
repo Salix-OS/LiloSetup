@@ -90,7 +90,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Γιώργος Βλαχάβας <vlahavas~at~gmail~dot~com>\n"
-"Δημήτρης Τζέμος <djemos~at~slackel~dor~gr>"
+"Δημήτρης Τζέμος <djemos~at~slackel~dot~gr>"
 
 #: src/lilosetup.py:353
 msgid ""

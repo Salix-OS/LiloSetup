@@ -1,3 +1,17 @@
+version 0.4
+ * Moved global functions to external modules
+ * Fixed 'NAME=Slackware' bug in OS description
+ * Versions and copyright years are now set in lilosetup.py instead of lilosetup.glade
+ * Version of LiloSetup is displayed on the terminal if executed from CLI
+ * Added translations in Czech
+ 
+version 0.3.2
+ * Added translation in Portuguese
+ * Updated all translations
+
+version 0.3.1
+ * Updated all translations
+
 version 0.3
  * Fixed a bug in partition and disk detection.
  * Added lba32 and compact in default options
@@ -5,7 +19,7 @@ version 0.3
 
 version 0.2.9.1
  * Set column headers in the py file for translation
- * Fixed '/dev/root' partition showing in SaLT livecd
+ * Fixed '/dev/root' partition showing in SaLT Live CD
 
 version 0.2.9
  * Replaced all lshal instances with blkid to retrieve partition info
@@ -18,7 +32,7 @@ version 0.2.9
 version 0.2.8
  * Fixed auto-mounting of primary target partition in LiveCDs not using /dev/root
  * Fixed Label length error checking
- * Improved overall labelling error proofing scheme
+ * Improved overall labeling error proofing scheme
  * Added translations in Polish
 
 version 0.2.7
@@ -36,23 +50,23 @@ version 0.2.4
 
 version 0.2.3
  * Improved bootable partition detection
- * Fixed annulation sequence after error detection for labels with more than 15 characters
+ * Fixed canceling sequence after error detection for labels with more than 15 characters
 
 version 0.2.2
  * Translation updates
 
 version 0.2.1
- * Improved detection of available text editor for lilosetup configuration file
+ * Improved detection of available text editor for LiloSetup configuration file
 
 version 0.2
  * Added translations in Danish, Dutch, Italian, Ukrainian. 
  * Added visual enhancement to label editing section.
- * Added auto-configuration for Fedora-based distro.
+ * Added auto-configuration for Fedora-based distribution.
  * Added support for 64 bit systems
- * Improved autoconfiguration for multiboot with libata & non-libata partitions.
+ * Improved auto-configuration for multi-boot with libata & non-libata partitions.
  * Improved contextual help display. 
 
 version 0.1
  * First release of LiloSetup in SalixLive 13.0
  * Translations in Greek, French, German, Spanish.
- * LiloSetup is an improved version of LiloConfig which I initially developped for ZenLive.
+ * LiloSetup is an improved version of LiloConfig which I initially developed for ZenLive.

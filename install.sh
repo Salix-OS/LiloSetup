@@ -5,7 +5,6 @@ VER=$(grep 'version =' src/$PKGNAME.py | head -n 1 | sed "s/.*'\(.*\)'/\1/")
 
 cd $(dirname $0)
 
-install -d -m 755 $DESTDIR/install
 install -d -m 755 $DESTDIR/usr/doc/$PKGNAME-$VER
 install -d -m 755 $DESTDIR/usr/sbin
 install -d -m 755 $DESTDIR/usr/share/applications

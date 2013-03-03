@@ -13,6 +13,13 @@ xgettext --from-code=utf-8 \
 	-L Python \
 	-o po/lilosetup.pot \
 	src/lilosetup.py
+
+xgettext --from-code=utf-8 \
+	-j \
+	-L Python \
+	-o po/lilosetup.pot \
+	src/lilosetup_modules/liloconfigfile.py
+
 xgettext --from-code=utf-8 -j -L C -kN_ -o po/lilosetup.pot src/lilosetup.desktop.in.h
 xgettext --from-code=utf-8 -j -L C -kN_ -o po/lilosetup.pot src/lilosetup-kde.desktop.in.h
 

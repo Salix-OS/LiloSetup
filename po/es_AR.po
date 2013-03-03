@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # gapan <vlahavas@gmail.com>, 2011.
 #   <seacat.linux@gmail.com>, 2011.
@@ -10,48 +10,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 12:22+0200\n"
-"PO-Revision-Date: 2011-10-17 03:19+0000\n"
-"Last-Translator: seacat <seacat.linux@gmail.com>\n"
+"POT-Creation-Date: 2013-03-03 18:33+0100\n"
+"PO-Revision-Date: 2012-02-14 13:24+0000\n"
+"Last-Translator: Cyrille Pontvieux <jrd@enialis.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_AR\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/lilosetup.glade:74 src/lilosetup.desktop.in.h:1
-#: src/lilosetup-kde.desktop.in.h:1
-msgid "Lilo Setup"
-msgstr "Configuración Lilo"
-
-#: src/lilosetup.glade:324
-msgid "_Undo configuration "
-msgstr "_Deshacer la configuración"
-
-#: src/lilosetup.glade:370
-msgid "_Edit configuration "
-msgstr "_Editar la configuración"
-
-#: src/lilosetup.glade:458
-msgid " _Install LILO's bootloader "
-msgstr " _Instalar el gestor de arranque LILO"
-
-#: src/lilosetup.glade:491
+#: src/lilosetup.glade:10
 msgid "About lilosetup"
 msgstr "Acerca de lilosetup"
 
-#: src/lilosetup.glade:502
-msgid ""
-"A simple GUI interface to set-up LILO.\n"
-"\n"
-"Copyright © 2010-2011 Pierrick Le Brun"
+#: src/lilosetup.glade:21
+#, fuzzy
+msgid "Copyright © 2010-2013 Pierrick Le Brun"
 msgstr ""
 "Una interfaz GUI simple para configurar LILO.\n"
 "\n"
 "Copyright © 2010-2011 Pierrick Le Brun"
 
-#: src/lilosetup.glade:507
+#: src/lilosetup.glade:22
+msgid "A simple GUI to set up LILO."
+msgstr ""
+
+#: src/lilosetup.glade:25
 msgid ""
 "This program is free software; you can redistribute it \n"
 "and/or modify it under the terms of the GNU General\n"
@@ -87,11 +72,282 @@ msgstr ""
 "escriba a Free Software Foundation, Inc., 51 Franklin Street, \n"
 "Fifth Floor, Boston, MA 02110-1301, USA."
 
-#: src/lilosetup.glade:524
+#: src/lilosetup.glade:42
 msgid "translator-credits"
 msgstr "Fernando Velo <seacat~at~prog@gmail~dot~com>"
 
-#: src/lilosetup.py:353
+#: src/lilosetup.glade:137 src/lilosetup.desktop.in.h:1
+#: src/lilosetup-kde.desktop.in.h:1
+msgid "Lilo Setup"
+msgstr "Configuración Lilo"
+
+#: src/lilosetup.glade:270
+msgid " _Install LILO's bootloader "
+msgstr " _Instalar el gestor de arranque LILO"
+
+#: src/lilosetup.glade:514
+msgid "_Undo configuration "
+msgstr "_Deshacer la configuración"
+
+#: src/lilosetup.glade:569
+msgid "_Edit configuration "
+msgstr "_Editar la configuración"
+
+#: src/lilosetup.py:102
+msgid "Partition"
+msgstr "Partición"
+
+#: src/lilosetup.py:103
+msgid "File system"
+msgstr "Sistema de archivos"
+
+#: src/lilosetup.py:104
+msgid "Operating system"
+msgstr "Sistema operativo"
+
+#: src/lilosetup.py:105
+msgid "Boot menu label"
+msgstr "Etiqueta de menú de arranque"
+
+#: src/lilosetup.py:109
+msgid ""
+"<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
+"\n"
+"A bootloader is required to load the main operating system of a computer and "
+"will initially display a boot menu if several operating systems are "
+"available on the same computer."
+msgstr ""
+"<b>LiloSetup instalará un nuevo cargador de arranque LILO en su computadora."
+"</b> \n"
+"\n"
+"Se necesita un cargador de arranque para cargar el sistema operativo "
+"principal de una computadora, que inicialmente mostrará un menú de arranque "
+"si hay varios sistemas operativos disponibles en la misma computadora."
+
+#: src/lilosetup.py:137 src/lilosetup.py:218 src/lilosetup.py:530
+#: src/lilosetup.py:554 src/lilosetup.py:559
+msgid "Set..."
+msgstr "Configurar..."
+
+#: src/lilosetup.py:225
+msgid "# Windows bootable partition config begins\n"
+msgstr "# Comienza la configuración de la partición arrancable de Windows\n"
+
+#: src/lilosetup.py:228
+msgid "# Windows bootable partition config ends\n"
+msgstr "# Termina la configuración de la partición arrancable de Windows\n"
+
+#: src/lilosetup.py:368
+msgid "# Linux bootable partition config begins\n"
+msgstr "# Comienza la configuración de la partición arrancable de Linux\n"
+
+#: src/lilosetup.py:374
+msgid ""
+"One of your partitions does not seem to hold a valid kernel file. Please "
+"verify and correct LiloSetup configuration file manually.\n"
+msgstr ""
+"Una de sus particiones parece no tener un archivo de kernel válido. Por "
+"favor, verifique y corrija manualmente el archivo de configuración.\n"
+
+#: src/lilosetup.py:407
+msgid "# Linux bootable partition config ends\n"
+msgstr "# Termina la configuración de la partición arrancable de Linux\n"
+
+#: src/lilosetup.py:418
+msgid "About Lilo Setup."
+msgstr "Acerca de Configuración de Lilo."
+
+#: src/lilosetup.py:423
+msgid ""
+"It is necessary to (re)configure the bootloader each time you install a new "
+"operating system on your computer. \n"
+"LiloSetup can also be useful in the process of a disaster recovery in which "
+"case you may have to launch it from a LiveCD if you have lost all other "
+"means to boot into your system.\n"
+"Lilosetup can indifferently be executed from a Linux LiveCD environment or "
+"from a regular installed Linux system.  In both cases, it will setup a new "
+"LILO bootloader on the MBR of your first hard drive."
+msgstr ""
+"Es necesario (re)configurar el cargador de arranque cada vez que instala un "
+"nuevo sistema operativo en su computadora. \n"
+"Configuración de Lilo también puede ser útil en el proceso de recuperación "
+"de desastres. En ese caso, tiene que lanzarlo desde un LiveCD si perdió "
+"todos los demás medios de arrancar su sistema.\n"
+"Configuración de Lilo se puede ejecutar indistintamente desde un entorno "
+"LiveCD de Linux o desde un sistema Linux instalado en forma regular. En "
+"ambos casos, configurará un nuevo cargador de arranque LILO en el MBR de su "
+"primer disco duro."
+
+#: src/lilosetup.py:434
+msgid ""
+"Here you must define a Boot menu label for each of the operating system that "
+"will be displayed on your bootloader menu.\n"
+"Any partition for which you do not set a  Boot menu label will not be "
+"configured and will not be displayed on the bootloader menu.\n"
+"If a few kernels are available within one partition, the label you have "
+"chosen for that partition will be appended numerically to create multiple "
+"menu entries for each of these kernels.\n"
+"Any of these settings can be edited manually in lilosetup configuration file."
+msgstr ""
+"Aquí tiene que definir el rótulo de menú de Arranque para cada uno de los "
+"sistemas operativos que el menú de su cargador de arranque mostrará.\n"
+"Cualquier partición a la que no se le establezca un rótulo de menú de "
+"Arranque, no se configurará y no se mostrará en el menú del cargador de "
+"arranque.\n"
+"Si dentro de una partición hay varios kernels disponibles, el rótulo que "
+"haya elegido para esta partición se agregará numéricamente para crear varias "
+"entradas de menú para cada uno de esos kernels.\n"
+"Cualquiera de estos valores se pueden editar manualmente en el archivo de "
+"configuración de Configuración de Lilo."
+
+#: src/lilosetup.py:445
+msgid ""
+"Use this arrow if you want to move the selected Operating System up to a "
+"higher rank.\n"
+"The partition with the highest rank will be displayed on the first line of "
+"the bootloader menu.\n"
+"Any of these settings can be edited manually in lilosetup configuration file."
+msgstr ""
+"Use esta flecha si quiere mover el Sistema Operativo seleccionado hacia una "
+"posición mayor.\n"
+"La partición con la posición más alta se mostrará en la primera línea del "
+"menú del cargador de arranque.\n"
+"Cualquiera de estos valores se pueden editar manualmente en el archivo de "
+"configuración Configuración de Lilo."
+
+#: src/lilosetup.py:453
+msgid ""
+"Use this arrow if you want to move the selected Operating System down to a "
+"lower rank.\n"
+"The partition with the lowest rank will be displayed on the last line of the "
+"bootloader menu.\n"
+"Any of these settings can be edited manually in lilosetup configuration file."
+msgstr ""
+"Use esta flecha si quiere mover el Sistema Operativo seleccionado hacia una "
+"posición menor.\n"
+"La partición con la posición más baja se mostrará en la última línea del "
+"menú del cargador de arranque.\n"
+"Cualquiera de estos valores se pueden editar manualmente en el archivo de "
+"configuración de Configuración de Lilo."
+
+#: src/lilosetup.py:462
+msgid "This will undo all settings (even manual modifications)."
+msgstr ""
+"Esto deshará todas las configuraciones (aún las modificaciones manuales)"
+
+#: src/lilosetup.py:466
+msgid ""
+"Experienced users have the possibility to manually edit LiloSetup "
+"configuration file (settings are identical to lilo.conf). \n"
+"Please do not temper with this file unless you know what you are doing and "
+"you have read its commented instructions regarding chrooted paths."
+msgstr ""
+"Los usuarios expertos tiene la posibilidad de editar manualmente el archivo "
+"de configuración de Configuración de Lilo (la configuración es idéntica a "
+"lilo.conf). \n"
+"Por favor, no se meta con este archivo, a menos que sepa lo que está "
+"haciendo y haya leído las instrucciones comentadas respecto a las rutas con "
+"chroot."
+
+#: src/lilosetup.py:474
+msgid "Exit Lilo Setup program."
+msgstr "Salir del programa Configuración de Lilo."
+
+#: src/lilosetup.py:479
+msgid ""
+"Once you have defined your settings, click on this button to create your new "
+"LILO's bootloader."
+msgstr ""
+"Una vez que haya definido sus ajustes, haga clic en este botón para crear su "
+"nuevo cargador de arranque LILO."
+
+#: src/lilosetup.py:523
+msgid ""
+"You have used the same label for different Operating Systems. Please verify "
+"and correct.\n"
+msgstr ""
+"Ud usó el mismo rótulo para diferentes Sistemas Operativos. Por favor, "
+"verificar y corregir.\n"
+
+#: src/lilosetup.py:543
+msgid ""
+"\n"
+"An Operating System label should not contain any space. \n"
+"\n"
+"Please verify and correct.\n"
+msgstr ""
+"\n"
+"El rótulo del Sistema Operativo no debería contener espacios. \n"
+"\n"
+"Por favor, verificar y corregir.\n"
+
+#: src/lilosetup.py:547
+msgid ""
+"\n"
+"An Operating System label should not hold more than 15 characters. \n"
+"\n"
+"Please verify and correct.\n"
+msgstr ""
+"\n"
+"El rótulo del Sistema Operativo no debería tener más de 15 caracteres. \n"
+"\n"
+"Por favor, verificar y corregir.\n"
+
+#: src/lilosetup.py:677
+msgid ""
+"Sorry, LiloSetup is unable to find a suitable text editor in your system. "
+"You will not be able to manually modify LiloSetup configuration.\n"
+msgstr ""
+"Lo siento, LiloSetup es incapaz de encontrar un editor de texto adecuado en "
+"su sistema. No será capaz de modificar manualmente la configuración de "
+"LiloSetup.\n"
+
+#: src/lilosetup.py:685
+msgid ""
+"Your configuration is not complete. Please, select at least one Linux "
+"booting partition and define its Boot menu label.\n"
+msgstr ""
+"Su configuración no está completa. Por favor, seleccionar al menos una "
+"partición de arranque Linux y definir su rótulo de menú de Arranque.\n"
+
+#: src/lilosetup.py:688
+msgid ""
+"You are about to install a new LILO bootloader. Are you sure you want to "
+"continue?"
+msgstr ""
+"Está a punto de instalar el nuevo cargador de arranque LILO. ¿Está seguro de "
+"querer continuar?"
+
+#: src/lilosetup.py:704
+msgid ""
+"The installation of your new LILO bootloader was succesful. You can now exit "
+"LiloSetup and reboot your computer.\n"
+msgstr ""
+"La instalación de su nuevo cargador de arranque LILO resultó exitosa. Ahora "
+"puede salir de Configuración de Lilo y reiniciar su computadora.\n"
+
+#: src/lilosetup.py:707
+msgid ""
+"The installation of your new LILO bootloader failed. Please verify /var/log/"
+"lilosetup.log, modify your settings and try again.\n"
+msgstr ""
+"Falló la instalación de su nuevo cargador de arranque LILO. Por favor "
+"verificar /var/log/lilosetup.log, modificar sus configuraciones e intentarlo "
+"nuevamente.\n"
+
+#: src/lilosetup.py:715
+#, fuzzy
+msgid ""
+"<b>Sorry!</b>\n"
+"\n"
+"Root privileges are required to run this program."
+msgstr ""
+"<b>Lo siento!</b> \n"
+"\n"
+"Se necesitan prvilegios de Root para ejecutar Configuración de Lilo. "
+
+#: src/lilosetup_modules/liloconfigfile.py:28
+#, fuzzy
 msgid ""
 "# LILO configuration file\n"
 "# Generated by LiloSetup\n"
@@ -99,7 +355,8 @@ msgstr ""
 "# Archivo de configuración de LILO\n"
 "# Generado por LiloSetup\n"
 
-#: src/lilosetup.py:356
+#: src/lilosetup_modules/liloconfigfile.py:31
+#, fuzzy
 msgid ""
 "# Start LILO global section\n"
 "# Append any additional kernel parameters:\n"
@@ -107,7 +364,8 @@ msgstr ""
 "# Inicio de la sección global de LILO\n"
 "# Agregar cualquier parámetro adicional del kernel:\n"
 
-#: src/lilosetup.py:361
+#: src/lilosetup_modules/liloconfigfile.py:38
+#, fuzzy
 msgid ""
 "# Boot BMP Image.\n"
 "# Bitmap in BMP format: 640x480x8\n"
@@ -115,7 +373,8 @@ msgstr ""
 "# Imagen BMP de arranque.\n"
 "# Bitmap en formato BMP: 640x480x8\n"
 
-#: src/lilosetup.py:364
+#: src/lilosetup_modules/liloconfigfile.py:41
+#, fuzzy
 msgid ""
 "# Menu colors (foreground, background, shadow, highlighted\n"
 "# foreground, highlighted background, highlighted shadow):\n"
@@ -123,7 +382,8 @@ msgstr ""
 "# Colores del menú (frente, fondo, sombra, resaltado\n"
 "# frente, fondo resaltado, sombra resaltada):\n"
 
-#: src/lilosetup.py:367
+#: src/lilosetup_modules/liloconfigfile.py:44
+#, fuzzy
 msgid ""
 "# Location of the option table: location x, location y, number of\n"
 "# columns, lines per column (max 15), \"spill\" this is how many\n"
@@ -135,15 +395,18 @@ msgstr ""
 "# entradas tienen que haber en la primera columna antes que la siguiente\n"
 "# comience a usarse. No la especificamos aquí, ya que hay una sola comuna.\n"
 
-#: src/lilosetup.py:372
+#: src/lilosetup_modules/liloconfigfile.py:49
+#, fuzzy
 msgid ""
 "# Timer location x, timer location y, foreground color,\n"
 "# background color, shadow color.\n"
 msgstr ""
-"# Posición x del temporizador, posición y del temporizador, color de frente,\n"
+"# Posición x del temporizador, posición y del temporizador, color de "
+"frente,\n"
 "# color de fondo, color de la sombra.\n"
 
-#: src/lilosetup.py:376
+#: src/lilosetup_modules/liloconfigfile.py:53
+#, fuzzy
 msgid ""
 "# Standard menu.\n"
 "# Or, you can comment out the bitmap menu above and \n"
@@ -153,7 +416,8 @@ msgstr ""
 "# O, puede comentar el menú de bitmap de arriba\n"
 "# y usar un mensaje de arranque con el menú estándar:\n"
 
-#: src/lilosetup.py:381
+#: src/lilosetup_modules/liloconfigfile.py:58
+#, fuzzy
 msgid ""
 "# Wait until the timeout to boot (if commented out, boot the\n"
 "# first entry immediately):\n"
@@ -161,7 +425,8 @@ msgstr ""
 "# Esperar hasta el fin de la demora para arrancar (si está comentada,\n"
 "# arrancar la primera entrada inmediatamente):\n"
 
-#: src/lilosetup.py:384
+#: src/lilosetup_modules/liloconfigfile.py:61
+#, fuzzy
 msgid ""
 "# Timeout before the first entry boots.\n"
 "# This is given in tenths of a second, so 600 for every minute:\n"
@@ -169,95 +434,106 @@ msgstr ""
 "# Demora antes que la primara entrada arranque.\n"
 "# Está dada en décimas de segundo, por lo tanto, 600 por cada minuto:\n"
 
-#: src/lilosetup.py:387
+#: src/lilosetup_modules/liloconfigfile.py:64
 msgid "# Override dangerous defaults that rewrite the partition table:\n"
 msgstr ""
 "# Anular los valores por defecto peligrosos que reescriben la tabla de "
 "particiones:\n"
 
-#: src/lilosetup.py:391
+#: src/lilosetup_modules/liloconfigfile.py:68
 msgid "# Normal VGA console\n"
 msgstr "# Consola VGA normal\n"
 
-#: src/lilosetup.py:393
+#: src/lilosetup_modules/liloconfigfile.py:70
 msgid "# VESA framebuffer console @ 1600x1200x16m\n"
 msgstr "# consola VESA framebuffer @ 1600x1200x16m\n"
 
-#: src/lilosetup.py:395
+#: src/lilosetup_modules/liloconfigfile.py:72
 msgid "# VESA framebuffer console @ 1600x1200x64k\n"
 msgstr "# Consola framebuffer VESA @ 1600x1200x64k\n"
 
-#: src/lilosetup.py:397
+#: src/lilosetup_modules/liloconfigfile.py:74
 msgid "# VESA framebuffer console @ 1600x1200x32k\n"
 msgstr "# Consola framebuffer VESA @ 1600x1200x32k\n"
 
-#: src/lilosetup.py:399
+#: src/lilosetup_modules/liloconfigfile.py:76
 msgid "# VESA framebuffer console @ 1600x1200x256\n"
 msgstr "# Consola framebuffer VESA @ 1600x1200x256\n"
 
-#: src/lilosetup.py:401
+#: src/lilosetup_modules/liloconfigfile.py:78
 msgid "# VESA framebuffer console @ 1280x1024x16m\n"
 msgstr "# consola VESA framebuffer @ 1280x1024x16m\n"
 
-#: src/lilosetup.py:403
+#: src/lilosetup_modules/liloconfigfile.py:80
 msgid "# VESA framebuffer console @ 1280x1024x64k\n"
 msgstr "# Consola framebuffer VESA @ 1280x1024x64k\n"
 
-#: src/lilosetup.py:405
+#: src/lilosetup_modules/liloconfigfile.py:82
 msgid "# VESA framebuffer console @ 1280x1024x32k\n"
 msgstr "# Consola framebuffer VESA @ 1280x1024x32k\n"
 
-#: src/lilosetup.py:407
+#: src/lilosetup_modules/liloconfigfile.py:84
 msgid "# VESA framebuffer console @ 1280x1024x256\n"
 msgstr "# Consola framebuffer VESA @ 1280x1024x256\n"
 
-#: src/lilosetup.py:409
+#: src/lilosetup_modules/liloconfigfile.py:86
+#, fuzzy
+msgid "# VESA framebuffer console @ 1024x768x16m\n"
+msgstr "# Consola framebuffer VESA @ 1024x768x64k\n"
+
+#: src/lilosetup_modules/liloconfigfile.py:88
 msgid "# VESA framebuffer console @ 1024x768x64k\n"
 msgstr "# Consola framebuffer VESA @ 1024x768x64k\n"
 
-#: src/lilosetup.py:411
+#: src/lilosetup_modules/liloconfigfile.py:90
 msgid "# VESA framebuffer console @ 1024x768x32k\n"
 msgstr "# Consola framebuffer VESA @ 1024x768x32k\n"
 
-#: src/lilosetup.py:413
+#: src/lilosetup_modules/liloconfigfile.py:92
 msgid "# VESA framebuffer console @ 1024x768x256\n"
 msgstr "# Consola framebuffer VESA @ 1024x768x256\n"
 
-#: src/lilosetup.py:415
+#: src/lilosetup_modules/liloconfigfile.py:94
 msgid "# VESA framebuffer console @ 800x600x16m\n"
 msgstr ""
 "# consola VESA framebuffer @ 800x600x16m\n"
 "\n"
 
-#: src/lilosetup.py:417
+#: src/lilosetup_modules/liloconfigfile.py:96
 msgid "# VESA framebuffer console @ 800x600x64k\n"
 msgstr "# Consola framebuffer VESA @ 800x600x64k\n"
 
-#: src/lilosetup.py:419
+#: src/lilosetup_modules/liloconfigfile.py:98
 msgid "# VESA framebuffer console @ 800x600x32k\n"
 msgstr "# Consola framebuffer VESA @ 800x600x32k\n"
 
-#: src/lilosetup.py:421
+#: src/lilosetup_modules/liloconfigfile.py:100
 msgid "# VESA framebuffer console @ 800x600x256\n"
 msgstr "# Consola framebuffer VESA @ 800x600x256\n"
 
-#: src/lilosetup.py:423
+#: src/lilosetup_modules/liloconfigfile.py:102
+#, fuzzy
+msgid "# VESA framebuffer console @ 640x480x16m\n"
+msgstr "# Consola framebuffer VESA @ 640x480x64k\n"
+
+#: src/lilosetup_modules/liloconfigfile.py:104
 msgid "# VESA framebuffer console @ 640x480x64k\n"
 msgstr "# Consola framebuffer VESA @ 640x480x64k\n"
 
-#: src/lilosetup.py:425
+#: src/lilosetup_modules/liloconfigfile.py:106
 msgid "# VESA framebuffer console @ 640x480x32k\n"
 msgstr "# Consola framebuffer VESA @ 640x480x32k\n"
 
-#: src/lilosetup.py:427
+#: src/lilosetup_modules/liloconfigfile.py:108
 msgid "# VESA framebuffer console @ 640x480x256\n"
 msgstr "# Consola framebuffer VESA @ 640x480x256\n"
 
-#: src/lilosetup.py:429
+#: src/lilosetup_modules/liloconfigfile.py:110
 msgid "# End LILO global section\n"
 msgstr "# Fin de la sección global de LILO\n"
 
-#: src/lilosetup.py:431
+#: src/lilosetup_modules/liloconfigfile.py:112
+#, fuzzy
 msgid ""
 "# LiloSetup can be executed from a LiveCD. This means that lilo\n"
 "# could be issued from a 'chrooted' Linux partition, which would\n"
@@ -267,7 +543,8 @@ msgid ""
 "# constraint into consideration if you must modify this file\n"
 "# or else LiloSetup will fail.\n"
 msgstr ""
-"# Configuración de Lilo se puede ejecutar desde un LiveCD. Esto significa que\n"
+"# Configuración de Lilo se puede ejecutar desde un LiveCD. Esto significa "
+"que\n"
 "# lilo podría ejecutarse desde una partición Linux con 'chroot', la cual\n"
 "# podría ser la primer partición Linux listada abajo.\n"
 "# Por lo tanto, las siguientes rutas son relevantes solamente al\n"
@@ -275,7 +552,8 @@ msgstr ""
 "# Por favor, tener en cuenta esta restricción si tiene que modificar\n"
 "# este archivo o Configuración de Lilo fallará.\n"
 
-#: src/lilosetup.py:439
+#: src/lilosetup_modules/liloconfigfile.py:120
+#, fuzzy
 msgid ""
 "# If later on you want to use this configuration file directly\n"
 "# with lilo in a command line, use the following syntax:\n"
@@ -293,216 +571,6 @@ msgstr ""
 "# todas las particiones referenciadas en él están montadas en los puntos\n"
 "# de montaje adecuados.\n"
 
-#: src/lilosetup.py:527
-msgid "Partition"
-msgstr "Partición"
-
-#: src/lilosetup.py:528
-msgid "File system"
-msgstr "Sistema de archivos"
-
-#: src/lilosetup.py:529
-msgid "Operating system"
-msgstr "Sistema operativo"
-
-#: src/lilosetup.py:530
-msgid "Boot menu label"
-msgstr "Etiqueta de menú de arranque"
-
-#: src/lilosetup.py:534
-msgid ""
-"<b>LiloSetup will install a new LILO bootloader on your computer.</b> \n"
-"\n"
-"A bootloader is required to load the main operating system of a computer and will initially display a boot menu if several operating systems are available on the same computer."
-msgstr ""
-"<b>LiloSetup instalará un nuevo cargador de arranque LILO en su computadora.</b> \n"
-"\n"
-"Se necesita un cargador de arranque para cargar el sistema operativo principal de una computadora, que inicialmente mostrará un menú de arranque si hay varios sistemas operativos disponibles en la misma computadora."
-
-#: src/lilosetup.py:554 src/lilosetup.py:640 src/lilosetup.py:952
-#: src/lilosetup.py:976 src/lilosetup.py:981
-msgid "Set..."
-msgstr "Configurar..."
-
-#: src/lilosetup.py:647
-msgid "# Windows bootable partition config begins\n"
-msgstr "# Comienza la configuración de la partición arrancable de Windows\n"
-
-#: src/lilosetup.py:650
-msgid "# Windows bootable partition config ends\n"
-msgstr "# Termina la configuración de la partición arrancable de Windows\n"
-
-#: src/lilosetup.py:790
-msgid "# Linux bootable partition config begins\n"
-msgstr "# Comienza la configuración de la partición arrancable de Linux\n"
-
-#: src/lilosetup.py:796
-msgid ""
-"One of your partitions does not seem to hold a valid kernel file. Please "
-"verify and correct LiloSetup configuration file manually.\n"
-msgstr ""
-"Una de sus particiones parece no tener un archivo de kernel válido. Por "
-"favor, verifique y corrija manualmente el archivo de configuración.\n"
-
-#: src/lilosetup.py:829
-msgid "# Linux bootable partition config ends\n"
-msgstr "# Termina la configuración de la partición arrancable de Linux\n"
-
-#: src/lilosetup.py:840
-msgid "About Lilo Setup."
-msgstr "Acerca de Configuración de Lilo."
-
-#: src/lilosetup.py:845
-msgid ""
-"It is necessary to (re)configure the bootloader each time you install a new operating system on your computer. \n"
-"LiloSetup can also be useful in the process of a disaster recovery in which case you may have to launch it from a LiveCD if you have lost all other means to boot into your system.\n"
-"Lilosetup can indifferently be executed from a Linux LiveCD environment or from a regular installed Linux system.  In both cases, it will setup a new LILO bootloader on the MBR of your first hard drive."
-msgstr ""
-"Es necesario (re)configurar el cargador de arranque cada vez que instala un nuevo sistema operativo en su computadora. \n"
-"Configuración de Lilo también puede ser útil en el proceso de recuperación de desastres. En ese caso, tiene que lanzarlo desde un LiveCD si perdió todos los demás medios de arrancar su sistema.\n"
-"Configuración de Lilo se puede ejecutar indistintamente desde un entorno LiveCD de Linux o desde un sistema Linux instalado en forma regular. En ambos casos, configurará un nuevo cargador de arranque LILO en el MBR de su primer disco duro."
-
-#: src/lilosetup.py:856
-msgid ""
-"Here you must define a Boot menu label for each of the operating system that will be displayed on your bootloader menu.\n"
-"Any partition for which you do not set a  Boot menu label will not be configured and will not be displayed on the bootloader menu.\n"
-"If a few kernels are available within one partition, the label you have chosen for that partition will be appended numerically to create multiple menu entries for each of these kernels.\n"
-"Any of these settings can be edited manually in lilosetup configuration file."
-msgstr ""
-"Aquí tiene que definir el rótulo de menú de Arranque para cada uno de los sistemas operativos que el menú de su cargador de arranque mostrará.\n"
-"Cualquier partición a la que no se le establezca un rótulo de menú de Arranque, no se configurará y no se mostrará en el menú del cargador de arranque.\n"
-"Si dentro de una partición hay varios kernels disponibles, el rótulo que haya elegido para esta partición se agregará numéricamente para crear varias entradas de menú para cada uno de esos kernels.\n"
-"Cualquiera de estos valores se pueden editar manualmente en el archivo de configuración de Configuración de Lilo."
-
-#: src/lilosetup.py:867
-msgid ""
-"Use this arrow if you want to move the selected Operating System up to a higher rank.\n"
-"The partition with the highest rank will be displayed on the first line of the bootloader menu.\n"
-"Any of these settings can be edited manually in lilosetup configuration file."
-msgstr ""
-"Use esta flecha si quiere mover el Sistema Operativo seleccionado hacia una posición mayor.\n"
-"La partición con la posición más alta se mostrará en la primera línea del menú del cargador de arranque.\n"
-"Cualquiera de estos valores se pueden editar manualmente en el archivo de configuración Configuración de Lilo."
-
-#: src/lilosetup.py:875
-msgid ""
-"Use this arrow if you want to move the selected Operating System down to a lower rank.\n"
-"The partition with the lowest rank will be displayed on the last line of the bootloader menu.\n"
-"Any of these settings can be edited manually in lilosetup configuration file."
-msgstr ""
-"Use esta flecha si quiere mover el Sistema Operativo seleccionado hacia una posición menor.\n"
-"La partición con la posición más baja se mostrará en la última línea del menú del cargador de arranque.\n"
-"Cualquiera de estos valores se pueden editar manualmente en el archivo de configuración de Configuración de Lilo."
-
-#: src/lilosetup.py:884
-msgid "This will undo all settings (even manual modifications)."
-msgstr ""
-"Esto deshará todas las configuraciones (aún las modificaciones manuales)"
-
-#: src/lilosetup.py:888
-msgid ""
-"Experienced users have the possibility to manually edit LiloSetup configuration file (settings are identical to lilo.conf). \n"
-"Please do not temper with this file unless you know what you are doing and you have read its commented instructions regarding chrooted paths."
-msgstr ""
-"Los usuarios expertos tiene la posibilidad de editar manualmente el archivo de configuración de Configuración de Lilo (la configuración es idéntica a lilo.conf). \n"
-"Por favor, no se meta con este archivo, a menos que sepa lo que está haciendo y haya leído las instrucciones comentadas respecto a las rutas con chroot."
-
-#: src/lilosetup.py:896
-msgid "Exit Lilo Setup program."
-msgstr "Salir del programa Configuración de Lilo."
-
-#: src/lilosetup.py:901
-msgid ""
-"Once you have defined your settings, click on this button to create your new"
-" LILO's bootloader."
-msgstr ""
-"Una vez que haya definido sus ajustes, haga clic en este botón para crear su"
-" nuevo cargador de arranque LILO."
-
-#: src/lilosetup.py:945
-msgid ""
-"You have used the same label for different Operating Systems. Please verify "
-"and correct.\n"
-msgstr ""
-"Ud usó el mismo rótulo para diferentes Sistemas Operativos. Por favor, "
-"verificar y corregir.\n"
-
-#: src/lilosetup.py:965
-msgid ""
-"\n"
-"An Operating System label should not contain any space. \n"
-"\n"
-"Please verify and correct.\n"
-msgstr ""
-"\n"
-"El rótulo del Sistema Operativo no debería contener espacios. \n"
-"\n"
-"Por favor, verificar y corregir.\n"
-
-#: src/lilosetup.py:969
-msgid ""
-"\n"
-"An Operating System label should not hold more than 15 characters. \n"
-"\n"
-"Please verify and correct.\n"
-msgstr ""
-"\n"
-"El rótulo del Sistema Operativo no debería tener más de 15 caracteres. \n"
-"\n"
-"Por favor, verificar y corregir.\n"
-
-#: src/lilosetup.py:1104
-msgid ""
-"Sorry, LiloSetup is unable to find a suitable text editor in your system. "
-"You will not be able to manually modify LiloSetup configuration.\n"
-msgstr ""
-"Lo siento, LiloSetup es incapaz de encontrar un editor de texto adecuado en "
-"su sistema. No será capaz de modificar manualmente la configuración de "
-"LiloSetup.\n"
-
-#: src/lilosetup.py:1113
-msgid ""
-"Your configuration is not complete. Please, select at least one Linux "
-"booting partition and define its Boot menu label.\n"
-msgstr ""
-"Su configuración no está completa. Por favor, seleccionar al menos una "
-"partición de arranque Linux y definir su rótulo de menú de Arranque.\n"
-
-#: src/lilosetup.py:1116
-msgid ""
-"You are about to install a new LILO bootloader. Are you sure you want to "
-"continue?"
-msgstr ""
-"Está a punto de instalar el nuevo cargador de arranque LILO. ¿Está seguro de"
-" querer continuar?"
-
-#: src/lilosetup.py:1132
-msgid ""
-"The installation of your new LILO bootloader was succesful. You can now exit"
-" LiloSetup and reboot your computer.\n"
-msgstr ""
-"La instalación de su nuevo cargador de arranque LILO resultó exitosa. Ahora "
-"puede salir de Configuración de Lilo y reiniciar su computadora.\n"
-
-#: src/lilosetup.py:1135
-msgid ""
-"The installation of your new LILO bootloader failed. Please verify "
-"/var/log/lilosetup.log, modify your settings and try again.\n"
-msgstr ""
-"Falló la instalación de su nuevo cargador de arranque LILO. Por favor "
-"verificar /var/log/lilosetup.log, modificar sus configuraciones e intentarlo"
-" nuevamente.\n"
-
-#: src/lilosetup.py:1143
-msgid ""
-"<b>Sorry!</b> \n"
-"\n"
-"Root privileges are required to run LiloSetup. "
-msgstr ""
-"<b>Lo siento!</b> \n"
-"\n"
-"Se necesitan prvilegios de Root para ejecutar Configuración de Lilo. "
-
 #: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
 msgstr "Herramienta de configuración de Lilo"
@@ -510,5 +578,3 @@ msgstr "Herramienta de configuración de Lilo"
 #: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
 msgstr "Configurar Lilo desde un LiveCD o un sistema estándar."
-
-

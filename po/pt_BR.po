@@ -1,29 +1,35 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Translators:
+# Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013.
+#   <gordoviajao@yahoo.com.br>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-03 18:48+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-03-03 18:33+0100\n"
+"PO-Revision-Date: 2013-01-18 22:08+0000\n"
+"Last-Translator: Enrico Nicoletto <enrico.BR@gmx.co.uk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/lilosetup.glade:10
 msgid "About lilosetup"
-msgstr ""
+msgstr "Sobre o lilosetup"
 
 #: src/lilosetup.glade:21
+#, fuzzy
 msgid "Copyright © 2010-2013 Pierrick Le Brun"
 msgstr ""
+"Uma interface GUI simples para configurar o LILO.\n"
+"\n"
+"Copyright © 2010-2011 Pierrick Le Brun"
 
 #: src/lilosetup.glade:22
 msgid "A simple GUI to set up LILO."
@@ -48,39 +54,55 @@ msgid ""
 "the Free Software Foundation, Inc., 51 Franklin Street, \n"
 "Fifth Floor, Boston, MA 02110-1301, USA."
 msgstr ""
+"Esse programa é software livre; você pode redistribuí-lo\n"
+"e/ou modificá-lo sob os termos da GNU General Public\n"
+"License como publicados pela Free Software Foundation;\n"
+"ou versão 2 da Licensa, ou (à sua opção) qualquer versão\n"
+"mais recente.\n"
+"\n"
+"Este programa é distribuido na esperaça de que será\n"
+"útil, mas SEM NENHUMA GARANTIA; sem mesmo\n"
+"a garantia de VENDABILIDADE ou ADEQUAÇÃO\n"
+"PARA QUALQUER PROPÓSITO.  Veja a GNU General\n"
+"Public License para mais detalhes.\n"
+"\n"
+"Você deveria ter recebido uma cópia da GNU General\n"
+"Public License junto com esse programa; se não, escreva para\n"
+"a Free Software Foundation, Inc., 51 Franklin Street,\n"
+"Fith Floor, Boston, MA 02110-1301, USA."
 
 #: src/lilosetup.glade:42
 msgid "translator-credits"
-msgstr ""
+msgstr "Tradutor - Fernando Henrique de Sousa"
 
 #: src/lilosetup.glade:137 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
-msgstr ""
+msgstr "Configuração do Lilo"
 
 #: src/lilosetup.glade:270
 msgid " _Install LILO's bootloader "
-msgstr ""
+msgstr " _Instalar o bootloader do LILO"
 
 #: src/lilosetup.glade:514
 msgid "_Undo configuration "
-msgstr ""
+msgstr "_Desfazer configuração "
 
 #: src/lilosetup.glade:569
 msgid "_Edit configuration "
-msgstr ""
+msgstr "_Editar configuração "
 
 #: src/lilosetup.py:102
 msgid "Partition"
-msgstr ""
+msgstr "Partição"
 
 #: src/lilosetup.py:103
 msgid "File system"
-msgstr ""
+msgstr "Sistema de arquivos"
 
 #: src/lilosetup.py:104
 msgid "Operating system"
-msgstr ""
+msgstr "Sistema Operacional"
 
 #: src/lilosetup.py:105
 msgid "Boot menu label"
@@ -94,37 +116,44 @@ msgid ""
 "will initially display a boot menu if several operating systems are "
 "available on the same computer."
 msgstr ""
+"<b>LiloSetup irá instalar um novo bootloader LILO no seu computador </b>\n"
+"\n"
+"Um bootloader é necessário para carregar o sistema operacional principal de "
+"um computador e irá mostrar um menu de boot se vários sistemas operacionais "
+"estiverem disponíveis no mesmo computador."
 
 #: src/lilosetup.py:137 src/lilosetup.py:218 src/lilosetup.py:530
 #: src/lilosetup.py:554 src/lilosetup.py:559
 msgid "Set..."
-msgstr ""
+msgstr "Definir..."
 
 #: src/lilosetup.py:225
 msgid "# Windows bootable partition config begins\n"
-msgstr ""
+msgstr "# Configuração de partição bootável do Windows começa\n"
 
 #: src/lilosetup.py:228
 msgid "# Windows bootable partition config ends\n"
-msgstr ""
+msgstr "# Cinfiguração de partição bootável do Windows termina\n"
 
 #: src/lilosetup.py:368
 msgid "# Linux bootable partition config begins\n"
-msgstr ""
+msgstr "# Configuração de partição bootável do Linux começa\n"
 
 #: src/lilosetup.py:374
 msgid ""
 "One of your partitions does not seem to hold a valid kernel file. Please "
 "verify and correct LiloSetup configuration file manually.\n"
 msgstr ""
+"Uma de suas partições não parece ter um arquivo válido de kernel. Por favor, "
+"verifique e corrija a configuração do LiloSetup manualmente.\n"
 
 #: src/lilosetup.py:407
 msgid "# Linux bootable partition config ends\n"
-msgstr ""
+msgstr "# Configuração de partição bootável do Linux termina\n"
 
 #: src/lilosetup.py:418
 msgid "About Lilo Setup."
-msgstr ""
+msgstr "Sobre o Lilo Setup."
 
 #: src/lilosetup.py:423
 msgid ""
@@ -137,6 +166,14 @@ msgid ""
 "from a regular installed Linux system.  In both cases, it will setup a new "
 "LILO bootloader on the MBR of your first hard drive."
 msgstr ""
+"É necessário (re)configurar o bootloader toda vez que você instalar um novo "
+"sistema operacional no seu computador.\n"
+"LiloSetup pode também ser útil no processo de recuperação de um desastre "
+"caso você tenha que lançá-lo de um LiveCD se você tiver perdido todos os "
+"outros meios de fazer boot no seu sistema.\n"
+"Lilosetup pode ser executado indiferentemente de um ambiente LiveCD Linux ou "
+"de um sistema Linux regular instalado.  Em ambos os casos, ele vai "
+"configurar um novo bootloader LILO no MRB ou no disco rígido primário."
 
 #: src/lilosetup.py:434
 msgid ""
@@ -149,6 +186,15 @@ msgid ""
 "menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Aqui você precisa definir uma etiqueta de menu de Boot para cada sistema "
+"operacional que será mostrado no menu bootloader.\n"
+"Qualquer partição para a qual você não definiu uma  etiqueta de menu de Boot "
+"não será configurada e não será mostrada no menu bootloader.\n"
+"Se alguns kernels estiverem disponíveis dentro de uma partição, a etiqueta "
+"que você escolheu para essa partição será anexada numericamente para criar "
+"múltiplas entradas no menu para cada um desses kernels.\n"
+"Qualquer dessas configurações pode ser editada manualmente no arquivo de "
+"configuração do lilosetup."
 
 #: src/lilosetup.py:445
 msgid ""
@@ -158,6 +204,12 @@ msgid ""
 "the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Use essa seta se você quer mover o Sistema Operacional selecionado para um "
+"ranking maior.\n"
+"A partição com o maior ranking será mostrada na primeira linha do menu "
+"bootloader.\n"
+"Qualquer dessas configurações pode ser editada manualmente no arquivo de "
+"configuração do lilosetup."
 
 #: src/lilosetup.py:453
 msgid ""
@@ -195,6 +247,8 @@ msgid ""
 "You have used the same label for different Operating Systems. Please verify "
 "and correct.\n"
 msgstr ""
+"Você usou a mesma etiqueta para Sistemas Operacionais diferentes. Por favor, "
+"verifique e corrija.\n"
 
 #: src/lilosetup.py:543
 msgid ""
@@ -203,6 +257,10 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Uma etiqueta de Sistema Operacional não deve conter qualquer espaço.\n"
+"\n"
+"Por favor, verifique e corrija.\n"
 
 #: src/lilosetup.py:547
 msgid ""
@@ -211,6 +269,10 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Uma etiqueta de Sistema Operacional não deve conter mais de 15 caracteres.\n"
+"\n"
+"Por favor, verifique e corrija.\n"
 
 #: src/lilosetup.py:677
 msgid ""
@@ -243,162 +305,200 @@ msgid ""
 msgstr ""
 
 #: src/lilosetup.py:715
+#, fuzzy
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
 "Root privileges are required to run this program."
 msgstr ""
+"<b>Desculpe!</b>\n"
+"\n"
+"Privilégios de root são necessários para executar o LiloSetup."
 
 #: src/lilosetup_modules/liloconfigfile.py:28
+#, fuzzy
 msgid ""
 "# LILO configuration file\n"
 "# Generated by LiloSetup\n"
 msgstr ""
+"# LILO arquivo de configuração\n"
+"# Gerado pelo LiloSetup\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:31
+#, fuzzy
 msgid ""
 "# Start LILO global section\n"
 "# Append any additional kernel parameters:\n"
 msgstr ""
+"# Iniciar seção global LILO\n"
+"# Anexar quaisquer parâmetros de kernel adicionais:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:38
+#, fuzzy
 msgid ""
 "# Boot BMP Image.\n"
 "# Bitmap in BMP format: 640x480x8\n"
 msgstr ""
+"# Iniciar Imagem BMP.\n"
+"# Bitmap em formato BMP: 640x480x8\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:41
+#, fuzzy
 msgid ""
 "# Menu colors (foreground, background, shadow, highlighted\n"
 "# foreground, highlighted background, highlighted shadow):\n"
 msgstr ""
+"# Cores do menu (campo frontal, fundo, sombra, campo frontal\n"
+"#destacado, fundo destacado, sombra destacada):\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:44
+#, fuzzy
 msgid ""
 "# Location of the option table: location x, location y, number of\n"
 "# columns, lines per column (max 15), \"spill\" this is how many\n"
 "# entries must be in the first column before the next begins to\n"
 "# be used.  We do not specify it here, as there is just one column.\n"
 msgstr ""
+"# Localização da tabela de opções: localização x, localização y,\n"
+"# número de colunas, linhas por coluna (máximo 15), \"derramar\"\n"
+"#isso são quantas entradas devem haver na primeira coluna antes\n"
+"# que a próxima comece a ser usada.  Nós não especificamos\n"
+"#isso aqui, já que só há uma coluna.\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:49
+#, fuzzy
 msgid ""
 "# Timer location x, timer location y, foreground color,\n"
 "# background color, shadow color.\n"
 msgstr ""
+"# Localização do timer x, localização do timer y, cor do campo\n"
+"# frontal, cor de fundo, cor da sombra.\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:53
+#, fuzzy
 msgid ""
 "# Standard menu.\n"
 "# Or, you can comment out the bitmap menu above and \n"
 "# use a boot message with the standard menu:\n"
 msgstr ""
+"# Menu padrão.\n"
+"# Ou, você pode comentar o menu bitmap acima e\n"
+"# usar uma mensagem de boot com o menu padrão:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:58
+#, fuzzy
 msgid ""
 "# Wait until the timeout to boot (if commented out, boot the\n"
 "# first entry immediately):\n"
 msgstr ""
+"# Espere até o fim da contagem para iniciar (se o comentário for \n"
+"# apagado, fazer boot na primeira entrada imediatamente):\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:61
+#, fuzzy
 msgid ""
 "# Timeout before the first entry boots.\n"
 "# This is given in tenths of a second, so 600 for every minute:\n"
 msgstr ""
+"# Timeout antes que a primeira entrada faça boot.\n"
+"# Isso é dado em décimos de segundo, então 600 pra cada minuto:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:64
 msgid "# Override dangerous defaults that rewrite the partition table:\n"
-msgstr ""
+msgstr "# Apagar padrões perigosos que reescrevem a tabela de partição:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:68
 msgid "# Normal VGA console\n"
-msgstr ""
+msgstr "# Console VGA normal\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:70
 msgid "# VESA framebuffer console @ 1600x1200x16m\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1600x1200x16m\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:72
 msgid "# VESA framebuffer console @ 1600x1200x64k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1600x1200x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:74
 msgid "# VESA framebuffer console @ 1600x1200x32k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1600x1200x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:76
 msgid "# VESA framebuffer console @ 1600x1200x256\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1600x1200x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:78
 msgid "# VESA framebuffer console @ 1280x1024x16m\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1280x1024x16m\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:80
 msgid "# VESA framebuffer console @ 1280x1024x64k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1280x1024x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:82
 msgid "# VESA framebuffer console @ 1280x1024x32k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1280x1024x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:84
 msgid "# VESA framebuffer console @ 1280x1024x256\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1280x1024x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:86
+#, fuzzy
 msgid "# VESA framebuffer console @ 1024x768x16m\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1024x768x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:88
 msgid "# VESA framebuffer console @ 1024x768x64k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1024x768x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:90
 msgid "# VESA framebuffer console @ 1024x768x32k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1024x768x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:92
 msgid "# VESA framebuffer console @ 1024x768x256\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 1024x768x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:94
 msgid "# VESA framebuffer console @ 800x600x16m\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 800x600x16m\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:96
 msgid "# VESA framebuffer console @ 800x600x64k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 800x600x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:98
 msgid "# VESA framebuffer console @ 800x600x32k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 800x600x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:100
 msgid "# VESA framebuffer console @ 800x600x256\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 800x600x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:102
+#, fuzzy
 msgid "# VESA framebuffer console @ 640x480x16m\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 640x480x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:104
 msgid "# VESA framebuffer console @ 640x480x64k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 640x480x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:106
 msgid "# VESA framebuffer console @ 640x480x32k\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 640x480x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:108
 msgid "# VESA framebuffer console @ 640x480x256\n"
-msgstr ""
+msgstr "# Console framebuffer VESA @ 640x480x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:110
 msgid "# End LILO global section\n"
-msgstr ""
+msgstr "# Fim LILO seção global\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:112
+#, fuzzy
 msgid ""
 "# LiloSetup can be executed from a LiveCD. This means that lilo\n"
 "# could be issued from a 'chrooted' Linux partition, which would\n"
@@ -408,8 +508,16 @@ msgid ""
 "# constraint into consideration if you must modify this file\n"
 "# or else LiloSetup will fail.\n"
 msgstr ""
+"# LiloSetup pode ser executado de um LiveCD. Isso significa que\n"
+"# lilo poderia ser aberto de uma partição Linux 'chrooted', que seria\n"
+"# a primeira partição Linux listada acima.\n"
+"# Portanto os caminhos a seguir são relevantes apenas quando\n"
+"# vistos da perspectiva da partição 'chrooted'. Por favor, tome essa\n"
+"# restrição em consideração se você modificar esse arquivo\n"
+"# ou então o LiloSetup falhará.\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:120
+#, fuzzy
 msgid ""
 "# If later on you want to use this configuration file directly\n"
 "# with lilo in a command line, use the following syntax:\n"
@@ -419,6 +527,13 @@ msgid ""
 "# all partitions referenced in it are mounted on the appropriate\n"
 "# mountpoints.\n"
 msgstr ""
+"# Se mais tarde você quiser usar esse arquivo de configuração\n"
+"# diretamente com o lilo pela linha de comando, use a seguinte\n"
+"# sintaxe: \"lilo -v -C /etc/lilosetup/conf\" em vez do tradicional\n"
+"# comando \"lilo -v\". Você deve, claro, dar o comando de dentro\n"
+"# do sistema operacional que tenha /etc/lilosetup.conf e garantir\n"
+"# que todas as partições referenciadas nele estejam montadas\n"
+"# nos pontos de montagem apropriados.\n"
 
 #: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"

@@ -1,29 +1,33 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-03 18:48+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-03-03 18:33+0100\n"
+"PO-Revision-Date: 2012-04-23 10:14+0000\n"
+"Last-Translator: Jiří Šůla <jiri.sula@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: src/lilosetup.glade:10
 msgid "About lilosetup"
-msgstr ""
+msgstr "O lilosetup"
 
 #: src/lilosetup.glade:21
+#, fuzzy
 msgid "Copyright © 2010-2013 Pierrick Le Brun"
 msgstr ""
+"Jednoduché grafické rozhraní pro nastavení LILO.\n"
+"\n"
+"Copyright © 2010-2011 Pierrick Le Brun"
 
 #: src/lilosetup.glade:22
 msgid "A simple GUI to set up LILO."
@@ -48,43 +52,59 @@ msgid ""
 "the Free Software Foundation, Inc., 51 Franklin Street, \n"
 "Fifth Floor, Boston, MA 02110-1301, USA."
 msgstr ""
+"This program is free software; you can redistribute it \n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software \n"
+"Foundation; either version 2 of the License, or (at your \n"
+"option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be \n"
+"useful, but WITHOUT ANY WARRANTY; without even\n"
+"the implied warranty of MERCHANTABILITY or FITNESS\n"
+"FOR A PARTICULAR PURPOSE.  See the GNU General \n"
+"Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General \n"
+"Public License along with this program; if not, write to \n"
+"the Free Software Foundation, Inc., 51 Franklin Street, \n"
+"Fifth Floor, Boston, MA 02110-1301, USA."
 
 #: src/lilosetup.glade:42
 msgid "translator-credits"
-msgstr ""
+msgstr "údaje o překladu"
 
 #: src/lilosetup.glade:137 src/lilosetup.desktop.in.h:1
 #: src/lilosetup-kde.desktop.in.h:1
 msgid "Lilo Setup"
-msgstr ""
+msgstr "Nastavení Lilo"
 
 #: src/lilosetup.glade:270
 msgid " _Install LILO's bootloader "
-msgstr ""
+msgstr " _Nainstalovat LILO zavaděč"
 
 #: src/lilosetup.glade:514
 msgid "_Undo configuration "
-msgstr ""
+msgstr "_Původní konfigurace"
 
 #: src/lilosetup.glade:569
 msgid "_Edit configuration "
-msgstr ""
+msgstr "_Upravit konfiguraci"
 
 #: src/lilosetup.py:102
 msgid "Partition"
-msgstr ""
+msgstr "Oddíl"
 
 #: src/lilosetup.py:103
 msgid "File system"
-msgstr ""
+msgstr "Souborový systém"
 
 #: src/lilosetup.py:104
 msgid "Operating system"
-msgstr ""
+msgstr "Operační systém"
 
 #: src/lilosetup.py:105
 msgid "Boot menu label"
-msgstr ""
+msgstr "Štítek bootovacího menu"
 
 #: src/lilosetup.py:109
 msgid ""
@@ -94,37 +114,44 @@ msgid ""
 "will initially display a boot menu if several operating systems are "
 "available on the same computer."
 msgstr ""
+"<b>LiloSetup nainstaluje na váš počítač nový LILO zavaděč.</b> \n"
+"\n"
+"Zavaděč je požadován pro to, aby nahrál hlavní operační systém z počítače a "
+"zobrazil úvodní obrazovku bootovacího menu, pokud je na počítači k dispozici "
+"několik operačních systémů."
 
 #: src/lilosetup.py:137 src/lilosetup.py:218 src/lilosetup.py:530
 #: src/lilosetup.py:554 src/lilosetup.py:559
 msgid "Set..."
-msgstr ""
+msgstr "Nastavit..."
 
 #: src/lilosetup.py:225
 msgid "# Windows bootable partition config begins\n"
-msgstr ""
+msgstr "# Konfigurace botoovatelných oddílů s Windows - začátek\n"
 
 #: src/lilosetup.py:228
 msgid "# Windows bootable partition config ends\n"
-msgstr ""
+msgstr "# Konfigurace botoovatelných oddílů s Windows - konec\n"
 
 #: src/lilosetup.py:368
 msgid "# Linux bootable partition config begins\n"
-msgstr ""
+msgstr "# Konfigurace bootovatelných Linuxových oddílů - začátek\n"
 
 #: src/lilosetup.py:374
 msgid ""
 "One of your partitions does not seem to hold a valid kernel file. Please "
 "verify and correct LiloSetup configuration file manually.\n"
 msgstr ""
+"Jeden z vašich oddílů nevypadá, že by obsahoval validní soubor kernelu. "
+"Prosím zkontrolujte a opravte konfigurační soubor LiloSetup manuálně. \n"
 
 #: src/lilosetup.py:407
 msgid "# Linux bootable partition config ends\n"
-msgstr ""
+msgstr "# Konfigurace bootovatelných Linuxových oddílů - konec\n"
 
 #: src/lilosetup.py:418
 msgid "About Lilo Setup."
-msgstr ""
+msgstr "O Lilo Setup."
 
 #: src/lilosetup.py:423
 msgid ""
@@ -137,6 +164,14 @@ msgid ""
 "from a regular installed Linux system.  In both cases, it will setup a new "
 "LILO bootloader on the MBR of your first hard drive."
 msgstr ""
+"Je nezbytné nakonfigurovat zavaděč pokaždé, kdy instalujete nový operační "
+"systém. \n"
+"LiloSetup může být také užitečný při procesu obnovování, při kterém ho "
+"můžete spustit z LiveCD (pokud jste ztratili další možnosti nabootovat do "
+"vašeho systému.\n"
+"Lilosetup může být stejně dobře spouštěno z prostředí LiveCD nebo z klasicky "
+"nainstalovaného linuxového systému. V obou případech nastaví nový LILO "
+"zavaděč v MBR vašeho prvního harddisku."
 
 #: src/lilosetup.py:434
 msgid ""
@@ -149,6 +184,15 @@ msgid ""
 "menu entries for each of these kernels.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Zde musíte nadefinovat štítky pro Boot menu pro každý operační systém, který "
+"se bude v menu zavaděči zobrazovat.\n"
+"Každý oddíl, pro který nenastavíte v Boot menu štítek, nebude "
+"nakonfigurovaný a nebude zobrazený v menu zavaděče.\n"
+"Pokud je na jednom oddílu k dispozici více kernelů, štítek, který si "
+"vyberete pro určený oddíl, bude přidán a vytvoří se komplexní menu záznamy, "
+"pro každý z uvedených kernelů.\n"
+"Jakékoliv z těchto nastavení může být editováno v konfiguračním souboru "
+"lilosetup."
 
 #: src/lilosetup.py:445
 msgid ""
@@ -158,6 +202,11 @@ msgid ""
 "the bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Použijte tuto šipku, pokud chcete posunout vybraný operační systém na vyšší "
+"pozici.\n"
+"Oddíl s nejvyšším postavením bude zobrazen na prvním řádku menu zavaděče.\n"
+"Jakékoliv z těchto nastavení může být editováno v konfiguračním souboru "
+"lilosetup."
 
 #: src/lilosetup.py:453
 msgid ""
@@ -167,10 +216,16 @@ msgid ""
 "bootloader menu.\n"
 "Any of these settings can be edited manually in lilosetup configuration file."
 msgstr ""
+"Použijte tuto šipku, pokud chcete posunout vybraný operační systém na nižší "
+"pozici.\n"
+"Oddíl s nejmenším postavením bude zobrazen na posledním řádku menu "
+"zavaděče.\n"
+"Jakékoliv z těchto nastavení může být editováno v konfiguračním souboru "
+"lilosetup."
 
 #: src/lilosetup.py:462
 msgid "This will undo all settings (even manual modifications)."
-msgstr ""
+msgstr "Vrátí zpět všechna nastavení (včetně manuálních modifikací)."
 
 #: src/lilosetup.py:466
 msgid ""
@@ -179,22 +234,30 @@ msgid ""
 "Please do not temper with this file unless you know what you are doing and "
 "you have read its commented instructions regarding chrooted paths."
 msgstr ""
+"Zkušení uživatelé mají možnosti zeditovat konfigurační soubor LiloSetup "
+"(nastavení jsou shodná jako v lilo.conf). \n"
+"Prosím nezahrávejte si s tímto souborem, pokud přesně nevíte, co děláte a "
+"nemáte načteny příslušné instrukce ohledně chrootovaných cest."
 
 #: src/lilosetup.py:474
 msgid "Exit Lilo Setup program."
-msgstr ""
+msgstr "Ukončit Lilo Setup program."
 
 #: src/lilosetup.py:479
 msgid ""
 "Once you have defined your settings, click on this button to create your new "
 "LILO's bootloader."
 msgstr ""
+"Pokud jste nadefinovali své nastavení, klikněte na toto tlačítko a vytvoříte "
+"tak nový LILO zavaděč."
 
 #: src/lilosetup.py:523
 msgid ""
 "You have used the same label for different Operating Systems. Please verify "
 "and correct.\n"
 msgstr ""
+"Použili jste stejné nastavení štítku pro různé operační systémy. Prosím "
+"překontrolujte to a opravte.\n"
 
 #: src/lilosetup.py:543
 msgid ""
@@ -203,6 +266,10 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Štítek operačního systému by neměl obsahovat žádnou mezeru. \n"
+"\n"
+"Prosím překontrolujte to a opravte.\n"
 
 #: src/lilosetup.py:547
 msgid ""
@@ -211,194 +278,246 @@ msgid ""
 "\n"
 "Please verify and correct.\n"
 msgstr ""
+"\n"
+"Štítek operačního systému by neměl mít více než 15 znaků. \n"
+"\n"
+"Prosím překontrolujte to a opravte.\n"
 
 #: src/lilosetup.py:677
 msgid ""
 "Sorry, LiloSetup is unable to find a suitable text editor in your system. "
 "You will not be able to manually modify LiloSetup configuration.\n"
 msgstr ""
+"Pardon, LiloSetup nemůže najít odpovídající textový editor ve vašem systému. "
+"Nebudete moci manuálně modifikovat konfiguraci LiloSetup.\n"
 
 #: src/lilosetup.py:685
 msgid ""
 "Your configuration is not complete. Please, select at least one Linux "
 "booting partition and define its Boot menu label.\n"
 msgstr ""
+"Vaše konfigurace není kompletní. Prosím vyberte nejméně jeden bootovací "
+"linux oddíl a nadefinujte jeho štítek v Boot menu.\n"
 
 #: src/lilosetup.py:688
 msgid ""
 "You are about to install a new LILO bootloader. Are you sure you want to "
 "continue?"
 msgstr ""
+"Chystáte se nainstalovat nový LILO zavaděč. Jste si jistí, že chcete "
+"pokračovat?"
 
 #: src/lilosetup.py:704
 msgid ""
 "The installation of your new LILO bootloader was succesful. You can now exit "
 "LiloSetup and reboot your computer.\n"
 msgstr ""
+"Instalace vašeho nového LILO zavaděče byla úspěšná. Nyní můžete opustit "
+"LiloSetup a restartovat váš počítač.\n"
 
 #: src/lilosetup.py:707
 msgid ""
 "The installation of your new LILO bootloader failed. Please verify /var/log/"
 "lilosetup.log, modify your settings and try again.\n"
 msgstr ""
+"Instalace vašeho nového zavaděče LILO nebyla úspěšná. Prosím zkontrolujte /"
+"var/log/lilosetup.log , upravte nastavení a zkuste to znovu.\n"
 
 #: src/lilosetup.py:715
+#, fuzzy
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
 "Root privileges are required to run this program."
 msgstr ""
+"<b>Pardon!</b> \n"
+"\n"
+"Pro spuštění LiloSetup jsou vyžadována práva root. "
 
 #: src/lilosetup_modules/liloconfigfile.py:28
+#, fuzzy
 msgid ""
 "# LILO configuration file\n"
 "# Generated by LiloSetup\n"
 msgstr ""
+"# LILO konfigurační soubor\n"
+"# Generováno LiloSetup\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:31
+#, fuzzy
 msgid ""
 "# Start LILO global section\n"
 "# Append any additional kernel parameters:\n"
 msgstr ""
+"# začátek LILO globální sekce\n"
+"# Přidejte jakékoliv dodatečné parametry kernelu:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:38
+#, fuzzy
 msgid ""
 "# Boot BMP Image.\n"
 "# Bitmap in BMP format: 640x480x8\n"
 msgstr ""
+"# BMP obrázky při bootování.\n"
+"# Bitmapa v BMP formátu: 640x480x8\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:41
+#, fuzzy
 msgid ""
 "# Menu colors (foreground, background, shadow, highlighted\n"
 "# foreground, highlighted background, highlighted shadow):\n"
 msgstr ""
+"# barvy menu (popředí, pozadí, stín, zvýrazněné\n"
+"# popředí, zvýrazněné pozadí, zvýrazněný stín):\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:44
+#, fuzzy
 msgid ""
 "# Location of the option table: location x, location y, number of\n"
 "# columns, lines per column (max 15), \"spill\" this is how many\n"
 "# entries must be in the first column before the next begins to\n"
 "# be used.  We do not specify it here, as there is just one column.\n"
 msgstr ""
+"# Umístění tabulky parametrů: souřadnice x, souřadnice y, počet\n"
+"# sloupců, řádků na sloupec (maximálně 15), \"spill\" znamená, jak mnoho\n"
+"# záznamů musí být v prvním sloupci před tím, než se začne používat\n"
+"# druhý. Zde to nespecifikujeme, protože je tu jen jeden sloupec.\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:49
+#, fuzzy
 msgid ""
 "# Timer location x, timer location y, foreground color,\n"
 "# background color, shadow color.\n"
 msgstr ""
+"# Souřadnice časovače x, souřadnice časovače y, barva popředí,\n"
+"# barva pozadí, barva stínu.\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:53
+#, fuzzy
 msgid ""
 "# Standard menu.\n"
 "# Or, you can comment out the bitmap menu above and \n"
 "# use a boot message with the standard menu:\n"
 msgstr ""
+"# Standardní menu.\n"
+"# Nebo můžete okomentovat bitmapové menu nahoře a\n"
+"# použít bootovací zprávu v menu standardním:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:58
+#, fuzzy
 msgid ""
 "# Wait until the timeout to boot (if commented out, boot the\n"
 "# first entry immediately):\n"
 msgstr ""
+"# Před bootováním čekejte, než vyprší čas (pokud\n"
+"# je zakomentováno, první záznam se spustí okamžitě):\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:61
+#, fuzzy
 msgid ""
 "# Timeout before the first entry boots.\n"
 "# This is given in tenths of a second, so 600 for every minute:\n"
 msgstr ""
+"# Časovač předtím, než nabootuje první záznam.\n"
+"# Hodnota je uvedena v desetinách vteřin, takže 600 je pro minutu:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:64
 msgid "# Override dangerous defaults that rewrite the partition table:\n"
 msgstr ""
+"# Zruší nebezpečné defaultní hodnoty, které přepisují partition tabulku:\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:68
 msgid "# Normal VGA console\n"
-msgstr ""
+msgstr "# Bežná VGA konzole\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:70
 msgid "# VESA framebuffer console @ 1600x1200x16m\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1600x1200x16m\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:72
 msgid "# VESA framebuffer console @ 1600x1200x64k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1600x1200x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:74
 msgid "# VESA framebuffer console @ 1600x1200x32k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1600x1200x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:76
 msgid "# VESA framebuffer console @ 1600x1200x256\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1600x1200x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:78
 msgid "# VESA framebuffer console @ 1280x1024x16m\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1280x1024x16m\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:80
 msgid "# VESA framebuffer console @ 1280x1024x64k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1280x1024x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:82
 msgid "# VESA framebuffer console @ 1280x1024x32k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1280x1024x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:84
 msgid "# VESA framebuffer console @ 1280x1024x256\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1280x1024x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:86
+#, fuzzy
 msgid "# VESA framebuffer console @ 1024x768x16m\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1024x768x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:88
 msgid "# VESA framebuffer console @ 1024x768x64k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1024x768x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:90
 msgid "# VESA framebuffer console @ 1024x768x32k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1024x768x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:92
 msgid "# VESA framebuffer console @ 1024x768x256\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 1024x768x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:94
 msgid "# VESA framebuffer console @ 800x600x16m\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 800x600x16m\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:96
 msgid "# VESA framebuffer console @ 800x600x64k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 800x600x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:98
 msgid "# VESA framebuffer console @ 800x600x32k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 800x600x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:100
 msgid "# VESA framebuffer console @ 800x600x256\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 800x600x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:102
+#, fuzzy
 msgid "# VESA framebuffer console @ 640x480x16m\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 640x480x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:104
 msgid "# VESA framebuffer console @ 640x480x64k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 640x480x64k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:106
 msgid "# VESA framebuffer console @ 640x480x32k\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 640x480x32k\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:108
 msgid "# VESA framebuffer console @ 640x480x256\n"
-msgstr ""
+msgstr "# VESA framebuffer konzole @ 640x480x256\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:110
 msgid "# End LILO global section\n"
-msgstr ""
+msgstr "# Ukončení LILO globální sekce\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:112
+#, fuzzy
 msgid ""
 "# LiloSetup can be executed from a LiveCD. This means that lilo\n"
 "# could be issued from a 'chrooted' Linux partition, which would\n"
@@ -408,8 +527,16 @@ msgid ""
 "# constraint into consideration if you must modify this file\n"
 "# or else LiloSetup will fail.\n"
 msgstr ""
+"# LiloSetup může být spuštěn z LiveCD. To znamená, že lilo\n"
+"# může být spouštěno z 'chrootovaného' Linux oddílu, klterý\n"
+"# se stane prvním linuxovým oddílem v seznamu níže.\n"
+"# Z tohoto důvodu jsou následující cesty relevantní poze pokud\n"
+"# se na ně díváme z perspektivy 'chrootovaného' oddílu. Prosím\n"
+"# mějte na paměti toto omezení, pokud musíte tento soubor modifikovat,\n"
+"# jinak LiloSetup zhavaruje.\n"
 
 #: src/lilosetup_modules/liloconfigfile.py:120
+#, fuzzy
 msgid ""
 "# If later on you want to use this configuration file directly\n"
 "# with lilo in a command line, use the following syntax:\n"
@@ -419,11 +546,18 @@ msgid ""
 "# all partitions referenced in it are mounted on the appropriate\n"
 "# mountpoints.\n"
 msgstr ""
+"# Pokud chcete později použít přímo tento soubor s příkazovou\n"
+"# řádkou lilo, použijte následující syntaxi:\n"
+"# \"lilo -v -C /etc/lilosetup/conf\" místo klasického\n"
+"# \"lilo -v\" příkazu. Samozřejmě musíte spouštět tento soubor \n"
+"# z operačního systému,který má /etc/lilosetup.conf a ujistěte se,\n"
+"# že všechny oddíle zde uvedené jsou připojeny na správné\n"
+"# přípojné body.\n"
 
 #: src/lilosetup.desktop.in.h:2 src/lilosetup-kde.desktop.in.h:2
 msgid "Lilo set-up utility"
-msgstr ""
+msgstr "Program pro nastavení Lilo"
 
 #: src/lilosetup.desktop.in.h:3 src/lilosetup-kde.desktop.in.h:3
 msgid "Set up Lilo from a LiveCD or a standard system."
-msgstr ""
+msgstr "Nastavit Lilo z LiveCD nebo standardního systému."

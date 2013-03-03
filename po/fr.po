@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-03 18:33+0100\n"
-"PO-Revision-Date: 2012-02-14 13:24+0000\n"
-"Last-Translator: Cyrille Pontvieux <jrd@enialis.net>\n"
+"PO-Revision-Date: 2013-03-03 18:57+0100\n"
+"Last-Translator: Pierrick Le Brun <akuna@salixos.org>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/salix/language/"
 "fr/)\n"
 "Language: fr\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: src/lilosetup.glade:10
 msgid "About lilosetup"
@@ -31,7 +32,7 @@ msgstr "Copyright © 2010-2013 Pierrick Le Brun"
 
 #: src/lilosetup.glade:22
 msgid "A simple GUI to set up LILO."
-msgstr "Une interface graphique simple pour la mise en place de LILO.\n"
+msgstr "Une interface graphique simple pour la mise en place de LILO."
 
 #: src/lilosetup.glade:25
 msgid ""

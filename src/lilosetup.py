@@ -39,6 +39,7 @@ from gettext import gettext as _
 import locale
 locale.setlocale(locale.LC_ALL, "")
 
+sys.path.append("/usr/share/" + application_name)
 import lilosetup_modules as selflib
 
 # Initialize key mountpoints value

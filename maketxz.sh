@@ -7,6 +7,7 @@ export DESTDIR=$PWD/pkg
 ./install.sh
 VER=$(grep 'version =' src/lilosetup.py | head -n 1 | sed "s/.*'\(.*\)'/\1/")
 cd pkg
+mkdir install
 cat <<EOF > install/slack-desc
 lilosetup: LiloSetup - A simple GUI to setup LILO.
 lilosetup: 
@@ -20,7 +21,7 @@ lilosetup:
 lilosetup:
 lilosetup:
 EOF
-makepkg -l y -c n ../lilosetup-$VER-noarch-1plb.txz
+/sbin/makepkg -l y -c n ../lilosetup-$VER-noarch-1plb.txz
 cd ..
 echo -e "lilo,python,os-prober" > lilosetup-$VER-noarch-1plb.dep
 md5sum lilosetup-$VER-noarch-1plb.txz > lilosetup-$VER-noarch-1plb.md5

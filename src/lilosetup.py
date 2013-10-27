@@ -35,9 +35,13 @@ import shutil
 import subprocess
 import sys
 
-from gettext import gettext as _
+import gettext
 import locale
 locale.setlocale(locale.LC_ALL, "")
+locale_dir = '/usr/share/locale'
+gettext.install(application_name, locale_dir, True)
+gtk.glade.bindtextdomain(application_name, locale_dir)
+gtk.glade.textdomain(application_name)
 
 sys.path.append("/usr/share/" + application_name)
 import lilosetup_modules as selflib

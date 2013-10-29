@@ -33,7 +33,7 @@ def detect_fb():
             depth = "32k"
         elif values[-1] == "24":
             depth = "64k"
-        elif values[-1] == "323":
+        elif values[-1] == "32":
             depth = "16M"
         else:
             return ""     
